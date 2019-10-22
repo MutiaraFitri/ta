@@ -2,7 +2,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    width: 414px;
+    max-width: 414px;
     margin: 0 auto;
     align-items: center;
     justify-content: center;

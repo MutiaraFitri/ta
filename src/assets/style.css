@@ -2,11 +2,35 @@
     font-size: calc(10px + 2vmin);
     color : #0050A1;
 }
+
 input, select, textarea{
     color: #000;
     border : 1px solid #C6C6C6;
     border-radius: 5px;
     padding: 15px;
+}
+
+.Report {
+    padding: 0px 25px;
+}
+
+.kotak-input{
+    color: #C6C6C6;
+    border : 1px solid #C6C6C6;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+}
+
+.input-form-full{
+    width: 90%;
+    text-align: center;
+}
+
+.input-form-textarea{
+    width: 90%;
+    height: 60px;
+    text-align: left;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -25,6 +49,73 @@ a {
     font-size: calc(7px + 1vmin);
     color:black;
     font-weight: 500;
+}
+.navbar-icon {
+    opacity: 0.25;
+}
+
+.label {
+    text-align: left;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.75);
+}
+.label .row{
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.id-problem-solve{
+    width: 20%;
+    background-color: #0050A1;
+}
+
+.isi-id {
+    color:#FFF;
+    padding: 15px;
+}
+
+.detail-problem-solve{
+    width: 100%;
+    border: 1px solid #0050A1;
+    text-align: left;
+    padding: 20px;
+}
+
+.title-problem-solve {
+    width:75%;
+    padding-top: 6px;
+    text-align: left;
+    padding-left: 15px;
+    font-weight: 500;
+    font-size: calc(10px + 4vmin); /* Best Experience for Mobile */
+    padding-bottom: 6px;
+    border: 1px solid #0050A1;
+}
+
+.title-page{
+    color: rgba(0,0,0,0.6);
+    text-align: left;
+    width: 100%;
+    font-weight: 700;
+    font-size: calc(10px + 10vmin); /* Best Experience for Mobile */
+    /*font-size: calc(10px + 7vmin); /* Best Experience for Desktop */
+}
+
+.navbar-icon:hover{
+    opacity: 1;
+}
+
+.navbar-icon.active{
+    opacity: 1;
+}
+
+.navbar {
+    border-top: 1px solid #c6c6c6;
+    background-color: #fff;
+    bottom: 0px;
+    padding-bottom: 5px;
+    position: fixed;
+    height: 7vh;
+    width: 414px;
 }
 
 .menu-home{
@@ -56,6 +147,177 @@ a {
 }
 
 .button-submit {
+    width: 100%;
+    padding: 9px;
+    font-size: calc(10px + 2vmin);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    background-color: #0050A1;
+    border: none;
+}
+
+.greeting {
+    color: rgba(0,0,0,0.6);
+    font-weight: 700;
+    font-size: calc(10px + 7vmin);
+}
+
+.nameData {
+    width: 60%;
+    font-size: calc(10px + 3vmin);
+}
+
+.button.loggout {
+    background-color: red;
+}
+
+.ticket {
+    width: 90%;
+    height: 160px;
+    text-align: center;
+    background-image: url('./img/ticket-bg.PNG');
+    background-size: cover;
+}
+
+.left-ticket {
+    width: 60%;
+    text-align: left;
+}
+
+.queue {
+    color: #FF8A00;
+    font-weight: 700;
+    font-size: calc(10px + 7vmin);
+}
+
+.button-detail{
+    width: 50%;
+    padding: 9px;
+    margin: 0 auto;
+    font-size: calc(7px + 2vmin);
+    text-transform: uppercase;
+    font-weight: 500;
+    border : 1px solid #FF8A00;
+    border-radius: 7px;
+    color: #FF8A00;
+    background-color: none;
+}
+
+.id-ticket{
+    font-size: calc(7px + 1vmin);
+}
+
+.top {
+    text-align: left;
+}
+
+.content-ticket {
+    padding-top: 5px;
+    padding-left: 15px;
+}
+.right-ticket {
+    width: 34%; 
+    /* width: 40%;  for mobile*/
+}
+
+.title-app{
+    margin: 5px auto;
+    padding-top: 10px;
+    font-size: calc(10px + 4vmin);
+    font-weight: 700;
+    color : rgba(0, 0, 0, 0.6);
+}
+
+.title-pages{
+    font-size: calc(10px + 4vmin);
+    color: #fff;
+    font-weight: 500;
+    margin:0 auto;
+    text-align: center;
+}
+
+.back-button {
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+    box-sizing: border-box;
+    position: absolute;
+    margin-left: 20px;
+}
+
+.version-app {
+    margin: 15px auto;
+    font-size: calc(10px + 2vmin);    
+    color : rgba(0, 0, 0, 0.75);
+}
+
+.description-app {
+    font-size: calc(10px + 2vmin);    
+    color : rgba(0, 0, 0, 0.75);
+}
+
+.about {
+    text-align: left;
+    color : rgba(0, 0, 0, 0.75);
+}
+
+.history{
+    width: 100%;
+    margin:10px auto;
+}
+
+.title-issue{
+    text-align: left;
+    font-weight: 700;
+    font-size: calc(10px + 3vmin);
+}
+
+.date-ticket{
+    font-size: calc(15px + 6vmin);
+    font-weight: 700;
+    margin-top: -7px;
+    margin-right: 5px;
+}
+
+.status {
+    width: 30%;
+}
+
+.content-status {
+    border:2px solid #0050A1;
+    font-size: calc(7px + 1vmin);
+    font-weight: 700;
+    text-align: center;
+    border-radius: 5px;
+    padding:5px 0px;
+}
+
+.month-ticket {
+    font-size: calc(10px + 1vmin);
+    margin-right: 5px;
+}
+
+.Ticket{
+    background-color: #0050A1;
+}
+
+.valueData {
+    width: 40%;
+    text-align: right;
+    font-size: calc(10px + 3vmin);
+
+}
+
+.Profile{
+    padding: 0px 25px;
+    width: 70%;
+    text-align: left;
+}
+
+.button{
     width: 100%;
     padding: 9px;
     font-size: calc(10px + 2vmin);
