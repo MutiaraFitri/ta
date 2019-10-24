@@ -12,6 +12,7 @@ const History = React.lazy(() => import('./components/views/page/History'));
 const About = React.lazy(() => import('./components/views/page/About'));
 const ProblemSolve = React.lazy(() => import('./components/views/page/ProblemSolve'));
 const DetProblemSolve = React.lazy(() => import('./components/views/page/DetailProblemSolve'));
+const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -27,6 +28,7 @@ const routes = [
   { path: '/about', exact: true, name: 'History', component: About },
   { path: '/problemsolve', exact: true, name: 'History', component: ProblemSolve },
   { path: '/detproblemsolve', exact: true, name: 'History', component: DetProblemSolve },
+  { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },
     
   // Handle 404 Not Found
   { path: '*', name: 'Landing', component: NotFound },

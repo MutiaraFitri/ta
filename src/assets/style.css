@@ -73,6 +73,13 @@ a {
     padding: 15px;
 }
 
+.ticket-det {
+    background : url(../assets/img/det-ticket.PNG) no-repeat;
+    width: 90%;
+    height: 80vh;
+    background-size: 100%;
+}
+
 .detail-problem-solve{
     width: 100%;
     border: 1px solid #0050A1;
@@ -81,7 +88,7 @@ a {
 }
 
 .title-problem-solve {
-    width:75%;
+    width:70%;
     padding-top: 6px;
     text-align: left;
     padding-left: 15px;
@@ -217,7 +224,7 @@ a {
     padding-left: 15px;
 }
 .right-ticket {
-    width: 34%; 
+    width: 40%; 
     /* width: 40%;  for mobile*/
 }
 
@@ -272,6 +279,7 @@ a {
 .title-issue{
     text-align: left;
     font-weight: 700;
+    margin-bottom: 15px;
     font-size: calc(10px + 3vmin);
 }
 
