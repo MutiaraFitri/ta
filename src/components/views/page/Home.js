@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import '../../../loading.css';
 import '../../../assets/style.css';
-import NavbarTop from '../navbar/NavbarTop';
+import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
 import header from '../../../assets/img/contact.png';
 import service from '../../../assets/img/customer-support.png';
 import history from '../../../assets/img/history.png';
-import info from '../../../assets/img/info.png';
-import {Link} from 'react-router-dom';
+import tickets from '../../../assets/img/tickets.png';
+import clipboard from '../../../assets/img/clipboard.png';
+import insurance from '../../../assets/img/insurance.png';
+import problem from '../../../assets/img/problem.png';
+import { Link } from 'react-router-dom';
+import left from './../../../assets/img/left-arrow.png';
 import Category from '../Category';
 
 export class Home extends Component {
@@ -15,61 +19,144 @@ export class Home extends Component {
         return (
             <div className="home">
                 <NavbarTop />
-                <div className="container">
-                    <div className="row">
-                        <img src={header} alt="Komatsu" style={{ width: "100%", margin: "0 auto", zIndex: "-2", marginBottom: "-15px" }} />
+                <div className="container" style={{ width: "100%" }}>
+                    <div className="row" style={{ width: "340px", margin: "0px auto", marginTop: "-90px" }}>
+                        <div className="lingkaran"
+                            style={{
+                                width: "110px",
+                                height: "110px",
+                                borderRadius: "50%",
+                                backgroundColor: "#fff",
+                                border: "3px solid #e8e8e8"
+                            }}>
+                            <h6 style={{ fontSize: "18px", color: "black" }}>5:16 PM</h6>
+                            <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Good Evening !</h6>
+                        </div>
+                        <Link to='/all-ticket' style={{ zIndex: 5 }}>
+                            <div className="lingkaran"
+                                style={{
+                                    width: "140px",
+                                    height: "140px",
+                                    borderRadius: "50%",
+                                    backgroundColor: "#fff",
+                                    border: "3px solid #e8e8e8",
+
+                                    margin: "0px -20px"
+                                }}>
+                                <h6 style={{ fontSize: "21px", color: "black" }}>9 Tickets</h6>
+                                <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>QUEUE</p>
+                            </div>
+                        </Link>
+                        <div className="lingkaran"
+                            style={{
+                                width: "110px",
+                                height: "110px",
+                                borderRadius: "50%",
+                                backgroundColor: "#fff",
+                                border: "2px solid #e8e8e8"
+                            }}>
+                            <h6 style={{ fontSize: "18px", color: "black" }}>25 </h6>
+                            <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Task Done</h6>
+
+                        </div>
                     </div>
-                    <div style={{ border: "2px solid rgba(0,0,0,0.08", borderRadius: "10px", margin: "-50px auto 0px auto", backgroundColor: "#fff", zIndex: "2", width: "90%" }}>
-                        <div className="row" style={{ width: "90%", fontWeight: "bold" }}>
-                            <div style={{ width: "70%", textAlign: "left" }}>Yuli Susanto</div>
-                            <div style={{ width: "30%", textAlign: "right" }}>12345</div>
-                            <hr width="100%" noshade style={{border:"1px solid #c6c6c6"}} />
-                            <div className="row" style={{ width: "90%", margin: "0 auto" }}>
-                                <div className="menu-home">
-                                    <Link to="/report">
-                                        <div className="isi-menu-home">
-                                            <div className="row">
-                                                <img src={service} alt="" style={{ margin: "0 auto -10px auto", height: "30px" }} />
-                                            </div>
-                                            <div className="font-small">Service</div>
-                                        </div>
-                                    </Link>
-                                </div>
-                                <div className="menu-home">
-                                <Link to="/history">
-                                    <div className="isi-menu-home">
-                                        <div className="row">
-                                            <img src={history} alt="" style={{ margin: "0 auto -10px auto", height: "30px" }} />
-                                        </div>
-                                        <div className="font-small">History</div>
-                                    </div>
-                                </Link>
-                                </div>
-                                <div className="menu-home">
-                                <Link to="/about">
-                                    <div className="isi-menu-home">
-                                        <div className="row">
-                                            <img src={info} alt="" style={{ margin: "0 auto -10px auto", height: "30px" }} />
-                                        </div>
-                                        <div className="font-small">Info</div>
-                                    </div>
-                                </Link>
-                                </div>
+                </div>
+                <div className="menu-atas" style={{ display: "flex", width: "100%" }}>
+                    <div className="menu"
+                        style={{
+                            width: "50%",
+                            padding: "0px 10px"
+                        }}>
+                        <div className="row" style={{
+                            padding: "10px", margin: "0px",
+                            borderRadius: "10px",
+                            backgroundColor: "#FFF9F9",
+                            border: "2px solid #DEDEDE",
+                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                        }}>
+
+                            <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
+                                <img src={tickets} alt="info" />
+                            </div>
+                            <div className="desc" style={{ width: "60%" }}>
+                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>All Ticket</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>12</div>
+                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>queue</div>
                             </div>
                         </div>
                     </div>
-                    {/* Our Services */}
-                    <div style={{marginBottom:"75px"}}>
-                        <div className="row" style={{width:"90%", fontWeight:"bold", marginBottom:"-15px"}}>
-                            Our Services
+                    <div className="menu"
+                        style={{
+                            width: "50%",
+                            padding: "0px 10px",
+                        }}>
+                        <div className="row" style={{
+                            padding: "10px", margin: "0px", borderRadius: "10px",
+                            backgroundColor: "#FFF9F9",
+                            border: "2px solid #DEDEDE",
+                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                        }}>
+
+                            <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
+                                <img src={clipboard} alt="info" />
+                            </div>
+                            <div className="desc" style={{ width: "60%" }}>
+                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>2</div>
+                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>assign</div>
+                            </div>
                         </div>
-                        <div className="row" style={{width:"90%"}}>
-                            <hr width="15%" align="left" noshade style={{border:"2px solid #c6c6c6"}}/>
-                        </div>
-                        <Category/>
                     </div>
                 </div>
-                <NavbarBottom active="Home"/>
+                <div className="menu_bawah" style={{
+                    width: "100%",
+                    height: "81px",
+
+                }} >
+                    <Link to='/report' >
+                        <div className="menuReport" 
+                        style={{padding:"0px 10px"}}
+                        >
+                            <div className="row" style={{
+                            borderRadius: "10px",
+                            padding:"10px",
+                            backgroundColor: "#FFF9F9",
+                            border: "2px solid #DEDEDE",
+                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                        }}>
+
+                                <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
+                                    <img src={insurance} alt="info" />
+                                </div>
+                                <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Report</div>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>summary</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                    <Link to='/article'>
+                        <div className="menuKnowlageBase"
+                            style={{padding:"0px 10px",paddingBottom:"70px"}}>
+                        <div className="row" style={{
+                            borderRadius: "10px",
+                            padding:"10px",
+                            backgroundColor: "#FFF9F9",
+                            border: "2px solid #DEDEDE",
+                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                        }}>
+                                <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
+                                    <img src={problem} alt="info" />
+                                </div>
+                                <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>knowlage Base</div>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>summary</div>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+                <NavbarBottom active="Home" />
             </div>
         )
     }
