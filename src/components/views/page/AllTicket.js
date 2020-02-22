@@ -10,11 +10,54 @@ import network from './../../../assets/img/wifi.png';
 import software from './../../../assets/img/virus.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
+import { fetchProductPending, fetchProductSuccess, fetchProductError, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
+import tickets from '../../../redux/api/ticket';
+import { connect } from 'react-redux';
+import _ from "lodash";
+
 
 class AllTicket extends Component {
+
+    state = {
+        tiket: []
+    }
+    componentDidMount() {
+
+        this.props.tiketku();
+    }
+    renderToDos() {
+        const { data } = this.props;
+        var asu = "";
+        // console.log(data.personState.data)
+        if (data.personState.data) {
+            asu = data.personState.data.values;
+            const toDos = _.map(asu, (values, key) => {
+                return <div key={key}>
+                    <Antrian
+                        //imageKategori={hardware}
+                        sender={values.sender}
+                        category={values.category}
+                        title={values.title}
+                        assign_to={values.assign_to}
+                        status={values.status}
+                        due_date={values.due_date}
+                        imagePriority={low}
+                        priority={values.priority}
+                    />
+
+                </div>;
+            });
+            if (!_.isEmpty(toDos)) {
+                return toDos;
+            }
+        }
+    }
+
     render() {
+        const { data } = this.props;
         const detail = this.props.active == "Detail" ? "navbar-icon active" : "navbar-icon";
+
 
         return (
             <div className="home">
@@ -40,43 +83,7 @@ class AllTicket extends Component {
                     <div className="title" style={{ textAlign: "left", marginLeft: "5px", letterSpacing: "5px" }}>
                         QUEUE
                     </div>
-
-                    <Antrian
-                        imageKategori={hardware}
-                        nama="Justin"
-                        kategori=" Hardware"
-                        judul="I need new laptop"
-                        keterangan="WAITING FOR SUPPORT"
-                        status="Unassigned"
-                        tanggal="29 Jan 20"
-                        imagePriority={low}
-                        priority="low"
-                    />
-
-                    <Antrian
-                        imageKategori={network}
-                        nama="Emma Wetson"
-                        kategori="Network"
-                        judul="I can't connect .."
-                        keterangan="DONE"
-                        status="Unassigned"
-                        tanggal="29 Jan 20"
-                        imagePriority={low}
-                        priority="low"
-                    />
-
-                    <Antrian
-                        imageKategori={software}
-                        nama="Ningsih"
-                        kategori="Software"
-                        judul="Ada virus di ..  "
-                        keterangan="WAITING FOR SUPPORT"
-                        status="Unassigned"
-                        tanggal="29 Jan 20"
-                        imagePriority={low}
-                        priority="low"
-                    />
-
+                    {this.renderToDos()}
                     <br /><br /><br /><br />
 
                 </div>
@@ -86,4 +93,18 @@ class AllTicket extends Component {
     }
 }
 
-export default AllTicket;
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        fetchPendingku: () => dispatch(fetchProductPending()),
+        fetchSuccessku: () => dispatch(fetchProductSuccess()),
+        fetchErrorku: () => dispatch(fectProductError()),
+        tiketku: () => dispatch(tickets()),
+    }
+}
+
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(AllTicket)

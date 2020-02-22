@@ -11,28 +11,28 @@ import tambah from './../../../assets/img/tambah.png';
 import macbook from './../../../assets/img/smashed_macbook-1-780x521.png';
 import down from './../../../assets/img/arrow_down.png';
 import NavbarBottom from '../navbar/NavbarBottom';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import menu from '../../../assets/img/menu.png';
 
 class AllTicket extends Component {
     render() {
         return (
             <div className="home" style={{ paddingBottom: "70px" }}>
-                <div style={{backgroundColor:"#141AA2",fontSize:"22px",fontFamily:"Muli",width:"100%",color:"white",padding:"16px 0px"}}>
-                    <div className="menu" style={{position:"absolute",top:"7px"}}>
-                        <img src={menu} alt=""/>
+                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
+                    <div className="menu" style={{ position: "absolute", top: "7px" }}>
+                        <img src={menu} alt="" />
                     </div>
                     Detail Ticket
                 </div>
                 <div style={{ color: "black" }} style={{ width: "100%" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <Link to='/all-ticket'>
-                        <div className="row">
-                            <div style={{ width: "20%",float:"left",marginLeft:"-10px" }}>
-                                    <img src={left} alt="filter" /> 
+                            <div className="row">
+                                <div style={{ width: "20%", float: "left", marginLeft: "-10px" }}>
+                                    <img src={left} alt="filter" />
+                                </div>
+
                             </div>
-                            
-                        </div>
                         </Link>
                     </div>
                 </div>
@@ -73,8 +73,12 @@ class AllTicket extends Component {
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100", marginTop: "10px" }}>Desktop/Laptop</div>
                     </div>
-                    <div style={{ textAlign: "left", width: "100%", marginLeft: "25px", fontSize: "14px", fontWeight: "700", display: "flex" }}>Location  : Divisi MIS Lantai 3</div>
-                    <div style={{ textAlign: "left", width: "100%", marginLeft: "25px", fontSize: "14px", fontWeight: "700", display: "flex" }}>Report  : Divisi MIS Lantai 3</div>
+                    <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
+                        <div style={{ paddingLeft: "25px" }}>Location  : Divisi MIS Lantai 3</div>
+                    </div>
+                    <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
+                        <div style={{ paddingLeft: "25px" }}>Report  : Divisi MIS Lantai 3</div>
+                    </div>
                 </div>
                 <div className="row" style={{ width: "100%" }}>
                     <div className="kotak-menu" style={{ width: "33%" }}>

@@ -5,10 +5,6 @@ import ticket from '../../../assets/img/ticket.png';
 import {Link} from 'react-router-dom';
 
 export class NavbarBottom extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleNavbarBottom = (e) => 
     {
         console.log(this.props.active);
