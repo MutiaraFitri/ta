@@ -2,7 +2,7 @@ import { fetchUser } from "../action/action";
 import axios from 'axios';
 
 
-const url = 'localhost:3001/users';
+//const url = 'localhost:3001/users';
 function users() {
     return dispatch => {
         axios.get(`https://api.ict-servicedesk.xyz/users`, {

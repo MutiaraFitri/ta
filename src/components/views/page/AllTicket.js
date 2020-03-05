@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import NavbarTop from '../navbar/NavbarTop';
 import filter from './../../../assets/img/filter.png';
 import search from './../../../assets/img/search.png';
-import hardware from './../../../assets/img/mouse-black.png';
 import low from './../../../assets/img/low.jpg';
-import hight from './../../../assets/img/hight.png';
-import medium from './../../../assets/img/medium.png';
-import network from './../../../assets/img/wifi.png';
-import software from './../../../assets/img/virus.png';
 import NavbarBottom from '../navbar/NavbarBottom';
-import { Link } from 'react-router-dom';
-import { fetchProductPending, fetchProductSuccess, fetchProductError, fectProductError } from './../../../redux/action/action';
+import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
 import tickets from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
@@ -23,16 +17,14 @@ class AllTicket extends Component {
         tiket: []
     }
     componentDidMount() {
-
         this.props.tiketku();
     }
     renderToDos() {
         const { data } = this.props;
-        var asu = "";
-        // console.log(data.personState.data)
+        var dataku = "";
         if (data.personState.data) {
-            asu = data.personState.data.values;
-            const toDos = _.map(asu, (values, key) => {
+            dataku = data.personState.data.values;
+            const toDos = _.map(dataku, (values, key) => {
                 return <div key={key}>
                     <Antrian
                         //imageKategori={hardware}
@@ -55,14 +47,14 @@ class AllTicket extends Component {
     }
 
     render() {
-        const { data } = this.props;
-        const detail = this.props.active == "Detail" ? "navbar-icon active" : "navbar-icon";
+        // const { data } = this.props;
+        // const detail = this.props.active == "Detail" ? "navbar-icon active" : "navbar-icon";
 
 
         return (
             <div className="home">
                 <NavbarTop />
-                <div style={{ color: "black" }} style={{ width: "100%" }}>
+                <div style={{ color: "black", width: "100%" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
@@ -72,7 +64,7 @@ class AllTicket extends Component {
                                 </div>
                             </div>
                             <div style={{ width: "20%" }}>
-                                <button style={{ paddingTop: "10px", paddingBottom: "10px", float: "right", marginRight: "5px", paddingLeft: "12px", paddingRight: "12px", backgroundColor: "#fff", border: "none", color: "#fff", borderRadius: "10%", border: "1px solid #c6c6c6" }}>
+                                <button style={{ paddingTop: "10px", paddingBottom: "10px", float: "right", marginRight: "5px", paddingLeft: "12px", paddingRight: "12px", backgroundColor: "#fff", color: "#fff", borderRadius: "10%", border: "1px solid #c6c6c6" }}>
                                     <img src={filter} alt="filter" />
                                 </button>
                             </div>

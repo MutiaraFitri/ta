@@ -2,7 +2,7 @@
 import { fetchTiket } from "../action/action";
 import axios from 'axios';
 
-const urlTiket = 'localhost:3001/tickets';
+//const urlTiket = 'localhost:3001/tickets';
 function tickets() {
     return dispatch => {
         axios.get(`https://api.ict-servicedesk.xyz/tickets`, {

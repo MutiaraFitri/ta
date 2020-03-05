@@ -3,22 +3,17 @@ import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
-import header from '../../../assets/img/contact.png';
-import service from '../../../assets/img/customer-support.png';
-import history from '../../../assets/img/history.png';
 import tickets from '../../../assets/img/tickets.png';
 import clipboard from '../../../assets/img/clipboard.png';
 import insurance from '../../../assets/img/insurance.png';
 import problem from '../../../assets/img/problem.png';
 import { Link } from 'react-router-dom';
-import left from './../../../assets/img/left-arrow.png';
-import Category from '../Category';
-import { fetchProductPending, fetchProductSuccess, fetchProductError, fectProductError } from './../../../redux/action/action';
+import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
-import axios from 'axios';
 
 export class Home extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = { date: new Date() };
@@ -27,19 +22,14 @@ export class Home extends Component {
         persons: []
     }
     componentDidMount() {
-        // var x = 19;
-        // if (false) {
-        //     this.props.fetchSuccessku();
-        // }
-        // else {
-        //     this.props.fetchPendingku();
-        //     this.props.fetchErrorku();
-        // }
-        this.timerID = setInterval(
-            () => this.tick(),
-            1000
-        );
-        this.props.userku();
+        this._isMounted = true;
+        if (this._isMounted) {
+            this.timerID = setInterval(
+                () => this.tick(),
+                60000
+            );
+            this.props.userku();
+        }
     }
 
     tick() {
@@ -48,20 +38,22 @@ export class Home extends Component {
         });
     }
 
+    componentWillUnmount() {
+        console.log("PPPPPPP")
+        this._isMounted = false;
+    }
+
     render() {
-        const { data } = this.props;
+        // const { data } = this.props;
         var today = new Date()
         var curHr = today.getHours()
         var waktu = ""
         if (curHr < 12) {
             waktu = "Morning"
-            console.log('good morning')
         } else if (curHr < 18) {
             waktu = "Afternoon"
-            console.log('good afternoon')
         } else {
             waktu = "Evening"
-            console.log('good evening')
         }
         return (
             <div className="home">

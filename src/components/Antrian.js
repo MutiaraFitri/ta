@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import mouseBlack from './../assets/img/mouse-black.png';
 import low from './../assets/img/low.jpg';
 import high from './../assets/img/hight.png';
 import medium from './../assets/img/medium.png';

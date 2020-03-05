@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import NavbarTop from '../navbar/NavbarTop';
-import filter from './../../../assets/img/filter.png';
-import search from './../../../assets/img/search.png';
-import mouseBlack from './../../../assets/img/mouse-black.png';
 import left from './../../../assets/img/left-arrow.png';
 import mann from './../../../assets/img/mann.png';
 import priority from './../../../assets/img/priority.png';
@@ -24,7 +20,7 @@ class AllTicket extends Component {
                     </div>
                     Detail Ticket
                 </div>
-                <div style={{ color: "black" }} style={{ width: "100%" }}>
+                <div style={{ color: "black", width: "100%" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <Link to='/all-ticket'>
                             <div className="row">
@@ -53,7 +49,7 @@ class AllTicket extends Component {
                     </div>
                     <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
                         <div className="nama" style={{ fontSize: "24px", color: "black", fontWeight: "bold", textAlign: "left" }}>Justin Bieber</div>
-                        <div className="email" style={{ fontSize: "20px", color: "black", textAlign: "center", textAlign: "left" }}> bieber@gmail.com </div>
+                        <div className="email" style={{ fontSize: "20px", color: "black", textAlign: "left" }}> bieber@gmail.com </div>
                     </div>
                 </div>
 
@@ -65,7 +61,7 @@ class AllTicket extends Component {
                 </div>
 
                 <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingBottom: "30px" }}>
-                    <div className="description" style={{ backgroundColor: "#fff", width: "80%", margin: "0px auto", padding: "20px", margin: "20px auto" }}>
+                    <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "700", marginTop: "10px" }}>I dropped my laptop as I was walking to work this morning. can i get a new one?</div>
                         <div style={{ width: "100%", textAlign: "left", marginTop: "10px" }}>
