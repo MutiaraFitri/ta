@@ -6,7 +6,7 @@ import low from './../../../assets/img/low.jpg';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
-import tickets from '../../../redux/api/ticket';
+import { tickets } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import _ from "lodash";
 
@@ -28,14 +28,19 @@ class AllTicket extends Component {
                 return <div key={key}>
                     <Antrian
                         //imageKategori={hardware}
-                        sender={values.sender}
-                        category={values.category}
-                        title={values.title}
-                        assign_to={values.assign_to}
-                        status={values.status}
-                        due_date={values.due_date}
+                        sender1={values.employee_firstname}
+                        sender2={values.employee_lastname}
+                        category={values.ticket_category}
+                        title={values.ticket_subject}
+                        assign_to={values.technician_firstname}
+                        status={values.ticket_status}
+                        due_date={values.ticket_timestamp}
                         imagePriority={low}
-                        priority={values.priority}
+                        priority={values.ticket_priority}
+                        id={values.ticket_id}
+                        employee_email={values.employee_email}
+                        description={values.ticket_description}
+                        location={values.ticket_location}
                     />
 
                 </div>;
@@ -94,6 +99,7 @@ const mapDispacthToProps = (dispatch) => {
         fetchSuccessku: () => dispatch(fetchProductSuccess()),
         fetchErrorku: () => dispatch(fectProductError()),
         tiketku: () => dispatch(tickets()),
+
     }
 }
 

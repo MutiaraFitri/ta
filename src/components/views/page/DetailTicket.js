@@ -1,17 +1,56 @@
 import React, { Component } from 'react';
 import left from './../../../assets/img/left-arrow.png';
-import mann from './../../../assets/img/mann.png';
 import priority from './../../../assets/img/priority.png';
 import garbage from './../../../assets/img/garbage.png';
 import tambah from './../../../assets/img/tambah.png';
-import macbook from './../../../assets/img/smashed_macbook-1-780x521.png';
-import down from './../../../assets/img/arrow_down.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import menu from '../../../assets/img/menu.png';
+import { ticketsById } from '../../../redux/api/ticket';
+import { connect } from 'react-redux';
+import TicketDetailDesc from '../../TicketDetailDesc';
+import _ from "lodash";
 
-class AllTicket extends Component {
+class DetailTicket extends Component {
+    componentDidMount() {
+        this.props.ticket(this.props.match.params.id)
+    }
+    state = {
+        tiket: []
+    }
+    renderToDos() {
+        const { data } = this.props;
+        var dataku = "";
+        if (data.personState.data) {
+            dataku = data.personState.data.values;
+            const toDos = _.map(dataku, (values, key) => {
+                return <div key={key}>
+                    <TicketDetailDesc
+                        //imageKategori={hardware}
+                        sender1={values.employee_firstname}
+                        sender2={values.employee_lastname}
+                        category={values.ticket_category}
+                        title={values.ticket_subject}
+                        assign_to={values.technician_firstname}
+                        status={values.ticket_status}
+                        due_date={values.ticket_timestamp}
+                        priority={values.ticket_priority}
+                        id={values.ticket_id}
+                        employee_email={values.employee_email}
+                        description={values.ticket_description}
+                        email={values.employee_email}
+                        location={values.ticket_location}
+                    />
+
+                </div>;
+            });
+            if (!_.isEmpty(toDos)) {
+                return toDos;
+            }
+        }
+    }
     render() {
+        //console.log(this.props.match.params.id)
         return (
             <div className="home" style={{ paddingBottom: "70px" }}>
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
@@ -32,50 +71,8 @@ class AllTicket extends Component {
                         </Link>
                     </div>
                 </div>
-                <div style={{ width: "100%" }}>
-                    <div className="title" style={{ textAlign: "left", margin: "25px" }}>
-                        <p style={{ fontSize: "12px", padding: "0px", margin: "0px" }}>Title </p>
-                        <p style={{ fontSize: "22px", padding: "0px", margin: "0px" }}>I Need new laptop please.</p>
-                    </div>
-                </div>
-                <div style={{ width: "100%", height: "70px", display: "flex" }}>
-                    <div className="pengirim" style={{ width: "20%", marginLeft: "25px" }}>
-                        <div className="foto-pengim" style={{
-                            width: "60px", backgroundColor: "#F1AEAE",
-                            height: "60px", borderRadius: "50%", border: "1px solid", margin: "0px auto", overflow: "hidden"
-                        }}>
-                            <img src={mann} alt="mann" style={{ width: "100%" }} />
-                        </div>
-                    </div>
-                    <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
-                        <div className="nama" style={{ fontSize: "24px", color: "black", fontWeight: "bold", textAlign: "left" }}>Justin Bieber</div>
-                        <div className="email" style={{ fontSize: "20px", color: "black", textAlign: "left" }}> bieber@gmail.com </div>
-                    </div>
-                </div>
+                {this.renderToDos()}
 
-                <div className="deskripsi-isi" style={{ width: "100%", marginTop: "10px" }}>
-                    <div style={{ backgroundColor: "#F4F4F6", width: "170px", fontSize: "14px", float: "right", fontWeight: "700" }}>
-                        Waiting for Support
-                        <img src={down} alt="down" width="10" style={{ marginLeft: "5px" }} />
-                    </div>
-                </div>
-
-                <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingBottom: "30px" }}>
-                    <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "700", marginTop: "10px" }}>I dropped my laptop as I was walking to work this morning. can i get a new one?</div>
-                        <div style={{ width: "100%", textAlign: "left", marginTop: "10px" }}>
-                            <img src={macbook} alt="macbook" style={{ textAlign: "left" }} />
-                        </div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100", marginTop: "10px" }}>Desktop/Laptop</div>
-                    </div>
-                    <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
-                        <div style={{ paddingLeft: "25px" }}>Location  : Divisi MIS Lantai 3</div>
-                    </div>
-                    <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
-                        <div style={{ paddingLeft: "25px" }}>Report  : Divisi MIS Lantai 3</div>
-                    </div>
-                </div>
                 <div className="row" style={{ width: "100%" }}>
                     <div className="kotak-menu" style={{ width: "33%" }}>
                         <div style={{ padding: "5px" }}>
@@ -113,11 +110,23 @@ class AllTicket extends Component {
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <NavbarBottom active="Ticket" />
             </div>
         );
     }
 }
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        ticket: (id) => dispatch(ticketsById(id)),
 
-export default AllTicket;
+    }
+}
+
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(DetailTicket)

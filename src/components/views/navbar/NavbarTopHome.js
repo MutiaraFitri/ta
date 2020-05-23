@@ -4,6 +4,7 @@ import mann from '../../../assets/img/mann.png';
 import notification from '../../../assets/img/notification.png';
 import users from '../../../redux/api/users';
 import { connect } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
 
 export class NavbarTop extends Component {
 
@@ -34,7 +35,7 @@ export class NavbarTop extends Component {
                         <img src={mann} alt="man" style={{ width: "100%" }} />
                     </div>
                     <div>
-                        <div style={{ color: "white", textAlign: "center" }}>Welcome, {(data.personState.data) ? data.personState.data.values[0].first_name : ""} </div>
+                        <div style={{ color: "white", textAlign: "center" }}>Welcome, {!(data.personState.data) ? <Skeleton duration={1} /> : data.personState.data.data ? data.personState.data.data.user_firstname : ""} </div>
                         <div style={{ color: "white", fontSize: "14px", paddingTop: "5px", textAlign: "center" }}>IT Service</div>
                     </div>
                 </div>

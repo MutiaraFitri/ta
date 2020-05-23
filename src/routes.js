@@ -18,6 +18,7 @@ const AllTicket = React.lazy(() => import('./components/views/page/AllTicket'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
 const DetailTicket = React.lazy(() => import('./components/views/page/DetailTicket'));
 const Chart_Component = React.lazy(() => import('./components/views/Chart_Component'));
+const DetailTickets = React.lazy(() => import('./components/views/page/DetailTicket'))
 
 
 
@@ -41,6 +42,7 @@ const routes = [
   { path: '/detail-ticket', exact: true, name: 'DetailTicket', component: DetailTicket },
   { path: '/report', exact: true, name: 'DetailTicket', component: Report },
   { path: '/chart', exact: true, name: 'Chart_Component', component: Chart_Component },
+  { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
 
 
 

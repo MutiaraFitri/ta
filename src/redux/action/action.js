@@ -4,6 +4,7 @@ export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const FETCH_TIKET_SUCCESS = 'FETCH_TIKET_SUCCESS';
 export const FETCH_TECHNICIAN_SUCCESS = 'FETCH_TECHNICIAN_SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export const fetchProductPending = () => {
     // console.log("asu")
@@ -17,6 +18,12 @@ export const fetchProductSuccess = () => {
     return {
         type: FETCH_SUCCESS,
         value: "success"
+    }
+}
+
+export const userLogout = () => {
+    return {
+        type: LOGOUT_SUCCESS
     }
 }
 

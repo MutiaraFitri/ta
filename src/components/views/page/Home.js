@@ -28,8 +28,8 @@ export class Home extends Component {
                 () => this.tick(),
                 60000
             );
-            this.props.userku();
         }
+        this.props.userku();
     }
 
     tick() {
@@ -39,7 +39,7 @@ export class Home extends Component {
     }
 
     componentWillUnmount() {
-        console.log("PPPPPPP")
+        //console.log("PPPPPPP")
         this._isMounted = false;
     }
 

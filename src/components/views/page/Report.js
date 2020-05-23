@@ -6,34 +6,40 @@ import { Link } from 'react-router-dom';
 import menu from '../../../assets/img/menu.png';
 import left from './../../../assets/img/left-arrow.png';
 import ChartComponent from '../Chart_Component';
+import Chartjs2 from '../Chartjs2';
 
 export class Home extends Component {
 
     state = {
         tab: "weekly",
-        data: [
-            {
-                label: 'Senin',
-                data: [[0, 1.5]]
-            },
-            {
-                label: 'Selasa',
-                data: [[0, 3]]
-            },
-            {
-                label: 'Rabu',
-                data: [[0, 3], [1, 3]]
-            },
-            {
-                label: 'Kamis',
-                data: [[0, 2]]
-            },
-            {
-                label: "Jumat",
-                data: [[0, 3]]
-            }
-        ]
+        chartData: {
+            labels: ['week1', 'week2', 'week3', 'week4'],
+            datasets: [
+                {
+                    label: 'finish',
+                    data: [
+                        11,
+                        1,
+                        6,
+                        20
+                    ],
+                    backgroundColor: [
+                        "#ff4", "#ff4", "#ff4", "#ff4"
+                    ],
+                }, {
+                    label: 'assign',
+                    data: [
+                        2,
+                        7,
+                        5,
+                        5]
+                    ,
+                    backgroundColor: [
+                        "#789999", "#789999", "#789999", "#789999"
 
+                    ]
+                }]
+        }
     }
 
     handleClickTab = (e) => {
@@ -42,57 +48,113 @@ export class Home extends Component {
         })
         if (e.target.id === "daily") {
             this.setState({
-                data: [
-                    {
-                        label: 'Series 1',
-                        data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
-                    },
-                    {
-                        label: 'Series 2',
-                        data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
-                    }
-                ]
+                chartData: {
+                    labels: ['s', 's', 'r', 'k', 'j', 's', 'm'],
+                    datasets: [
+                        {
+                            label: 'assigment',
+                            data: [
+                                1,
+                                2,
+                                3,
+                                3,
+                                5,
+                                6,
+                                4,],
+                            backgroundColor: [
+                                "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
+                            ]
+                        },
+                        {
+                            label: 'finish',
+                            data: [
+                                1,
+                                4,
+                                6,
+                                5,
+                                1,
+                                9,
+                                4,],
+                            backgroundColor: [
+                                "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
+                            ]
+                        }
+                    ]
+                }
             })
         } else if (e.target.id === "weekly") {
-            this.setState(
-                {
-                    data: [
+            this.setState({
+                chartData: {
+                    labels: ['week1', 'week2', 'week3', 'week4'],
+                    datasets: [
                         {
-                            label: 'Series 1',
-                            data: [[0, 3], [1, 1], [2, 5], [3, 6], [4, 4]]
-                        },
-                        {
-                            label: 'Series 2',
-                            data: [[0, 1], [1, 2], [2, 4], [3, 2], [4, 7]]
-                        }
-                    ]
+                            label: 'finish',
+                            data: [
+                                11,
+                                1,
+                                6,
+                                20
+                            ],
+                            backgroundColor: [
+                                "#ff4", "#ff4", "#ff4", "#ff4",
+                            ]
+                        }, {
+                            label: 'assign',
+                            data: [
+                                2,
+                                7,
+                                5,
+                                5]
+                            ,
+                            backgroundColor: [
+                                "#789999", "#789999", "#789999", "#789999",
+
+                            ]
+                        }]
                 }
-            )
+            })
         } else if (e.target.id === "monthly") {
-            this.setState(
-                {
-                    data: [
+            this.setState({
+                chartData: {
+                    labels: ['jan', 'feb', 'mart', 'apr', 'mai', 'jun'],
+                    datasets: [
                         {
-                            label: 'Series 1',
-                            data: [[1, 1], [0, 3], [2, 5], [4, 4], [3, 6]]
+                            label: 'assigment',
+                            data: [
+                                1,
+                                4,
+                                6,
+                                3,
+                                9,
+                                3,
+                            ],
+                            backgroundColor: [
+                                "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
+                            ]
                         },
                         {
-                            label: 'Series 2',
-                            data: [[1, 2], [3, 2], [2, 4], [4, 7], [0, 1]]
-                        },
-                        {
-                            label: 'Series 2',
-                            data: [[1, 2], [3, 2], [2, 4], [4, 7], [0, 1]]
+                            label: 'finish',
+                            data: [
+                                2,
+                                7,
+                                5,
+                                5,
+                                1,
+                                9,
+                            ],
+                            backgroundColor: [
+                                "#789999", "#789999", "#789999", "#789999", "#789999", "#789999",
+                            ]
                         }
                     ]
                 }
-            )
+            })
         }
     }
     render() {
         return (
-            <div className="home">
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
+            <div className="home" >
+                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <img src={menu} alt="" />
                     </div>
@@ -121,9 +183,9 @@ export class Home extends Component {
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px", }}>
                             <div className="desc" style={{ width: "100%", display: "flex" }}>
-                                <div className="desc-main" id="daily" onClick={this.handleClickTab} style={{ width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "daily" ? "10px" : "0px"), backgroundColor: (this.state.tab === "daily" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "daily" ? "#fff" : "#837F7F") }}>DAILY</div>
-                                <div className="desc-main" id="weekly" onClick={this.handleClickTab} style={{ width: "33.333%", borderRadius: (this.state.tab === "weekly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "weekly" ? "#1477DB" : "#F6F8FF"), fontSize: "15px", fontWeight: "500", color: (this.state.tab === "weekly" ? "#fff" : "#837F7F") }}>WEEKLY</div>
-                                <div className="desc-main" id="monthly" onClick={this.handleClickTab} style={{ width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "monthly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "monthly" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "monthly" ? "#fff" : "#837F7F") }}>MONTHLY</div>
+                                <div className="desc-main" id="daily" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "daily" ? "10px" : "0px"), backgroundColor: (this.state.tab === "daily" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "daily" ? "#fff" : "#837F7F") }}>DAILY</div>
+                                <div className="desc-main" id="weekly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", borderRadius: (this.state.tab === "weekly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "weekly" ? "#1477DB" : "#F6F8FF"), fontSize: "15px", fontWeight: "500", color: (this.state.tab === "weekly" ? "#fff" : "#837F7F") }}>WEEKLY</div>
+                                <div className="desc-main" id="monthly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "monthly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "monthly" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "monthly" ? "#fff" : "#837F7F") }}>MONTHLY</div>
                             </div>
                         </div>
                     </div>
@@ -137,8 +199,9 @@ export class Home extends Component {
                             height: "200px",
                         }}>
 
-                        <div className="row" style={{ padding: "10px", margin: "0px", }}>
-                            <ChartComponent data={this.state.data} />
+                        <div className="row" style={{ padding: "10px", margin: "0px", height: '200px' }}>
+                            {/* <ChartComponent data={this.state.datasets} /> */}
+                            <Chartjs2 data={this.state.chartData} />
                         </div>
                     </div>
                 </div>

@@ -3,15 +3,14 @@ import profile from '../../../assets/img/bgProfile.png';
 import mann from '../../../assets/img/mann.png';
 import back from './../../../assets/img/back.png';
 import { connect } from 'react-redux';
-import technician from '../../../redux/api/technician';
+import users from '../../../redux/api/users';
 import left from './../../../assets/img/left-arrow.png';
 import { Link } from 'react-router-dom';
-
 
 export class NavbarProfile extends Component {
 
     componentDidMount() {
-        this.props.teknisiku();
+        this.props.userku();
     }
     render() {
         const { data } = this.props;
@@ -30,8 +29,8 @@ export class NavbarProfile extends Component {
                     <img src={profile} alt="profile" style={{ marginTop: "-90px", width: "100%" }} />
                 </div>
                 <div style={{ position: "absolute", top: "175px", width: "100%", left: "0px" }}>
-                    <div style={{ color: "black", fontSize: "20px" }}> {(data.personState.data) ? data.personState.data.values[0].first_name : ""} {(data.personState.data) ? data.personState.data.values[0].last_name : ""} </div>
-                    <div style={{ color: "black", fontSize: "14px" }}>Technician ID <span style={{ fontSize: "14px" }}> {(data.personState.data) ? data.personState.data.values[0].nrp : ""}</span></div>
+                    <div style={{ color: "black", fontSize: "20px" }}> {(data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_firstname : "" : ""} {(data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_lastname : "" : ""} </div>
+                    <div style={{ color: "black", fontSize: "14px" }}>Technician ID <span style={{ fontSize: "14px" }}> {(data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_id : "" : ""}</span></div>
                 </div>
                 <div className="profile"
                     style={{
@@ -54,12 +53,13 @@ export class NavbarProfile extends Component {
 }
 
 
+
 const mapStateToProps = (state) => ({
     data: state
 })
 const mapDispacthToProps = (dispatch) => {
     return {
-        teknisiku: () => dispatch(technician()),
+        userku: () => dispatch(users()),
     }
 }
 export default connect(
