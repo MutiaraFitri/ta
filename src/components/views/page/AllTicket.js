@@ -2,24 +2,64 @@ import React, { Component } from 'react';
 import NavbarTop from '../navbar/NavbarTop';
 import filter from './../../../assets/img/filter.png';
 import search from './../../../assets/img/search.png';
-import hardware from './../../../assets/img/mouse-black.png';
 import low from './../../../assets/img/low.jpg';
-import hight from './../../../assets/img/hight.png';
-import medium from './../../../assets/img/medium.png';
-import network from './../../../assets/img/wifi.png';
-import software from './../../../assets/img/virus.png';
 import NavbarBottom from '../navbar/NavbarBottom';
-import { Link } from 'react-router-dom';
+import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
+import { tickets } from '../../../redux/api/ticket';
+import { connect } from 'react-redux';
+import _ from "lodash";
+
 
 class AllTicket extends Component {
+
+    state = {
+        tiket: []
+    }
+    componentDidMount() {
+        this.props.tiketku();
+    }
+    renderToDos() {
+        const { data } = this.props;
+        var dataku = "";
+        if (data.personState.data) {
+            dataku = data.personState.data.values;
+            const toDos = _.map(dataku, (values, key) => {
+                return <div key={key}>
+                    <Antrian
+                        //imageKategori={hardware}
+                        sender1={values.employee_firstname}
+                        sender2={values.employee_lastname}
+                        category={values.ticket_category}
+                        title={values.ticket_subject}
+                        assign_to={values.technician_firstname}
+                        status={values.ticket_status}
+                        due_date={values.ticket_timestamp}
+                        imagePriority={low}
+                        priority={values.ticket_priority}
+                        id={values.ticket_id}
+                        employee_email={values.employee_email}
+                        description={values.ticket_description}
+                        location={values.ticket_location}
+                    />
+
+                </div>;
+            });
+            if (!_.isEmpty(toDos)) {
+                return toDos;
+            }
+        }
+    }
+
     render() {
-        const detail = this.props.active == "Detail" ? "navbar-icon active" : "navbar-icon";
+        // const { data } = this.props;
+        // const detail = this.props.active == "Detail" ? "navbar-icon active" : "navbar-icon";
+
 
         return (
             <div className="home">
                 <NavbarTop />
-                <div style={{ color: "black" }} style={{ width: "100%" }}>
+                <div style={{ color: "black", width: "100%" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
@@ -29,7 +69,7 @@ class AllTicket extends Component {
                                 </div>
                             </div>
                             <div style={{ width: "20%" }}>
-                                <button style={{ paddingTop: "10px", paddingBottom: "10px", float: "right", marginRight: "5px", paddingLeft: "12px", paddingRight: "12px", backgroundColor: "#fff", border: "none", color: "#fff", borderRadius: "10%", border: "1px solid #c6c6c6" }}>
+                                <button style={{ paddingTop: "10px", paddingBottom: "10px", float: "right", marginRight: "5px", paddingLeft: "12px", paddingRight: "12px", backgroundColor: "#fff", color: "#fff", borderRadius: "10%", border: "1px solid #c6c6c6" }}>
                                     <img src={filter} alt="filter" />
                                 </button>
                             </div>
@@ -40,43 +80,7 @@ class AllTicket extends Component {
                     <div className="title" style={{ textAlign: "left", marginLeft: "5px", letterSpacing: "5px" }}>
                         QUEUE
                     </div>
-
-                    <Antrian
-                        imageKategori={hardware}
-                        nama="Justin"
-                        kategori=" Hardware"
-                        judul="I need new laptop"
-                        keterangan="WAITING FOR SUPPORT"
-                        status="Unassigned"
-                        tanggal="29 Jan 20"
-                        imagePriority={low}
-                        priority="low"
-                    />
-
-                    <Antrian
-                        imageKategori={network}
-                        nama="Emma Wetson"
-                        kategori="Network"
-                        judul="I can't connect .."
-                        keterangan="DONE"
-                        status="Unassigned"
-                        tanggal="29 Jan 20"
-                        imagePriority={low}
-                        priority="low"
-                    />
-
-                    <Antrian
-                        imageKategori={software}
-                        nama="Ningsih"
-                        kategori="Software"
-                        judul="Ada virus di ..  "
-                        keterangan="WAITING FOR SUPPORT"
-                        status="Unassigned"
-                        tanggal="29 Jan 20"
-                        imagePriority={low}
-                        priority="low"
-                    />
-
+                    {this.renderToDos()}
                     <br /><br /><br /><br />
 
                 </div>
@@ -86,4 +90,19 @@ class AllTicket extends Component {
     }
 }
 
-export default AllTicket;
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        fetchPendingku: () => dispatch(fetchProductPending()),
+        fetchSuccessku: () => dispatch(fetchProductSuccess()),
+        fetchErrorku: () => dispatch(fectProductError()),
+        tiketku: () => dispatch(tickets()),
+
+    }
+}
+
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(AllTicket)

@@ -1,74 +1,117 @@
 import React, { Component } from 'react';
 import NavbarProfile from '../navbar/NavbarProfile';
-import filter from './../../../assets/img/filter.png';
-import search from './../../../assets/img/search.png';
-import mouseBlack from './../../../assets/img/mouse-black.png';
-import mann from './../../../assets/img/mann.png';
-import priority from './../../../assets/img/priority.png';
-import garbage from './../../../assets/img/garbage.png';
-import tambah from './../../../assets/img/tambah.png';
-import macbook from './../../../assets/img/smashed_macbook-1-780x521.png';
-import job from './../../../assets/img/job.png';
-import email from './../../../assets/img/email.png';
+import job2 from './../../../assets/img/job.png';
+import call2 from './../../../assets/img/call.png';
+import email2 from './../../../assets/img/email.png';
 import build from './../../../assets/img/building.png';
 import place from './../../../assets/img/place.png';
 import NavbarBottom from '../navbar/NavbarBottom';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+// import users from '../../../redux/api/users';
+import { userLogOut, users } from '../../../redux/api/users';
 
-class AllTicket extends Component {
+
+
+export class Profile extends Component {
+
+    handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        this.props.logOut()
+    };
+    componentDidMount() {
+        this.props.userku();
+    }
     render() {
+        if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
+        console.log('wow')
+        const { data } = this.props;
+        const department = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_department ? data.personState.data.data.user_department : "Your Departement" : "Your Departement" : "Your Departement";
+        const address = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_address ? data.personState.data.data.user_address : "Your Address" : "Your Address" : "Your Address";
+        const email = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_email ? data.personState.data.data.user_email : "Your Mail" : "Your Mail" : "Your Mail";
+        const job = (data.personState.data) ? (data.personState.data.data) ? (data.personState.data.data.user_job) ? (data.personState.data.data.user_job) : "Your Skill" : "Your Skill" : "Your Skill";
+        const phone = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_contact ? data.personState.data.data.user_contact : "Your Phone Number" : "Your Phone Number" : "Your Phone Number";
+
+        const colorJob =
+            !(data.personState.data) ? "#837E7E" : (data.personState.data.data) ? "#3f4377" : "#837E7E";
+        const colorDepartment =
+            !(data.personState.data) ? "#837E7E" : (data.personState.data.data) ? "#3f4377" : "#837E7E";
+        const colorContact =
+            !(data.personState.data) ? "#837E7E" : (data.personState.data.data) ? "#3f4377" : "#837E7E";
+        const colorAddress =
+            !(data.personState.data) ? "#837E7E" : (data.personState.data.data) ? "#3f4377" : "#837E7E";
+
+
         return (
             <div className="home" style={{ paddingBottom: "70px" }}>
                 <NavbarProfile />
 
                 <div className="description" style={{ backgroundColor: "#EDF4FF", width: "70%", margin: "0px auto", padding: "20px", marginTop: "120px", borderRadius: "10px" }}>
-                    <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", letterSpacing: "2.7px", color: "black", fontSize: "15px", fontWeight: "bold" }}>About</div>
+                    <div className="title-kotak" style={{ textAlign: "left", letterSpacing: "2.7px", color: "black", fontSize: "15px", fontWeight: "bold" }}>About</div>
                     <div className="row" style={{ width: "100%" }}>
-                        <div className="gambar" style={{ width: "30%" }}>
-                            <img src={job} alt="info" />
+                        <div className="gambar" style={{ width: "20%" }}>
+                            <img src={job2} alt="info" />
                         </div>
-                        <div className="desc" style={{ width: "70%", textAlign: "left", height: "50px" }}>
-                            <div className="desc-main" style={{ fontSize: "15px", color: "#837E7E" }}>Network Egineer</div>
+                        <div className="desc" style={{ width: "80%", textAlign: "left", height: "50px" }}>
+                            <div className="desc-main" style={{ fontSize: "15px", color: colorJob }}>{job}</div>
                         </div>
-                        <div className="gambar" style={{ width: "30%" }}>
+                        <div className="gambar" style={{ width: "20%" }}>
                             <img src={build} alt="info" />
                         </div>
-                        <div className="desc" style={{ width: "70%", textAlign: "left", height: "50px" }}>
-                            <div className="desc-main" style={{ fontSize: "15px", color: "#837E7E" }}>Your departement</div>
+                        <div className="desc" style={{ width: "80%", textAlign: "left", height: "50px" }}>
+                            <div className="desc-main" style={{ fontSize: "15px", color: colorDepartment }}>{department}</div>
                         </div>
-                        <div className="gambar" style={{ width: "30%" }}>
+                        <div className="gambar" style={{ width: "20%" }}>
                             <img src={place} alt="info" />
                         </div>
-                        <div className="desc" style={{ width: "70%", textAlign: "left", height: "50px" }}>
-                            <div className="desc-main" style={{ fontSize: "15px", color: "#837E7E" }}>Your Location</div>
+                        <div className="desc" style={{ width: "80%", textAlign: "left", height: "50px" }}>
+                            <div className="desc-main" style={{ fontSize: "15px", color: colorAddress }}>{address}</div>
                         </div>
                     </div>
-                    <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", letterSpacing: "2.7px", color: "black", fontSize: "15px", fontWeight: "bold" }}>Contac</div>
+                    <div className="title-kotak" style={{ textAlign: "left", letterSpacing: "2.7px", color: "black", fontSize: "15px" }}>Contact</div>
                     <div className="row" style={{ width: "100%" }}>
-                        <div className="gambar" style={{ width: "30%" }}>
-                            <img src={email} alt="info" />
+                        <div className="gambar" style={{ width: "20%" }}>
+                            <img src={email2} alt="info" />
                         </div>
-                        <div className="desc" style={{ width: "70%", textAlign: "left" }}>
-                            <div className="desc-main" style={{ fontSize: "15px", color: "#837E7E" }}>Yayan@gmail.com</div>
+                        <div className="desc" style={{ width: "80%", textAlign: "left" }}>
+                            <div className="desc-main" style={{ fontSize: "15px", color: colorContact }}>{email}</div>
+                        </div>
+
+                    </div>
+                    <div className="row" style={{ width: "100%" }}>
+                        <div className="gambar" style={{ width: "20%" }}>
+                            <img src={call2} style={{ width: "28%" }} alt="info" />
+                        </div>
+                        <div className="desc" style={{ width: "80%", textAlign: "left" }}>
+                            <div className="desc-main" style={{ fontSize: "15px", color: colorContact }}>{phone}</div>
                         </div>
 
                     </div>
                 </div>
 
                 <div className="row" style={{ width: "100%" }}>
-                    <div className="kotak-menu" style={{ width: "60%", margin: "0px auto", backgroundColor: "#141AA2", height: "40px", marginTop: "30px" }}>
-                        <div style={{ padding: "5px" }}>
-                            <div style={{ border: "1px solid #141AA2", borderRadius: "4px" }}>
-                                <div className="desc-menu" style={{ fontSize: "18px", color: "#ffff" }}>
-                                    LOGOUT
-                                </div>
-                            </div>
-                        </div>
+
+                    <div className="row" style={{ marginTop: "2rem" }}>
+                        <button className="button-submit" type="submit" onClick={this.handleLogout}>logOut</button>
                     </div>
                 </div>
-                <NavbarBottom />
-            </div>
+                <NavbarBottom active="Profile" />
+            </div >
         );
     }
 }
 
-export default AllTicket;
+
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        userku: () => dispatch(users()),
+        logOut: () => dispatch(userLogOut())
+    }
+}
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(Profile)

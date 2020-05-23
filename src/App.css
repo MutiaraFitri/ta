@@ -1,9 +1,34 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 .App {
   text-align: center;
 }
 
 .App-logo {
   height: 40vmin;
+}
+
+.tiket {
+  margin-top: 20px;
+  display:flex;
+  padding-bottom:10px; 
+  border-bottom: 1px solid rgba(133, 127, 127, 0.8);
+}
+/* css HOME */
+.lingkaran{
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 3px solid #e8e8e8;
+}
+.lingkaranBesar{
+  width:140px;
+  height:140px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 3px solid #e8e8e8;
+  margin: 0px -20px;
 }
 
 .App-header {
