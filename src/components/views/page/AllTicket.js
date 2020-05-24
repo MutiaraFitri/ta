@@ -6,6 +6,7 @@ import low from './../../../assets/img/low.jpg';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
+import { Redirect } from 'react-router-dom';
 import { tickets } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import _ from "lodash";
@@ -54,7 +55,7 @@ class AllTicket extends Component {
     render() {
         // const { data } = this.props;
         // const detail = this.props.active == "Detail" ? "navbar-icon active" : "navbar-icon";
-
+        if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
 
         return (
             <div className="home">

@@ -3,6 +3,7 @@ import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
+import { Redirect } from 'react-router-dom';
 import tickets from '../../../assets/img/tickets.png';
 import clipboard from '../../../assets/img/clipboard.png';
 import insurance from '../../../assets/img/insurance.png';
@@ -55,6 +56,8 @@ export class Home extends Component {
         } else {
             waktu = "Evening"
         }
+        if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
+
         return (
             <div className="home">
                 <NavbarTop />
