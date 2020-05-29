@@ -7,8 +7,6 @@ import mann from './../assets/img/mann.png';
 
 class TicketDetailDesc extends Component {
     render() {
-
-
         return (
             <div>
                 <div style={{ width: "100%" }}>
@@ -31,20 +29,21 @@ class TicketDetailDesc extends Component {
                         <div className="email" style={{ fontSize: "20px", color: "black", textAlign: "left" }}> {this.props.email} </div>
                     </div>
                 </div>
-
-                <div className="deskripsi-isi" style={{ width: "100%", marginTop: "10px" }}>
-                    <div style={{ backgroundColor: "#F4F4F6", width: "170px", fontSize: "14px", float: "right", fontWeight: "700" }}>
-                        Waiting for Support
-                        <img src={down} alt="down" width="10" style={{ marginLeft: "5px" }} />
-                    </div>
-                </div>
-
-                <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingBottom: "30px" }}>
+                <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
+                        <div className="deskripsi-isi" style={{ width: "100%", marginTop: "10px" }}>
+                            <div style={{ backgroundColor: "#F4F4F6", width: "170px", fontSize: "14px", float: "right", fontWeight: "700" }}>
+                                Waiting for Support
+                        <img src={down} alt="down" width="10" style={{ marginLeft: "5px" }} />
+                            </div>
+                        </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "700", marginTop: "10px" }}>{this.props.description}</div>
-                        <div style={{ width: "100%", textAlign: "left", marginTop: "10px" }}>
-                            <img src={macbook} alt="macbook" style={{ textAlign: "left" }} />
+                        <div style={{ maxWidth: "414px", textAlign: "left", marginTop: "10px" }}>
+                            {(this.props.image) ?
+                                <img src={'https://api.ict-servicedesk.xyz/uploads/' + this.props.image} alt="macbook" style={{ textAlign: "left", width: "100%" }} />
+                                : null
+                            }
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100", marginTop: "10px" }}>Desktop/Laptop</div>
                     </div>
