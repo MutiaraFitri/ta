@@ -37,7 +37,7 @@ export class EditProfile extends Component {
     }
 
     handleSave = () => {
-        axios.put(`http://localhost:3001/technician/` + this.state.user_id, this.state, {
+        axios.put(`https://api.ict-servicedesk.xyz//technician/` + this.state.user_id, this.state, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -65,7 +65,7 @@ export class EditProfile extends Component {
         });
     }
     fetchUser = () => {
-        axios.get(`http://localhost:3001/user/technician/` + this.state.user_id, {
+        axios.get(`https://api.ict-servicedesk.xyz/user/technician/` + this.state.user_id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
