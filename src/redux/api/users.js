@@ -17,7 +17,6 @@ export function users() {
                 dispatch(fetchUser(decoded.data));
             }
         });
-
     }
 }
 
@@ -108,6 +107,15 @@ export function userLoginFetch(data) {
 export function userLogOut() {
     return dispatch => {
         dispatch(userLogout())
+    }
+}
+
+export function userEdit(data) {
+    return dispatch => {
+        jwt.verify(localStorage.getItem("jwt"), 'dimasputray', function (err, decoded) {
+            dispatch(decoded.data.user_id)
+        });
+
     }
 }
 
