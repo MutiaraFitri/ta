@@ -8,6 +8,7 @@ const Chart_Component = React.lazy(() => import('./components/views/Chart_Compon
 const DetailTickets = React.lazy(() => import('./components/views/page/DetailTicket'))
 const DetailTicket = React.lazy(() => import('./components/views/page/DetailTicket'));
 const DetProblemSolve = React.lazy(() => import('./components/views/page/DetailProblemSolve'));
+const EditProfile = React.lazy(() => import('./components/views/page/EditProfile'));
 const ForgotPassword = React.lazy(() => import('./components/views/page/ForgotPassword'));
 const History = React.lazy(() => import('./components/views/page/History'));
 const Home = React.lazy(() => import('./components/views/page/Home'));
@@ -19,8 +20,6 @@ const Profile = React.lazy(() => import('./components/views/page/Profile'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
 const Ticket = React.lazy(() => import('./components/views/page/Ticket'));
 const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
-
-
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 
@@ -43,6 +42,7 @@ const routes = [
   { path: '/ticket', exact: true, name: 'Login', component: Ticket },
   { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
+  { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
 
 
 
