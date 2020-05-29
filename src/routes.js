@@ -18,8 +18,8 @@ const AllTicket = React.lazy(() => import('./components/views/page/AllTicket'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
 const DetailTicket = React.lazy(() => import('./components/views/page/DetailTicket'));
 const Chart_Component = React.lazy(() => import('./components/views/Chart_Component'));
-const DetailTickets = React.lazy(() => import('./components/views/page/DetailTicket'))
-
+const DetailTickets = React.lazy(() => import('./components/views/page/DetailTicket'));
+const EditProfile = React.lazy(() => import('./components/views/page/EditProfile'));
 
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -43,6 +43,7 @@ const routes = [
   { path: '/report', exact: true, name: 'DetailTicket', component: Report },
   { path: '/chart', exact: true, name: 'Chart_Component', component: Chart_Component },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
+  { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
 
 
 

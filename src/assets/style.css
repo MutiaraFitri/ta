@@ -337,3 +337,26 @@ a {
     background-color: #0050A1;
     border: none;
 }
+.row-edit{
+    margin:10px;
+}
+.editInput{
+    width: 280px;
+    height: 10px;
+    margin: 0px auto;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-bottom: 1px solid rgb(131, 126, 126) ;
+    border-radius: 1px;
+    margin-bottom:5px;
+}
+.sub-edit{
+    color:rgba(98, 98, 98, 0.924);
+    float: left;
+    font-size: 12px;
+}
+.ganti-foto{
+    font-size: 16px;
+    padding-top: 30px;
+}
