@@ -11,8 +11,6 @@ import { Redirect } from 'react-router-dom';
 // import users from '../../../redux/api/users';
 import { userLogOut, users } from '../../../redux/api/users';
 
-
-
 export class Profile extends Component {
 
     handleLogout = (e) => {
@@ -25,13 +23,13 @@ export class Profile extends Component {
     }
     render() {
         if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
-        console.log('wow')
         const { data } = this.props;
-        const department = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_department ? data.personState.data.data.user_department : "Your Departement" : "Your Departement" : "Your Departement";
-        const address = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_address ? data.personState.data.data.user_address : "Your Address" : "Your Address" : "Your Address";
-        const email = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_email ? data.personState.data.data.user_email : "Your Mail" : "Your Mail" : "Your Mail";
-        const job = (data.personState.data) ? (data.personState.data.data) ? (data.personState.data.data.user_job) ? (data.personState.data.data.user_job) : "Your Skill" : "Your Skill" : "Your Skill";
-        const phone = (data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_contact ? data.personState.data.data.user_contact : "Your Phone Number" : "Your Phone Number" : "Your Phone Number";
+        console.log(data.personState.data)
+        const department = (data.personState.data) ? data.personState.data.user_department: "Your Departement";
+        const address = (data.personState.data) ? data.personState.data.user_address : "Your Address";
+        const email = (data.personState.data) ? data.personState.data.user_email  :"Your Mail";
+        const job = (data.personState.data) ? (data.personState.data.user_job)   : "Your Skill";
+        const phone = (data.personState.data) ? data.personState.data.user_contact : "Your Phone Number";
 
         const colorJob =
             !(data.personState.data) ? "#837E7E" : (data.personState.data.data) ? "#3f4377" : "#837E7E";

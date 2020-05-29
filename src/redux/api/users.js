@@ -1,4 +1,4 @@
-import { fetchUser, userLogout } from "../action/action";
+import { fetchUser, userLogout,loginFailed,updatePasswordSuccess,updatePasswordFailed,requestResetPasswordSuccess,requestResetPasswordFailed,fectProductError,setNullErrorMessage } from "../action/action";
 import axios from 'axios';
 
 const jwt = require('jsonwebtoken');
@@ -12,10 +12,67 @@ export function users() {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            console.log(decoded) // bar
-            dispatch(fetchUser(decoded));
+            if(decoded){
+                console.log("decoded",decoded) // bar
+                dispatch(fetchUser(decoded.data));
+            }
         });
 
+    }
+}
+
+export function setNullError() {
+    return dispatch => {
+        dispatch(loginFailed(null));
+    }
+}
+
+export function updatePassword(data) {
+    return dispatch => {
+        axios.put("https://api.ict-servicedesk.xyz/auth/password/technician", data, {
+            headers: {
+                key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                }
+            }
+        )
+            .then(res => {
+                if (res.error) {
+                    throw (res.error);
+                }
+                else {
+                    dispatch(updatePasswordSuccess());
+                }
+            })
+            .catch(error => {
+                console.log("Error " + error);
+                dispatch(updatePasswordFailed());
+            })
+    }
+}
+
+export function resetPassword(data) {
+    return dispatch => {
+        axios.post("https://api.ict-servicedesk.xyz/auth/reset/technician", data, {
+            headers: {
+                key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                }
+            }
+        )
+            .then(res => {
+                if (res.error) {
+                    throw (res.error);
+                }
+                if(res.data.values.jwt){
+                    dispatch(requestResetPasswordSuccess());
+                }
+                else{
+                    dispatch(requestResetPasswordFailed());
+                }
+            })
+            .catch(error => {
+                console.log("Error " + error);
+                dispatch(fectProductError(error));
+            })
     }
 }
 
@@ -28,11 +85,23 @@ export function userLoginFetch(data) {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
         })
+            .then(res => res.data)
             .then(res => {
-                const user = res.data;
-                localStorage.setItem("jwt", user.values.jwt);
-                console.log("data", user)
-                dispatch(fetchUser(user));
+                if (res.error) {
+                    throw (res.error);
+                }
+                console.log(res);
+                if (res.values.jwt) {
+                    console.log("data", res.data)
+                    localStorage.setItem('jwt', res.values.jwt)
+                    dispatch(fetchUser(res));
+                    // console.log(localStorage.getItem('user'))
+
+                    // console.log(res.jwt);
+                    return res.data;
+                }else {
+                    dispatch(loginFailed(res.values.message));
+                }
             })
     }
 }

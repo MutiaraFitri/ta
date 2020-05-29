@@ -15,7 +15,9 @@ const Login = React.lazy(() => import('./components/views/page/Login'));
 const NotFound = React.lazy(() => import('./components/views/page/NotFound_404'));
 const NewArticle = React.lazy(() => import('./components/views/page/NewArticle'));
 const ProblemSolve = React.lazy(() => import('./components/views/page/ProblemSolve'));
+const KB = React.lazy(() => import('./components/views/page/KnowledgeBase'));
 const Profile = React.lazy(() => import('./components/views/page/Profile'));
+const Reset = React.lazy(() => import('./components/views/page/ResetPassword'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
 const Ticket = React.lazy(() => import('./components/views/page/Ticket'));
 const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
@@ -37,8 +39,10 @@ const routes = [
   { path: '/home', exact: true, name: 'Landing', component: Home },
   { path: '/login', exact: true, name: 'Login', component: Login },
   { path: '/new-article', exact: true, name: 'Report', component: NewArticle },
+  { path: '/knowledgebase/:id', exact: true, name: 'KB', component: KB },
   { path: '/profile', exact: true, name: 'Login', component: Profile },
   { path: '/problemsolve', exact: true, name: 'History', component: ProblemSolve },
+  { path: '/reset/:token', exact: true, name: 'History', component: Reset },
   { path: '/report', exact: true, name: 'DetailTicket', component: Report },
   { path: '/ticket', exact: true, name: 'Login', component: Ticket },
   { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },

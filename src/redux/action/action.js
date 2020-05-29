@@ -1,6 +1,12 @@
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const FETCH_PRODUCT_PENDING = 'FETCH_PENDING';
 export const FETCH_SUCCESS = 'FETCH_SUCCESS';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+export const Request_Reset_Password_Success = 'Request_Reset_Password_Success';
+export const Request_Reset_Password_Failed = 'Request_Reset_Password_Failed';
+export const UPDATE_PASSWORD_SUCCESS = 'UPDATE_PASSWORD_SUCCESS';
+export const UPDATE_PASSWORD_FAILED = 'UPDATE_PASSWORD_FAILED';
+export const FETCH_KB_SUCCESS = 'FETCH_KB_SUCCESS';
 export const FETCH_TIKET_SUCCESS = 'FETCH_TIKET_SUCCESS';
 export const FETCH_TECHNICIAN_SUCCESS = 'FETCH_TECHNICIAN_SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
@@ -11,6 +17,27 @@ export const fetchProductPending = () => {
     return {
         type: FETCH_PRODUCT_PENDING,
         value: "pending"
+    }
+}
+
+export const requestResetPasswordSuccess = () => {
+    return {
+        type: Request_Reset_Password_Success,
+        value:"Success"
+    }
+}
+
+export const requestResetPasswordFailed = () => {
+    return {
+        type: Request_Reset_Password_Failed,
+        value:"Failed"
+    }
+}
+
+export const loginFailed = (data) => {
+    return {
+        type: LOGIN_ERROR,
+        value:data
     }
 }
 
@@ -34,10 +61,30 @@ export const fectProductError = (error = "error") => {
     }
 }
 
+export const fetchKb = (kb) => {
+    return {
+        type: FETCH_KB_SUCCESS,
+        value: kb
+    }
+}
 export const fetchUser = (user) => {
     return {
         type: FETCH_USER_SUCCESS,
         value: user
+    }
+}
+
+export const updatePasswordFailed = () => {
+    return {
+        type: UPDATE_PASSWORD_FAILED,
+        value:"Failed"
+    }
+}
+
+export const updatePasswordSuccess = () => {
+    return {
+        type: UPDATE_PASSWORD_SUCCESS,
+        value:"Success"
     }
 }
 
