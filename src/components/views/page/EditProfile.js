@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import '../../../loading.css';
 import '../../../assets/style.css';
-import logo from '../../../assets/img/logo_komatsu.png';
 import '../../../assets/style.css';
-import left from './../../../assets/img/left-arrow.png';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
-import menu from '../../../assets/img/menu.png';
 import { users } from '../../../redux/api/users';
 import mann from '../../../assets/img/mann.png';
 import axios from 'axios';
-import { fetchUser } from '../../../redux/action/action';
 const jwt = require('jsonwebtoken');
 
 

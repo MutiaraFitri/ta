@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import * as moment from 'moment';
-import macbook from './../assets/img/smashed_macbook-1-780x521.png';
 import down from './../assets/img/arrow_down.png';
 import mann from './../assets/img/mann.png';
 

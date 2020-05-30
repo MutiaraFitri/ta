@@ -20,6 +20,7 @@ const Profile = React.lazy(() => import('./components/views/page/Profile'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
 const Ticket = React.lazy(() => import('./components/views/page/Ticket'));
 const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
+const Rating = React.lazy(() => import('./components/views/page/Rating'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 
@@ -43,7 +44,7 @@ const routes = [
   { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
   { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
-
+  { path: '/rating', exact: true, name: 'Rating', component: Rating },
 
 
 
