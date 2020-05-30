@@ -8,7 +8,7 @@ class TicketDetailDesc extends Component {
             <div>
                 <div style={{ width: "100%" }}>
                     <div className="title" style={{ textAlign: "left", margin: "25px" }}>
-                        <p style={{ fontSize: "12px", padding: "0px", margin: "0px" }}>Title </p>
+                        <p style={{ fontSize: "12px", padding: "0px", margin: "0px" }}>Title</p>
                         <p style={{ fontSize: "22px", padding: "0px", margin: "0px" }}>{this.props.title}</p>
                     </div>
                 </div>
@@ -28,11 +28,11 @@ class TicketDetailDesc extends Component {
                 </div>
                 <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
-                        <div className="deskripsi-isi" style={{ width: "100%", marginTop: "10px" }}>
-                            <div style={{ backgroundColor: "#F4F4F6", width: "170px", fontSize: "14px", float: "right", fontWeight: "700" }}>
-                                Waiting for Support
-                        <img src={down} alt="down" width="10" style={{ marginLeft: "5px" }} />
-                            </div>
+                        <div class="deskripsi-isi" style={{width:"200px", float:"right"}}>
+                            <select style={{padding:"1px 5px",backgroundColor:"#F4F4F6",color:"#0050A1",border:"none",fontWeight:"700",fontSize:"16px"}}>
+                                <option value="-1" style={{width:"200px",fontWeight:"700",fontSize:"16px"}}>Waiting for support</option>
+                                <option value="-1" style={{width:"200px",fontWeight:"700",fontSize:"16px"}}>Select car:</option>
+                            </select>
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "700", marginTop: "10px" }}>{this.props.description}</div>
@@ -44,12 +44,12 @@ class TicketDetailDesc extends Component {
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100", marginTop: "10px" }}>Desktop/Laptop</div>
                     </div>
-                    <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
+                    {/* <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
                         <div style={{ paddingLeft: "25px" }}>Location  : Divisi MIS Lantai 3</div>
                     </div>
                     <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
                         <div style={{ paddingLeft: "25px" }}>Report  : Divisi MIS Lantai 3</div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );

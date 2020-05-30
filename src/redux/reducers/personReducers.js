@@ -34,6 +34,28 @@ const authReducers = (state = initState, action) => {
                 ...state,
             }
 
+        case 'Request_Reset_Password_Success':
+            return {
+                ...state,
+                reqResetPassword: action.value
+            }
+        case 'Request_Reset_Password_Failed':
+            return {
+                ...state,
+                reqResetPassword: action.value
+            }
+        case 'UPDATE_PASSWORD_SUCCESS':
+            return {
+                ...state,
+                reqResetPassword: action.value
+            }
+        case 'LOGIN_ERROR':
+            return {
+                ...state,
+                authError: 'Login failed',
+                message: action.value
+            }
+
         default:
             return state
     }
