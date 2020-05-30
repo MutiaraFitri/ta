@@ -7,7 +7,6 @@ import '../../../loading.css';
 import '../../../assets/style.css';
 import logo from '../../../assets/img/logo_komatsu.png';
 import { userLoginFetch,setNullError } from '../../../redux/api/users';
-import eye from '../../../assets/img/eye.png';
 
 
 export class Login extends Component {

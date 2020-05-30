@@ -6,11 +6,11 @@ import tambah from './../../../assets/img/tambah.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import menu from '../../../assets/img/menu.png';
 import { ticketsById } from '../../../redux/api/ticket';
 import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import TicketDetailDesc from '../../TicketDetailDesc';
+import back from './../../../assets/img/back.png';
 import _ from "lodash";
 
 class DetailTicket extends Component {
@@ -137,22 +137,15 @@ class DetailTicket extends Component {
             <div className="home" style={{ paddingBottom: "70px" }}>
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <img src={menu} alt="" />
-                    </div>
-                    Detail Ticket
-                </div>
-                <div style={{ color: "black", width: "100%" }}>
-                    <div className="search" style={{ width: "100%" }}>
                         <Link to='/all-ticket'>
-                            <div className="row">
-                                <div style={{ width: "20%", float: "left", marginLeft: "-10px" }}>
-                                    <img src={left} alt="filter" />
-                                </div>
-
+                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                                <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>
                         </Link>
                     </div>
+                    Detail Ticket
                 </div>
+
                 {this.renderToDos()}
                 {(this.state.tiket[0]) ?
                     (!this.state.tiket[0].ticket_technician_id && this.state.tiket[0].ticket_is_active) ?

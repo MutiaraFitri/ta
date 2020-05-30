@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import left from './../../../assets/img/left-arrow.png';
-import menu from '../../../assets/img/menu.png';
 import write from '../../../assets/img/write.png';
 import NavbarBottom from '../navbar/NavbarBottom';
+import back from './../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
 import { kb } from '../../../redux/api/kb';
 import { connect } from 'react-redux';
@@ -41,26 +40,17 @@ class AllTicket extends Component {
 
         return (
             <div className="home">
-
+                
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <img src={menu} alt="" />
-                    </div>
-                    Article
-                </div>
-
-                <div style={{ color: "black", width: "100%" }}>
-                    <div className="search" style={{ width: "100%" }}>
-                        <Link to='/home'>
-                            <div className="row">
-                                <div style={{ width: "20%", float: "left", marginLeft: "-10px" }}>
-                                    <ig src={left} alt="filter" />
-                                </div>
+                        <Link to='.'>
+                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                                <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>
                         </Link>
                     </div>
+                    Article
                 </div>
-
                 <div style={{ width: "100%" }}>
                     <div className="title" style={{ width: "80%", textAlign: "left", padding: "30px 30px", marginTop: "-35px", letterSpacing: "0.09em" }}>
                         <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowlage base.</p>

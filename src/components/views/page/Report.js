@@ -3,9 +3,7 @@ import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
-import menu from '../../../assets/img/menu.png';
-import left from './../../../assets/img/left-arrow.png';
-import ChartComponent from '../Chart_Component';
+import back from './../../../assets/img/back.png';
 import Chartjs2 from '../Chartjs2';
 
 export class Home extends Component {
@@ -156,21 +154,13 @@ export class Home extends Component {
             <div className="home" >
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <img src={menu} alt="" />
-                    </div>
-                    Detail Ticket
-                </div>
-                <div style={{ color: "black", width: "100%" }}>
-                    <div className="search" style={{ width: "100%" }}>
-                        <Link to='/home'>
-                            <div className="row">
-                                <div style={{ width: "20%", float: "left", marginLeft: "-10px" }}>
-                                    <img src={left} alt="filter" />
-                                </div>
-
+                        <Link to='.'>
+                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                                <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>
                         </Link>
                     </div>
+                    Detail Ticket
                 </div>
                 <div className="mainmenu" style={{ display: "flex" }}>
                     <div className="menu"
