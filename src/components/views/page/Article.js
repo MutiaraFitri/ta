@@ -2,14 +2,45 @@ import React, { Component } from 'react';
 import write from '../../../assets/img/write.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import back from './../../../assets/img/back.png';
+import { users } from '../../../redux/api/users';
+import { kb } from '../../../redux/api/kb';
+import { connect } from 'react-redux';
+import _ from "lodash";
 import { Link } from 'react-router-dom';
 
 class AllTicket extends Component {
+    componentDidMount() {
+        this.props.userku();
+        this.props.fetchKb();
+    }
+
+    renderKB() {
+        const { data } = this.props;
+        var dataku = data.kb.data;
+        const toDos = _.map(dataku, (values, key) => {
+            return <div key={values.kb_id} className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", display: "flex", margin: "0px auto" }}>
+                <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
+                    <p style={{ fontSize: "15px", color: "#104FAD", }}>{values.issue_subject}</p>
+                </div>
+                <div className="judul-kategori" style={{ width: "30%" }}>
+                    <p style={{ fontSize: "15px", color: "black", float: "left" }}>{values.issue_category}</p>
+                </div>
+                <div className="jdul-authors" style={{ width: "50%" }}>
+                    <p style={{ fontSize: "15px", color: "black", }}>{values.kb_subject}</p>
+                </div>
+            </div>;
+        });
+        if (!_.isEmpty(toDos)) {
+            return toDos;
+        }
+        return "Loading ..."
+    }
+
     render() {
 
         return (
             <div className="home">
-
+                
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='.'>
@@ -28,77 +59,16 @@ class AllTicket extends Component {
                     <div className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", borderBottom: "1px solid black", display: "flex", margin: "0px auto" }}>
 
                         <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Topic</p>
+                            <p style={{ fontSize: "15px", color: "black", }}>Subject</p>
                         </div>
-                        <div className="judul-kategori" style={{ width: "20%" }}>
+                        <div className="judul-kategori" style={{ width: "30%" }}>
                             <p style={{ fontSize: "15px", color: "black", }}>Categories</p>
                         </div>
-                        <div className="jdul-authors" style={{ width: "20%" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Authors</p>
-                        </div>
-                        <div className="jdul-view" style={{ width: "15%" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Views</p>
-                        </div>
-                        <div className="jdul-update" style={{ width: "15%", paddingRight: "10px" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Update</p>
+                        <div className="jdul-authors" style={{ width: "50%" }}>
+                            <p style={{ fontSize: "15px", color: "black", }}>ProblemSolve</p>
                         </div>
                     </div>
-                    <Link to='/new-article'>
-                        <div className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", display: "flex", margin: "0px auto" }}>
-
-                            <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                                <p style={{ fontSize: "15px", color: "#104FAD", }}>No Internet connection</p>
-                            </div>
-                            <div className="judul-kategori" style={{ width: "20%" }}>
-                                <p style={{ fontSize: "15px", color: "black", float: "left" }}>Network</p>
-                            </div>
-                            <div className="jdul-authors" style={{ width: "20%" }}>
-                                <p style={{ fontSize: "15px", color: "black", }}>Yayan</p>
-                            </div>
-                            <div className="jdul-view" style={{ width: "15%" }}>
-                                <p style={{ fontSize: "15px", color: "#545050", }}>2</p>
-                            </div>
-                            <div className="jdul-update" style={{ width: "15%", paddingRight: "10px" }}>
-                                <p style={{ fontSize: "15px", color: "black", }}>16h</p>
-                            </div>
-                        </div>
-                    </Link>
-                    <div className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", display: "flex", margin: "0px auto" }}>
-
-                        <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                            <p style={{ fontSize: "15px", color: "#104FAD", }}>Anti Virus</p>
-                        </div>
-                        <div className="judul-kategori" style={{ width: "20%" }}>
-                            <p style={{ fontSize: "15px", color: "black", float: "left" }}>Virus</p>
-                        </div>
-                        <div className="jdul-authors" style={{ width: "20%" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Ucup</p>
-                        </div>
-                        <div className="jdul-view" style={{ width: "15%" }}>
-                            <p style={{ fontSize: "15px", color: "#545050", }}>8</p>
-                        </div>
-                        <div className="jdul-update" style={{ width: "15%", paddingRight: "10px" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>1h</p>
-                        </div>
-                    </div>
-                    <div className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", display: "flex", margin: "0px auto" }}>
-
-                        <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                            <p style={{ fontSize: "15px", color: "#104FAD", }}>Fix Printer</p>
-                        </div>
-                        <div className="judul-kategori" style={{ width: "20%" }}>
-                            <p style={{ fontSize: "15px", color: "black", float: "left" }}>Hardware</p>
-                        </div>
-                        <div className="jdul-authors" style={{ width: "20%" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Yuli</p>
-                        </div>
-                        <div className="jdul-view" style={{ width: "15%" }}>
-                            <p style={{ fontSize: "15px", color: "#545050", }}>2</p>
-                        </div>
-                        <div className="jdul-update" style={{ width: "15%", paddingRight: "10px" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>2h</p>
-                        </div>
-                    </div>
+                    {this.renderKB()}
                     <div style={{ width: "30%", float: "right", marginTop: "20px" }}>
                         <Link to="/new-article">
                             <img src={write} alt="" />
@@ -114,4 +84,16 @@ class AllTicket extends Component {
     }
 }
 
-export default AllTicket;
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        userku: () => dispatch(users()),
+        fetchKb: () => dispatch(kb()),
+    }
+}
+
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(AllTicket);

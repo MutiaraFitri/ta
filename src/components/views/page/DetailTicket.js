@@ -7,6 +7,7 @@ import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ticketsById } from '../../../redux/api/ticket';
+import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import TicketDetailDesc from '../../TicketDetailDesc';
 import back from './../../../assets/img/back.png';
@@ -16,7 +17,8 @@ class DetailTicket extends Component {
     state = {
         tiket: []
     }
-    componentDidMount() {
+
+    fetchData = () => {
         axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -31,9 +33,14 @@ class DetailTicket extends Component {
             })
     }
 
+    componentDidMount() {
+        this.props.userku();
+        this.fetchData()
+    }
+
     renderToDos() {
         const toDos = _.map(this.state.tiket, (values, key) => {
-            return <div key={key}>
+            return <div key={key} style={{ width: "100%" }}>
                 <TicketDetailDesc
                     //imageKategori={hardware}
                     sender1={values.employee_firstname}
@@ -60,12 +67,68 @@ class DetailTicket extends Component {
     }
 
     handleButtonAssignToMe = () => {
+        axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const tiket = res.data.values;
+                console.log("data", tiket[0])
+                if (!tiket[0].ticket_technician_id) {
+                    axios.put('https://api.ict-servicedesk.xyz/ticket/assign/' + this.props.match.params.id, {technician_id:this.props.data.personState.data.user_id}, {
+                        headers: {
+                            key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                        }
+                    }
+                    )
+                        .then(res => res.data)
+                        .then(res => {
+                            if (res.error) {
+                                throw (res.error);
+                            }
+                            console.log("hasil",res)
+                            this.fetchData()
+                        })
+                        .catch(error => {
+                            console.log("Error " + error);
+                        })
+                }
+            })
         console.log("Assign To me");
     }
     handleButtonMakeItPriority = () => {
         console.log("Make it Priority");
     }
     handleButtonSpam = () => {
+        axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const tiket = res.data.values;
+                console.log("data", tiket[0])
+                if (!tiket[0].ticket_technician_id) {
+                    axios.put('https://api.ict-servicedesk.xyz/ticket/spam/' + this.props.match.params.id, {technician_id:this.props.data.personState.data.user_id}, {
+                        headers: {
+                            key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                        }
+                    }
+                    )
+                        .then(res => res.data)
+                        .then(res => {
+                            if (res.error) {
+                                throw (res.error);
+                            }
+                            console.log("hasil",res)
+                            this.fetchData()
+                        })
+                        .catch(error => {
+                            console.log("Error " + error);
+                        })
+                }
+            })
         console.log("Spam");
     }
     render() {
@@ -84,46 +147,51 @@ class DetailTicket extends Component {
                 </div>
 
                 {this.renderToDos()}
-
-                <div className="row" style={{ width: "100%" }}>
-                    <div className="kotak-menu" style={{ width: "33%" }}>
-                        <div style={{ padding: "5px" }} onClick={this.handleButtonAssignToMe}>
-                            <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
-                                <div className="icon-menu">
-                                    <img src={tambah} alt="tambah" />
+                {(this.state.tiket[0]) ?
+                    (!this.state.tiket[0].ticket_technician_id && this.state.tiket[0].ticket_is_active) ?
+                        <div className="row" style={{ width: "100%" }}>
+                            <div className="kotak-menu" style={{ width: "33%" }}>
+                                <div style={{ padding: "5px" }} onClick={this.handleButtonAssignToMe}>
+                                    <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
+                                        <div className="icon-menu">
+                                            <img src={tambah} alt="tambah" />
+                                        </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
+                                            Assign to Me
+                                            </div>
+                                    </div>
                                 </div>
-                                <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                    Assign to Me
+                            </div>
+                            <div className="kotak-menu" style={{ width: "33%" }}>
+                                <div style={{ padding: "5px" }} onClick={this.handleButtonMakeItPriority}>
+                                    <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
+                                        <div className="icon-menu">
+                                            <img src={priority} alt="tambah" />
+                                        </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
+                                            Make it Priority
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="kotak-menu" style={{ width: "33%" }}>
+                                <div style={{ padding: "5px" }} onClick={this.handleButtonSpam}>
+                                    <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
+                                        <div className="icon-menu">
+                                            <img src={garbage} alt="tambah" />
+                                        </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
+                                            Spam
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="kotak-menu" style={{ width: "33%" }}>
-                        <div style={{ padding: "5px" }} onClick={this.handleButtonMakeItPriority}>
-                            <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
-                                <div className="icon-menu">
-                                    <img src={priority} alt="tambah" />
-                                </div>
-                                <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                    Make it Priority
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="kotak-menu" style={{ width: "33%" }}>
-                        <div style={{ padding: "5px" }} onClick={this.handleButtonSpam}>
-                            <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
-                                <div className="icon-menu">
-                                    <img src={garbage} alt="tambah" />
-                                </div>
-                                <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                    Spam
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                        :
+                        null
+                    :
+                    null
+                }
                 <NavbarBottom active="Ticket" />
             </div>
         );
@@ -134,8 +202,8 @@ const mapStateToProps = (state) => ({
 })
 const mapDispacthToProps = (dispatch) => {
     return {
+        userku: () => dispatch(users()),
         ticket: (id) => dispatch(ticketsById(id)),
-
     }
 }
 

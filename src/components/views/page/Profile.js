@@ -15,8 +15,6 @@ import axios from 'axios';
 const jwt = require('jsonwebtoken');
 
 
-
-
 export class Profile extends Component {
 
     state = {
@@ -63,7 +61,6 @@ export class Profile extends Component {
     }
     render() {
         if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
-        console.log('wow')
         const { data } = this.props;
 
         const department = (data.personState.data) ? (this.state) ? this.state.technician_department ? this.state.technician_department : "Your Departement" : "Your Departement" : "Your Departement";

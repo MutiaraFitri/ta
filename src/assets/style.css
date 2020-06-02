@@ -12,6 +12,50 @@ input, select, textarea{
     padding: 15px;
 }
 
+.box-priority {
+    width: 80%;
+    font-size: 12px;
+    padding:5px;
+    border-radius: 7px;
+    margin: 0px auto;
+    color:#bebebe;
+    border:1px solid #bebebe;
+}
+
+.circle-filter{
+    position: absolute;
+    top:-40px;
+    height: 30px;
+    width: 100%;
+}
+
+.content-circle-filter{
+    width: 100px;
+    height: 80px;
+    background-color: #FFF;
+    margin: 0px auto;
+    border-radius: 50%;
+}
+
+.box-apply {
+    width: 40%;
+    font-size: 16px;
+    border-radius: 7px;
+    margin: 10px auto;
+    color:#fff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    padding: 5px;
+    background-color:#0050A1;
+    border:1px solid #bebebe;
+}
+
+.box-priority.active{
+    border:1px solid #0050A1;
+    color: #fff;
+    background-color:#0050A1;
+}
+
 .Report {
     padding: 0px 25px;
 }
