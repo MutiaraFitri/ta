@@ -28,7 +28,19 @@ input, select, textarea{
     height: 30px;
     width: 100%;
 }
-
+.star-bg {
+    background:url('./img/star.png');
+    background-size: 30px;
+    height: 30px;
+    filter:grayscale(1);
+}
+.star-isi {
+    background:url('./img/star.png');
+    background-size: 30px;
+    height: 30px;
+    margin-top: -30px;
+    filter:grayscale(0);
+}
 .content-circle-filter{
     width: 100px;
     height: 80px;

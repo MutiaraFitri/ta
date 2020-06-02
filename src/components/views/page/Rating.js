@@ -73,121 +73,136 @@ class Rating extends Component {
                         <div className="overal"
                             style={{
                                 textAlign: "left",
-                                width: "30%",
+                                width: "50%",
                                 color: "black", fontSize: "35px", fontWeight: "bold"
                             }}>4.5</div>
                         <div className="overal"
                             style={{
                                 textAlign: "right",
-                                float: "right",
-                                width: "70%",
+                                float: "left",
+                                width: "50%",
                             }}>
-                            <div className="star">
-                                <img src={starfull} style={{ width: "10%" }} />
-                                <img src={starfull} style={{ width: "10%" }} />
-                                <img src={starfull} style={{ width: "10%" }} />
-                                <img src={starfull} style={{ width: "10%" }} />
-                                <img src={starksg} style={{ width: "10%" }} />
-                            </div>
+                            <div className="star-bg" style={{width:"150px"}}></div>
+                            <div className="star-isi" style={{width:((3+4)/2)*30 +"px"}}></div>
                             <div className="star" style={{ fontSize: "14px" }}>
                                 3 feedback
                             </div>
                         </div>
 
-                        <div className="row bungkusBar" style={{ width: "80%" }}>
-                            <div className="row angka-star" style={{
-                                width: "20%",
-                                marginTop: "-1px",
-                            }}>
-                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                        <div className="row bungkusBar" style={{ width: "100%" }}>
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <div className="row angka-star" style={{
+                                    width: "20%",
+                                    margin: "0px"
+                                }}>
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                        5
+                                    <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
+                                    </div>
+                                </div>
+                                <div className="bar-star" style={{
+                                    width: "70%",
+                                    height: "30px",
+                                }}>
+                                    <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
+                                        <div className="isibar" style={{ width:"0%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{ width: "10%" }}>
+                                    0
+                                </div>
+                            </div>
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <div className="row angka-star" style={{
+                                    width: "20%",
+                                    margin: "0px"
+                                }}>
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                        4
+                                    <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
+                                    </div>
+                                </div>
+                                <div className="bar-star" style={{
+                                    width: "70%",
+                                    height: "30px",
+                                }}>
+                                    <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
+                                        <div className="isibar" style={{ width: "50%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{ width: "10%" }}>
                                     1
-                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
                                 </div>
                             </div>
-                            <div className="bar-star" style={{
-                                width: "80%",
-                                height: "30px",
-                            }}>
-                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
-                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
-                                        80%
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <div className="row angka-star" style={{
+                                    width: "20%",
+                                    margin: "0px"
+                                }}>
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                        3
+                                    <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row angka-star" style={{
-                                width: "20%",
-                                marginTop: "-1px",
-                            }}>
-                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
-                                    2
-                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
-                                </div>
-                            </div>
-                            <div className="bar-star" style={{
-                                width: "80%",
-                                height: "30px",
-                            }}>
-                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
-                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
-
+                                <div className="bar-star" style={{
+                                    width: "70%",
+                                    height: "30px",
+                                }}>
+                                    <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
+                                        <div className="isibar" style={{ width: "50%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row angka-star" style={{
-                                width: "20%",
-                                marginTop: "-1px",
-                            }}>
-                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
-                                    3
-                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                <div style={{ width: "10%" }}>
+                                    1
                                 </div>
                             </div>
-                            <div className="bar-star" style={{
-                                width: "80%",
-                                height: "30px",
-                            }}>
-                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
-                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
-                                        80%
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <div className="row angka-star" style={{
+                                    width: "20%",
+                                    margin: "0px"
+                                }}>
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                        2
+                                    <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row angka-star" style={{
-                                width: "20%",
-                                marginTop: "-1px",
-                            }}>
-                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
-                                    4
-                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
-                                </div>
-                            </div>
-                            <div className="bar-star" style={{
-                                width: "80%",
-                                height: "30px",
-                            }}>
-                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
-                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
-                                        80%
+                                <div className="bar-star" style={{
+                                    width: "70%",
+                                    height: "30px",
+                                }}>
+                                    <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
+                                        <div className="isibar" style={{ width: "0%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row angka-star" style={{
-                                width: "20%",
-                                marginTop: "-1px",
-                            }}>
-                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
-                                    5
-                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                <div style={{ width: "10%" }}>
+                                    0
                                 </div>
                             </div>
-                            <div className="bar-star" style={{
-                                width: "80%",
-                                height: "30px",
-                            }}>
-                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
-                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
-                                        80%
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <div className="row angka-star" style={{
+                                    width: "20%",
+                                    margin: "0px"
+                                }}>
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                        1
+                                    <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
+                                </div>
+                                <div className="bar-star" style={{
+                                    width: "70%",
+                                    height: "30px",
+                                }}>
+                                    <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
+                                        <div className="isibar" style={{ width: "0%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{ width: "10%" }}>
+                                    0
                                 </div>
                             </div>
                         </div>
@@ -213,7 +228,7 @@ class Rating extends Component {
                                     <img src={mann} alt="mann" style={{ width: "100%" }} />
                                 </div>
                             </div>
-                            <div className="nama-pengirim" style={{ width: "30%", marginTop: "5px" }}>
+                            <div className="nama-pengirim" style={{ width: "40%", marginTop: "5px",marginLeft:"10px" }}>
                                 <div className="nama" style={{ fontSize: "18px", color: "black", fontWeight: "400", textAlign: "left" }}> Dimas Putra</div>
                                 <div className="email" style={{ fontSize: "14px", color: "#141AA2", textAlign: "left" }}>15/05/2020</div>
                             </div>
