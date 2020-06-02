@@ -94,6 +94,104 @@ class Rating extends Component {
                             </div>
                         </div>
 
+                        <div className="row bungkusBar" style={{ width: "80%" }}>
+                            <div className="row angka-star" style={{
+                                width: "20%",
+                                marginTop: "-1px",
+                            }}>
+                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    1
+                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                </div>
+                            </div>
+                            <div className="bar-star" style={{
+                                width: "80%",
+                                height: "30px",
+                            }}>
+                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
+                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        80%
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row angka-star" style={{
+                                width: "20%",
+                                marginTop: "-1px",
+                            }}>
+                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    2
+                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                </div>
+                            </div>
+                            <div className="bar-star" style={{
+                                width: "80%",
+                                height: "30px",
+                            }}>
+                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
+                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row angka-star" style={{
+                                width: "20%",
+                                marginTop: "-1px",
+                            }}>
+                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    3
+                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                </div>
+                            </div>
+                            <div className="bar-star" style={{
+                                width: "80%",
+                                height: "30px",
+                            }}>
+                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
+                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        80%
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row angka-star" style={{
+                                width: "20%",
+                                marginTop: "-1px",
+                            }}>
+                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    4
+                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                </div>
+                            </div>
+                            <div className="bar-star" style={{
+                                width: "80%",
+                                height: "30px",
+                            }}>
+                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
+                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        80%
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row angka-star" style={{
+                                width: "20%",
+                                marginTop: "-1px",
+                            }}>
+                                <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    5
+                                    <img src={starfull} alt="star" style={{ width: "40%", marginLeft: "5px" }} />
+                                </div>
+                            </div>
+                            <div className="bar-star" style={{
+                                width: "80%",
+                                height: "30px",
+                            }}>
+                                <div className="barbg" style={{ width: "100%", height: "30px", backgroundColor: "#C4C4C4", margin: "0px auto", }}>
+                                    <div className="isibar" style={{ width: "80%", height: "30px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        80%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="feedback" style={{
                             margin: "50px 0px 20px ",
                             textAlign: "left",
