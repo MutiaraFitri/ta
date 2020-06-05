@@ -28,10 +28,10 @@ class TicketDetailDesc extends Component {
                 </div>
                 <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
-                        <div class="deskripsi-isi" style={{width:"200px", float:"right"}}>
-                            <select style={{padding:"1px 5px",backgroundColor:"#F4F4F6",color:"#0050A1",border:"none",fontWeight:"700",fontSize:"16px"}}>
-                                <option value="-1" style={{width:"200px",fontWeight:"700",fontSize:"16px"}}>Waiting for support</option>
-                                <option value="-1" style={{width:"200px",fontWeight:"700",fontSize:"16px"}}>Select car:</option>
+                        <div class="deskripsi-isi" style={{ width: "200px", float: "right" }}>
+                            <select style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }}>
+                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>Waiting for support</option>
+                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>Select car:</option>
                             </select>
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>

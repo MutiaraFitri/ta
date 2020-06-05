@@ -32,3 +32,17 @@ export function ticketsById(id) {
             })
     }
 }
+export function ticketRating() {
+    return dispatch => {
+        axios.get(`https://api.ict-servicedesk.xyz/ticket`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const tiket = res.data;
+                console.log("data", tiket)
+                dispatch(fetchTiket(tiket));
+            })
+    }
+}

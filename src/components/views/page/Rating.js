@@ -5,18 +5,32 @@ import starfull from './../../../assets/img/star.png';
 import starksg from './../../../assets/img/starr.png';
 import mann from './../../../assets/img/mann.png';
 import { Link } from 'react-router-dom';
-import Ratingdesc from '../../TicketDetailDesc.js';
-import { ticketsById } from '../../../redux/api/ticket';
+import Ratingdesc from '../../Ratingdesc.js';
+import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
+import { tickets } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from "lodash";
 
 class Rating extends Component {
     state = {
-        tiket: []
+        rating: [],
+
     }
     componentDidMount() {
-        axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
+        axios.get(`http://localhost:3001/rating`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const rating = res.data.values;
+                console.log("data", rating)
+                this.setState({
+                    rating
+                })
+            })
+        axios.get(`https://api.ict-servicedesk.xyz/ticket/`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -28,29 +42,54 @@ class Rating extends Component {
                     tiket
                 })
             })
+        this.props.tiketku()
     }
 
     renderToDos() {
-        const toDos = _.map(this.state.tiket, (values, key) => {
-            return <div key={key}>
-                <Ratingdesc
-                    //imageKategori={hardware}
-                    sender1={values.employee_firstname}
-                    sender2={values.employee_lastname}
-                    email={values.employee_email}
-                />
-
-            </div>;
-        });
-        if (!_.isEmpty(toDos)) {
-            return toDos;
+        const { data } = this.props;
+        var dataku = "";
+        if (data.personState.data) {
+            dataku = data.personState.data.values;
+            const toDos = _.map(dataku, (values, key) => {
+                return <div key={key}>
+                    <Ratingdesc
+                        //imageKategori={hardware}
+                        sender1={values.employee_firstname}
+                        sender2={values.employee_lastname}
+                        email={values.employee_email}
+                        due_date={values.ticket_timestamp}
+                        bintang={values.ticket_rating}
+                        comment={values.ticket_comment}
+                    />
+                </div>;
+            });
+            if (!_.isEmpty(toDos)) {
+                return toDos;
+            }
         }
     }
 
-    render() {
-        return (
-            <div className="home">
 
+
+    render() {
+        const size = this.state.tiket ? this.state.tiket.length : 0
+        //console.log('jumlahtiket', size);
+        const jumlahRating = this.state.rating[0] ?
+            (this.state.rating[0].jumlah * 1) +
+            (this.state.rating[1].jumlah * 2) +
+            (this.state.rating[2].jumlah * 3) +
+            (this.state.rating[3].jumlah * 4) +
+            (this.state.rating[4].jumlah * 5) : 0;
+        //console.log('jumlahRating', jumlahRating);
+        const rating5 = this.state.rating[4] ? this.state.rating[4].jumlah : 0
+        const rating4 = this.state.rating[3] ? this.state.rating[3].jumlah : 0
+        const rating3 = this.state.rating[2] ? this.state.rating[2].jumlah : 0
+        const rating2 = this.state.rating[1] ? this.state.rating[1].jumlah : 0
+        const rating1 = this.state.rating[0] ? this.state.rating[0].jumlah : 0
+        // console.log(rating5 / size)
+        return (
+
+            <div className="home">
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='/report'>
@@ -73,17 +112,17 @@ class Rating extends Component {
                         <div className="overal"
                             style={{
                                 textAlign: "left",
-                                width: "50%",
+                                width: "55%",
                                 color: "black", fontSize: "35px", fontWeight: "bold"
-                            }}>4.5</div>
+                            }}>{size ? (jumlahRating / size).toFixed(1) : "0"} </div>
                         <div className="overal"
                             style={{
                                 textAlign: "right",
                                 float: "left",
-                                width: "50%",
+                                width: "45%"
                             }}>
-                            <div className="star-bg" style={{width:"150px"}}></div>
-                            <div className="star-isi" style={{width:((3+4)/2)*30 +"px"}}></div>
+                            <div className="star-bg" style={{ width: "150px" }}></div>
+                            <div className="star-isi" style={{ width: size ? (jumlahRating / size) * 30 : 0 + "px", transition: "width 0.5s" }}></div>
                             <div className="star" style={{ fontSize: "14px" }}>
                                 3 feedback
                             </div>
@@ -95,7 +134,7 @@ class Rating extends Component {
                                     width: "20%",
                                     margin: "0px"
                                 }}>
-                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px", fontSize: "20px" }} >
                                         5
                                     <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
@@ -105,12 +144,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width:"0%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: size ? (rating5 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ width: "10%" }}>
-                                    0
+                                <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
+                                    {this.state.rating[4] ? this.state.rating[4].jumlah : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -118,7 +157,7 @@ class Rating extends Component {
                                     width: "20%",
                                     margin: "0px"
                                 }}>
-                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px", fontSize: "20px" }} >
                                         4
                                     <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
@@ -128,12 +167,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: "50%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: size ? (rating4 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ width: "10%" }}>
-                                    1
+                                <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
+                                    {this.state.rating[3] ? this.state.rating[3].jumlah : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -141,7 +180,7 @@ class Rating extends Component {
                                     width: "20%",
                                     margin: "0px"
                                 }}>
-                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px", fontSize: "20px" }} >
                                         3
                                     <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
@@ -151,12 +190,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: "50%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: size ? (rating3 / size).toFixed(1) * 100 : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ width: "10%" }}>
-                                    1
+                                <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
+                                    {this.state.rating[2] ? this.state.rating[2].jumlah : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -164,7 +203,7 @@ class Rating extends Component {
                                     width: "20%",
                                     margin: "0px"
                                 }}>
-                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px", fontSize: "20px" }} >
                                         2
                                     <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
@@ -174,12 +213,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: "0%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: size ? (rating2 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ width: "10%" }}>
-                                    0
+                                <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
+                                    {this.state.rating[1] ? this.state.rating[1].jumlah : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -187,7 +226,7 @@ class Rating extends Component {
                                     width: "20%",
                                     margin: "0px"
                                 }}>
-                                    <div className="angkas" style={{ color: "black", paddingTop: "0px" }} >
+                                    <div className="angkas" style={{ color: "black", paddingTop: "0px", fontSize: "20px" }} >
                                         1
                                     <img src={starfull} alt="star" style={{ width: "38%", marginLeft: "5px", marginBottom: "5px", verticalAlign: "middle" }} />
                                     </div>
@@ -197,12 +236,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: "0%", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: size ? (rating1 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
-                                <div style={{ width: "10%" }}>
-                                    0
+                                <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
+                                    {this.state.rating[0] ? this.state.rating[0].jumlah : '0'}
                                 </div>
                             </div>
                         </div>
@@ -215,45 +254,9 @@ class Rating extends Component {
                         <span style={{ color: "black", fontSize: "14px" }}> (3)</span>
                         </div>
 
-                        {/* {this.renderToDos()} */}
-
-                        <div className="bungkusReview" style={{ width: "100%", display: "flex" }}>
-                            <div className="pengirim" style={{ width: "20%", margin: '5px 0px 0px 5px' }}>
-                                <div className="foto-pengim" style={{
-                                    width: "50px",
-                                    height: "50px",
-                                    borderRadius: "50%", border: "1px solid", overflow: "hidden",
-                                    float: "left"
-                                }}>
-                                    <img src={mann} alt="mann" style={{ width: "100%" }} />
-                                </div>
-                            </div>
-                            <div className="nama-pengirim" style={{ width: "40%", marginTop: "5px",marginLeft:"10px" }}>
-                                <div className="nama" style={{ fontSize: "18px", color: "black", fontWeight: "400", textAlign: "left" }}> Dimas Putra</div>
-                                <div className="email" style={{ fontSize: "14px", color: "#141AA2", textAlign: "left" }}>15/05/2020</div>
-                            </div>
-                            <div className="bungkusStar" style={{ width: "50%", marginTop: "5px" }}>
-                                <div className="overal"
-                                    style={{
-                                        textAlign: "right",
-                                        float: "right",
-                                    }}>
-                                    <div className="star" >
-                                        <img src={starfull} style={{ width: "10%", margin: "2px" }} />
-                                        <img src={starfull} style={{ width: "10%", margin: "2px" }} />
-                                        <img src={starfull} style={{ width: "10%", margin: "2px" }} />
-                                        <img src={starksg} style={{ width: "10%", margin: "2px" }} />
-                                        <img src={starksg} style={{ width: "10%", margin: "2px" }} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="review" style={{ marginLeft: "10px", paddingBottom: "10px" }}>
-                            <p style={{ color: "black", textAlign: "left", fontSize: "16px" }}>" Kinerja bagus, dalam penanganan dan penyelesaian tepat waktu, teknisi ramah dan sabar "</p>
-                        </div>
+                        {this.renderToDos()}
                     </div>
                 </div>
-
                 <NavbarBottom />
             </div >
         )
@@ -265,11 +268,10 @@ const mapStateToProps = (state) => ({
 })
 const mapDispacthToProps = (dispatch) => {
     return {
-        ticket: (id) => dispatch(ticketsById(id)),
+        tiketku: () => dispatch(tickets()),
 
     }
 }
-
 export default connect(
     mapStateToProps, mapDispacthToProps
 )(Rating)
