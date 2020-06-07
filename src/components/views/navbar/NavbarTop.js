@@ -8,13 +8,13 @@ class NavbarTop extends Component {
     return (
       <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
         <div className="menu" style={{ position: "absolute", top: "7px" }}>
-          <Link to='.'>
+          <Link to={this.props.backUrl?this.props.backUrl:"/"}>
             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
               <img src={back} alt="back" style={{ width: "20px" }} />
             </div>
           </Link>
         </div>
-          All Ticket
+          {this.props.title? this.props.title : "All Ticket"}
       </div>
     );
   }

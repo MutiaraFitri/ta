@@ -18,7 +18,7 @@ class Rating extends Component {
 
     }
     componentDidMount() {
-        axios.get(`http://localhost:3001/rating`, {
+        axios.get(`https://api.ict-servicedesk.xyz/rating`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
