@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
-import menu from '../../../assets/img/menu.png';
+import menu from '../../../assets/img/menu.png'
 import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
-import left from './../../../assets/img/left-arrow.png';
+import back from '../../../assets/img/back.png';
 import _ from 'lodash'
-
 import axios from 'axios';
-
-import lain from '../../../assets/img/more.png';
-import mouse from '../../../assets/img/mouse-blue.png';
 import picture from './../../../assets/img/picture.png';
-import software from '../../../assets/img/software.png';
-import network from '../../../assets/img/network-blue.png';
-import lainActive from '../../../assets/img/more-active.png';
-import mouseActive from '../../../assets/img/mouse-active.png';
-import softwareActive from '../../../assets/img/software-active.png';
-import networkActive from '../../../assets/img/network-active.png';
 
 export class KnowledgeBase extends Component {
     state = {
@@ -128,7 +118,7 @@ export class KnowledgeBase extends Component {
     handleGoTo = (e) => {
         const data = -1 + parseInt(e.target.value)
         const dataSteps = this.state.steps[data]
-        if(e.target.value){
+        if (e.target.value) {
             this.setState({
                 number: data,
                 ...dataSteps
@@ -158,7 +148,11 @@ export class KnowledgeBase extends Component {
             <div className="home" style={{ height: (this.state.loading) ? "100vh" : "auto", overflow: (this.state.loading) ? "hidden" : "auto" }}>
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <img src={menu} alt="" />
+                        <Link to='/article'>
+                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                                <img src={back} alt="back" style={{ width: "20px" }} />
+                            </div>
+                        </Link>
                     </div>
                     New Article
                 </div>
@@ -209,7 +203,7 @@ export class KnowledgeBase extends Component {
                         <Link to='/article'>
                             <div className="row">
                                 <div style={{ width: "20%", float: "left", marginLeft: "-10px" }}>
-                                    <img src={left} alt="filter" />
+                                    <img src={back} alt="filter" />
                                 </div>
 
                             </div>

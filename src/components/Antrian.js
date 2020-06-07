@@ -16,7 +16,7 @@ class Antrian extends Component {
             (this.props.category === "network") ? "#617BBD" :
                 (this.props.category === "software") ? "#EFF25E" :
                     (this.props.category === "hardware") ? "#F1AEAE" :
-                        "red";
+                        "#eae702";
         const imgCategory =
             (this.props.category === "network") ? network :
                 (this.props.category === "software") ? software :
@@ -26,17 +26,23 @@ class Antrian extends Component {
         const bgStatus =
             (this.props.status === "DONE") ? "#BAF2D7" :
                 (this.props.status === "WAITING FOR SUPPORT") ? "#A4C7FA" :
-                    (this.props.status === "CANCALED") ? "#FFD89D" :
-                        (this.props.status === "ESCATED") ? "#FFABAB" :
-                            "red";
+                    (this.props.status === "WAITING FOR TECHNICIAN") ? "#A4C7FA" :
+                        (this.props.status === "ON PROCESS") ? "#FFD89D" :
+                            (this.props.status === "CANCELED") ? "#FFABAB" :
+                                "#A4C7FA";
         const imagePriority =
             (this.props.priority === "Low") ? low :
                 (this.props.priority === "Highest") ? high :
                     (this.props.priority === "Medium") ? medium :
                         low;
+        const statusPriority =
+            (this.props.priority === "LOW") ? "LOW" :
+                (this.props.priority === "HIGH") ? "HIGH" :
+                    "LOW";
+
         const assignColor =
             (this.props.assign_to != null) ? "#002C6D" :
-                "#EFF25E"
+                "#bf0e0e"
             ;
         const assign =
             (this.props.assign_to === null) ? "Unassign" :
@@ -68,9 +74,8 @@ class Antrian extends Component {
                             <div className="icon" style={{ fontSize: "10px", color: "black", textAlign: "center", marginTop: "10px" }}>
                                 <img src={imagePriority} alt="low" style={{ width: "22px", height: "22px", margin: "0px auto" }} />
                             </div>
-                            <div className="name-category" style={{ fontSize: "10px", color: "#C0BEBE", textAlign: "center", padding: "5px" }}> {this.props.priority}</div>
+                            <div className="name-category" style={{ fontSize: "10px", color: "#000", textAlign: "center", padding: "5px", wight: "bold" }}> {statusPriority}</div>
                         </div>
-
                     </div>
                 </Link>
             </div>

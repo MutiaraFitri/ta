@@ -24,6 +24,7 @@ const Ticket = React.lazy(() => import('./components/views/page/Ticket'));
 const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
 const Rating = React.lazy(() => import('./components/views/page/Rating'));
 
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 
 const routes = [
