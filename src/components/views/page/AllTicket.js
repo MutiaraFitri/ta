@@ -90,7 +90,7 @@ class AllTicket extends Component {
         if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
 
         return (
-            <div className="home" style={{height:(this.state.overlay)?"100vh":"auto", overflow:(this.state.overlay)?"hidden":"auto"}}>
+            <div className="home" style={{ height: (this.state.overlay) ? "100vh" : "auto", overflow: (this.state.overlay) ? "hidden" : "auto" }}>
                 <div style={{
                     width: "100%",
                     position: "absolute",
@@ -125,15 +125,15 @@ class AllTicket extends Component {
                                 transform: transform,
                                 top: "25vh"
                             }}>
-                                <div className="circle-filter">
-                                    <div className="content-circle-filter">
-                                        <img src={filterImage} width="30px" style={{marginTop:"20px"}}/>
-                                    </div>
-                                    <div style={{marginTop:"-20px"}}>
-                                        Filter
-                                    </div>
+                            <div className="circle-filter">
+                                <div className="content-circle-filter">
+                                    <img src={filterImage} width="30px" style={{ marginTop: "20px" }} />
                                 </div>
-                            <div className="row" style={{ textAlign: "center",marginTop:"50px" }}>
+                                <div style={{ marginTop: "-20px" }}>
+                                    Filter
+                                    </div>
+                            </div>
+                            <div className="row" style={{ textAlign: "center", marginTop: "50px" }}>
                                 <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>DATE</div>
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
