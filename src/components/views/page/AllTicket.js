@@ -20,6 +20,7 @@ class AllTicket extends Component {
         overlay: false,
         opacity: true,
         from: null,
+        q: "",
         until: null,
         priority: null,
         category: null,
@@ -55,30 +56,69 @@ class AllTicket extends Component {
         if (data.personState.data) {
             dataku = data.personState.data.values;
             const toDos = _.map(dataku, (values, key) => {
-                return <div key={key}>
-                    <Antrian
-                        //imageKategori={hardware}
-                        sender1={values.employee_firstname}
-                        sender2={values.employee_lastname}
-                        category={values.ticket_category}
-                        title={values.ticket_subject}
-                        assign_to={values.technician_firstname}
-                        status={values.ticket_status}
-                        due_date={values.ticket_timestamp}
-                        imagePriority={low}
-                        priority={values.ticket_priority}
-                        id={values.ticket_id}
-                        employee_email={values.employee_email}
-                        description={values.ticket_description}
-                        location={values.ticket_location}
-                    />
+                if (this.state.q) {
+                    console.log("ticket Subject ", values.ticket_subject.toLowerCase())
+                    console.log("q ", this.state.q)
+                    console.log((values.ticket_subject).toLowerCase().search(this.state.q))
+                    if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                        return <div key={key}>
+                            <Antrian
+                                //imageKategori={hardware}
+                                sender1={values.employee_firstname}
+                                sender2={values.employee_lastname}
+                                category={values.ticket_category}
+                                title={values.ticket_subject}
+                                assign_to={values.technician_firstname}
+                                status={values.ticket_status}
+                                due_date={values.ticket_timestamp}
+                                imagePriority={low}
+                                priority={values.ticket_priority}
+                                id={values.ticket_id}
+                                employee_email={values.employee_email}
+                                description={values.ticket_description}
+                                location={values.ticket_location}
+                            />
+                        </div>;
+                    }else {
+                        if(key==0)
+                        return(
+                            "Not Found"
+                        )
+                    }
+                }
+                // Search null
+                else {
+                    return <div key={key}>
+                        <Antrian
+                            //imageKategori={hardware}
+                            sender1={values.employee_firstname}
+                            sender2={values.employee_lastname}
+                            category={values.ticket_category}
+                            title={values.ticket_subject}
+                            assign_to={values.technician_firstname}
+                            status={values.ticket_status}
+                            due_date={values.ticket_timestamp}
+                            imagePriority={low}
+                            priority={values.ticket_priority}
+                            id={values.ticket_id}
+                            employee_email={values.employee_email}
+                            description={values.ticket_description}
+                            location={values.ticket_location}
+                        />
 
-                </div>;
+                    </div>;
+                }
             });
             if (!_.isEmpty(toDos)) {
                 return toDos;
             }
         }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     render() {
@@ -90,7 +130,7 @@ class AllTicket extends Component {
         if (!localStorage.getItem("jwt")) return <Redirect to="/Login" />
 
         return (
-            <div className="home" style={{height:(this.state.overlay)?"100vh":"auto", overflow:(this.state.overlay)?"hidden":"auto"}}>
+            <div className="home" style={{ height: (this.state.overlay) ? "100vh" : "auto", overflow: (this.state.overlay) ? "hidden" : "auto" }}>
                 <div style={{
                     width: "100%",
                     position: "absolute",
@@ -125,15 +165,15 @@ class AllTicket extends Component {
                                 transform: transform,
                                 top: "25vh"
                             }}>
-                                <div className="circle-filter">
-                                    <div className="content-circle-filter">
-                                        <img src={filterImage} width="30px" style={{marginTop:"20px"}}/>
-                                    </div>
-                                    <div style={{marginTop:"-20px"}}>
-                                        Filter
-                                    </div>
+                            <div className="circle-filter">
+                                <div className="content-circle-filter">
+                                    <img src={filterImage} width="30px" style={{ marginTop: "20px" }} />
                                 </div>
-                            <div className="row" style={{ textAlign: "center",marginTop:"50px" }}>
+                                <div style={{ marginTop: "-20px" }}>
+                                    Filter
+                                    </div>
+                            </div>
+                            <div className="row" style={{ textAlign: "center", marginTop: "50px" }}>
                                 <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>DATE</div>
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
@@ -206,7 +246,7 @@ class AllTicket extends Component {
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
-                                <input type="text" name="q" id="q" placeholder="Search . . ." style={{ marginLeft: "5px", padding: "10px", width: "100%" }} />
+                                <input type="text" name="q" id="q" placeholder="Search . . ." style={{ marginLeft: "5px", padding: "10px", width: "100%" }} onChange={this.handleChange} />
                                 <div style={{ marginTop: "-40px", width: "100%", marginLeft: "50%" }}>
                                     <img src={search} alt="search" style={{ top: "87px", right: "65px", position: "absolute" }} />
                                 </div>
