@@ -3,6 +3,7 @@ import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
+import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import tickets from '../../../assets/img/tickets.png';
 import clipboard from '../../../assets/img/clipboard.png';
@@ -12,7 +13,10 @@ import { Link } from 'react-router-dom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
+import { dev, build } from '../../../redux/url/server';
+const jwt = require('jsonwebtoken');
 
+const url = dev;
 export class Home extends Component {
     _isMounted = false;
     constructor(props) {
@@ -31,6 +35,51 @@ export class Home extends Component {
             );
         }
         this.props.userku();
+
+        axios.get(url + `ticket/done`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                this.setState({ jumlahDone: res.data.values.length })
+            })
+        axios.get(url + `ticket/queue`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                this.setState({ jumlahQueue: res.data.values.length })
+            })
+        axios.get(url + `ticket/all`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                this.setState({ jumlahAll: res.data.values.length })
+            })
+        jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
+            if (err) {
+                console.log("Error", err)
+                localStorage.removeItem("jwt");
+                // dispatch(loginFailed("Your session has expired"));
+            }
+            const user = decoded.data;
+            this.setState({ ...user },
+                () => {
+                    axios.get(url + `ticket/technician/` + this.state.user_id, {
+                        headers: {
+                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                        }
+                    })
+                        .then(res => {
+                            this.setState({ jumlahTask: res.data.values.length })
+                        })
+                }
+            )
+        });
     }
 
     tick() {
@@ -67,7 +116,7 @@ export class Home extends Component {
                             <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.date.toLocaleTimeString([], { timeStyle: 'short' })}</h6>
                             <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Good {waktu} !</h6>
                         </div>
-                        <Link to='/all-ticket' style={{ zIndex: 5 }}>
+                        <Link to='/ticket/queue' style={{ zIndex: 5 }}>
                             <div className="lingkaran"
                                 style={{
                                     width: "140px",
@@ -78,7 +127,7 @@ export class Home extends Component {
 
                                     margin: "0px -20px"
                                 }}>
-                                <h6 style={{ fontSize: "21px", color: "black" }}>9 Tickets</h6>
+                                <h6 style={{ fontSize: "21px", color: "black" }}>{this.state.jumlahQueue ? this.state.jumlahQueue : "0"} Tickets</h6>
                                 <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>QUEUE</p>
                             </div>
                         </Link>
@@ -90,8 +139,12 @@ export class Home extends Component {
                                 backgroundColor: "#fff",
                                 border: "2px solid #e8e8e8"
                             }}>
-                            <h6 style={{ fontSize: "18px", color: "black" }}>25 </h6>
-                            <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Task Done</h6>
+                            <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.jumlahDone ? this.state.jumlahDone : "0"} </h6>
+                            <Link to="/ticket/done">
+                                <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>
+                                    Task Done
+                                </h6>
+                            </Link>
 
                         </div>
                     </div>
@@ -102,45 +155,49 @@ export class Home extends Component {
                             width: "50%",
                             padding: "0px 10px"
                         }}>
-                        <div className="row" style={{
-                            padding: "10px", margin: "0px",
-                            borderRadius: "10px",
-                            backgroundColor: "#FFF9F9",
-                            border: "2px solid #DEDEDE",
-                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
-                        }}>
+                        <Link to="/ticket/all">
+                            <div className="row" style={{
+                                padding: "10px", margin: "0px",
+                                borderRadius: "10px",
+                                backgroundColor: "#FFF9F9",
+                                border: "2px solid #DEDEDE",
+                                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                            }}>
 
-                            <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
-                                <img src={tickets} alt="info" />
+                                <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
+                                    <img src={tickets} alt="info" />
+                                </div>
+                                <div className="desc" style={{ width: "60%" }}>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>All Ticket</div>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahAll ? this.state.jumlahAll : "0"}</div>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>queue</div>
+                                </div>
                             </div>
-                            <div className="desc" style={{ width: "60%" }}>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>All Ticket</div>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>12</div>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>queue</div>
-                            </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="menu"
                         style={{
                             width: "50%",
                             padding: "0px 10px",
                         }}>
-                        <div className="row" style={{
-                            padding: "10px", margin: "0px", borderRadius: "10px",
-                            backgroundColor: "#FFF9F9",
-                            border: "2px solid #DEDEDE",
-                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
-                        }}>
+                        <Link to="/ticket/assign-to-me">
+                            <div className="row" style={{
+                                padding: "10px", margin: "0px", borderRadius: "10px",
+                                backgroundColor: "#FFF9F9",
+                                border: "2px solid #DEDEDE",
+                                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                            }}>
 
-                            <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
-                                <img src={clipboard} alt="info" />
+                                <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
+                                    <img src={clipboard} alt="info" />
+                                </div>
+                                <div className="desc" style={{ width: "60%" }}>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTask ? this.state.jumlahTask : "0"}</div>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>assign</div>
+                                </div>
                             </div>
-                            <div className="desc" style={{ width: "60%" }}>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>2</div>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>assign</div>
-                            </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="menu_bawah" style={{

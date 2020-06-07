@@ -45,7 +45,7 @@ const routes = [
   { path: '/problemsolve', exact: true, name: 'History', component: ProblemSolve },
   { path: '/reset/:token', exact: true, name: 'History', component: Reset },
   { path: '/report', exact: true, name: 'DetailTicket', component: Report },
-  { path: '/ticket', exact: true, name: 'Login', component: Ticket },
+  { path: '/ticket/:detail', exact: true, name: 'Login', component: Ticket },
   { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
   { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },

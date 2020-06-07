@@ -70,15 +70,13 @@ class Article extends Component {
                         </div>
                     </div>
                     {this.renderKB()}
-                    <div style={{ width: "30%", float: "right", marginTop: "20px" }}>
-                        <Link to="/new-article">
-                            <img src={write} alt="" />
-                        </Link>
-                    </div>
                     <br /><br /><br /><br />
-
                 </div>
-
+                <div style={{ bottom: "50px",position:"fixed" }}>
+                    <Link to="/new-article">
+                        <img src={write} alt="" />
+                    </Link>
+                </div>
                 <NavbarBottom />
             </div>
         );
