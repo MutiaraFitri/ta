@@ -38,7 +38,7 @@ export class EditProfile extends Component {
             }
         })
             .then(res => {
-                const user = res.data;
+                // const user = res.data;
                 this.fetchUser()
             })
     }

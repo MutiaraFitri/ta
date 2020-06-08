@@ -3,8 +3,6 @@ import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { Redirect } from 'react-router-dom';
-import menu from '../../../assets/img/menu.png';
-import left from './../../../assets/img/left-arrow.png';
 import _ from 'lodash'
 import axios from 'axios';
 import lain from '../../../assets/img/more.png';
@@ -147,7 +145,7 @@ export class Report extends Component {
         if (this.state.issue_id === "lainnya") {
             this.setState({
                 issue_id: (new Date().getTime()).toString(36),
-                kb_id: (new Date().getTime()+9).toString(36),
+                kb_id: (new Date().getTime() + 9).toString(36),
             }, () => {
                 console.log(this.state)
                 axios.post("https://api.ict-servicedesk.xyz/steps", this.state, {
@@ -157,7 +155,7 @@ export class Report extends Component {
                 }
                 ).then(res => {
                     this.setState({
-                        redirect_1:true
+                        redirect_1: true
                     })
                     console.log(res)
                 }).catch(error => {
@@ -171,7 +169,7 @@ export class Report extends Component {
                 }
                 ).then(res => {
                     this.setState({
-                        redirect_2:true
+                        redirect_2: true
                     })
                     console.log(res)
                 }).catch(error => {
@@ -187,8 +185,8 @@ export class Report extends Component {
             }
             ).then(res => {
                 this.setState({
-                    redirect_1:true,
-                    redirect_2:true
+                    redirect_1: true,
+                    redirect_2: true
                 })
                 console.log(res.value)
             }).catch(error => {
@@ -197,7 +195,7 @@ export class Report extends Component {
         }
     }
     render() {
-        if (this.state.redirect_1 && this.state.redirect_2) return <Redirect to={"/knowledgebase/"+this.state.kb_id} />
+        if (this.state.redirect_1 && this.state.redirect_2) return <Redirect to={"/knowledgebase/" + this.state.kb_id} />
         const imgmouse = this.state.issue_category === "hardware" ? mouseActive : mouse;
         const imgnetwork = this.state.issue_category === "network" ? networkActive : network;
         const imgsoftware = this.state.issue_category === "software" ? softwareActive : software;

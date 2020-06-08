@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import mann from '../assets/img/mann.png';
 import * as moment from 'moment';
 
@@ -37,7 +36,7 @@ class Ratingdesc extends Component {
                     </div>
                 </div>
                 <div className="review" style={{ marginLeft: "10px", paddingBottom: "10px" }}>
-                    <p style={{ color: "black", textAlign: "left", fontSize: "16px" }}>" {this.props.comment} "</p>
+                    <p style={{ color: "black", textAlign: "left", fontSize: "16px" }}> {this.props.comment} </p>
                 </div>
             </div>
         );

@@ -1,4 +1,4 @@
-import { fetchUser, userLogout,loginFailed,updatePasswordSuccess,updatePasswordFailed,requestResetPasswordSuccess,requestResetPasswordFailed,fectProductError,setNullErrorMessage } from "../action/action";
+import { fetchUser, userLogout, loginFailed, updatePasswordSuccess, updatePasswordFailed, requestResetPasswordSuccess, requestResetPasswordFailed, fectProductError } from "../action/action";
 import axios from 'axios';
 
 const jwt = require('jsonwebtoken');
@@ -12,8 +12,8 @@ export function users() {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            if(decoded){
-                console.log("decoded",decoded) // bar
+            if (decoded) {
+                console.log("decoded", decoded) // bar
                 dispatch(fetchUser(decoded.data));
             }
         });
@@ -31,8 +31,8 @@ export function updatePassword(data) {
         axios.put("https://api.ict-servicedesk.xyz/auth/password/technician", data, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
-                }
             }
+        }
         )
             .then(res => {
                 if (res.error) {
@@ -54,17 +54,17 @@ export function resetPassword(data) {
         axios.post("https://api.ict-servicedesk.xyz/auth/reset/technician", data, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
-                }
             }
+        }
         )
             .then(res => {
                 if (res.error) {
                     throw (res.error);
                 }
-                if(res.data.values.jwt){
+                if (res.data.values.jwt) {
                     dispatch(requestResetPasswordSuccess());
                 }
-                else{
+                else {
                     dispatch(requestResetPasswordFailed());
                 }
             })
@@ -98,7 +98,7 @@ export function userLoginFetch(data) {
 
                     // console.log(res.jwt);
                     return res.data;
-                }else {
+                } else {
                     dispatch(loginFailed(res.values.message));
                 }
             })

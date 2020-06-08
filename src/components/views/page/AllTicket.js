@@ -79,11 +79,11 @@ class AllTicket extends Component {
                                 location={values.ticket_location}
                             />
                         </div>;
-                    }else {
-                        if(key==0)
-                        return(
-                            "Not Found"
-                        )
+                    } else {
+                        if (key === 0)
+                            return (
+                                "Not Found"
+                            )
                     }
                 }
                 // Search null
@@ -167,7 +167,7 @@ class AllTicket extends Component {
                             }}>
                             <div className="circle-filter">
                                 <div className="content-circle-filter">
-                                    <img src={filterImage} width="30px" style={{ marginTop: "20px" }} />
+                                    <img src={filterImage} alt="filter" width="30px" style={{ marginTop: "20px" }} />
                                 </div>
                                 <div style={{ marginTop: "-20px" }}>
                                     Filter

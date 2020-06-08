@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import profile from '../../../assets/img/bgProfile.png';
-import mann from '../../../assets/img/mann.png';
+import profileBg from '../../../assets/img/bgProfile.png';
 import back from './../../../assets/img/back.png';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
-import left from './../../../assets/img/left-arrow.png';
 import { Link } from 'react-router-dom';
 
 export class NavbarProfile extends Component {
@@ -18,6 +16,9 @@ export class NavbarProfile extends Component {
 
         // const back = (this.props.back == "true") ?<Link to="." ><div className="back-button"><img src={arrow} alt="" style={{padding:"15px"}}/></div></Link>:'';
         // const title = (this.props.title) ? <div className="title-pages" style={{paddingTop:"5px"}}>{this.props.title}</div>:<img src={logo} alt="Komatsu" style={{ margin: "0 auto", height: "30px",paddingTop:"15px" }} />;
+        const profile = (data.personState.data) ? (data.personState.data) ? data.personState.data.user_image : "mann.png" : "mann.png"
+        const gambar = 'http://localhost:3001/avatar/technician/' + profile
+        console.log(gambar)
         return (
             <div className="container" style={{ width: "100%" }}>
                 <Link to='/'>
@@ -26,7 +27,7 @@ export class NavbarProfile extends Component {
                     </div>
                 </Link>
                 <div className="row">
-                    <img src={profile} alt="profile" style={{ marginTop: "-90px", width: "100%" }} />
+                    <img src={profileBg} alt="profile" style={{ marginTop: "-90px", width: "100%" }} />
                 </div>
                 <div style={{ position: "absolute", top: "175px", width: "100%", left: "0px" }}>
                     <div style={{ color: "black", fontSize: "20px" }}> {(data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_firstname : "" : ""} {(data.personState.data) ? (data.personState.data.data) ? data.personState.data.data.user_lastname : "" : ""} </div>
@@ -45,7 +46,7 @@ export class NavbarProfile extends Component {
                         position: "absolute",
                         overflow: "hidden"
                     }}>
-                    <img src={mann} alt="man" style={{ width: "100%" }} />
+                    <img src={gambar} alt="man" style={{ width: "100%" }} />
                 </div>
             </div>
         )
