@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import left from './../../../assets/img/left-arrow.png';
 import priority from './../../../assets/img/priority.png';
 import garbage from './../../../assets/img/garbage.png';
 import tambah from './../../../assets/img/tambah.png';
@@ -76,7 +75,7 @@ class DetailTicket extends Component {
                 const tiket = res.data.values;
                 console.log("data", tiket[0])
                 if (!tiket[0].ticket_technician_id) {
-                    axios.put('https://api.ict-servicedesk.xyz/ticket/assign/' + this.props.match.params.id, {technician_id:this.props.data.personState.data.user_id}, {
+                    axios.put('https://api.ict-servicedesk.xyz/ticket/assign/' + this.props.match.params.id, { technician_id: this.props.data.personState.data.user_id }, {
                         headers: {
                             key: '8dfcb234a322aeeb6b530f20c8e9988e'
                         }
@@ -87,7 +86,7 @@ class DetailTicket extends Component {
                             if (res.error) {
                                 throw (res.error);
                             }
-                            console.log("hasil",res)
+                            console.log("hasil", res)
                             this.fetchData()
                         })
                         .catch(error => {
@@ -110,7 +109,7 @@ class DetailTicket extends Component {
                 const tiket = res.data.values;
                 console.log("data", tiket[0])
                 if (!tiket[0].ticket_technician_id) {
-                    axios.put('https://api.ict-servicedesk.xyz/ticket/spam/' + this.props.match.params.id, {technician_id:this.props.data.personState.data.user_id}, {
+                    axios.put('https://api.ict-servicedesk.xyz/ticket/spam/' + this.props.match.params.id, { technician_id: this.props.data.personState.data.user_id }, {
                         headers: {
                             key: '8dfcb234a322aeeb6b530f20c8e9988e'
                         }
@@ -121,7 +120,7 @@ class DetailTicket extends Component {
                             if (res.error) {
                                 throw (res.error);
                             }
-                            console.log("hasil",res)
+                            console.log("hasil", res)
                             this.fetchData()
                         })
                         .catch(error => {

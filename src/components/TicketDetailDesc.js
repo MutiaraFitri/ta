@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import down from './../assets/img/arrow_down.png';
 import mann from './../assets/img/mann.png';
 
 class TicketDetailDesc extends Component {

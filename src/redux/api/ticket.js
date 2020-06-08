@@ -1,13 +1,13 @@
 
 import { fetchTiket } from "../action/action";
 import axios from 'axios';
-import {dev,build} from '../url/server';
+import { dev } from '../url/server';
 
 const url = dev;
 
 export function tickets() {
     return dispatch => {
-        axios.get(url+'ticket/', {
+        axios.get(url + 'ticket/', {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -21,7 +21,7 @@ export function tickets() {
 }
 export function ticketByDetail(data) {
     return dispatch => {
-        axios.get(url+`ticket/`+data, {
+        axios.get(url + `ticket/` + data, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -50,7 +50,7 @@ export function ticketsById(id) {
 }
 export function ticketsByTechnicianId(id) {
     return dispatch => {
-        axios.get(url+`ticket/technician/` + id, {
+        axios.get(url + `ticket/technician/` + id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }

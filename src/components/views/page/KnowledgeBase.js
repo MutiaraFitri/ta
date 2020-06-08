@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
-import menu from '../../../assets/img/menu.png'
-import { PulseLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import back from '../../../assets/img/back.png';
-import _ from 'lodash'
 import axios from 'axios';
 import picture from './../../../assets/img/picture.png';
+// import _ from 'lodash'
+// import menu from '../../../assets/img/menu.png'
+// import { PulseLoader } from 'react-spinners';
 
 export class KnowledgeBase extends Component {
     state = {

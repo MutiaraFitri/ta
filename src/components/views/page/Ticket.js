@@ -8,7 +8,7 @@ import NavbarBottom from '../navbar/NavbarBottom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
 import { Redirect } from 'react-router-dom';
-import { tickets, ticketByDetail,ticketsByTechnicianId } from '../../../redux/api/ticket';
+import { ticketByDetail, ticketsByTechnicianId } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import _ from "lodash";
 const jwt = require('jsonwebtoken');
@@ -26,7 +26,7 @@ export class Ticket extends Component {
         transform: true
     }
     componentDidMount() {
-        if(this.props.match.params.detail === 'assign-to-me'){
+        if (this.props.match.params.detail === 'assign-to-me') {
             jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
                 if (err) {
                     console.log("Error", err)
@@ -41,7 +41,7 @@ export class Ticket extends Component {
                 )
             });
         }
-        else{
+        else {
             this.props.tiket(this.props.match.params.detail);
         }
     }
@@ -95,11 +95,11 @@ export class Ticket extends Component {
                                 location={values.ticket_location}
                             />
                         </div>;
-                    }else {
-                        if(key==0)
-                        return(
-                            "Not Found"
-                        )
+                    } else {
+                        if (key === 0)
+                            return (
+                                "Not Found"
+                            )
                     }
                 }
                 // Search null
@@ -183,7 +183,7 @@ export class Ticket extends Component {
                             }}>
                             <div className="circle-filter">
                                 <div className="content-circle-filter">
-                                    <img src={filterImage} width="30px" style={{ marginTop: "20px" }} />
+                                    <img src={filterImage} alt="filter" width="30px" style={{ marginTop: "20px" }} />
                                 </div>
                                 <div style={{ marginTop: "-20px" }}>
                                     Filter
@@ -257,7 +257,7 @@ export class Ticket extends Component {
                         </div>
                     </div>
                 </div>
-                <NavbarTop title="Ticket"/>
+                <NavbarTop title="Ticket" />
                 <div style={{ color: "black", width: "100%" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
