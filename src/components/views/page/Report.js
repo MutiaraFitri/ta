@@ -4,8 +4,13 @@ import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
+import { dev, prod } from '../../../redux/url/server';
 import Chartjs2 from '../Chartjs2';
+import { CSVLink, CSVDownload } from "react-csv";
+import axios from 'axios';
+const jwt = require('jsonwebtoken');
 
+const url = dev;
 export class Home extends Component {
 
     state = {
@@ -38,6 +43,48 @@ export class Home extends Component {
                     ]
                 }]
         }
+    }
+    componentDidMount() {
+        axios.get(`https://api.ict-servicedesk.xyz/rating`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const rating = res.data.values;
+                console.log("data", rating)
+                this.setState({
+                    rating
+                })
+            })
+        jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
+            if (err) {
+                console.log("Error", err)
+                localStorage.removeItem("jwt");
+                // dispatch(loginFailed("Your session has expired"));
+            }
+            const user = decoded.data;
+            this.setState({ ...user },
+                () => {
+                    axios.get(url + `ticket/done/` + this.state.user_id, {
+                        headers: {
+                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                        }
+                    })
+                        .then(res => {
+                            this.setState({ jumlahTaskDone: res.data.values.length })
+                        })
+                    axios.get(url + `ticket/not-done/` + this.state.user_id, {
+                        headers: {
+                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                        }
+                    })
+                        .then(res => {
+                            this.setState({ jumlahTaskNotDone: res.data.values.length })
+                        })
+                }
+            )
+        });
     }
 
     handleClickTab = (e) => {
@@ -150,8 +197,21 @@ export class Home extends Component {
         }
     }
     render() {
+        const csvData = [
+            ["firstname", "lastname", "email"],
+            ["Ahmed", "Tomi", "ah@smthing.co.com"],
+            ["Raed", "Labes", "rl@smthing.co.com"],
+            ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+          ];
+        const totalRating = this.state.rating ?
+            (this.state.rating[0].jumlah * 1) +
+            (this.state.rating[1].jumlah * 2) +
+            (this.state.rating[2].jumlah * 3) +
+            (this.state.rating[3].jumlah * 4) +
+            (this.state.rating[4].jumlah * 5) : 0;
+        const jumlahRating = this.state.rating ? this.state.rating.length : 0;
         return (
-            <div className="home" >
+            <div className="home" style={{ paddingBottom: "70px" }} >
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='.'>
@@ -162,11 +222,11 @@ export class Home extends Component {
                     </div>
                     Detail Ticket
                 </div>
-                <div className="mainmenu" style={{ display: "flex" }}>
+                <div className="mainmenu" style={{ display: "flex", width: "100%", textAlign: "center" }}>
                     <div className="menu"
                         style={{
-                            width: "330px",
-                            margin: "20px 20px 0px 0px",
+                            width: "90%",
+                            margin: "20px auto 0px auto",
                             height: "38px",
                             backgroundColor: "#F7F8FF",
                             borderRadius: "10px"
@@ -180,13 +240,14 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="curva" style={{ display: "flex" }}>
+                <div className="curva" style={{ display: "flex", width: "100%" }}>
                     <div className="curva"
                         style={{
-                            width: "330px",
-                            margin: "20px 20px 0px 0px",
+                            width: "80%",
+                            margin: "20px auto 0px auto",
                             borderRadius: "10px",
                             height: "200px",
+                            paddingBottom: "10px"
                         }}>
 
                         <div className="row" style={{ padding: "10px", margin: "0px", height: '200px' }}>
@@ -195,95 +256,106 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="menu-atas" style={{ display: "flex" }}>
+                <div className="menu-atas" style={{ display: "flex", width: "80%" }}>
                     <div className="menu"
                         style={{
-                            width: "155px",
-                            margin: "20px 20px 0px 0px",
+                            width: "50%",
+                            margin: "20px 10px 0px auto",
                             borderRadius: "10px",
-                            backgroundColor: "#FFF9F9",
                             border: "2px solid #DEDEDE",
                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                         }}>
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
 
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>12</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone : "0"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Task Done</div>
                             </div>
                         </div>
                     </div>
                     <div className="menu"
                         style={{
-                            width: "155px",
-                            margin: "20px 20px 0px 0px",
+                            width: "50%",
+                            margin: "20px auto 0px 10px",
                             borderRadius: "10px",
-                            backgroundColor: "#FFF9F9",
                             border: "2px solid #DEDEDE",
                             boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                         }}>
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>70%</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTaskDone ? ((this.state.jumlahTaskDone / (this.state.jumlahTaskDone + this.state.jumlahTaskNotDone)) * 100).toFixed(1) + "%" : "0%"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Rate</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="menu_bawah">
+                <div className="menuReport"
+                    style={{
+                        width: "80%",
+                        height: "81px",
+                        margin: "30px auto 0px auto",
+                        borderRadius: "10px",
+                        border: "2px solid #DEDEDE",
+                        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                        display: "flex",
+                        paddingBottom: "10px"
+
+                    }}>
+                    <div className="row" style={{ padding: "10px", margin: "0px", width: "100%" }}>
+
+                        <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Created vs Done</div>
+                        </div>
+                        <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone + this.state.jumlahTaskNotDone : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Created</div>
+                        </div>
+                        <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Done</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="menu_bawah2" style={{ width: "80%", display: "flex" }}>
                     <div className="menuReport"
                         style={{
-                            width: "329px",
+                            width: "100%",
                             height: "81px",
-                            margin: "30px 0px 0px -25px",
+                            margin: "20px auto 0px auto",
                             borderRadius: "10px",
-                            backgroundColor: "#FFF9F9",
                             border: "2px solid #DEDEDE",
-                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
+                            boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                            paddingBottom: "10px"
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px" }}>
 
                             <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
-                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Created vs Done</div>
+                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Customer Satisfaction</div>
+                            </div>
+                            <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
+                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.rating ? ((totalRating / (jumlahRating * 5)) * 100).toFixed(1) : "0"}%</div>
+                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Average Rating</div>
                             </div>
                             <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>17</div>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Created</div>
-                            </div>
-                            <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>12</div>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Done</div>
+                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.rating ? jumlahRating : "0"}</div>
+                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>User Review</div>
                             </div>
                         </div>
                     </div>
-                    <div className="menu_bawah2">
-                        <div className="menuReport"
-                            style={{
-                                width: "329px",
-                                height: "81px",
-                                margin: "20px 0px 0px -25px",
-                                borderRadius: "10px",
-                                backgroundColor: "#FFF9F9",
-                                border: "2px solid #DEDEDE",
-                                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
-                            }}>
-                            <div className="row" style={{ padding: "10px", margin: "0px" }}>
-
-                                <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
-                                    <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Customer Satisfaction</div>
-                                </div>
-                                <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                                    <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>90,1%</div>
-                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Average Rating</div>
-                                </div>
-                                <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                                    <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>12</div>
-                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>User Review</div>
-                                </div>
+                </div>
+                <div className="row" style={{ width: "80%", border: "1px solid #0050A1", padding: "10px 0px", borderRadius: "10px" }}>
+                    <div style={{ width: "100%" }}>
+                        <CSVLink data={csvData}>
+                            <div style={{ width: "40%", margin: "0px auto" }}>
+                                <span class="material-icons" style={{ marginRight: "10px", verticalAlign: "bottom" }}>
+                                    print
+                            </span>
+                                <span style={{ fontSize: "18px", fontWeight: "700" }}>
+                                    Print
+                            </span>
                             </div>
-                        </div>
+                        </CSVLink>
                     </div>
-                    <br /><br /><br />
                 </div>
                 <NavbarBottom active="Home" />
             </div>
