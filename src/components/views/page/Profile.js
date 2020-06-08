@@ -66,7 +66,7 @@ export class Profile extends Component {
         const department = (data.personState.data) ? (this.state) ? this.state.technician_department ? this.state.technician_department : "Your Departement" : "Your Departement" : "Your Departement";
         const address = (data.personState.data) ? (this.state) ? this.state.technician_address ? this.state.technician_address : "Your Address" : "Your Address" : "Your Address";
         const email = (data.personState.data) ? (this.state) ? this.state.technician_email ? this.state.technician_email : "Your Mail" : "Your Mail" : "Your Mail";
-        const job = (data.personState.data) ? (this.state) ? (this.state.technician_job) ? (this.state.technician_job) : "Your Skill" : "Your Skill" : "Your Skill";
+        const job = (data.personState.data) ? (this.state) ? (this.state.technician_job) ? (this.state.technician_job).length >20 ? (this.state.technician_job).slice(0, 20) + " ...": (this.state.technician_job) : "Your Skill" : "Your Skill" : "Your Skill";
         const phone = (data.personState.data) ? (this.state) ? this.state.technician_contact ? this.state.technician_contact : "Your Phone Number" : "Your Phone Number" : "Your Phone Number";
 
         const colorJob =

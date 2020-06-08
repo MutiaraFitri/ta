@@ -21,7 +21,8 @@ export class EditProfile extends Component {
     handleChange = (e) => {
         //console.log(e.target.value)
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            save:false
         })
     }
 
@@ -40,6 +41,9 @@ export class EditProfile extends Component {
             .then(res => {
                 // const user = res.data;
                 this.fetchUser()
+                this.setState({
+                    save:true
+                })
             })
     }
     componentDidMount() {
@@ -106,6 +110,11 @@ export class EditProfile extends Component {
                         <img src={mann} alt="man" style={{ width: "100%" }} />
                     </div>
                     <div className="ganti-foto"> Change Profile Photo   </div>
+                </div>
+                <div className="row" style={{ width: "100%", backgroundColor: "#06d755", display: this.state.save ? "flex" : "none" }}>
+                    <div style={{ padding: "10px", color: "white" }}>
+                        Save successfully
+                        </div>
                 </div>
                 <div className="bungkusBg" style={{ borderColor: "#EDF4FF" }}>
                     <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit}>
