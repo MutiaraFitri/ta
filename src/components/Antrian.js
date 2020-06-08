@@ -62,15 +62,15 @@ class Antrian extends Component {
                             <div className="name" style={{ fontSize: "15px", color: "black" }}>{this.props.sender1} {this.props.sender2}</div>
                             <div className="type" style={{ fontSize: "10px", color: "#F1AEAE" }}>{this.props.category}</div>
                             <div className="message" style={{ fontSize: "12px", color: "#665858" }}>{this.props.title}</div>
-                            <div className="status" style={{ width: "102px", height: "12px", fontSize: "16px", padding: "2px 7px", borderRadius: "50px", backgroundColor: bgStatus, textAlign: "center", marginTop: "10px" }}>
-                                <div style={{ fontSize: "8px", textTransform: "uppercase" }}>{this.props.status}</div>
+                            <div className="status" style={{ width: "102px", height: "15px", margin: "0px auto", borderRadius: "50px", backgroundColor: bgStatus, textAlign: "center", marginTop: "10px" }}>
+                                <div style={{ fontSize: "9px", wight: "bold", color: "black", textTransform: "uppercase" }}>{this.props.status}</div>
                             </div>
                         </div>
                         <div className="dasc-status" style={{ width: "20%", textAlign: "left", padding: "30px 30px" }}>
                             <div style={{ fontSize: "12px", color: assignColor, fontWeight: "bold" }}>{assign}</div>
                         </div>
                         <div className="category" style={{ width: "15%", textAlign: "left" }}>
-                            <div className="tanggal" style={{ fontSize: "9px", color: "black", letterSpacing: "0.2", fontWeight: "bold", textAlign: "center" }}> {moment(this.props.due_date).format('Do MMMM')}</div>
+                            <div className="tanggal" style={{ fontSize: "9px", color: "black", letterSpacing: "0.2", fontWeight: "bold", textAlign: "center" }}> {moment(this.props.due_date).subtract(10, 'days').calendar()}</div>
                             <div className="icon" style={{ fontSize: "10px", color: "black", textAlign: "center", marginTop: "10px" }}>
                                 <img src={imagePriority} alt="low" style={{ width: "22px", height: "22px", margin: "0px auto" }} />
                             </div>
