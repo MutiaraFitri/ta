@@ -52,8 +52,8 @@ class Article extends Component {
                     </div>
                     Article
                 </div>
-                <div style={{ width: "100%" }}>
-                    <div className="title" style={{ width: "80%", textAlign: "left", padding: "30px 30px", marginTop: "-35px", letterSpacing: "0.09em" }}>
+                <div style={{ width: "100%", marginBottom: "100px" }}>
+                    <div className="title" style={{ width: "80%", textAlign: "left", padding: "15px 30px", letterSpacing: "0.09em" }}>
                         <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowlage base.</p>
                     </div>
 
@@ -70,11 +70,11 @@ class Article extends Component {
                         </div>
                     </div>
                     {this.renderKB()}
-                    <br /><br /><br /><br />
+                    <br /><br />
                 </div>
-                <div style={{ bottom: "50px",position:"fixed" }}>
+                <div style={{ bottom: "50px", position: "fixed" }}>
                     <Link to="/new-article">
-                        <img src={write} alt="" />
+                        <img src={write} alt="add" style={{ width: "70%" }} />
                     </Link>
                 </div>
                 <NavbarBottom />

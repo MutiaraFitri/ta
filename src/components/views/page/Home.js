@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
-import { dev,prod } from '../../../redux/url/server';
+import { dev, prod } from '../../../redux/url/server';
 const jwt = require('jsonwebtoken');
 
 const url = prod;
@@ -242,14 +242,14 @@ export class Home extends Component {
                                 </div>
                                 <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlage Base</div>
-                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>summary</div>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
                                 </div>
                             </div>
                         </div>
                     </Link>
                 </div>
                 <NavbarBottom active="Home" />
-            </div>
+            </div >
         )
     }
 }
