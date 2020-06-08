@@ -23,16 +23,29 @@ class TicketDetailDesc extends Component {
                     <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
                         <div className="nama" style={{ fontSize: "24px", color: "black", fontWeight: "bold", textAlign: "left" }}>{this.props.sender1} {this.props.sender2}</div>
                         <div className="email" style={{ fontSize: "20px", color: "black", textAlign: "left" }}> {this.props.email} </div>
-                    </div>
-                </div>
-                <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "20px", paddingTop: "10px", paddingBottom: "30px" }}>
-                    <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
-                        <div class="deskripsi-isi" style={{ width: "200px", float: "right" }}>
+                        <div class="deskripsi-isi" style={{ width: "200px", float: "right",margin:"20px" }}>
                             <select style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }}>
-                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>Waiting for support</option>
-                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>Select car:</option>
+                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                    Waiting for support
+                                </option>
+                                <option value="1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                    Response to Employee
+                                </option>
+                                <option value="2" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "red" }}>
+                                    Canceled
+                                </option>
+                                <option value="3" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                    Escalated
+                                </option>
+                                <option value="4" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
+                                    Set as Done
+                                </option>
                             </select>
                         </div>
+                    </div>
+                </div>
+                <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "50px", paddingTop: "10px", paddingBottom: "30px" }}>
+                    <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "700", marginTop: "10px" }}>{this.props.description}</div>
                         <div style={{ maxWidth: "414px", textAlign: "left", marginTop: "10px" }}>

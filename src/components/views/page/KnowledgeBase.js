@@ -40,6 +40,7 @@ export class KnowledgeBase extends Component {
         // console.log(this.props.data.person.data.data.user_id)
         this.setState({
             [e.target.name]: e.target.value,
+            save:false
         })
     }
 
@@ -50,6 +51,7 @@ export class KnowledgeBase extends Component {
             const data = this.state.steps[angka]
             this.setState({
                 number: angka,
+                save:false,
                 ...data
             })
         }
@@ -60,6 +62,7 @@ export class KnowledgeBase extends Component {
             const data = this.state.steps[angka]
             this.setState({
                 number: angka,
+                save:false,
                 ...data
             })
         }
@@ -107,8 +110,9 @@ export class KnowledgeBase extends Component {
             axios.post("https://api.ict-servicedesk.xyz/steps/update/" + this.state.steps[this.state.number].steps_id, formData, config)
                 .then((response) => {
                     // alert("The file is successfully uploaded");
+                    this.fetchdata();
                     this.setState({
-                        redirect: true
+                        save: true
                     })
                 }).catch((error) => {
                 });
@@ -154,7 +158,7 @@ export class KnowledgeBase extends Component {
                             </div>
                         </Link>
                     </div>
-                    New Article
+                    Article
                 </div>
                 <div style={{
                     width: "100%",
@@ -198,19 +202,12 @@ export class KnowledgeBase extends Component {
                         </div>
                     </div>
                 </div>
-                <div style={{ color: "black", width: "100%" }}>
-                    <div className="search" style={{ width: "100%" }}>
-                        <Link to='/article'>
-                            <div className="row">
-                                <div style={{ width: "20%", float: "left", marginLeft: "-10px" }}>
-                                    <img src={back} alt="filter" />
-                                </div>
-
-                            </div>
-                        </Link>
-                    </div>
-                </div>
                 <div className="Report" style={{ width: "85%" }}>
+                    <div className="row" style={{ width: "100%",backgroundColor:"#06d755",display:this.state.save?"flex":"none" }}>
+                        <div style={{padding:"10px",color:"white"}}>
+                            Save successfully
+                        </div>
+                    </div>
                     <div className="row" style={{ width: "100%" }}>
                         <button className="button" type="submit" style={{ width: "20%" }} onClick={this.hanndleBefore}>
                             {'<'}

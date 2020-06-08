@@ -72,7 +72,145 @@ export class Ticket extends Component {
         if (data.personState.data) {
             dataku = data.personState.data.values;
             const toDos = _.map(dataku, (values, key) => {
-                if (this.state.q) {
+                if (this.state.priority && this.state.category) {
+                    if (values.ticket_priority === this.state.priority && values.ticket_category === this.state.category) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.priority) {
+                    if (values.ticket_priority === this.state.priority) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.category) {
+                    if (values.ticket_category === this.state.category) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.q) {
                     console.log("ticket Subject ", values.ticket_subject.toLowerCase())
                     console.log("q ", this.state.q)
                     console.log((values.ticket_subject).toLowerCase().search(this.state.q))
@@ -95,11 +233,6 @@ export class Ticket extends Component {
                                 location={values.ticket_location}
                             />
                         </div>;
-                    } else {
-                        if (key === 0)
-                            return (
-                                "Not Found"
-                            )
                     }
                 }
                 // Search null
