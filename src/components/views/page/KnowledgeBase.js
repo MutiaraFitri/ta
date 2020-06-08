@@ -17,7 +17,8 @@ export class KnowledgeBase extends Component {
         number: 0,
         steps: [],
         steps_description: "",
-        steps_title: ""
+        steps_title: "",
+        saved:true
     }
 
     _handleImageChange(e) {
@@ -40,12 +41,12 @@ export class KnowledgeBase extends Component {
         // console.log(this.props.data.person.data.data.user_id)
         this.setState({
             [e.target.name]: e.target.value,
-            save:false
+            save: false,
+            saved:false,
         })
     }
 
     hanndleNext = () => {
-        console.log(this.state.steps.length, "length");
         if (this.state.number < this.state.steps.length - 1) {
             const angka = this.state.number + 1
             const data = this.state.steps[angka]
@@ -112,7 +113,8 @@ export class KnowledgeBase extends Component {
                     // alert("The file is successfully uploaded");
                     this.fetchdata();
                     this.setState({
-                        save: true
+                        save: true,
+                        saved:true
                     })
                 }).catch((error) => {
                 });
@@ -122,15 +124,21 @@ export class KnowledgeBase extends Component {
     handleGoTo = (e) => {
         const data = -1 + parseInt(e.target.value)
         const dataSteps = this.state.steps[data]
-        if (e.target.value) {
+        if (e.target.value && e.target.value <= this.state.steps.length && e.target.value > 0) {
             this.setState({
                 number: data,
-                ...dataSteps
+                ...dataSteps,
+                errorNumber: false
+            })
+        } else if (e.target.value > this.state.steps.length || e.target.value < 1) {
+            this.setState({
+                errorNumber: true
             })
         }
     }
 
-    handleClose = () => {
+    handleClose = (e) => {
+        e.preventDefault()
         this.setState({
             loading: false
         })
@@ -140,7 +148,9 @@ export class KnowledgeBase extends Component {
             loading: true
         })
     }
-
+    handleProhibit=()=>{
+        alert("Please Save before you Go !")
+    }
 
     render() {
         let { imagePreviewUrl } = this.state;
@@ -184,41 +194,41 @@ export class KnowledgeBase extends Component {
                             className="loading-content"
                             style={{
                                 backgroundColor: "white",
-                                width: "200px",
+                                width: "100%",
                                 borderRadius: "10px",
                                 position: "absolute",
                                 padding: "0px",
                                 paddingTop: "10px",
                                 overflow: "hidden",
-                                height: "110px",
+                                height: "190px",
                                 zIndex: "4",
-                                top: "50vh",
+                                bottom: "0px",
                             }}>
-                            <div style={{ fontSize: "18px" }}>Go to</div>
-                            <input className="input-form-full" onChange={this.handleGoTo} name="goto" type="number" placeholder={this.state.number + 1} />
-                            <button className="button" style={{ width: "50%", float: "right" }} onClick={this.handleClose}>
-                                Close
-                            </button>
+                            <div className="row">
+                                <div style={{ fontSize: "18px", fontWeight: "700", textAlign: "left", marginLeft: "30px", width: "80%" }}>Go to</div>
+                                <span class="material-icons" onClick={this.handleClose}>
+                                    close
+                                </span>
+                                <div style={{ fontSize: "14px", color: "red", textAlign: "left", marginLeft: "30px", width: "50%", display: this.state.errorNumber ? "flex" : "none" }}>Input not valid</div>
+                            </div>
+                            <form onSubmit={this.handleClose}>
+                                <input className="input-form-full" onChange={this.handleGoTo} name="goto" type="number" placeholder={this.state.number + 1} style={{ width: "80%" }} />
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div className="Report" style={{ width: "85%" }}>
-                    <div className="row" style={{ width: "100%",backgroundColor:"#06d755",display:this.state.save?"flex":"none" }}>
-                        <div style={{padding:"10px",color:"white"}}>
-                            Save successfully
-                        </div>
-                    </div>
                     <div className="row" style={{ width: "100%" }}>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.hanndleBefore}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleBefore:this.handleProhibit}>
                             {'<'}
                         </button>
                         <button className="button" type="submit" style={{ width: "20%" }}>
                             {this.state.number + 1}
                         </button>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.hanndleNext}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleNext:this.handleProhibit}>
                             >
                         </button>
-                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.handleOpen}>
+                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved?this.handleOpen:this.handleProhibit}>
                             Go To
                         </button>
                     </div>
@@ -262,17 +272,22 @@ export class KnowledgeBase extends Component {
                             Save
                         </button>
                     </div>
+                    <div className="row" style={{ width: "100%", backgroundColor: "#06d755", display: this.state.save ? "flex" : "none" }}>
+                        <div style={{ padding: "10px", color: "white" }}>
+                            Save successfully
+                        </div>
+                    </div>
                     <div className="row" style={{ width: "100%", marginBottom: "70px" }}>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.hanndleBefore}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleBefore:this.handleProhibit}>
                             {'<'}
                         </button>
                         <button className="button" type="submit" style={{ width: "20%" }}>
                             {this.state.number + 1}
                         </button>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.hanndleNext}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleNext:this.handleProhibit}>
                             >
                         </button>
-                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.handleOpen}>
+                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved?this.handleOpen:this.handleProhibit}>
                             Go To
                         </button>
                     </div>
