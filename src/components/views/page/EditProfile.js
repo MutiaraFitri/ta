@@ -22,7 +22,7 @@ export class EditProfile extends Component {
         //console.log(e.target.value)
         this.setState({
             [e.target.name]: e.target.value,
-            save:false
+            save: false
         })
     }
 
@@ -42,7 +42,7 @@ export class EditProfile extends Component {
                 // const user = res.data;
                 this.fetchUser()
                 this.setState({
-                    save:true
+                    save: true
                 })
             })
     }
@@ -92,7 +92,7 @@ export class EditProfile extends Component {
                 <div style={{ color: "black", width: "100%" }}>
                 </div>
 
-                <div className="container" style={{ width: "100%" }}>
+                {/* <div className="container" style={{ width: "100%" }}>
                     <div className="profile"
                         style={{
                             top: "30px",
@@ -110,14 +110,20 @@ export class EditProfile extends Component {
                         <img src={mann} alt="man" style={{ width: "100%" }} />
                     </div>
                     <div className="ganti-foto"> Change Profile Photo   </div>
-                </div>
+                </div> */}
+
                 <div className="row" style={{ width: "100%", backgroundColor: "#06d755", display: this.state.save ? "flex" : "none" }}>
                     <div style={{ padding: "10px", color: "white" }}>
                         Save successfully
                         </div>
                 </div>
-                <div className="bungkusBg" style={{ borderColor: "#EDF4FF" }}>
-                    <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit}>
+
+                <div className="bungkusBg" style={{
+                    borderRadius: "10px",
+                    padding: "20px",
+                    marginTop: "30px"
+                }}>
+                    <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit} >
                         <div className="container">
                             <div className="row-edit" style={{ alignItems: "center" }}>
                                 <div className="sub-edit"> job</div>
@@ -194,6 +200,8 @@ export class EditProfile extends Component {
                     </div>
                 </div>
             </div>
+
+
         )
     }
 }

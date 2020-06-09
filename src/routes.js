@@ -5,6 +5,7 @@ const About = React.lazy(() => import('./components/views/page/About'));
 const Article = React.lazy(() => import('./components/views/page/Article'));
 const AllTicket = React.lazy(() => import('./components/views/page/AllTicket'));
 const Chart_Component = React.lazy(() => import('./components/views/Chart_Component'));
+const DetailArticle = React.lazy(() => import('./components/views/page/DetailArticle'));
 const DetailTickets = React.lazy(() => import('./components/views/page/DetailTicket'))
 const DetailTicket = React.lazy(() => import('./components/views/page/DetailTicket'));
 const DetProblemSolve = React.lazy(() => import('./components/views/page/DetailProblemSolve'));
@@ -26,6 +27,7 @@ const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
 const Rating = React.lazy(() => import('./components/views/page/Rating'));
 
 
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 
 const routes = [
@@ -33,9 +35,9 @@ const routes = [
   { path: '/about', exact: true, name: 'History', component: About },
   { path: '/all-ticket', exact: true, name: 'AllTicket', component: AllTicket },
   { path: '/article', exact: true, name: 'Report', component: Article },
-  { path: '/chart', exact: true, name: 'Chart_Component', component: Chart_Component },
-  { path: '/detail-ticket', exact: true, name: 'DetailTicket', component: DetailTicket },
+  { path: '/articledetail', exact: true, name: 'DetailArticle', component: DetailArticle },
   { path: '/detproblemsolve', exact: true, name: 'History', component: DetProblemSolve },
+  { path: '/chart', exact: true, name: 'Chart_Component', component: Chart_Component },
   { path: '/forgotpassword', exact: true, name: 'ForgotPassword', component: ForgotPassword },
   { path: '/history', exact: true, name: 'History', component: History },
   { path: '/home', exact: true, name: 'Landing', component: Home },
@@ -43,13 +45,14 @@ const routes = [
   { path: '/new-article', exact: true, name: 'Report', component: NewArticle },
   { path: '/knowledgebase/:id', exact: true, name: 'KB', component: KB },
   { path: '/profile', exact: true, name: 'Login', component: Profile },
+  { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
   { path: '/problemsolve', exact: true, name: 'History', component: ProblemSolve },
   { path: '/reset/:token', exact: true, name: 'History', component: Reset },
   { path: '/report', exact: true, name: 'DetailTicket', component: Report },
   { path: '/ticket/:detail', exact: true, name: 'Login', component: Ticket },
   { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },
+  { path: '/detail-ticket', exact: true, name: 'DetailTicket', component: DetailTicket },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
-  { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
   { path: '/rating', exact: true, name: 'Rating', component: Rating },
   { path: '/message/:id', exact: true, name: 'Message', component: Message },
 

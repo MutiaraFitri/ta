@@ -52,8 +52,8 @@ class Article extends Component {
                     </div>
                     Article
                 </div>
-                <div style={{ width: "100%", marginTop: "60px" }}>
-                    <div className="title" style={{ width: "80%", textAlign: "left", padding: "30px 30px", marginTop: "-35px", letterSpacing: "0.09em" }}>
+                <div style={{ width: "100%", marginBottom: "100px" }}>
+                    <div className="title" style={{ width: "80%", textAlign: "left", padding: "15px 30px", letterSpacing: "0.09em" }}>
                         <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowlage base.</p>
                     </div>
 
@@ -70,17 +70,11 @@ class Article extends Component {
                         </div>
                     </div>
                     {this.renderKB()}
-                    <br /><br /><br /><br />
+                    <br /><br />
                 </div>
-                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
-                    <div style={{ width: "82%", height: "10px" }}>
-                    </div>
-                    <Link to='/new-article'>
-                        <div style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", padding: "15px 18px", backgroundColor: "#0050A1", borderRadius: "50%" }}>
-                            <span class="material-icons" style={{ verticalAlign: "bottom", color: "#fff" }}>
-                                add
-                            </span>
-                        </div>
+                <div style={{ bottom: "50px", position: "fixed" }}>
+                    <Link to="/new-article">
+                        <img src={write} alt="add" style={{ width: "70%" }} />
                     </Link>
                 </div>
                 <NavbarBottom active="Home" />

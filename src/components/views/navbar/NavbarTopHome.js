@@ -4,7 +4,7 @@ import notification from '../../../assets/img/notification.png';
 import users from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
-import { dev,prod } from '../../../redux/url/server';
+import { dev, prod } from '../../../redux/url/server';
 
 export class NavbarTop extends Component {
 
@@ -18,7 +18,7 @@ export class NavbarTop extends Component {
         // const back = (this.props.back == "true") ?<Link to="." ><div className="back-button"><img src={arrow} alt="" style={{padding:"15px"}}/></div></Link>:'';
         // const title = (this.props.title) ? <div className="title-pages" style={{paddingTop:"5px"}}>{this.props.title}</div>:<img src={logo} alt="Komatsu" style={{ margin: "0 auto", height: "30px",paddingTop:"15px" }} />;
         const profile = (data.personState.data) ? (data.personState.data) ? data.personState.data.user_image : "mann.png" : "mann.png"
-        const gambar = prod+'avatar/technician/' + profile
+        const gambar = prod + 'avatar/technician/' + profile
         console.log(gambar)
         return (
             <div className="container" style={{ width: "100%" }}>
