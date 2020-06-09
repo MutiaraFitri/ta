@@ -42,7 +42,7 @@ class Article extends Component {
         return (
             <div className="home">
 
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
+                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", position: "fixed" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='.'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
@@ -52,7 +52,7 @@ class Article extends Component {
                     </div>
                     Article
                 </div>
-                <div style={{ width: "100%" }}>
+                <div style={{ width: "100%", marginTop: "60px" }}>
                     <div className="title" style={{ width: "80%", textAlign: "left", padding: "30px 30px", marginTop: "-35px", letterSpacing: "0.09em" }}>
                         <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowlage base.</p>
                     </div>
@@ -72,12 +72,18 @@ class Article extends Component {
                     {this.renderKB()}
                     <br /><br /><br /><br />
                 </div>
-                <div style={{ bottom: "50px",position:"fixed" }}>
-                    <Link to="/new-article">
-                        <img src={write} alt="" />
+                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
+                    <div style={{ width: "82%", height: "10px" }}>
+                    </div>
+                    <Link to='/new-article'>
+                        <div style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", padding: "15px 18px", backgroundColor: "#0050A1", borderRadius: "50%" }}>
+                            <span class="material-icons" style={{ verticalAlign: "bottom", color: "#fff" }}>
+                                add
+                            </span>
+                        </div>
                     </Link>
                 </div>
-                <NavbarBottom />
+                <NavbarBottom active="Home" />
             </div>
         );
     }
