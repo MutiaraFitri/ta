@@ -24,7 +24,7 @@ export class NavbarBottom extends Component {
                         </Link>
                     </div>
                     <div className="menu-home">
-                        <Link to='/all-ticket'>
+                        <Link to='/ticket/all'>
                             <img src={ticket} alt="" height="40px" className={ticketIcon} ref="ticketIcon" />
                         </Link>
                     </div>

@@ -42,7 +42,7 @@ class Article extends Component {
         return (
             <div className="home">
 
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
+                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", position: "fixed" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='.'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
@@ -77,7 +77,7 @@ class Article extends Component {
                         <img src={write} alt="add" style={{ width: "70%" }} />
                     </Link>
                 </div>
-                <NavbarBottom />
+                <NavbarBottom active="Home" />
             </div>
         );
     }

@@ -7,8 +7,8 @@ class TicketDetailDesc extends Component {
             <div>
                 <div style={{ width: "100%" }}>
                     <div className="title" style={{ textAlign: "left", margin: "25px" }}>
-                        <p style={{ fontSize: "12px", padding: "0px", margin: "0px" }}>Title</p>
-                        <p style={{ fontSize: "22px", padding: "0px", margin: "0px" }}>{this.props.title}</p>
+                        <p style={{ fontSize: "12px", padding: "0px", margin: "0px",color:"black" }}>Title</p>
+                        <p style={{ fontSize: "22px", padding: "0px", margin: "0px",color:"black",fontWeight:"700" }}>{this.props.title}</p>
                     </div>
                 </div>
                 <div style={{ width: "100%", height: "70px", display: "flex" }}>

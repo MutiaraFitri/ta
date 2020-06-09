@@ -131,22 +131,21 @@ export class Home extends Component {
                                 <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>QUEUE</p>
                             </div>
                         </Link>
-                        <div className="lingkaran"
-                            style={{
-                                width: "110px",
-                                height: "110px",
-                                borderRadius: "50%",
-                                backgroundColor: "#fff",
-                                border: "2px solid #e8e8e8"
-                            }}>
-                            <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.jumlahDone ? this.state.jumlahDone : "0"} </h6>
-                            <Link to="/ticket/done">
+                        <Link to="/ticket/done">
+                            <div className="lingkaran"
+                                style={{
+                                    width: "110px",
+                                    height: "110px",
+                                    borderRadius: "50%",
+                                    backgroundColor: "#fff",
+                                    border: "2px solid #e8e8e8"
+                                }}>
+                                <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.jumlahDone ? this.state.jumlahDone : "0"} </h6>
                                 <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>
                                     Task Done
                                 </h6>
-                            </Link>
-
-                        </div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="menu-atas" style={{ display: "flex", width: "100%" }}>

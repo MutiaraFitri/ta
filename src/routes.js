@@ -14,6 +14,7 @@ const ForgotPassword = React.lazy(() => import('./components/views/page/ForgotPa
 const History = React.lazy(() => import('./components/views/page/History'));
 const Home = React.lazy(() => import('./components/views/page/Home'));
 const Login = React.lazy(() => import('./components/views/page/Login'));
+const Message = React.lazy(() => import('./components/views/page/Message'));
 const NotFound = React.lazy(() => import('./components/views/page/NotFound_404'));
 const NewArticle = React.lazy(() => import('./components/views/page/NewArticle'));
 const ProblemSolve = React.lazy(() => import('./components/views/page/ProblemSolve'));
@@ -53,6 +54,7 @@ const routes = [
   { path: '/detail-ticket', exact: true, name: 'DetailTicket', component: DetailTicket },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
   { path: '/rating', exact: true, name: 'Rating', component: Rating },
+  { path: '/message/:id', exact: true, name: 'Message', component: Message },
 
 
 
