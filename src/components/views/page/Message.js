@@ -24,7 +24,7 @@ class Message extends Component {
     state = {
         tiket: [],
         message: "",
-        message_ticket_id :this.props.match.params.id
+        message_ticket_id: this.props.match.params.id
     }
 
     fetchData = () => {
@@ -54,7 +54,7 @@ class Message extends Component {
             }
             const user = decoded.data;
             this.setState({
-                message_technician_id:user.user_id
+                message_technician_id: user.user_id
             })
         });
     }
@@ -77,28 +77,31 @@ class Message extends Component {
         const toDos = _.map(this.state.tiket, (values, key) => {
             return <div key={key} style={{ width: "90%", margin: "0px auto" }}>
                 <div>
-                    <div style={{ width: "100%" }}>
-                        <div className="title" style={{ textAlign: "left", margin: "20px" }}>
-                            <p style={{ fontSize: "20px", padding: "0px", margin: "0px", color: "black", fontWeight: "700" }}>{values.ticket_subject}</p>
-                        </div>
+                    <div className="title-kendala" style={{ width: "100%", textAlign: "left", marginTop: "30px" }}>
+                        <p style={{ fontSize: "20px", color: "#A4A6B3", fontWeight: "700" }}>Issue</p>
+                        <p style={{ fontSize: "20px", color: "black", marginTop: "-20px", fontWeight: "700" }}>{values.ticket_subject}</p>
                     </div>
-                    <div style={{ width: "100%", height: "70px", display: "flex" }}>
-                        <div className="pengirim" style={{ width: "20%", marginLeft: "25px" }}>
+                    <div style={{ width: "100%", display: "flex", marginTop: "-6px" }}>
+                        <div className="pengirim" style={{ width: "15%" }}>
                             <div className="foto-pengim" style={{
-                                width: "50px", backgroundColor: "#F1AEAE",
-                                height: "50px", borderRadius: "50%", border: "1px solid", margin: "0px auto", overflow: "hidden"
+                                width: "40px", backgroundColor: "#F1AEAE",
+                                height: "40px", borderRadius: "50%", border: "1px solid", margin: "0px auto", overflow: "hidden"
                             }}>
                                 <img src={mann} alt="mann" style={{ width: "100%" }} />
                             </div>
                         </div>
                         <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
-                            <div className="nama" style={{ fontSize: "20px", color: "black", fontWeight: "bold", textAlign: "left" }}>{values.employee_firstname} {values.employee_lastname}</div>
-                            <div className="email" style={{ fontSize: "18px", color: "black", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
+                            <div className="nama" style={{ fontSize: "16px", color: "black", fontWeight: "bold", textAlign: "left" }}>{values.employee_firstname} {values.employee_lastname}</div>
+                            <div className="row" style={{ marginTop: "-4px" }}>
+                                <div className="time" style={{ width: "50%", fontSize: "14px", color: "black", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
+                                <Link to={'/ticket/detail/' + values.ticket_id} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </Link>
+
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            </div>;
+            </div >;
         });
         if (!_.isEmpty(toDos)) {
             return toDos;
@@ -116,7 +119,7 @@ class Message extends Component {
                         </div>
                     </div>
                 );
-            }else {
+            } else {
                 return (
                     <div style={{ width: "100%", display: "flex" }}>
                         <div style={{ width: "30%", height: "10px" }}></div>
@@ -161,7 +164,7 @@ class Message extends Component {
                         .catch(error => {
                             console.log("Error " + error);
                         })
-                } 
+                }
             })
         console.log("Assign To me");
     }
@@ -206,8 +209,8 @@ class Message extends Component {
         })
     }
 
-    handleSend = () =>{
-        axios.post(url + `message`,this.state, {
+    handleSend = () => {
+        axios.post(url + `message`, this.state, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -215,7 +218,7 @@ class Message extends Component {
             .then(res => {
                 this.fetchMessage()
                 this.setState({
-                    message:""
+                    message: ""
                 })
             })
     }
@@ -223,9 +226,9 @@ class Message extends Component {
         //console.log(this.props.match.params.id)
         return (
             <div className="home" style={{ paddingBottom: "10vh", minHeight: "90vh", backgroundColor: "#F4F4F6", }}>
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", position: "fixed", zIndex: "3" }}>
+                <div className="navbar-message">
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='/all-ticket'>
+                        <Link to={'/ticket/detail/' + this.state.message_ticket_id}>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
                                 <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>

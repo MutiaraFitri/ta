@@ -35,7 +35,7 @@ const routes = [
   { path: '/about', exact: true, name: 'History', component: About },
   { path: '/all-ticket', exact: true, name: 'AllTicket', component: AllTicket },
   { path: '/article', exact: true, name: 'Report', component: Article },
-  { path: '/articledetail', exact: true, name: 'DetailArticle', component: DetailArticle },
+  { path: '/article/detail/:id', exact: true, name: 'DetailArticle', component: DetailArticle },
   { path: '/detproblemsolve', exact: true, name: 'History', component: DetProblemSolve },
   { path: '/chart', exact: true, name: 'Chart_Component', component: Chart_Component },
   { path: '/forgotpassword', exact: true, name: 'ForgotPassword', component: ForgotPassword },

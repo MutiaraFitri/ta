@@ -18,7 +18,7 @@ export class KnowledgeBase extends Component {
         steps: [],
         steps_description: "",
         steps_title: "",
-        saved:true
+        saved: true
     }
 
     _handleImageChange(e) {
@@ -42,7 +42,7 @@ export class KnowledgeBase extends Component {
         this.setState({
             [e.target.name]: e.target.value,
             save: false,
-            saved:false,
+            saved: false,
         })
     }
 
@@ -52,7 +52,7 @@ export class KnowledgeBase extends Component {
             const data = this.state.steps[angka]
             this.setState({
                 number: angka,
-                save:false,
+                save: false,
                 ...data
             })
         }
@@ -63,7 +63,7 @@ export class KnowledgeBase extends Component {
             const data = this.state.steps[angka]
             this.setState({
                 number: angka,
-                save:false,
+                save: false,
                 ...data
             })
         }
@@ -114,7 +114,7 @@ export class KnowledgeBase extends Component {
                     this.fetchdata();
                     this.setState({
                         save: true,
-                        saved:true
+                        saved: true
                     })
                 }).catch((error) => {
                 });
@@ -148,7 +148,7 @@ export class KnowledgeBase extends Component {
             loading: true
         })
     }
-    handleProhibit=()=>{
+    handleProhibit = () => {
         alert("Please Save before you Go !")
     }
 
@@ -168,7 +168,7 @@ export class KnowledgeBase extends Component {
                             </div>
                         </Link>
                     </div>
-                    Article
+                        Edit Article
                 </div>
                 <div style={{
                     width: "100%",
@@ -219,16 +219,16 @@ export class KnowledgeBase extends Component {
                 </div>
                 <div className="Report" style={{ width: "85%" }}>
                     <div className="row" style={{ width: "100%" }}>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleBefore:this.handleProhibit}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved ? this.hanndleBefore : this.handleProhibit}>
                             {'<'}
                         </button>
                         <button className="button" type="submit" style={{ width: "20%" }}>
                             {this.state.number + 1}
                         </button>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleNext:this.handleProhibit}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved ? this.hanndleNext : this.handleProhibit}>
                             >
                         </button>
-                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved?this.handleOpen:this.handleProhibit}>
+                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved ? this.handleOpen : this.handleProhibit}>
                             Go To
                         </button>
                     </div>
@@ -278,16 +278,16 @@ export class KnowledgeBase extends Component {
                         </div>
                     </div>
                     <div className="row" style={{ width: "100%", marginBottom: "70px" }}>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleBefore:this.handleProhibit}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved ? this.hanndleBefore : this.handleProhibit}>
                             {'<'}
                         </button>
                         <button className="button" type="submit" style={{ width: "20%" }}>
                             {this.state.number + 1}
                         </button>
-                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved?this.hanndleNext:this.handleProhibit}>
+                        <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved ? this.hanndleNext : this.handleProhibit}>
                             >
                         </button>
-                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved?this.handleOpen:this.handleProhibit}>
+                        <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved ? this.handleOpen : this.handleProhibit}>
                             Go To
                         </button>
                     </div>

@@ -202,7 +202,7 @@ export class Home extends Component {
             ["Ahmed", "Tomi", "ah@smthing.co.com"],
             ["Raed", "Labes", "rl@smthing.co.com"],
             ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-          ];
+        ];
         const totalRating = this.state.rating ?
             (this.state.rating[0].jumlah * 1) +
             (this.state.rating[1].jumlah * 2) +
@@ -212,7 +212,7 @@ export class Home extends Component {
         const jumlahRating = this.state.rating ? this.state.rating.length : 0;
         return (
             <div className="home" style={{ paddingBottom: "70px" }} >
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", }}>
+                <div className="navbar-message" >
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='.'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
@@ -220,7 +220,7 @@ export class Home extends Component {
                             </div>
                         </Link>
                     </div>
-                    Detail Ticket
+                    Report
                 </div>
                 <div className="mainmenu" style={{ display: "flex", width: "100%", textAlign: "center" }}>
                     <div className="menu"
@@ -229,7 +229,8 @@ export class Home extends Component {
                             margin: "20px auto 0px auto",
                             height: "38px",
                             backgroundColor: "#F7F8FF",
-                            borderRadius: "10px"
+                            borderRadius: "10px",
+                            marginTop: "100px",
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px", }}>
                             <div className="desc" style={{ width: "100%", display: "flex" }}>

@@ -5,7 +5,6 @@ import tambah from './../../../assets/img/tambah.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import write from '../../../assets/img/write.png';
 import { ticketsById } from '../../../redux/api/ticket';
 import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
@@ -135,7 +134,7 @@ class DetailTicket extends Component {
         //console.log(this.props.match.params.id)
         return (
             <div className="home" style={{ paddingBottom: "70px" }}>
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", position: "fixed" }}>
+                <div className="navbar-message" >
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='/all-ticket'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
@@ -196,7 +195,7 @@ class DetailTicket extends Component {
                 <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
                     <div style={{ width: "82%", height: "10px" }}>
                     </div>
-                    <Link to={'/message/'+this.props.match.params.id}>
+                    <Link to={'/message/' + this.props.match.params.id}>
                         <div style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", padding: "15px 16px", backgroundColor: "#0050A1", borderRadius: "50%" }}>
                             <span class="material-icons" style={{ verticalAlign: "bottom", color: "#fff" }}>
                                 chat
