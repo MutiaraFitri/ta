@@ -134,6 +134,7 @@ class AllTicket extends Component {
                 <div style={{
                     width: "100%",
                     position: "absolute",
+
                     display: (this.state.overlay) ? "inline" : "none"
                 }}>
                     <div style={{
@@ -242,7 +243,7 @@ class AllTicket extends Component {
                     </div>
                 </div>
                 <NavbarTop />
-                <div style={{ color: "black", width: "100%" }}>
+                <div style={{ color: "black", width: "100%", marginTop: "50px" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>

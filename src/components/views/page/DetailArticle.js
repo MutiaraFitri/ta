@@ -6,13 +6,15 @@ import { ticketsById } from '../../../redux/api/ticket';
 import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import back from './../../../assets/img/back.png';
+import { kb } from '../../../redux/api/kb';
 import { css } from '@emotion/core';
 import picture from './../../../assets/img/picture.png';
 import imgStep from './../../../assets/img/imgStep.png';
-
+import { dev, prod } from '../../../redux/url/server';
 
 import _ from "lodash";
-
+const url = prod
+const gambar = prod + 'avatar/technician/'
 class DetailArticle extends Component {
     state = {
         category: "",
@@ -24,57 +26,38 @@ class DetailArticle extends Component {
         steps_title: "",
         saved: true
     }
-
-    _handleImageChange(e) {
-        e.preventDefault();
-
-        let reader = new FileReader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result
-            });
+    renderStep() {
+        const { data } = this.props;
+        var dataku = this.state.steps;
+        console.log('datsiSTep', dataku)
+        const toDos = _.map(dataku, (values, key) => {
+            return <div className="row step">
+                <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
+                    <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>{key + 1}</p>
+                </div>
+                <div className="judulstep" style={{ width: "90%" }}>
+                    {values.steps_title ?
+                        <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_title}</p>
+                        : "STEP " + (key + 1)}
+                </div>
+                <div className="ket-step" style={{ width: "100%" }}>
+                    {values.steps_description ?
+                        <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
+                        : null}
+                    {values.steps_image ?
+                        <img src={(gambar + values.steps_image)} alt="imgStep" style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
+                        : null}
+                </div>
+            </div>;
+        });
+        if (!_.isEmpty(toDos)) {
+            return toDos;
         }
-
-        reader.readAsDataURL(file)
-    }
-
-    handleChange = (e) => {
-        // console.log(this.props.data.person.data.data.user_id)
-        this.setState({
-            [e.target.name]: e.target.value,
-            save: false,
-            saved: false,
-        })
-    }
-
-    hanndleNext = () => {
-        if (this.state.number < this.state.steps.length - 1) {
-            const angka = this.state.number + 1
-            const data = this.state.steps[angka]
-            this.setState({
-                number: angka,
-                save: false,
-                ...data
-            })
-        }
-    }
-    hanndleBefore = () => {
-        if (this.state.number > 0) {
-            const angka = this.state.number - 1
-            const data = this.state.steps[angka]
-            this.setState({
-                number: angka,
-                save: false,
-                ...data
-            })
-        }
+        return "Loading ..."
     }
 
     fetchdata = () => {
-        axios.get("https://api.ict-servicedesk.xyz/steps/" + this.props.match.params.id, {
+        axios.get(url + "steps/" + this.props.match.params.id, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
             }
@@ -83,77 +66,27 @@ class DetailArticle extends Component {
             const steps = res.data.values;
             const data = res.data.values[0];
             this.setState({ steps, ...data });
+            console.log("dataSteps", steps)
         }).catch(error => {
             console.log("Error " + error);
+        });
+
+        axios.get(url + `knowledge_base/id/` + this.props.match.params.id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
         })
+            .then(res => {
+                const kb = res.data.values;
+                console.log("dataKb", kb)
+                this.setState({
+                    kb
+                })
+            })
     }
 
     componentDidMount = () => {
-        this.fetchdata()
-    }
-
-    handleSave = (e) => {
-        if (this.state.steps[this.state.number]) {
-            console.log(this.state.steps[this.state.number].steps_id)
-            const formData = new FormData();
-            e.preventDefault();
-            // console.log(this.state);
-            formData.append('steps_title', this.state.steps_title);
-            formData.append('myImage', this.state.file);
-            if (this.state.steps_description) {
-                formData.append('steps_description', this.state.steps_description);
-            }
-
-            const config = {
-                headers: {
-                    'content-type': 'multipart/form-data',
-                    key: '8dfcb234a322aeeb6b530f20c8e9988e'
-                }
-            };
-
-            // axios.post("https://api.ict-servicedesk.xyz/ticket", formData, config)
-            axios.post("https://api.ict-servicedesk.xyz/steps/update/" + this.state.steps[this.state.number].steps_id, formData, config)
-                .then((response) => {
-                    // alert("The file is successfully uploaded");
-                    this.fetchdata();
-                    this.setState({
-                        save: true,
-                        saved: true
-                    })
-                }).catch((error) => {
-                });
-        }
-    }
-
-    handleGoTo = (e) => {
-        const data = -1 + parseInt(e.target.value)
-        const dataSteps = this.state.steps[data]
-        if (e.target.value && e.target.value <= this.state.steps.length && e.target.value > 0) {
-            this.setState({
-                number: data,
-                ...dataSteps,
-                errorNumber: false
-            })
-        } else if (e.target.value > this.state.steps.length || e.target.value < 1) {
-            this.setState({
-                errorNumber: true
-            })
-        }
-    }
-
-    handleClose = (e) => {
-        e.preventDefault()
-        this.setState({
-            loading: false
-        })
-    }
-    handleOpen = () => {
-        this.setState({
-            loading: true
-        })
-    }
-    handleProhibit = () => {
-        alert("Please Save before you Go !")
+        this.fetchdata();
     }
 
     render() {
@@ -165,7 +98,7 @@ class DetailArticle extends Component {
         const judul = ("No Internet Connection").length > 25 ? ("No No Internet Connectionnnn Connection").slice(0, 20) + " ..." : " No Internet Connection"
         return (
             <div className="home" style={{ height: (this.state.loading) ? "100vh" : "auto", overflow: (this.state.loading) ? "hidden" : "auto" }}>
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
+                <div className="navbar-message">
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='/article'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
@@ -178,20 +111,22 @@ class DetailArticle extends Component {
 
 
                 <div className="bungkus-article" style={{ width: "90%" }}>
-                    <div style={{ width: "100%" }}>
+                    <div className="jarak" style={{ width: "100%", marginTop: "100px" }}>
                         <div className="row edit" style={{ width: "100%", textAlign: "left", marginTop: "25px" }}>
                             <div style={{ width: "85%", textAlign: "left" }} >
                                 <p style={{ fontSize: "18px", padding: "0px", margin: "0px", fontWeight: "bold", color: "#A4A6B3" }}>Issue</p>
-                                <p style={{ fontSize: "24px", padding: "0px", margin: "0px", fontWeight: "bold", color: "#000" }}>{judul}</p>
+                                <p style={{ fontSize: "24px", padding: "0px", margin: "0px", fontWeight: "bold", color: "#000", overflowX: "hidden", width: "300px" }}>{(this.state.kb) ? this.state.kb[0].issue_subject : "title"}</p>
                             </div>
                             <div className="edit-artikel" style={{ width: "15%", textAlign: "left" }} >
                                 <div className="edit" style={{ width: "40px", height: "40px", borderRadius: "10px", padding: "5px", margin: "5px auto" }}>
-                                    <span
-                                        className="material-icons"
-                                        onClick={this.handleClick}
-                                        style={{ position: "absolute", fontSize: "35px", margin: "5px 10px " }}>
-                                        create
-                                </span>
+                                    <Link to={'/knowledgebase/' + this.props.match.params.id}>
+                                        <span
+                                            className="material-icons"
+                                            onClick={this.handleClick}
+                                            style={{ position: "absolute", fontSize: "35px", margin: "5px 10px " }}>
+                                            create
+                                        </span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -209,36 +144,11 @@ class DetailArticle extends Component {
                             </div>
                         </div>
                         <p style={{ fontSize: "24px", padding: "0px", margin: "17px", fontWeight: "bold", color: "#000", textAlign: "left", }}>Problem Solving</p>
-                        <p style={{ fontSize: "14px", padding: "0px", margin: "17px", fontWeight: "400", color: "#000", textAlign: "left", }}>The following steps assume there is NO Internet access. Specific websites and ISPs can have outages that have nothing to do with your computer or its settings.</p>
+                        <p style={{ fontSize: "14px", padding: "0px", margin: "17px", fontWeight: "400", color: "#000", textAlign: "left", }}>{(this.state.kb) ? this.state.kb[0].kb_description : "description for problem solve"}</p>
                         <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                             <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontWeight: "bold", }}>Troubleshooting Steps</div>
-                            <div className="row step">
-                                <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
-                                    <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>1</p>
-                                </div>
-                                <div className="ket-step" style={{ width: "90%" }}>
-                                    <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>Check the network icon (or wireless connection settings) to see if you have Internet access. Ensure that your network adapter is not turned off.</p>
-                                    <img src={imgStep} alt="imgStep" style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
-                                </div>
-                            </div>
-                            <div className="row step">
-                                <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
-                                    <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>2</p>
-                                </div>
-                                <div className="ket-step" style={{ width: "90%" }}>
-                                    <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>Check the network icon (or wireless connection settings) to see if you have Internet access. Ensure that your network adapter is not turned off.</p>
-                                    <img src={imgStep} alt="imgStep" style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
-                                </div>
-                            </div>
-                            <div className="row step">
-                                <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
-                                    <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>3</p>
-                                </div>
-                                <div className="ket-step" style={{ width: "90%" }}>
-                                    <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>Check the network icon (or wireless connection settings) to see if you have Internet access. Ensure that your network adapter is not turned off.</p>
-                                    <img src={imgStep} alt="imgStep" style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
-                                </div>
-                            </div>
+                            {this.renderStep()}
+
                         </div>
                         <div className="row last-edit" style={{ padding: "0px", marginTop: "-20px", marginBottom: "-25px" }}>
                             <div className="editor" style={{ width: "70%" }}>
