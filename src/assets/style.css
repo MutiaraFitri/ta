@@ -429,10 +429,6 @@ a {
     font-size: 16px;
     padding-top: 30px;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 5c1901da31975404d7a4bfda2afbedd0068cfb9a
 .navbar-message {
     background-color: #141AA2;
     font-size: 22px;
@@ -443,8 +439,6 @@ a {
     position: fixed;
     z-index:3;
 }
-<<<<<<< HEAD
-=======
 .navbar-allTicket{
     background-color: #141AA2;
     font-size: 22px;
@@ -454,15 +448,11 @@ a {
     padding: 16px 0px;
     position: fixed;
 }
->>>>>>> 5c1901da31975404d7a4bfda2afbedd0068cfb9a
 @media (min-width: 500px) {
     .navbar-message {
         width:414px;
     }
-<<<<<<< HEAD
-=======
     .navbar-allTicket{
         width:414px;
     }
->>>>>>> 5c1901da31975404d7a4bfda2afbedd0068cfb9a
 }
