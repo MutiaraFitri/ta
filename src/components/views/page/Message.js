@@ -223,7 +223,7 @@ class Message extends Component {
         //console.log(this.props.match.params.id)
         return (
             <div className="home" style={{ paddingBottom: "10vh", minHeight: "90vh", backgroundColor: "#F4F4F6", }}>
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px", position: "fixed", zIndex: "3" }}>
+                <div className="navbar-message">
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='/all-ticket'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
@@ -231,7 +231,7 @@ class Message extends Component {
                             </div>
                         </Link>
                     </div>
-                    Detail Ticket
+                    Message
                 </div>
                 <div style={{ marginTop: "50px", width: "414px", position: "fixed", backgroundColor: "#fff", zIndex: "2" }}>
                     {this.renderToDos()}

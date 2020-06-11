@@ -5,6 +5,7 @@ import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import io from 'socket.io-client'
 import tickets from '../../../assets/img/tickets.png';
 import clipboard from '../../../assets/img/clipboard.png';
 import insurance from '../../../assets/img/insurance.png';
@@ -14,9 +15,10 @@ import { fetchProductPending, fetchProductSuccess, fectProductError } from './..
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
 import { dev, prod } from '../../../redux/url/server';
-const jwt = require('jsonwebtoken');
 
+const jwt = require('jsonwebtoken');
 const url = prod;
+
 export class Home extends Component {
     _isMounted = false;
     constructor(props) {
