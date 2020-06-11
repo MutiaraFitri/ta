@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Loading from './loading';
 import 'react-toastify/dist/ReactToastify.css';
 
-const socketUrl = "https://api.ict-servicedesk.xyz:3001/"
+const socketUrl = "https://api.ict-servicedesk.xyz/"
 const socket = io(socketUrl)
 const publicVapidKey =
   "BKh1biqQNSmXP62RjznwyzSGCm_FXcvtVMm8XPGophGFRxD2oycxY1LgTDRAv0gA2D7_00epR9SOwF9NGToCZcM";
