@@ -6,24 +6,21 @@ class TicketDetailDesc extends Component {
         return (
             <div>
                 <div style={{ width: "100%" }}>
-                    <div className="title" style={{ textAlign: "left", margin: "25px" }}>
-                        <p style={{ fontSize: "12px", padding: "0px", margin: "0px",color:"black" }}>Title</p>
-                        <p style={{ fontSize: "22px", padding: "0px", margin: "0px",color:"black",fontWeight:"700" }}>{this.props.title}</p>
+                    <div className="title-ticketCategory" >
+                        <p className="p-titile1" >Title</p>
+                        <p className="p-titile2" >{this.props.title}</p>
                     </div>
                 </div>
                 <div style={{ width: "100%", height: "70px", display: "flex" }}>
                     <div className="pengirim" style={{ width: "20%", marginLeft: "25px" }}>
-                        <div className="foto-pengim" style={{
-                            width: "60px", backgroundColor: "#F1AEAE",
-                            height: "60px", borderRadius: "50%", border: "1px solid", margin: "0px auto", overflow: "hidden"
-                        }}>
+                        <div className="foto-pengim" >
                             <img src={mann} alt="mann" style={{ width: "100%" }} />
                         </div>
                     </div>
-                    <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
-                        <div className="nama" style={{ fontSize: "24px", color: "black", fontWeight: "bold", textAlign: "left" }}>{this.props.sender1} {this.props.sender2}</div>
-                        <div className="email" style={{ fontSize: "20px", color: "black", textAlign: "left" }}> {this.props.email} </div>
-                        <div class="deskripsi-isi" style={{ width: "200px", float: "right",margin:"20px" }}>
+                    <div className="nama-pengirim">
+                        <div className="nama" >{this.props.sender1} {this.props.sender2}</div>
+                        <div className="email" > {this.props.email} </div>
+                        <div class="deskripsi-isi">
                             <select style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }}>
                                 <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Waiting for support
@@ -54,7 +51,8 @@ class TicketDetailDesc extends Component {
                                 : null
                             }
                         </div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100", marginTop: "10px" }}>Desktop/Laptop</div>
+                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>category : {this.props.category}</div>
+
                     </div>
                     {/* <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
                         <div style={{ paddingLeft: "25px" }}>Location  : Divisi MIS Lantai 3</div>

@@ -166,7 +166,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
                                     <img src={tickets} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "60%" }}>
+                                <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>All Ticket</div>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahAll ? this.state.jumlahAll : "0"}</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>queue</div>
@@ -190,7 +190,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
                                     <img src={clipboard} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "60%" }}>
+                                <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTask ? this.state.jumlahTask : "0"}</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>assign</div>
@@ -219,7 +219,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
                                     <img src={insurance} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Report</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>summary</div>
                                 </div>
@@ -239,7 +239,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
                                     <img src={problem} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlage Base</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
                                 </div>

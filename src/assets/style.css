@@ -9,7 +9,7 @@ input, select, textarea{
     color: #000;
     border : 1px solid #C6C6C6;
     border-radius: 5px;
-    padding: 15px;
+    padding: 158;
 }
 
 .box-priority {
@@ -406,7 +406,7 @@ a {
     background-color: #0050A1;
     border: none;
 }
-.row-edit{
+.row-editProfile{
     margin:10px;
 }
 .editInput{
@@ -419,8 +419,9 @@ a {
     border-bottom: 1px solid rgb(131, 126, 126) ;
     border-radius: 1px;
     margin-bottom:5px;
+    padding:7px;
 }
-.sub-edit{
+.sub-editProfile{
     color:rgba(98, 98, 98, 0.924);
     float: left;
     font-size: 12px;
@@ -449,6 +450,316 @@ a {
     padding: 16px 0px;
     position: fixed;
 }
+/* Page Antrian (ALL Ticket) */
+.icon-category{
+    width: 20%;
+    margin-top: 15px;
+    display: flex;
+}
+.icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.desc-antrian{
+    width: 45%;
+    text-align: left;
+    padding-left: 3px;
+}
+.desc-antrian .status{
+    width: 125px;
+    height: 15px;
+    margin: 0px auto;
+    border-radius: 50px; 
+    text-align: center;
+    margin-top: 10px; 
+    float: left;
+} 
+.desc-antrian .category-status{
+    font-size: 8px; 
+    font-weight: 700;
+    color: black;
+    text-transform: uppercase;
+    padding-top: 2px;
+}
+.dasc-status{
+    width: 20%;
+    text-align:left;
+    padding: 30px 30px;
+}
+.assign{
+    font-size: 12px;
+    font-weight: bold;
+}
+.category-antrian{
+    width: 15%;
+    text-align: left;
+}
+.category-antrian .tanggal{
+    font-size: 10px;
+    color: black; 
+    letter-spacing: 0.2; 
+    font-weight: bold;
+    text-align:center;
+}
+.category-antrian .icon-priority{
+    font-size:10px;
+    color: black; 
+    text-align: center;
+    margin-top: 10px
+}
+.name-category{
+    font-size: 10px; 
+    color: #000; 
+    text-align: center; 
+    padding: 5px; 
+    font-weight: bold; 
+    margin-top: 8px;  
+}
+.imgPriority{
+    width: 22px; 
+    height: 22px; 
+    margin: 0px auto;
+}
+.imgCategory{
+    margin-top: 25%;
+    width: 50%;
+}
+/* PAGE ALL TICKET */
+.text-Allticket{
+    margin-left: 5px; 
+    padding: 10px;
+    width: 100% }
+.imgTicket{
+    margin-top: -40px; 
+    width: 100%;
+    margin-left: 50%;
+}
+.imggTicket{
+    top: 87px; 
+    right: 65px;
+    position:absolute;
+}
+.buttonfilter-ticket{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: right;
+    margin-right: 5px;
+    padding-left: 12px;
+    padding-right: 12px; 
+    background-color: #fff; 
+    color: #fff; 
+    border-radius: 10%; 
+    border: 1px solid #c6c6c6; 
+}
+
+.title-Queue{
+    text-align: left; 
+    margin-left: 5px;
+    letter-spacing: 5px;
+}
+/* PAGE ARTICLE */
+.ticket-article{
+    width: 85%; 
+    margin-top: 10px;
+    padding-bottom: 10px; 
+    display: flex; 
+    margin: 0px auto;
+}
+.judul-topic{
+    width: 30%; 
+    text-align: left;
+    font-size: 15px;
+    color: #104FAD;
+}
+.judul-topic p{
+    font-size: 15px;
+    color: #104FAD;
+}
+.jdul-kategori{
+    width: 30%;
+}
+.jdul-kategori p{
+    font-size: 15px;
+    color: black; 
+    float: center;
+}
+.jdul-authors{
+    width: 50%;
+}
+.jdul-authors p{
+font-size:15px; 
+color: black;
+}
+/* DETAIL ARTICLE */
+.menu-detArticle{
+    position: absolute; 
+    top: 7px; 
+    margin-left: 15px;
+}
+.bungkus-article{
+    width: 90%;
+}
+.bungkus-article .jarak{
+    width: 100%;
+    margin-top: 100px;
+}
+.edit{
+width: 100%; 
+text-align: left; 
+margin-top: 25px;
+}
+.menu-article{
+    position: absolute;
+    top: 7px;
+}
+.edit-article{
+    width: 85%; 
+    text-align: left;
+}
+.edit-article-judul{
+    font-size: 18px; 
+    padding: 0px; 
+    margin: 0px; 
+    font-weight: bold; 
+    color: #A4A6B3;
+}
+.edit-article-judul2{
+    font-size: 24px;
+    padding: 0px;
+    margin:0px; 
+    font-weight: bold; 
+    color: #000; 
+    overflow-x: hidden;
+    width: 300px;
+}
+.edit-article2{
+    width: 15%;
+    text-align: left;
+}
+.edit-articleIcon{
+    width: 40px; 
+    height: 40px; 
+    border-radius: 10px; 
+    padding: 5px;
+    margin: 5px auto;
+}
+.kotak-detArticle{
+    background-color: #F4F4F6; 
+    width: 100%; 
+    padding-top: 5px; 
+    padding-bottom: 30px;
+}
+.p-kotak{
+    margin: 17px;
+    font-size:12px;
+    color: #4F4F4F;
+    padding:0px;
+    margin-top: 2px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+.category-detArticle{
+    margin-top:-15px;
+    margin-bottom: -20px;
+}
+.date-detArticleP{
+    margin: 17px; 
+    font-size: 12px; 
+    color: #4F4F4F; 
+    text-align: left;
+}
+.category-detArticleP{
+    margin: 17px; 
+    font-size: 12px; 
+    color: #4F4F4F; 
+    text-align: right;
+}
+.detArticle-P1{
+    font-size: 24px; 
+    padding: 0px;
+    margin: 17px; 
+    color: #000; 
+    text-align: left;
+}
+.detArticle-P2{
+    font-size: 14px; 
+    padding: 0px;
+    margin: 17px; 
+    font-weight: 400; 
+    color: #000;
+    text-align: left;
+}
+.description-detArticle{
+    background-color: #fff; 
+    width: 80%; 
+    padding: 20px; 
+    margin: 20px auto;
+}
+.title-kotakdetArticle{
+    text-align: left;
+    color: #000; 
+    font-weight: bold;
+}
+.editor-lastEdit1{
+    font-size: 14px; 
+    font-weight: 300; 
+    padding: 0px;
+    margin: 17px; 
+    color: #4F4F4F;
+}
+/* PAGE EDIT PROFILE */
+.editProfile{
+    background-color: #06d755;
+} 
+/* ticket_category */
+.title-ticketCategory{
+    text-align: left; 
+    margin: 25px;
+}
+.p-titile1{
+    font-size: 12px; 
+    padding: 0px; 
+    margin: 0px; 
+    color: black;
+} 
+.p-titile2{
+    font-size: 22px; 
+    padding: 0px; 
+    margin: 0px; 
+    color: black; 
+    font-weight: 700 ;
+} 
+.foto-pengim{
+    width: 60px;
+    background-color: #F1AEAE;
+    height: 60px; 
+    border-radius: 50%; 
+    border: 1px solid; 
+    margin: 0px auto; 
+    overflow: hidden;
+}
+.nama-pengirim{
+    width: 80%; 
+    margin-left: 5px; 
+}
+.nama-pengirim .nama{
+    font-size: 24px; 
+    color: black; 
+    font-weight: bold; 
+    text-align: left;
+}
+.nama-pengirim .email{
+    font-size: 20px; 
+    color: black; 
+    text-align: left; 
+    }
+.nama-pengirim .deskripsi-isi{
+    width: 200px; 
+    float: right; 
+    margin: 20px ;
+}
+
 @media (min-width: 500px) {
     .navbar-message {
         width:414px;

@@ -14,34 +14,39 @@ const url = dev;
 export class Home extends Component {
 
     state = {
-        tab: "weekly",
+        tab: "summary",
         chartData: {
-            labels: ['week1', 'week2', 'week3', 'week4'],
+            labels: ['s', 's', 'r', 'k', 'j', 's', 'm'],
             datasets: [
+                {
+                    label: 'assigment',
+                    data: [
+                        1,
+                        2,
+                        3,
+                        3,
+                        5,
+                        6,
+                        4,],
+                    backgroundColor: [
+                        "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
+                    ]
+                },
                 {
                     label: 'finish',
                     data: [
-                        11,
                         1,
+                        4,
                         6,
-                        20
-                    ],
-                    backgroundColor: [
-                        "#ff4", "#ff4", "#ff4", "#ff4"
-                    ],
-                }, {
-                    label: 'assign',
-                    data: [
-                        2,
-                        7,
                         5,
-                        5]
-                    ,
+                        1,
+                        9,
+                        4,],
                     backgroundColor: [
-                        "#789999", "#789999", "#789999", "#789999"
-
+                        "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
                     ]
-                }]
+                }
+            ]
         }
     }
     componentDidMount() {
@@ -91,7 +96,7 @@ export class Home extends Component {
         this.setState({
             tab: e.target.id
         })
-        if (e.target.id === "daily") {
+        if (e.target.id === "summary") {
             this.setState({
                 chartData: {
                     labels: ['s', 's', 'r', 'k', 'j', 's', 'm'],
@@ -127,7 +132,7 @@ export class Home extends Component {
                     ]
                 }
             })
-        } else if (e.target.id === "weekly") {
+        } else if (e.target.id === "feedbacks") {
             this.setState({
                 chartData: {
                     labels: ['week1', 'week2', 'week3', 'week4'],
@@ -234,9 +239,9 @@ export class Home extends Component {
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px", }}>
                             <div className="desc" style={{ width: "100%", display: "flex" }}>
-                                <div className="desc-main" id="daily" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "daily" ? "10px" : "0px"), backgroundColor: (this.state.tab === "daily" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "daily" ? "#fff" : "#837F7F") }}>DAILY</div>
-                                <div className="desc-main" id="weekly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", borderRadius: (this.state.tab === "weekly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "weekly" ? "#1477DB" : "#F6F8FF"), fontSize: "15px", fontWeight: "500", color: (this.state.tab === "weekly" ? "#fff" : "#837F7F") }}>WEEKLY</div>
-                                <div className="desc-main" id="monthly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "monthly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "monthly" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "monthly" ? "#fff" : "#837F7F") }}>MONTHLY</div>
+                                <div className="desc-main" id="summary" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "50%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "summary" ? "10px" : "0px"), backgroundColor: (this.state.tab === "summary" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "summary" ? "#fff" : "#837F7F") }}>SUMMARY</div>
+                                <div className="desc-main" id="feedbacks" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "50%", borderRadius: (this.state.tab === "feedbacks" ? "10px" : "0px"), backgroundColor: (this.state.tab === "feedbacks" ? "#1477DB" : "#F6F8FF"), fontSize: "15px", fontWeight: "500", color: (this.state.tab === "feedbacks" ? "#fff" : "#837F7F") }}>FEEDBACK</div>
+                                {/* <div className="desc-main" id="monthly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "monthly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "monthly" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "monthly" ? "#fff" : "#837F7F") }}>MONTHLY</div> */}
                             </div>
                         </div>
                     </div>
