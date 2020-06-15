@@ -112,7 +112,7 @@ export class EditProfile extends Component {
                     <div className="ganti-foto"> Change Profile Photo   </div>
                 </div> */}
 
-                <div className="row" style={{ width: "100%", backgroundColor: "#06d755", display: this.state.save ? "flex" : "none" }}>
+                <div className="row editProfile" style={{ width: "100%", display: this.state.save ? "flex" : "none" }}>
                     <div style={{ padding: "10px", color: "white" }}>
                         Save successfully
                         </div>
@@ -125,8 +125,8 @@ export class EditProfile extends Component {
                 }}>
                     <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit} >
                         <div className="container">
-                            <div className="row-edit" style={{ alignItems: "center" }}>
-                                <div className="sub-edit"> job</div>
+                            <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                <div className="sub-editProfile"> job</div>
                                 <div>
                                     <input
                                         className="editInput"
@@ -138,8 +138,8 @@ export class EditProfile extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="row-edit" style={{ alignItems: "center" }}>
-                                <div className="sub-edit"> department</div>
+                            <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                <div className="sub-editProfile"> department</div>
                                 <div>
                                     <input
                                         className="editInput"
@@ -151,8 +151,8 @@ export class EditProfile extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="row-edit" style={{ alignItems: "center" }}>
-                                <div className="sub-edit"> address</div>
+                            <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                <div className="sub-editProfile"> address</div>
                                 <div>
                                     <input
                                         className="editInput"
@@ -164,8 +164,8 @@ export class EditProfile extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="row-edit" style={{ alignItems: "center" }}>
-                                <div className="sub-edit"> email</div>
+                            <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                <div className="sub-editProfile"> email</div>
                                 <div>
                                     <input
                                         className="editInput"
@@ -177,8 +177,8 @@ export class EditProfile extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="row-edit" style={{ alignItems: "center" }}>
-                                <div className="sub-edit"> contact</div>
+                            <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                <div className="sub-editProfile"> contact</div>
                                 <div>
                                     <input
                                         className="editInput"

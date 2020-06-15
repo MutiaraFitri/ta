@@ -19,15 +19,15 @@ class Article extends Component {
         const { data } = this.props;
         var dataku = data.kb.data;
         const toDos = _.map(dataku, (values, key) => {
-            return <Link to={'/article/detail/' + values.kb_id} ><div key={values.kb_id} className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", display: "flex", margin: "0px auto" }}>
-                <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                    <p style={{ fontSize: "15px", color: "#104FAD", }}>{values.issue_subject}</p>
+            return <Link to={'/article/detail/' + values.kb_id} ><div key={values.kb_id} className="ticket-article">
+                <div className="judul-topic" >
+                    <p>{values.issue_subject}</p>
                 </div>
-                <div className="judul-kategori" style={{ width: "30%" }}>
-                    <p style={{ fontSize: "15px", color: "black", float: "center" }}>{values.issue_category}</p>
+                <div className="jdul-kategori" >
+                    <p>{values.issue_category}</p>
                 </div>
-                <div className="jdul-authors" style={{ width: "50%" }}>
-                    <p style={{ fontSize: "15px", color: "black", }}>{values.kb_subject}</p>
+                <div className="jdul-authors"  >
+                    <p>{values.kb_subject}</p>
                 </div>
             </div></Link>;
         });

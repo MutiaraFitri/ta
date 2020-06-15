@@ -134,7 +134,6 @@ class AllTicket extends Component {
                 <div style={{
                     width: "100%",
                     position: "absolute",
-
                     display: (this.state.overlay) ? "inline" : "none"
                 }}>
                     <div style={{
@@ -247,13 +246,13 @@ class AllTicket extends Component {
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
-                                <input type="text" name="q" id="q" placeholder="Search . . ." style={{ marginLeft: "5px", padding: "10px", width: "100%" }} onChange={this.handleChange} />
-                                <div style={{ marginTop: "-40px", width: "100%", marginLeft: "50%" }}>
-                                    <img src={search} alt="search" style={{ top: "87px", right: "65px", position: "absolute" }} />
+                                <input type="text-Allticket" name="q" id="q" placeholder="Search . . ." onChange={this.handleChange} />
+                                <div className="imgTicket" >
+                                    <img className="imggTicket" src={search} alt="search" />
                                 </div>
                             </div>
                             <div style={{ width: "20%" }} onClick={this.showFilter}>
-                                <button style={{ paddingTop: "10px", paddingBottom: "10px", float: "right", marginRight: "5px", paddingLeft: "12px", paddingRight: "12px", backgroundColor: "#fff", color: "#fff", borderRadius: "10%", border: "1px solid #c6c6c6" }}>
+                                <button className="buttonfilter-ticket">
                                     <img src={filter} alt="filter" />
                                 </button>
                             </div>
@@ -261,7 +260,7 @@ class AllTicket extends Component {
                     </div>
                 </div>
                 <div style={{ width: "90%" }}>
-                    <div className="title" style={{ textAlign: "left", marginLeft: "5px", letterSpacing: "5px" }}>
+                    <div className="title-Queue">
                         QUEUE
                     </div>
                     {this.renderToDos()}
