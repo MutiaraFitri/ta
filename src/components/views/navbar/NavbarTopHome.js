@@ -4,7 +4,7 @@ import notification from '../../../assets/img/notification.png';
 import users from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
-import { dev, prod } from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 import { Link } from 'react-router-dom';
 
 export class NavbarTop extends Component {
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispacthToProps = (dispatch) => {
     return {
-        userku: () => dispatch(users()),
+        userku: () => dispatch(users())
     }
 }
 export default connect(

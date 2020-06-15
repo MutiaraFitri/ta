@@ -1,7 +1,7 @@
 
 import { fetchTiket } from "../action/action";
 import axios from 'axios';
-import { dev,prod } from '../url/server';
+import { prod } from '../url/server';
 
 const url = prod;
 

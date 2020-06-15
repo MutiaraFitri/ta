@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import back from './../../../assets/img/back.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import starfull from './../../../assets/img/star.png';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Ratingdesc from '../../Ratingdesc.js';
 import { tickets } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
@@ -87,17 +86,6 @@ class Rating extends Component {
         return (
 
             <div className="home">
-                <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
-                    <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='/report'>
-                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
-                                <img src={back} alt="back" style={{ width: "20px" }} />
-                            </div>
-                        </Link>
-                    </div>
-                            Feed Back
-                    </div>
-
                 <div className="rating" style={{ width: "80%" }}>
                     <div className="overal"
                         style={{

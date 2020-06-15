@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import write from '../../../assets/img/write.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import back from '../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
