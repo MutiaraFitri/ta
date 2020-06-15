@@ -759,7 +759,13 @@ margin-top: 25px;
     float: right; 
     margin: 20px ;
 }
-
+/* PAGE HOME */
+.rowHome{
+    
+ width: 340px; 
+ margin: 20px auto; 
+ margin-top: -60px;
+}
 @media (min-width: 500px) {
     .navbar-message {
         width:414px;

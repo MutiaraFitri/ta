@@ -111,7 +111,7 @@ export class Home extends Component {
             <div className="home">
                 <NavbarTop />
                 <div className="container" style={{ width: "100%" }}>
-                    <div className="row rowHome" style={{ width: "340px", margin: "20px auto", marginTop: "-60px" }}>
+                    <div className="row rowHome">
                         <div className="lingkaran">
                             <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.date.toLocaleTimeString([], { timeStyle: 'short' })}</h6>
                             <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Good {waktu} !</h6>
