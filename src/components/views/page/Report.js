@@ -4,10 +4,11 @@ import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
-import { dev, prod } from '../../../redux/url/server';
+import { dev} from '../../../redux/url/server';
 import Chartjs2 from '../Chartjs2';
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink} from "react-csv";
 import axios from 'axios';
+import Rating from './Rating';
 const jwt = require('jsonwebtoken');
 
 const url = dev;
@@ -49,159 +50,7 @@ export class Home extends Component {
             ]
         }
     }
-    componentDidMount() {
-        axios.get(`https://api.ict-servicedesk.xyz/rating`, {
-            headers: {
-                key: "8dfcb234a322aeeb6b530f20c8e9988e"
-            }
-        })
-            .then(res => {
-                const rating = res.data.values;
-                console.log("data", rating)
-                this.setState({
-                    rating
-                })
-            })
-        jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
-            if (err) {
-                console.log("Error", err)
-                localStorage.removeItem("jwt");
-                // dispatch(loginFailed("Your session has expired"));
-            }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    axios.get(url + `ticket/done/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTaskDone: res.data.values.length })
-                        })
-                    axios.get(url + `ticket/not-done/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTaskNotDone: res.data.values.length })
-                        })
-                }
-            )
-        });
-    }
-
-    handleClickTab = (e) => {
-        this.setState({
-            tab: e.target.id
-        })
-        if (e.target.id === "summary") {
-            this.setState({
-                chartData: {
-                    labels: ['s', 's', 'r', 'k', 'j', 's', 'm'],
-                    datasets: [
-                        {
-                            label: 'assigment',
-                            data: [
-                                1,
-                                2,
-                                3,
-                                3,
-                                5,
-                                6,
-                                4,],
-                            backgroundColor: [
-                                "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
-                            ]
-                        },
-                        {
-                            label: 'finish',
-                            data: [
-                                1,
-                                4,
-                                6,
-                                5,
-                                1,
-                                9,
-                                4,],
-                            backgroundColor: [
-                                "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
-                            ]
-                        }
-                    ]
-                }
-            })
-        } else if (e.target.id === "feedbacks") {
-            this.setState({
-                chartData: {
-                    labels: ['week1', 'week2', 'week3', 'week4'],
-                    datasets: [
-                        {
-                            label: 'finish',
-                            data: [
-                                11,
-                                1,
-                                6,
-                                20
-                            ],
-                            backgroundColor: [
-                                "#ff4", "#ff4", "#ff4", "#ff4",
-                            ]
-                        }, {
-                            label: 'assign',
-                            data: [
-                                2,
-                                7,
-                                5,
-                                5]
-                            ,
-                            backgroundColor: [
-                                "#789999", "#789999", "#789999", "#789999",
-
-                            ]
-                        }]
-                }
-            })
-        } else if (e.target.id === "monthly") {
-            this.setState({
-                chartData: {
-                    labels: ['jan', 'feb', 'mart', 'apr', 'mai', 'jun'],
-                    datasets: [
-                        {
-                            label: 'assigment',
-                            data: [
-                                1,
-                                4,
-                                6,
-                                3,
-                                9,
-                                3,
-                            ],
-                            backgroundColor: [
-                                "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
-                            ]
-                        },
-                        {
-                            label: 'finish',
-                            data: [
-                                2,
-                                7,
-                                5,
-                                5,
-                                1,
-                                9,
-                            ],
-                            backgroundColor: [
-                                "#789999", "#789999", "#789999", "#789999", "#789999", "#789999",
-                            ]
-                        }
-                    ]
-                }
-            })
-        }
-    }
-    render() {
+    renderSummary = () => {
         const csvData = [
             ["firstname", "lastname", "email"],
             ["Ahmed", "Tomi", "ah@smthing.co.com"],
@@ -216,36 +65,7 @@ export class Home extends Component {
             (this.state.rating[4].jumlah * 5) : 0;
         const jumlahRating = this.state.rating ? this.state.rating.length : 0;
         return (
-            <div className="home" style={{ paddingBottom: "70px" }} >
-                <div className="navbar-message" >
-                    <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='.'>
-                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
-                                <img src={back} alt="back" style={{ width: "20px" }} />
-                            </div>
-                        </Link>
-                    </div>
-                    Report
-                </div>
-                <div className="mainmenu" style={{ display: "flex", width: "100%", textAlign: "center" }}>
-                    <div className="menu"
-                        style={{
-                            width: "90%",
-                            margin: "20px auto 0px auto",
-                            height: "38px",
-                            backgroundColor: "#F7F8FF",
-                            borderRadius: "10px",
-                            marginTop: "100px",
-                        }}>
-                        <div className="row" style={{ padding: "10px", margin: "0px", }}>
-                            <div className="desc" style={{ width: "100%", display: "flex" }}>
-                                <div className="desc-main" id="summary" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "50%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "summary" ? "10px" : "0px"), backgroundColor: (this.state.tab === "summary" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "summary" ? "#fff" : "#837F7F") }}>SUMMARY</div>
-                                <div className="desc-main" id="feedbacks" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "50%", borderRadius: (this.state.tab === "feedbacks" ? "10px" : "0px"), backgroundColor: (this.state.tab === "feedbacks" ? "#1477DB" : "#F6F8FF"), fontSize: "15px", fontWeight: "500", color: (this.state.tab === "feedbacks" ? "#fff" : "#837F7F") }}>FEEDBACK</div>
-                                {/* <div className="desc-main" id="monthly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "monthly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "monthly" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "monthly" ? "#fff" : "#837F7F") }}>MONTHLY</div> */}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div className="home" style={{ paddingBottom: "70px", width: "100%" }} >
                 <div className="curva" style={{ display: "flex", width: "100%" }}>
                     <div className="curva"
                         style={{
@@ -363,6 +183,98 @@ export class Home extends Component {
                         </CSVLink>
                     </div>
                 </div>
+            </div>
+        )
+    }
+
+    renderFeedback = () =>{
+        return (<Rating/>)
+    }
+    componentDidMount() {
+        axios.get(`https://api.ict-servicedesk.xyz/rating`, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const rating = res.data.values;
+                console.log("data", rating)
+                this.setState({
+                    rating
+                })
+            })
+        jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
+            if (err) {
+                console.log("Error", err)
+                localStorage.removeItem("jwt");
+                // dispatch(loginFailed("Your session has expired"));
+            }
+            const user = decoded.data;
+            this.setState({ ...user },
+                () => {
+                    axios.get(url + `ticket/done/` + this.state.user_id, {
+                        headers: {
+                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                        }
+                    })
+                        .then(res => {
+                            this.setState({ jumlahTaskDone: res.data.values.length })
+                        })
+                    axios.get(url + `ticket/not-done/` + this.state.user_id, {
+                        headers: {
+                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                        }
+                    })
+                        .then(res => {
+                            this.setState({ jumlahTaskNotDone: res.data.values.length })
+                        })
+                }
+            )
+        });
+    }
+
+    handleClickTab = (e) => {
+        this.setState({
+            tab: e.target.id
+        });
+    }
+    render() {
+        return (
+            <div className="home" style={{ paddingBottom: "70px" }} >
+                <div className="navbar-message" >
+                    <div className="menu" style={{ position: "absolute", top: "7px" }}>
+                        <Link to='.'>
+                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                                <img src={back} alt="back" style={{ width: "20px" }} />
+                            </div>
+                        </Link>
+                    </div>
+                    Report
+                </div>
+                <div className="mainmenu" style={{ display: "flex", width: "100%", textAlign: "center" }}>
+                    <div className="menu"
+                        style={{
+                            width: "90%",
+                            margin: "20px auto 0px auto",
+                            height: "38px",
+                            backgroundColor: "#F7F8FF",
+                            borderRadius: "10px",
+                            marginTop: "100px",
+                        }}>
+                        <div className="row" style={{ padding: "10px", margin: "0px", }}>
+                            <div className="desc" style={{ width: "100%", display: "flex" }}>
+                                <div className="desc-main" id="summary" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "50%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "summary" ? "10px" : "0px"), backgroundColor: (this.state.tab === "summary" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "summary" ? "#fff" : "#837F7F") }}>SUMMARY</div>
+                                <div className="desc-main" id="feedbacks" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "50%", borderRadius: (this.state.tab === "feedbacks" ? "10px" : "0px"), backgroundColor: (this.state.tab === "feedbacks" ? "#1477DB" : "#F6F8FF"), fontSize: "15px", fontWeight: "500", color: (this.state.tab === "feedbacks" ? "#fff" : "#837F7F") }}>FEEDBACK</div>
+                                {/* <div className="desc-main" id="monthly" onClick={this.handleClickTab} style={{ cursor: "pointer", width: "33.333%", fontSize: "15px", fontWeight: "500", borderRadius: (this.state.tab === "monthly" ? "10px" : "0px"), backgroundColor: (this.state.tab === "monthly" ? "#1477DB" : "#F6F8FF"), color: (this.state.tab === "monthly" ? "#fff" : "#837F7F") }}>MONTHLY</div> */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {
+                    (this.state.tab==="summary")?
+                        this.renderSummary() :
+                            this.renderFeedback()
+                }
                 <NavbarBottom active="Home" />
             </div>
         )

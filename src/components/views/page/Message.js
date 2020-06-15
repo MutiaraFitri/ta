@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
-import priority from './../../../assets/img/priority.png';
-import garbage from './../../../assets/img/garbage.png';
-import tambah from './../../../assets/img/tambah.png';
 import baloon from './../../../assets/img/side-chat.png';
 import baloon2 from './../../../assets/img/side-chat-2.png';
-import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import mann from './../../../assets/img/mann.png';
 import moment from 'moment'
 import axios from 'axios';
-import write from '../../../assets/img/write.png';
 import { ticketsById } from '../../../redux/api/ticket';
 import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
-import { dev, prod } from '../../../redux/url/server'
+import { prod } from '../../../redux/url/server'
 import jwt from "jsonwebtoken";
-import TicketDetailDesc from '../../TicketDetailDesc';
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
 
@@ -112,7 +106,7 @@ class Message extends Component {
             if (values.message_employee_id) {
                 return (
                     <div style={{ width: "100%", display: "flex" }}>
-                        <img src={baloon} width="20" height="30" style={{ margin: "10px 0px" }} />
+                        <img src={baloon} width="20" height="30" style={{ margin: "10px 0px" }} alt="baloon" />
                         <div className="description" style={{ backgroundColor: "#fff", width: "60%", padding: "20px", margin: "10px 0px" }}>
                             {/* <div className="title-kotak" style={{ textAlign: "left", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
                             <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
@@ -127,7 +121,7 @@ class Message extends Component {
                             {/* <div className="title-kotak" style={{ textAlign: "right", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
                             <div className="title-kotak" style={{ textAlign: "right", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
                         </div>
-                        <img src={baloon2} width="20" height="30" style={{ margin: "10px 0px", transform: "scale(-1, 1)" }} />
+                        <img src={baloon2} width="20" height="30" style={{ margin: "10px 0px", transform: "scale(-1, 1)" }} alt="baloon" />
                     </div>
                 );
             }
