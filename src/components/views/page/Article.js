@@ -76,14 +76,14 @@ class Article extends Component {
                     <div style={{ width: "82%", height: "10px" }}>
                     </div>
                     <Link to="/new-article">
-                        <div style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", padding: "15px 16px", backgroundColor: "#0050A1", borderRadius: "50%" }}>
-                            <span class="material-icons" style={{ verticalAlign: "bottom", color: "#fff" }}>
+                        <div class="chatIcon">
+                            <span class="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>
                                 add
                             </span>
                         </div>
                     </Link>
                 </div>
-            <NavbarBottom active="Home" />
+                <NavbarBottom active="Home" />
             </div >
         );
     }
