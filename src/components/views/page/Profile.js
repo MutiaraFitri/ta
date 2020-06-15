@@ -39,12 +39,14 @@ export class Profile extends Component {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    this.fetchUser();
-                }
-            )
+            else {
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        this.fetchUser();
+                    }
+                )
+            }
         });
     }
 
