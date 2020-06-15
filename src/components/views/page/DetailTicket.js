@@ -98,6 +98,34 @@ class DetailTicket extends Component {
         console.log("Assign To me");
     }
     handleButtonMakeItPriority = () => {
+        axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const tiket = res.data.values;
+                console.log("data", tiket[0])
+                if (!tiket[0].ticket_technician_id) {
+                    axios.put('http://localhost:3001/ticket/priority/' + this.props.match.params.id, {
+                        headers: {
+                            ApiKey: '8dfcb234a322aeeb6b530f20c8e9988e'
+                        }
+                    }
+                    )
+                        .then(res => res.data)
+                        .then(res => {
+                            if (res.error) {
+                                throw (res.error);
+                            }
+                            console.log("hasil", res)
+                            this.fetchData()
+                        })
+                        .catch(error => {
+                            console.log("Error " + error);
+                        })
+                }
+            })
         console.log("Make it Priority");
     }
     handleButtonSpam = () => {
@@ -197,8 +225,8 @@ class DetailTicket extends Component {
                     <div style={{ width: "82%", height: "10px" }}>
                     </div>
                     <Link to={'/message/' + this.props.match.params.id}>
-                        <div style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", padding: "15px 16px", backgroundColor: "#0050A1", borderRadius: "50%" }}>
-                            <span class="material-icons" style={{ verticalAlign: "bottom", color: "#fff" }}>
+                        <div className="chatIcon" >
+                            <span className="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>
                                 chat
                             </span>
                         </div>

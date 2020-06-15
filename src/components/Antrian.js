@@ -29,7 +29,8 @@ class Antrian extends Component {
                     (this.props.status === "WAITING FOR TECHNICIAN") ? "#A4C7FA" :
                         (this.props.status === "ON PROCESS") ? "#FFD89D" :
                             (this.props.status === "CANCELED") ? "#FFABAB" :
-                                "#A4C7FA";
+                                (this.props.status === "SPAM") ? "#FF0F17" :
+                                    "#A4C7FA";
         const imagePriority =
             (this.props.priority === "Low") ? low :
                 (this.props.priority === "Highest") ? high :
@@ -37,7 +38,7 @@ class Antrian extends Component {
                         low;
         const statusPriority =
             (this.props.priority === "LOW") ? "LOW" :
-                (this.props.priority === "HIGH") ? "HIGH" :
+                (this.props.priority === "Highest") ? "HIGH" :
                     "LOW";
 
         const assignColor =
