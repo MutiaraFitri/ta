@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import {SkeletonTheme} from 'react-loading-skeleton';
 import _ from 'lodash'
 import NavbarBottom from '../navbar/NavbarBottom';
+import moment from 'moment'
 import { getNotificationByEmployeeId } from './../../../redux/api/notification'
 
 export class Notification extends Component {
@@ -16,9 +17,9 @@ export class Notification extends Component {
         const toDos = _.map(data.notification.data, (value, key) => {
             return (
                 <div className="notification" key={key}>
-                    <div className="time-notification">3:25 AM</div>
-                    <div className="title-notification">Ticket on Proccess</div>
-                    <div className="description-notification">Your ticket has ben process with Dimas Putra</div>
+                    <div className="time-notification">{moment(value.notification_timestamps).format('LT')}</div>
+            <div className="title-notification">{value.notification_title}}</div>
+            <div className="description-notification">{value.notification_message}</div>
                 </div>
             );
         });

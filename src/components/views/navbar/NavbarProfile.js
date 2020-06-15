@@ -4,7 +4,7 @@ import back from './../../../assets/img/back.png';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
 import { Link } from 'react-router-dom';
-import { dev, prod } from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 
 
 export class NavbarProfile extends Component {

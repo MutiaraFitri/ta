@@ -1,7 +1,34 @@
 import React, { Component } from 'react';
 import mann from './../assets/img/mann.png';
+import axios from 'axios';
+import {dev} from './../redux/url/server'
 
+const url = dev;
 class TicketDetailDesc extends Component {
+    state = {
+        ticket_status: this.props.status
+    }
+    handleChange = (e) => {
+        this.setState({
+            ticket_status: e.target.value
+        })
+        axios.put(url+'ticket/status/' + this.props.id,{ticket_status: e.target.value}, {
+            headers: {
+                key: '8dfcb234a322aeeb6b530f20c8e9988e'
+            }
+        }
+        )
+            .then(res => res.data)
+            .then(res => {
+                if (res.error) {
+                    throw (res.error);
+                }
+                console.log("hasil", res)
+            })
+            .catch(error => {
+                console.log("Error " + error);
+            })
+    }
     render() {
         return (
             <div>
@@ -21,20 +48,20 @@ class TicketDetailDesc extends Component {
                         <div className="nama" >{this.props.sender1} {this.props.sender2}</div>
                         <div className="email" > {this.props.email} </div>
                         <div class="deskripsi-isi">
-                            <select style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }}>
-                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                            <select name="ticket_status" style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }} onChange={this.handleChange} value={this.state.ticket_status}>
+                                <option value="WAITING FOR SUPPORT" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Waiting for support
                                 </option>
-                                <option value="1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                <option value="Response to Employee" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Response to Employee
                                 </option>
-                                <option value="2" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "red" }}>
+                                <option value="CANCELED" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "red" }}>
                                     Canceled
                                 </option>
-                                <option value="3" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                <option value="ESCALATED" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Escalated
                                 </option>
-                                <option value="4" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
+                                <option value="DONE" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
                                     Set as Done
                                 </option>
                             </select>
