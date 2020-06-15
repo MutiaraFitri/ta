@@ -6,11 +6,11 @@ import { ticketsById } from '../../../redux/api/ticket';
 import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import back from './../../../assets/img/back.png';
-import { kb } from '../../../redux/api/kb';
-import { css } from '@emotion/core';
+// import { kb } from '../../../redux/api/kb';
+// import { css } from '@emotion/core';
 import picture from './../../../assets/img/picture.png';
-import imgStep from './../../../assets/img/imgStep.png';
-import { dev, prod } from '../../../redux/url/server';
+// import imgStep from './../../../assets/img/imgStep.png';
+import { prod } from '../../../redux/url/server';
 
 import _ from "lodash";
 const url = prod
@@ -27,7 +27,6 @@ class DetailArticle extends Component {
         saved: true
     }
     renderStep() {
-        const { data } = this.props;
         var dataku = this.state.steps;
         console.log('datsiSTep', dataku)
         const toDos = _.map(dataku, (values, key) => {
@@ -90,12 +89,7 @@ class DetailArticle extends Component {
     }
 
     render() {
-        let { imagePreviewUrl } = this.state;
-        const override = css`
-            display: block;
-            margin: 0px auto;
-        `;
-        const judul = ("No Internet Connection").length > 25 ? ("No No Internet Connectionnnn Connection").slice(0, 20) + " ..." : " No Internet Connection"
+        // const judul = ("No Internet Connection").length > 25 ? ("No No Internet Connectionnnn Connection").slice(0, 20) + " ..." : " No Internet Connection"
         return (
             <div className="home" style={{ height: (this.state.loading) ? "100vh" : "auto", overflow: (this.state.loading) ? "hidden" : "auto" }}>
                 <div className="navbar-message">

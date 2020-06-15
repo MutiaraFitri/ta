@@ -6,7 +6,7 @@ import '../../../assets/style.css';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
-import mann from '../../../assets/img/mann.png';
+// import mann from '../../../assets/img/mann.png';
 import axios from 'axios';
 const jwt = require('jsonwebtoken');
 
