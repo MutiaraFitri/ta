@@ -246,7 +246,7 @@ class AllTicket extends Component {
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
-                                <input type="text-Allticket" name="q" id="q" placeholder="Search . . ." onChange={this.handleChange} />
+                                <input type="text-Allticket" name="q" id="q" style={{ marginLeft: "5px", padding: "10px", width: "100%" }} placeholder="Search . . ." onChange={this.handleChange} />
                                 <div className="imgTicket" >
                                     <img className="imggTicket" src={search} alt="search" />
                                 </div>
