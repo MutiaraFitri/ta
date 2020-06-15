@@ -234,7 +234,7 @@ class Message extends Component {
                             </div>
                         </Link>
                     </div>
-                    Detail Ticket
+                    Message
                 </div>
                 <div style={{ marginTop: "50px", width: "414px", position: "fixed", backgroundColor: "#fff", zIndex: "2" }}>
                     {this.renderToDos()}
