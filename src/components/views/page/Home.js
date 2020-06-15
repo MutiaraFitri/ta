@@ -68,19 +68,21 @@ export class Home extends Component {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    axios.get(url + `ticket/technician/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTask: res.data.values.length })
+            else {
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        axios.get(url + `ticket/technician/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
                         })
-                }
-            )
+                            .then(res => {
+                                this.setState({ jumlahTask: res.data.values.length })
+                            })
+                    }
+                )
+            }
         });
     }
 
