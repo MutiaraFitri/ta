@@ -18,9 +18,11 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.0",
     "react-spinners": "^0.6.1",
+    "react-toastify": "^6.0.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "skeleton": "^0.1.2"
+    "skeleton": "^0.1.2",
+    "socket.io": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
