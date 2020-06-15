@@ -5,6 +5,7 @@ import users from '../../../redux/api/users';
 import { connect } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
 import { dev, prod } from '../../../redux/url/server';
+import { Link } from 'react-router-dom';
 
 export class NavbarTop extends Component {
 
@@ -25,7 +26,9 @@ export class NavbarTop extends Component {
                 <div style={{ backgroundImage: "url(" + top + ")", height: "300px", backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
                     <div className="row" style={{ width: "100%", marginBottom: "0px", marginTop: "0px" }} >
                         <div style={{ textAlign: "right", width: "100%", marginRight: "10px", marginTop: "10px" }}>
-                            <img src={notification} alt="ehe" />
+                            <Link to="/Notification">
+                                <img src={notification} alt="ehe" />
+                            </Link>
                         </div>
                     </div>
                     <div className="profile"
