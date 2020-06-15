@@ -72,13 +72,19 @@ class Article extends Component {
                     {this.renderKB()}
                     <br /><br />
                 </div>
-                <div style={{ bottom: "50px", position: "fixed" }}>
+                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
+                    <div style={{ width: "82%", height: "10px" }}>
+                    </div>
                     <Link to="/new-article">
-                        <img src={write} alt="add" style={{ width: "70%" }} />
+                        <div style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", padding: "15px 16px", backgroundColor: "#0050A1", borderRadius: "50%" }}>
+                            <span class="material-icons" style={{ verticalAlign: "bottom", color: "#fff" }}>
+                                add
+                            </span>
+                        </div>
                     </Link>
                 </div>
-                <NavbarBottom active="Home" />
-            </div>
+            <NavbarBottom active="Home" />
+            </div >
         );
     }
 }

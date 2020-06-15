@@ -15,6 +15,7 @@ const History = React.lazy(() => import('./components/views/page/History'));
 const Home = React.lazy(() => import('./components/views/page/Home'));
 const Login = React.lazy(() => import('./components/views/page/Login'));
 const Message = React.lazy(() => import('./components/views/page/Message'));
+const Notification = React.lazy(() => import('./components/views/page/Notification'));
 const NotFound = React.lazy(() => import('./components/views/page/NotFound_404'));
 const NewArticle = React.lazy(() => import('./components/views/page/NewArticle'));
 const ProblemSolve = React.lazy(() => import('./components/views/page/ProblemSolve'));
@@ -45,6 +46,7 @@ const routes = [
   { path: '/new-article', exact: true, name: 'Report', component: NewArticle },
   { path: '/knowledgebase/:id', exact: true, name: 'KB', component: KB },
   { path: '/profile', exact: true, name: 'Login', component: Profile },
+  { path: '/Notification', exact: true, name: 'Login', component: Notification },
   { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
   { path: '/problemsolve', exact: true, name: 'History', component: ProblemSolve },
   { path: '/reset/:token', exact: true, name: 'History', component: Reset },
