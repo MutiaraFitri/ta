@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import '../../../loading.css';
 import '../../../assets/style.css';
 import logo from '../../../assets/img/logo_komatsu.png';
-import { userLoginFetch,setNullError } from '../../../redux/api/users';
+import { userLoginFetch, setNullError } from '../../../redux/api/users';
 
 
 export class Login extends Component {
@@ -22,7 +22,7 @@ export class Login extends Component {
         this.props.setNullError()
         this.setState({
             [e.target.name]: e.target.value,
-            loading:false
+            loading: false
         })
     }
     handleClick = (e) =>
@@ -34,7 +34,7 @@ export class Login extends Component {
         e.preventDefault()
         // console.log(this.state)
         this.setState({
-            loading:true
+            loading: true
         })
         this.props.userLoginFetch(this.state)
     }
@@ -72,9 +72,9 @@ export class Login extends Component {
                         <div
                             className="loading-content"
                             style={{
-                                backgroundColor:"white",
-                                width:"200px",
-                                borderRadius:"10px",
+                                backgroundColor: "white",
+                                width: "200px",
+                                borderRadius: "10px",
                                 position: "absolute",
                                 padding: "0px",
                                 paddingTop: "20px",
@@ -109,6 +109,7 @@ export class Login extends Component {
                                 onChange={this.handleChange}
                                 name="nrp"
                                 value={this.state.nrp}
+                                style={{ padding: "10px", width: "100%" }}
                             />
                         </div>
                         <div className="row-password" style={{ alignItems: "center" }}>
@@ -119,6 +120,7 @@ export class Login extends Component {
                                 placeholder="Password"
                                 onChange={this.handleChange}
                                 value={this.state.password}
+                                style={{ padding: "10px" }}
 
 
                             />
@@ -135,12 +137,12 @@ export class Login extends Component {
                     <div className="row" style={{ marginTop: "2rem" }}>
                         <button className="button-submit" type="submit">Login</button>
                     </div>
-                    <div className="row" style={{display:(this.props.data.personState.message)?"flex":"none"}}>
-                        <div  style={{color:"red",margin:"0 auto"}}>
-                        {this.props.data.personState.message}
+                    <div className="row" style={{ display: (this.props.data.personState.message) ? "flex" : "none" }}>
+                        <div style={{ color: "red", margin: "0 auto" }}>
+                            {this.props.data.personState.message}
                         </div>
                     </div>
-                    <div className="row" style={{ fontWeight: "500",marginTop:"20px" }}>
+                    <div className="row" style={{ fontWeight: "500", marginTop: "20px" }}>
                         <a href="/forgotpassword" style={{ margin: "0 auto" }}>Forgot password ?</a>
                     </div>
                 </form>

@@ -56,6 +56,7 @@ class DetailTicket extends Component {
                     description={values.ticket_description}
                     email={values.employee_email}
                     location={values.ticket_location}
+                    time={values.ticket_timestamp}
                 />
 
             </div>;
