@@ -9,6 +9,7 @@ export const UPDATE_PASSWORD_FAILED = 'UPDATE_PASSWORD_FAILED';
 export const FETCH_KB_SUCCESS = 'FETCH_KB_SUCCESS';
 export const FETCH_TIKET_SUCCESS = 'FETCH_TIKET_SUCCESS';
 export const FETCH_TECHNICIAN_SUCCESS = 'FETCH_TECHNICIAN_SUCCESS';
+export const FETCH_NOTIFICATION_SUCCESS = 'FETCH_NOTIFICATION_SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
@@ -45,6 +46,13 @@ export const fetchProductSuccess = () => {
     return {
         type: FETCH_SUCCESS,
         value: "success"
+    }
+}
+
+export const fetchNotification = (data) => {
+    return {
+        type: FETCH_NOTIFICATION_SUCCESS,
+        value:data
     }
 }
 
