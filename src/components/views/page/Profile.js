@@ -141,8 +141,8 @@ export class Profile extends Component {
                     </div>
                 </div>
 
-                <div className="row" style={{ width: "100%" }}>
-                    <div className="row" style={{ marginTop: "2rem" }}>
+                <div>
+                    <div className="row">
                         <button className="buttonLogout" type="submit" onClick={this.handleLogout}>logOut</button>
                     </div>
                 </div>
