@@ -4,14 +4,14 @@ import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
-import { dev} from '../../../redux/url/server';
+import { prod} from '../../../redux/url/server';
 import Chartjs2 from '../Chartjs2';
 import { CSVLink} from "react-csv";
 import axios from 'axios';
 import Rating from './Rating';
 const jwt = require('jsonwebtoken');
 
-const url = dev;
+const url = prod;
 export class Home extends Component {
 
     state = {
