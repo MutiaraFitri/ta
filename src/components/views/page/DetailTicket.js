@@ -109,7 +109,7 @@ class DetailTicket extends Component {
                 if (!tiket[0].ticket_technician_id) {
                     axios.put('http://localhost:3001/ticket/priority/' + this.props.match.params.id, {
                         headers: {
-                            ApiKey: '8dfcb234a322aeeb6b530f20c8e9988e'
+                            key: '8dfcb234a322aeeb6b530f20c8e9988e'
                         }
                     }
                     )
