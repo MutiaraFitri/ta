@@ -72,7 +72,6 @@ class Message extends Component {
             return <div key={key} style={{ width: "90%", margin: "0px auto" }}>
                 <div>
                     <div className="title-kendala" style={{ width: "100%", textAlign: "left", marginTop: "30px" }}>
-                        <p style={{ fontSize: "20px", color: "#A4A6B3", fontWeight: "700" }}>Issue</p>
                         <p style={{ fontSize: "20px", color: "black", marginTop: "-20px", fontWeight: "700" }}>{values.ticket_subject}</p>
                     </div>
                     <div style={{ width: "100%", display: "flex", marginTop: "-6px" }}>
@@ -106,7 +105,7 @@ class Message extends Component {
             if (values.message_employee_id) {
                 return (
                     <div style={{ width: "100%", display: "flex" }}>
-                        <img src={baloon} width="20" height="30" style={{ margin: "10px 0px" }} alt="baloon" />
+                        <img src={baloon} width="10" height="15" style={{ margin: "10px 0px" }} alt="baloon" />
                         <div className="description" style={{ backgroundColor: "#fff", width: "60%", padding: "20px", margin: "10px 0px" }}>
                             {/* <div className="title-kotak" style={{ textAlign: "left", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
                             <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
@@ -121,7 +120,7 @@ class Message extends Component {
                             {/* <div className="title-kotak" style={{ textAlign: "right", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
                             <div className="title-kotak" style={{ textAlign: "right", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
                         </div>
-                        <img src={baloon2} width="20" height="30" style={{ margin: "10px 0px", transform: "scale(-1, 1)" }} alt="baloon" />
+                        <img src={baloon2}  width="10" height="15"  style={{ margin: "10px 0px", transform: "scale(-1, 1)" }} alt="baloon " />
                     </div>
                 );
             }

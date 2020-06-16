@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import mann from './../assets/img/mann.png';
 import axios from 'axios';
-import {dev} from './../redux/url/server'
+import { prod } from './../redux/url/server'
 
-const url = dev;
+const url = prod;
 class TicketDetailDesc extends Component {
     state = {
-        ticket_status: this.props.status
+        ticket_status: -1
     }
     handleChange = (e) => {
         this.setState({
             ticket_status: e.target.value
         })
-        axios.put(url+'ticket/status/' + this.props.id,{ticket_status: e.target.value}, {
+        axios.put(url + 'ticket/' + e.target.value + '/' + this.props.id, null, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
             }
@@ -47,27 +47,41 @@ class TicketDetailDesc extends Component {
                     <div className="nama-pengirim">
                         <div className="nama" >{this.props.sender1} {this.props.sender2}</div>
                         <div className="email" > {this.props.email} </div>
-                        <div class="deskripsi-isi">
+                        <div style={{ display: (this.props.active) ? "none" : "flex", width: "100%" }}>
+                            <div style={{ color: "red", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
+                                <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "red", marginRight: "5px" }}>
+                                    highlight_off
+                            </span>
+                            CLOSED
+                            </div>
+                        </div>
+                        <div style={{ display: !(this.props.active) ? "none" : "flex", width: "100%" }}>
+                            <div style={{ color: "#09d509", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
+                                <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
+                                    check_circle_outline
+                            </span>
+                            OPEN
+                            </div>
+                        </div>
+                        <div class="deskripsi-isi" style={{ display: (!this.props.active || this.props.status === "CANCELED") ? "none" : "flex" }}>
                             <select name="ticket_status" style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }} onChange={this.handleChange} value={this.state.ticket_status}>
-                                <option value="WAITING FOR SUPPORT" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }} disabled>
                                     Waiting for support
                                 </option>
-                                <option value="Response to Employee" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
-                                    Response to Employee
-                                </option>
-                                <option value="CANCELED" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "red" }}>
+                                <option value="cancel" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "red" }}>
                                     Canceled
                                 </option>
-                                <option value="ESCALATED" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                <option value="escalated" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Escalated
                                 </option>
-                                <option value="DONE" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
+                                <option value="finish" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
                                     Set as Done
                                 </option>
                             </select>
                         </div>
                     </div>
                 </div>
+
                 <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "50px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
@@ -79,6 +93,16 @@ class TicketDetailDesc extends Component {
                             }
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>category : {this.props.category}</div>
+                        <div style={{ display: !(this.props.status === "CANCELED") ? "none" : "flex", width: "100%", marginTop: "15px" }}>
+                            <div style={{ margin: "0px auto", padding: "10px 0px", border: "1px solid red", borderRadius: "8px", color: "red", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                                CANCELED
+                            </div>
+                        </div>
+                        <div style={{ display: !(this.props.status === "DONE") ? "none" : "flex", width: "100%", marginTop: "15px" }}>
+                            <div style={{ margin: "0px auto", padding: "10px 0px", border: "1px solid #09d509", borderRadius: "8px", color: "#09d509", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                                DONE
+                            </div>
+                        </div>
 
                     </div>
                     {/* <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
