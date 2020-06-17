@@ -12,12 +12,26 @@ export const FETCH_TECHNICIAN_SUCCESS = 'FETCH_TECHNICIAN_SUCCESS';
 export const FETCH_NOTIFICATION_SUCCESS = 'FETCH_NOTIFICATION_SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const FETCH_SUMMARY_ASSIGN = 'FETCH_SUMMARY_ASSIGN';
+export const FETCH_SUMMARY_DONE = 'FETCH_SUMMARY_DONE';
 
 export const fetchProductPending = () => {
     // console.log("asu")
     return {
         type: FETCH_PRODUCT_PENDING,
         value: "pending"
+    }
+}
+export const fetchSummaryAssignSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_ASSIGN,
+        value: data.values
+    }
+}
+export const fetchSummaryDoneSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_DONE,
+        value: data.values
     }
 }
 
