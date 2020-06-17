@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
+import _ from "lodash";
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
-import { prod} from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 import Chartjs2 from '../Chartjs2';
-import { CSVLink} from "react-csv";
+import { CSVLink } from "react-csv";
 import axios from 'axios';
 import Rating from './Rating';
+import { fetchSummary } from '../../../redux/api/summary';
 const jwt = require('jsonwebtoken');
 
 const url = prod;
@@ -16,47 +19,9 @@ export class Home extends Component {
 
     state = {
         tab: "summary",
-        chartData: {
-            labels: ['s', 's', 'r', 'k', 'j', 's', 'm'],
-            datasets: [
-                {
-                    label: 'assigment',
-                    data: [
-                        1,
-                        2,
-                        3,
-                        3,
-                        5,
-                        6,
-                        4,],
-                    backgroundColor: [
-                        "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
-                    ]
-                },
-                {
-                    label: 'finish',
-                    data: [
-                        1,
-                        4,
-                        6,
-                        5,
-                        1,
-                        9,
-                        4,],
-                    backgroundColor: [
-                        "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
-                    ]
-                }
-            ]
-        }
     }
     renderSummary = () => {
-        const csvData = [
-            ["firstname", "lastname", "email"],
-            ["Ahmed", "Tomi", "ah@smthing.co.com"],
-            ["Raed", "Labes", "rl@smthing.co.com"],
-            ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-        ];
+        
         const totalRating = this.state.rating ?
             (this.state.rating[0].jumlah * 1) +
             (this.state.rating[1].jumlah * 2) +
@@ -64,6 +29,62 @@ export class Home extends Component {
             (this.state.rating[3].jumlah * 4) +
             (this.state.rating[4].jumlah * 5) : 0;
         const jumlahRating = this.state.rating ? this.state.rating.length : 0;
+        var seninDone, seninAssign = "";
+        var selasaDone, selasaAssign = "";
+        var rabuDone, rabuAssign = "";
+        var kamisDone, kamisAssign = "";
+        var jumatDone, jumatAssign = "";
+        var sabtuDone, sabtuAssign = "";
+        var mingguDone, mingguAssign = "";
+        _.map(this.props.data.summary.dataAssign, (values, key) => {
+            if(values.hari =="Monday") seninAssign = values.jumlah
+            if(values.hari =="Thursday") selasaAssign = values.jumlah
+            if(values.hari =="Wednesday") rabuAssign = values.jumlah
+            if(values.hari =="Tuesday") kamisAssign = values.jumlah
+            if(values.hari =="Friday") jumatAssign = values.jumlah
+            if(values.hari =="Saturday") sabtuAssign = values.jumlah
+            if(values.hari =="Sunday") mingguAssign = values.jumlah
+        })
+        _.map(this.props.data.summary.dataDone, (values, key) => {
+            if(values.hari =="Monday") seninDone = values.jumlah
+            if(values.hari =="Thursday") selasaDone = values.jumlah
+            if(values.hari =="Wednesday") rabuDone = values.jumlah
+            if(values.hari =="Tuesday") kamisDone = values.jumlah
+            if(values.hari =="Friday") jumatDone = values.jumlah
+            if(values.hari =="Saturday") sabtuDone = values.jumlah
+            if(values.hari =="Sunday") mingguDone = values.jumlah
+        })
+        const csvData = [
+            ["day", "DONE", "ASSIGN"],
+            ["Monday", seninDone, seninAssign],
+            ["Thursday", selasaDone, selasaAssign],
+            ["Wednesday", rabuDone, rabuAssign],
+            ["Tuesday", kamisDone, kamisAssign],
+            ["Friday", jumatDone, jumatAssign],
+            ["Saturday", sabtuDone, sabtuAssign],
+            ["Sunday", mingguDone, mingguAssign]
+        ];
+        var dataHari = {
+            chartData: {
+                labels: ["Monday", "Thursday", "Wednesday", "Tuesday", "Friday", "Saturday", "Sunday"],
+                datasets: [
+                    {
+                        label: 'assigment',
+                        data: [seninAssign, selasaAssign, rabuAssign, kamisAssign, jumatAssign, sabtuAssign, mingguAssign],
+                        backgroundColor: [
+                            "#0050A1","#0050A1","#0050A1","#0050A1","#0050A1","#0050A1","#0050A1"
+                        ]
+                    },
+                    {
+                        label: 'finish',
+                        data: [seninDone,selasaDone,rabuDone,kamisDone,jumatDone,sabtuDone,mingguDone],
+                        backgroundColor: [
+                            "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
+                        ]
+                    }
+                ]
+            }
+        };
         return (
             <div className="home" style={{ paddingBottom: "70px", width: "100%" }} >
                 <div className="curva" style={{ display: "flex", width: "100%" }}>
@@ -78,7 +99,7 @@ export class Home extends Component {
 
                         <div className="row" style={{ padding: "10px", margin: "0px", height: '200px' }}>
                             {/* <ChartComponent data={this.state.datasets} /> */}
-                            <Chartjs2 data={this.state.chartData} />
+                            <Chartjs2 data={dataHari.chartData} />
                         </div>
                     </div>
                 </div>
@@ -187,10 +208,12 @@ export class Home extends Component {
         )
     }
 
-    renderFeedback = () =>{
-        return (<Rating/>)
+    renderFeedback = () => {
+        return (<Rating />)
     }
-    componentDidMount() {
+    async componentDidMount() {
+        this.props.getSummary("DONE");
+        this.props.getSummary("ASSIGN");
         axios.get(`https://api.ict-servicedesk.xyz/rating`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -209,27 +232,29 @@ export class Home extends Component {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    axios.get(url + `ticket/done/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTaskDone: res.data.values.length })
+            else {
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        axios.get(url + `ticket/done/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
                         })
-                    axios.get(url + `ticket/not-done/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTaskNotDone: res.data.values.length })
+                            .then(res => {
+                                this.setState({ jumlahTaskDone: res.data.values.length })
+                            })
+                        axios.get(url + `ticket/not-done/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
                         })
-                }
-            )
+                            .then(res => {
+                                this.setState({ jumlahTaskNotDone: res.data.values.length })
+                            })
+                    }
+                )
+            }
         });
     }
 
@@ -271,14 +296,25 @@ export class Home extends Component {
                     </div>
                 </div>
                 {
-                    (this.state.tab==="summary")?
+                    (this.state.tab === "summary") ?
                         this.renderSummary() :
-                            this.renderFeedback()
+                        this.renderFeedback()
                 }
                 <NavbarBottom active="Home" />
             </div>
         )
     }
 }
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        getSummary: (STATUS) => dispatch(fetchSummary(STATUS)),
+    }
+}
 
-export default Home
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(Home);
+

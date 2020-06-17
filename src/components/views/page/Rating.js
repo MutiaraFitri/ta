@@ -47,17 +47,22 @@ class Rating extends Component {
         if (data.personState.data) {
             dataku = data.personState.data.values;
             const toDos = _.map(dataku, (values, key) => {
-                return <div key={key}>
-                    <Ratingdesc
-                        //imageKategori={hardware}
-                        sender1={values.employee_firstname}
-                        sender2={values.employee_lastname}
-                        email={values.employee_email}
-                        due_date={values.ticket_timestamp}
-                        bintang={values.ticket_rating}
-                        comment={values.ticket_comment}
-                    />
-                </div>;
+                if (values.ticket_rating) {
+                    this.setState({
+                        count:this.statecount++
+                    })
+                    return <div key={key}>
+                        <Ratingdesc
+                            //imageKategori={hardware}
+                            sender1={values.employee_firstname}
+                            sender2={values.employee_lastname}
+                            email={values.employee_email}
+                            due_date={values.ticket_timestamp}
+                            bintang={values.ticket_rating}
+                            comment={values.ticket_comment}
+                        />
+                    </div>;
+                }
             });
             if (!_.isEmpty(toDos)) {
                 return toDos;
@@ -236,7 +241,7 @@ class Rating extends Component {
                             textAlign: "left",
                             color: "black", fontSize: "20px", fontWeight: "600"
                         }}> Feedbacks
-                        <span style={{ color: "black", fontSize: "14px" }}> (3)</span>
+                        <span style={{ color: "black", fontSize: "14px" }}>( {this.state.count? this.state.count:0})</span>
                         </div>
 
                         {this.renderToDos()}
