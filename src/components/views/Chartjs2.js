@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 // import { Bar, Line, Pie } from 'react-chartjs-2';
 
 
@@ -39,23 +39,15 @@ class Chartjs2 extends Component {
     render() {
         return (
             <div className="chart">
-                <Bar
+                <Doughnut
                     data={this.props.data}
                     options={
                         {
                             legend: {
                                 display: true,
-                                position: "top"
+                                position: "left"
                             },
-                            maintainAspectRatio: false,
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 5
-                                    }
-                                }]
-                            }
+                            maintainAspectRatio: false
                         }
                     }
                 />

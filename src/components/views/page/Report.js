@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
+import _ from "lodash";
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
-import { prod} from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 import Chartjs2 from '../Chartjs2';
-import { CSVLink} from "react-csv";
+import { CSVLink } from "react-csv";
 import axios from 'axios';
 import Rating from './Rating';
+import { fetchSummary } from '../../../redux/api/summary';
 const jwt = require('jsonwebtoken');
 
 const url = prod;
@@ -16,47 +19,10 @@ export class Home extends Component {
 
     state = {
         tab: "summary",
-        chartData: {
-            labels: ['s', 's', 'r', 'k', 'j', 's', 'm'],
-            datasets: [
-                {
-                    label: 'assigment',
-                    data: [
-                        1,
-                        2,
-                        3,
-                        3,
-                        5,
-                        6,
-                        4,],
-                    backgroundColor: [
-                        "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4", "#ff4",
-                    ]
-                },
-                {
-                    label: 'finish',
-                    data: [
-                        1,
-                        4,
-                        6,
-                        5,
-                        1,
-                        9,
-                        4,],
-                    backgroundColor: [
-                        "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
-                    ]
-                }
-            ]
-        }
+        report: "month"
     }
     renderSummary = () => {
-        const csvData = [
-            ["firstname", "lastname", "email"],
-            ["Ahmed", "Tomi", "ah@smthing.co.com"],
-            ["Raed", "Labes", "rl@smthing.co.com"],
-            ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-        ];
+
         const totalRating = this.state.rating ?
             (this.state.rating[0].jumlah * 1) +
             (this.state.rating[1].jumlah * 2) +
@@ -64,6 +30,59 @@ export class Home extends Component {
             (this.state.rating[3].jumlah * 4) +
             (this.state.rating[4].jumlah * 5) : 0;
         const jumlahRating = this.state.rating ? this.state.rating.length : 0;
+
+        // _.map(this.props.data.summary.dataAssign, (values, key) => {
+        // })
+        var dataSummary = []
+        var labesSummary = []
+        var jumlahCancel= 0;
+        var jumlahDone= 0;
+        var jumlahSeluruh= 0;
+        const csvData = []
+        if (this.state.report === "month") {
+            _.map(this.props.data.summary.dataThisMonth, (values, key) => {
+                if(values.status==="DONE") {jumlahDone=values.jumlah}
+                if(values.status==="CANCELED") {jumlahCancel=values.jumlah}
+                jumlahSeluruh+=values.jumlah;
+                dataSummary.push(values.jumlah)
+                labesSummary.push(values.status)
+                csvData.push(values)
+            })
+        }
+        else {
+            _.map(this.props.data.summary.data, (values, key) => {
+                if(values.status==="DONE") {jumlahDone=values.jumlah}
+                if(values.status==="CANCELED") {jumlahCancel=values.jumlah}
+                jumlahSeluruh+=values.jumlah;
+                dataSummary.push(values.jumlah)
+                labesSummary.push(values.status)
+                csvData.push(values)
+            })
+        }
+        console.log("dateku",jumlahSeluruh)
+        // _.map(this.props.data.summary.dataDone, (values, key) => {
+        //     csvData.push(values)
+        // })
+        // _.map(this.props.data.summary.dataCancel, (values, key) => {
+        //     csvData.push(values)
+        // })
+        // _.map(this.props.data.summary.dataEscalated, (values, key) => {
+        //     csvData.push(values)
+        // })
+        var dataHari = {
+            chartData: {
+                labels: labesSummary,
+                datasets: [
+                    {
+                        label: 'ESCALATED',
+                        data: dataSummary,
+                        backgroundColor: [
+                            "#0050A1", "RED", "ORANGE"
+                        ]
+                    }
+                ]
+            }
+        };
         return (
             <div className="home" style={{ paddingBottom: "70px", width: "100%" }} >
                 <div className="curva" style={{ display: "flex", width: "100%" }}>
@@ -78,7 +97,7 @@ export class Home extends Component {
 
                         <div className="row" style={{ padding: "10px", margin: "0px", height: '200px' }}>
                             {/* <ChartComponent data={this.state.datasets} /> */}
-                            <Chartjs2 data={this.state.chartData} />
+                            <Chartjs2 data={dataHari.chartData} />
                         </div>
                     </div>
                 </div>
@@ -94,7 +113,7 @@ export class Home extends Component {
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
 
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone : "0"}</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{jumlahDone? jumlahDone : "0"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Task Done</div>
                             </div>
                         </div>
@@ -109,7 +128,7 @@ export class Home extends Component {
                         }}>
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTaskDone ? ((this.state.jumlahTaskDone / (this.state.jumlahTaskDone + this.state.jumlahTaskNotDone)) * 100).toFixed(1) + "%" : "0%"}</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{jumlahSeluruh ? ((jumlahDone / jumlahSeluruh) * 100).toFixed(1) + "%" : "0%"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Rate</div>
                             </div>
                         </div>
@@ -130,15 +149,15 @@ export class Home extends Component {
                     <div className="row" style={{ padding: "10px", margin: "0px", width: "100%" }}>
 
                         <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Created vs Done</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Assigned vs Done</div>
                         </div>
                         <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone + this.state.jumlahTaskNotDone : "0"}</div>
-                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Created</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahSeluruh ?jumlahSeluruh : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Assigned</div>
                         </div>
                         <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone : "0"}</div>
-                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Done</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahCancel ? jumlahCancel : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Cancel</div>
                         </div>
                     </div>
                 </div>
@@ -173,7 +192,7 @@ export class Home extends Component {
                     <div style={{ width: "100%" }}>
                         <CSVLink data={csvData}>
                             <div style={{ width: "40%", margin: "0px auto" }}>
-                                <span class="material-icons" style={{ marginRight: "10px", verticalAlign: "bottom" }}>
+                                <span className="material-icons" style={{ marginRight: "10px", verticalAlign: "bottom" }}>
                                     print
                             </span>
                                 <span style={{ fontSize: "18px", fontWeight: "700" }}>
@@ -187,10 +206,15 @@ export class Home extends Component {
         )
     }
 
-    renderFeedback = () =>{
-        return (<Rating/>)
+    renderFeedback = () => {
+        return (<Rating tipe={this.state.report}/>)
     }
-    componentDidMount() {
+    async componentDidMount() {
+        this.props.getSummary("done");
+        this.props.getSummary("escalated");
+        this.props.getSummary("cancel");
+        this.props.getSummary("all");
+        this.props.getSummary("this_month");
         axios.get(`https://api.ict-servicedesk.xyz/rating`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -209,30 +233,37 @@ export class Home extends Component {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    axios.get(url + `ticket/done/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTaskDone: res.data.values.length })
+            else {
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        axios.get(url + `ticket/done/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
                         })
-                    axios.get(url + `ticket/not-done/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTaskNotDone: res.data.values.length })
+                            .then(res => {
+                                this.setState({ jumlahTaskDone: res.data.values.length })
+                            })
+                        axios.get(url + `ticket/not-done/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
                         })
-                }
-            )
+                            .then(res => {
+                                this.setState({ jumlahTaskNotDone: res.data.values.length })
+                            })
+                    }
+                )
+            }
         });
     }
 
+    handleChange = (e) => {
+        this.setState({
+            report: e.target.value
+        })
+    }
     handleClickTab = (e) => {
         this.setState({
             tab: e.target.id
@@ -259,7 +290,7 @@ export class Home extends Component {
                             height: "38px",
                             backgroundColor: "#F7F8FF",
                             borderRadius: "10px",
-                            marginTop: "100px",
+                            marginTop: "80px",
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px", }}>
                             <div className="desc" style={{ width: "100%", display: "flex" }}>
@@ -270,15 +301,30 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
+                <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="month">
+                    <option value="month" >This Month</option>
+                    <option value="all" >All Day</option>
+                </select>
                 {
-                    (this.state.tab==="summary")?
+                    (this.state.tab === "summary") ?
                         this.renderSummary() :
-                            this.renderFeedback()
+                        this.renderFeedback()
                 }
                 <NavbarBottom active="Home" />
             </div>
         )
     }
 }
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        getSummary: (STATUS) => dispatch(fetchSummary(STATUS)),
+    }
+}
 
-export default Home
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(Home);
+
