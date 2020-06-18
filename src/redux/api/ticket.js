@@ -13,7 +13,7 @@ export function tickets() {
             }
         })
             .then(res => {
-                const tiket = res.data;
+                const tiket = res.data.values;
                 console.log("data", tiket)
                 dispatch(fetchTiket(tiket));
             })

@@ -19,9 +19,10 @@ export class Home extends Component {
 
     state = {
         tab: "summary",
+        report: "month"
     }
     renderSummary = () => {
-        
+
         const totalRating = this.state.rating ?
             (this.state.rating[0].jumlah * 1) +
             (this.state.rating[1].jumlah * 2) +
@@ -29,57 +30,54 @@ export class Home extends Component {
             (this.state.rating[3].jumlah * 4) +
             (this.state.rating[4].jumlah * 5) : 0;
         const jumlahRating = this.state.rating ? this.state.rating.length : 0;
-        var seninDone, seninAssign = "";
-        var selasaDone, selasaAssign = "";
-        var rabuDone, rabuAssign = "";
-        var kamisDone, kamisAssign = "";
-        var jumatDone, jumatAssign = "";
-        var sabtuDone, sabtuAssign = "";
-        var mingguDone, mingguAssign = "";
-        _.map(this.props.data.summary.dataAssign, (values, key) => {
-            if(values.hari =="Monday") seninAssign = values.jumlah
-            if(values.hari =="Thursday") selasaAssign = values.jumlah
-            if(values.hari =="Wednesday") rabuAssign = values.jumlah
-            if(values.hari =="Tuesday") kamisAssign = values.jumlah
-            if(values.hari =="Friday") jumatAssign = values.jumlah
-            if(values.hari =="Saturday") sabtuAssign = values.jumlah
-            if(values.hari =="Sunday") mingguAssign = values.jumlah
-        })
-        _.map(this.props.data.summary.dataDone, (values, key) => {
-            if(values.hari =="Monday") seninDone = values.jumlah
-            if(values.hari =="Thursday") selasaDone = values.jumlah
-            if(values.hari =="Wednesday") rabuDone = values.jumlah
-            if(values.hari =="Tuesday") kamisDone = values.jumlah
-            if(values.hari =="Friday") jumatDone = values.jumlah
-            if(values.hari =="Saturday") sabtuDone = values.jumlah
-            if(values.hari =="Sunday") mingguDone = values.jumlah
-        })
-        const csvData = [
-            ["day", "DONE", "ASSIGN"],
-            ["Monday", seninDone, seninAssign],
-            ["Thursday", selasaDone, selasaAssign],
-            ["Wednesday", rabuDone, rabuAssign],
-            ["Tuesday", kamisDone, kamisAssign],
-            ["Friday", jumatDone, jumatAssign],
-            ["Saturday", sabtuDone, sabtuAssign],
-            ["Sunday", mingguDone, mingguAssign]
-        ];
+
+        // _.map(this.props.data.summary.dataAssign, (values, key) => {
+        // })
+        var dataSummary = []
+        var labesSummary = []
+        var jumlahCancel= 0;
+        var jumlahDone= 0;
+        var jumlahSeluruh= 0;
+        const csvData = []
+        if (this.state.report === "month") {
+            _.map(this.props.data.summary.dataThisMonth, (values, key) => {
+                if(values.status==="DONE") {jumlahDone=values.jumlah}
+                if(values.status==="CANCELED") {jumlahCancel=values.jumlah}
+                jumlahSeluruh+=values.jumlah;
+                dataSummary.push(values.jumlah)
+                labesSummary.push(values.status)
+                csvData.push(values)
+            })
+        }
+        else {
+            _.map(this.props.data.summary.data, (values, key) => {
+                if(values.status==="DONE") {jumlahDone=values.jumlah}
+                if(values.status==="CANCELED") {jumlahCancel=values.jumlah}
+                jumlahSeluruh+=values.jumlah;
+                dataSummary.push(values.jumlah)
+                labesSummary.push(values.status)
+                csvData.push(values)
+            })
+        }
+        console.log("dateku",jumlahSeluruh)
+        // _.map(this.props.data.summary.dataDone, (values, key) => {
+        //     csvData.push(values)
+        // })
+        // _.map(this.props.data.summary.dataCancel, (values, key) => {
+        //     csvData.push(values)
+        // })
+        // _.map(this.props.data.summary.dataEscalated, (values, key) => {
+        //     csvData.push(values)
+        // })
         var dataHari = {
             chartData: {
-                labels: ["Monday", "Thursday", "Wednesday", "Tuesday", "Friday", "Saturday", "Sunday"],
+                labels: labesSummary,
                 datasets: [
                     {
-                        label: 'assigment',
-                        data: [seninAssign, selasaAssign, rabuAssign, kamisAssign, jumatAssign, sabtuAssign, mingguAssign],
+                        label: 'ESCALATED',
+                        data: dataSummary,
                         backgroundColor: [
-                            "#0050A1","#0050A1","#0050A1","#0050A1","#0050A1","#0050A1","#0050A1"
-                        ]
-                    },
-                    {
-                        label: 'finish',
-                        data: [seninDone,selasaDone,rabuDone,kamisDone,jumatDone,sabtuDone,mingguDone],
-                        backgroundColor: [
-                            "#789999", "#789999", "#789999", "#789999", "#789999", "#789999", "#789999"
+                            "#0050A1", "RED", "ORANGE"
                         ]
                     }
                 ]
@@ -115,7 +113,7 @@ export class Home extends Component {
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
 
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone : "0"}</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{jumlahDone? jumlahDone : "0"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Task Done</div>
                             </div>
                         </div>
@@ -130,7 +128,7 @@ export class Home extends Component {
                         }}>
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTaskDone ? ((this.state.jumlahTaskDone / (this.state.jumlahTaskDone + this.state.jumlahTaskNotDone)) * 100).toFixed(1) + "%" : "0%"}</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{jumlahSeluruh ? ((jumlahDone / jumlahSeluruh) * 100).toFixed(1) + "%" : "0%"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Rate</div>
                             </div>
                         </div>
@@ -151,15 +149,15 @@ export class Home extends Component {
                     <div className="row" style={{ padding: "10px", margin: "0px", width: "100%" }}>
 
                         <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Created vs Done</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Assigned vs Done</div>
                         </div>
                         <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone + this.state.jumlahTaskNotDone : "0"}</div>
-                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Created</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahSeluruh ?jumlahSeluruh : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Assigned</div>
                         </div>
                         <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.jumlahTaskDone ? this.state.jumlahTaskDone : "0"}</div>
-                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Done</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahCancel ? jumlahCancel : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Cancel</div>
                         </div>
                     </div>
                 </div>
@@ -194,7 +192,7 @@ export class Home extends Component {
                     <div style={{ width: "100%" }}>
                         <CSVLink data={csvData}>
                             <div style={{ width: "40%", margin: "0px auto" }}>
-                                <span class="material-icons" style={{ marginRight: "10px", verticalAlign: "bottom" }}>
+                                <span className="material-icons" style={{ marginRight: "10px", verticalAlign: "bottom" }}>
                                     print
                             </span>
                                 <span style={{ fontSize: "18px", fontWeight: "700" }}>
@@ -209,11 +207,14 @@ export class Home extends Component {
     }
 
     renderFeedback = () => {
-        return (<Rating />)
+        return (<Rating tipe={this.state.report}/>)
     }
     async componentDidMount() {
-        this.props.getSummary("DONE");
-        this.props.getSummary("ASSIGN");
+        this.props.getSummary("done");
+        this.props.getSummary("escalated");
+        this.props.getSummary("cancel");
+        this.props.getSummary("all");
+        this.props.getSummary("this_month");
         axios.get(`https://api.ict-servicedesk.xyz/rating`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -258,6 +259,11 @@ export class Home extends Component {
         });
     }
 
+    handleChange = (e) => {
+        this.setState({
+            report: e.target.value
+        })
+    }
     handleClickTab = (e) => {
         this.setState({
             tab: e.target.id
@@ -284,7 +290,7 @@ export class Home extends Component {
                             height: "38px",
                             backgroundColor: "#F7F8FF",
                             borderRadius: "10px",
-                            marginTop: "100px",
+                            marginTop: "80px",
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px", }}>
                             <div className="desc" style={{ width: "100%", display: "flex" }}>
@@ -295,6 +301,10 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
+                <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="month">
+                    <option value="month" >This Month</option>
+                    <option value="all" >All Day</option>
+                </select>
                 {
                     (this.state.tab === "summary") ?
                         this.renderSummary() :

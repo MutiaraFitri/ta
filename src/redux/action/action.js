@@ -14,6 +14,9 @@ export const FETCH_ERROR = 'FETCH_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const FETCH_SUMMARY_ASSIGN = 'FETCH_SUMMARY_ASSIGN';
 export const FETCH_SUMMARY_DONE = 'FETCH_SUMMARY_DONE';
+export const FETCH_SUMMARY_ESCALATED = 'FETCH_SUMMARY_ESCALATED';
+export const FETCH_SUMMARY_CANCEL = 'FETCH_SUMMARY_CANCEL';
+export const FETCH_SUMMARY_THIS_MONTH = 'FETCH_SUMMARY_THIS_MONTH';
 
 export const fetchProductPending = () => {
     // console.log("asu")
@@ -25,6 +28,24 @@ export const fetchProductPending = () => {
 export const fetchSummaryAssignSucces = (data) => {
     return {
         type: FETCH_SUMMARY_ASSIGN,
+        value: data.values
+    }
+}
+export const fetchSummaryThisMonthSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_THIS_MONTH,
+        value: data.values
+    }
+}
+export const fetchSummaryCancelSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_CANCEL,
+        value: data.values
+    }
+}
+export const fetchSummaryEscalatedSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_ESCALATED,
         value: data.values
     }
 }
