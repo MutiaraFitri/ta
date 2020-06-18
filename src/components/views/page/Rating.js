@@ -7,9 +7,9 @@ import { tickets } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from "lodash";
-import { dev } from "./../../../redux/url/server";
+import { prod } from "./../../../redux/url/server";
 
-const url = dev;
+const url = prod;
 class Rating extends Component {
     state = {
         rating: [],
