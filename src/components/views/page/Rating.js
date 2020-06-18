@@ -7,35 +7,37 @@ import { tickets } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from "lodash";
+import { prod } from "./../../../redux/url/server";
 
+const url = prod;
 class Rating extends Component {
     state = {
         rating: [],
 
     }
     componentDidMount() {
-        axios.get(`https://api.ict-servicedesk.xyz/rating`, {
+        axios.get(url + `rating/all/9`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
         })
             .then(res => {
                 const rating = res.data.values;
-                console.log("data", rating)
+                console.log("data rating", rating)
                 this.setState({
                     rating
                 })
             })
-        axios.get(`https://api.ict-servicedesk.xyz/ticket/`, {
+        axios.get(url + `rating/6/9`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
         })
             .then(res => {
-                const tiket = res.data.values;
-                console.log("data", tiket)
+                const ratingMonth = res.data.values;
+                console.log("data rating", ratingMonth)
                 this.setState({
-                    tiket
+                    ratingMonth
                 })
             })
         this.props.tiketku()
@@ -44,28 +46,51 @@ class Rating extends Component {
     renderToDos() {
         const { data } = this.props;
         var dataku = "";
-        if (data.personState.data) {
-            dataku = data.personState.data.values;
-            const toDos = _.map(dataku, (values, key) => {
-                if (values.ticket_rating) {
-                    this.setState({
-                        count:this.statecount++
-                    })
-                    return <div key={key}>
-                        <Ratingdesc
-                            //imageKategori={hardware}
-                            sender1={values.employee_firstname}
-                            sender2={values.employee_lastname}
-                            email={values.employee_email}
-                            due_date={values.ticket_timestamp}
-                            bintang={values.ticket_rating}
-                            comment={values.ticket_comment}
-                        />
-                    </div>;
+        if (this.props.tipe === "all") {
+            if (data.personState.data) {
+                dataku = data.personState.data;
+                const toDos = _.map(dataku, (values, key) => {
+                    if (values.ticket_rating) {
+                        return <div key={key}>
+                            <Ratingdesc
+                                //imageKategori={hardware}
+                                sender1={values.employee_firstname}
+                                sender2={values.employee_lastname}
+                                email={values.employee_email}
+                                due_date={values.ticket_timestamp}
+                                bintang={values.ticket_rating}
+                                comment={values.ticket_comment}
+                            />
+                        </div>;
+                    }
+                });
+                if (!_.isEmpty(toDos)) {
+                    return toDos;
                 }
-            });
-            if (!_.isEmpty(toDos)) {
-                return toDos;
+            }
+        }
+        if (this.props.tipe === "month") {
+            if (data.personState.data) {
+                dataku = data.personState.data;
+                const toDos = _.map(dataku, (values, key) => {
+                    console.log("bulan", new Date(values.ticket_timestamp).getMonth());
+                    if (values.ticket_rating && new Date(values.ticket_timestamp).getMonth()===5) {
+                        return <div key={key}>
+                            <Ratingdesc
+                                //imageKategori={hardware}
+                                sender1={values.employee_firstname}
+                                sender2={values.employee_lastname}
+                                email={values.employee_email}
+                                due_date={values.ticket_timestamp}
+                                bintang={values.ticket_rating}
+                                comment={values.ticket_comment}
+                            />
+                        </div>;
+                    }
+                });
+                if (!_.isEmpty(toDos)) {
+                    return toDos;
+                }
             }
         }
     }
@@ -73,21 +98,48 @@ class Rating extends Component {
 
 
     render() {
-        const size = this.state.tiket ? this.state.tiket.length : 0
         //console.log('jumlahtiket', size);
-        const jumlahRating = this.state.rating[0] ?
-            (this.state.rating[0].jumlah * 1) +
-            (this.state.rating[1].jumlah * 2) +
-            (this.state.rating[2].jumlah * 3) +
-            (this.state.rating[3].jumlah * 4) +
-            (this.state.rating[4].jumlah * 5) : 0;
-        //console.log('jumlahRating', jumlahRating);
-        const rating5 = this.state.rating[4] ? this.state.rating[4].jumlah : 0
-        const rating4 = this.state.rating[3] ? this.state.rating[3].jumlah : 0
-        const rating3 = this.state.rating[2] ? this.state.rating[2].jumlah : 0
-        const rating2 = this.state.rating[1] ? this.state.rating[1].jumlah : 0
-        const rating1 = this.state.rating[0] ? this.state.rating[0].jumlah : 0
-        // console.log(rating5 / size)
+        var varRating1 = 0;
+        var varRating2 = 0;
+        var varRating3 = 0;
+        var varRating4 = 0;
+        var varRating5 = 0;
+        var datanya = null;
+        if (this.props.tipe === "all") {
+            datanya = this.state.rating;
+        }
+        if (this.props.tipe === "month") {
+            datanya = this.state.ratingMonth;
+        }
+
+        _.map(datanya, (values, key) => {
+            if (values.ticket_rating === 1) {
+                varRating1 = values.jumlah;
+            }
+            if (values.ticket_rating === 2) {
+                varRating2 = values.jumlah;
+            }
+            if (values.ticket_rating === 3) {
+                varRating3 = values.jumlah;
+            }
+            if (values.ticket_rating === 4) {
+                varRating4 = values.jumlah;
+            }
+            if (values.ticket_rating === 5) {
+                varRating5 = values.jumlah;
+            }
+        })
+        const jumlahRating = (varRating1 * 1) + (varRating2 * 2) + (varRating3 * 3) + (varRating4 * 4) + (varRating5 * 5);
+        console.log('jumlahRating', varRating3);
+        const rating5 = varRating5 ? varRating5 : 0
+        const rating4 = varRating4 ? varRating4 : 0
+        const rating3 = varRating3 ? varRating3 : 0
+        const rating2 = varRating2 ? varRating2 : 0
+        const rating1 = varRating1 ? varRating1 : 0
+        var countJumlah = 0;
+        _.map(datanya, (values, key) => {
+            countJumlah += values.jumlah;
+        })
         return (
 
             <div className="home">
@@ -104,7 +156,7 @@ class Rating extends Component {
                                 textAlign: "left",
                                 width: "55%",
                                 color: "black", fontSize: "35px", fontWeight: "bold"
-                            }}>{size ? (jumlahRating / size).toFixed(1) : "0"} </div>
+                            }}>{jumlahRating ? (jumlahRating / countJumlah).toFixed(1) : "0"} </div>
                         <div className="overal"
                             style={{
                                 textAlign: "right",
@@ -112,9 +164,9 @@ class Rating extends Component {
                                 width: "45%"
                             }}>
                             <div className="star-bg" style={{ width: "150px" }}></div>
-                            <div className="star-isi" style={{ width: size ? (jumlahRating / size) * 30 : 0 + "px", transition: "width 0.5s" }}></div>
+                            <div className="star-isi" style={{ width: jumlahRating ? (jumlahRating / countJumlah) * 30 : 0 + "px", transition: "width 0.5s" }}></div>
                             <div className="star" style={{ fontSize: "14px" }}>
-                                3 feedback
+                                {countJumlah ? countJumlah : "0"} feedback
                             </div>
                         </div>
 
@@ -134,12 +186,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: size ? (rating5 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: rating5 ? ((rating5 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
-                                    {this.state.rating[4] ? this.state.rating[4].jumlah : '0'}
+                                    {rating5 ? rating5 : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -157,12 +209,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: size ? (rating4 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: rating4 ? ((rating4 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
-                                    {this.state.rating[3] ? this.state.rating[3].jumlah : '0'}
+                                    {rating4 ? rating4 : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -180,12 +232,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: size ? (rating3 / size).toFixed(1) * 100 : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: rating3 ? ((rating3 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
-                                    {this.state.rating[2] ? this.state.rating[2].jumlah : '0'}
+                                    {rating3 ? rating3 : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -203,12 +255,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: size ? (rating2 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: rating2 ? ((rating2 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
-                                    {this.state.rating[1] ? this.state.rating[1].jumlah : '0'}
+                                    {rating2 ? rating2 : '0'}
                                 </div>
                             </div>
                             <div style={{ width: "100%", display: "flex" }}>
@@ -226,12 +278,12 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: size ? (rating1 / size).toFixed(1) * 100 : 0 * 100 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar" style={{ width: rating1 ? ((rating1 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
                                         </div>
                                     </div>
                                 </div>
                                 <div style={{ width: "10%", color: "black", fontSize: "20px" }}>
-                                    {this.state.rating[0] ? this.state.rating[0].jumlah : '0'}
+                                    {rating1 ? rating1 : '0'}
                                 </div>
                             </div>
                         </div>
@@ -241,7 +293,7 @@ class Rating extends Component {
                             textAlign: "left",
                             color: "black", fontSize: "20px", fontWeight: "600"
                         }}> Feedbacks
-                        <span style={{ color: "black", fontSize: "14px" }}>( {this.state.count? this.state.count:0})</span>
+                        <span style={{ color: "black", fontSize: "14px", marginLeft: "10px" }}>({countJumlah ? countJumlah : 0})</span>
                         </div>
 
                         {this.renderToDos()}
