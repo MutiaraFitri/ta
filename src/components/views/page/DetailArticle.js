@@ -34,17 +34,17 @@ class DetailArticle extends Component {
                 <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
                     <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>{key + 1}</p>
                 </div>
-                <div className="judulstep" style={{ width: "90%" }}>
+                <div className="judulstep" style={{ width: "80%", paddingLeft: "12px", color: "#000", fontSize: "16px", textAlign: "left", marginTop: "10px", fontWeight: "500" }}>
                     {values.steps_title ?
-                        <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_title}</p>
+                        <p style={{ color: "#000", fontSize: "16px", textAlign: "left", marginTop: "0px", fontWeight: "500" }}>{values.steps_title}</p>
                         : "STEP " + (key + 1)}
                 </div>
-                <div className="ket-step" style={{ width: "100%" }}>
+                <div className="ket-step" style={{ width: "100%", paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", backgroundColor: "red" }}>
                     {values.steps_description ?
-                        <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
+                        <p style={{ paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
                         : null}
                     {values.steps_image ?
-                        <img src={(gambar + values.steps_image)} alt="imgStep" style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
+                        <img src={(gambar + values.steps_image)} alt=" " style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
                         : null}
                 </div>
             </div>;
