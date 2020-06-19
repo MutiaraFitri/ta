@@ -131,7 +131,7 @@ export class Home extends Component {
                                     margin: "0px -20px"
                                 }}>
                                 <h6 style={{ fontSize: "21px", color: "black" }}>{this.state.jumlahQueue ? this.state.jumlahQueue : "0"} Tickets</h6>
-                                <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>QUEUE</p>
+                                <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Unassign</p>
                             </div>
                         </Link>
                         <Link to="/ticket/done">
