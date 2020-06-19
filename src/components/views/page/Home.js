@@ -16,11 +16,11 @@ import { Link } from 'react-router-dom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
-import { dev } from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 
 const jwt = require('jsonwebtoken');
-const url = dev;
-const socketUrl = dev
+const url = prod;
+const socketUrl = prod
 const socket = io(socketUrl)
 
 export class Home extends Component {

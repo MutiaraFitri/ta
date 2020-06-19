@@ -9,12 +9,12 @@ import { ticketsById } from '../../../redux/api/ticket';
 import io from 'socket.io-client'
 import { users } from '../../../redux/api/users';
 import { connect } from 'react-redux';
-import { dev } from '../../../redux/url/server'
+import { prod } from '../../../redux/url/server'
 import jwt from "jsonwebtoken";
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
 
-const url = dev
+const url = prod
 const socketUrl = url
 const socket = io(socketUrl)
 class Message extends Component {
