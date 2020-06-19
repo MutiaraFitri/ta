@@ -4,8 +4,11 @@ import '../../../assets/style.css';
 import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
 import axios from 'axios';
+import io from 'socket.io-client'
 import { Redirect } from 'react-router-dom';
 import tickets from '../../../assets/img/tickets.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import clipboard from '../../../assets/img/clipboard.png';
 import insurance from '../../../assets/img/insurance.png';
 import problem from '../../../assets/img/problem.png';
@@ -13,20 +16,30 @@ import { Link } from 'react-router-dom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
-import { prod } from '../../../redux/url/server';
+import { dev } from '../../../redux/url/server';
 
 const jwt = require('jsonwebtoken');
-const url = prod;
+const url = dev;
+const socketUrl = dev
+const socket = io(socketUrl)
 
 export class Home extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
-        this.state = { date: new Date() };
+        this.state = { 
+            date: new Date(),
+            persons: []
+        };
     }
-    state = {
-        persons: []
-    }
+    initSocket = () => {
+        this.setState({ socket })
+        socket.on('MESSAGE_SENT-'+this.state.user_id, (data) => {
+          toast.success("New Message")
+          // this.createNotificationSubscription(data)
+        })
+      }
+
     componentDidMount() {
         this._isMounted = true;
         if (this._isMounted) {
@@ -78,6 +91,8 @@ export class Home extends Component {
                         })
                             .then(res => {
                                 this.setState({ jumlahTask: res.data.values.length })
+                                this.initSocket()
+                                console.log("setelah jwt")
                             })
                     }
                 )

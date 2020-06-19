@@ -9,10 +9,10 @@ import routes from './routes';
 import { ToastContainer, toast } from 'react-toastify';
 import Loading from './loading';
 import 'react-toastify/dist/ReactToastify.css';
+import { prod } from "./redux/url/server";
 
-const socketUrl = "https://api.ict-servicedesk.xyz/"
+const socketUrl = prod
 const socket = io(socketUrl)
-console.log("socket",socket);
 const publicVapidKey =
   "BKh1biqQNSmXP62RjznwyzSGCm_FXcvtVMm8XPGophGFRxD2oycxY1LgTDRAv0gA2D7_00epR9SOwF9NGToCZcM";
 
@@ -29,7 +29,6 @@ class App extends React.Component {
 
     socket.on('OPEN_TICKET', (data) => {
       console.log(data);
-      alert("ADA TIKCETTTTT !")
       toast(data.title)
       this.createNotificationSubscription(data)
     })
