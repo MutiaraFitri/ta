@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 // import TicketDetailDesc from '../../TicketDetailDesc';
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
+import * as moment from 'moment';
 import { prod } from './../../../redux/url/server'
 
 const url = prod;
@@ -25,19 +26,19 @@ class DetailTicket extends Component {
 
     handleChange = (e) => {
         const notifDone = <div style={{ color: "white", textAlign: "center" }}>
-            <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
+            <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
                 done
             </span>
             Ticket Done !
         </div>
         const notifEscalated = <div style={{ color: "white", textAlign: "center" }}>
-            <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
+            <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
                 error_outline
             </span>
             Ticket Escalated !
         </div>
         const notifCancel = <div style={{ color: "white", textAlign: "center" }}>
-            <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
+            <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
                 clear
             </span>
             Ticket Canceled !
@@ -119,14 +120,14 @@ class DetailTicket extends Component {
             // var assign_to = values.technician_firstname;
             var status = values.ticket_status;
             // var due_date = values.ticket_timestamp;
-            // var priority = values.ticket_priority;
+            var priority = values.ticket_priority;
             // var id = values.ticket_id;
             var active = values.ticket_is_active;
             // var employee_email = values.employee_email;
             var description = values.ticket_description;
             var email = values.employee_email;
             // var location = values.ticket_location;
-            // var time = values.ticket_timestamp;
+            var time = values.ticket_timestamp;
             return <div>
                 <div style={{ width: "100%" }}>
                     <div className="title-ticketCategory" >
@@ -159,7 +160,7 @@ class DetailTicket extends Component {
                         OPEN
                         </div>
                         </div>
-                        <div class="deskripsi-isi" style={{ display: (!active || status === "CANCELED" || !technician_id) ? "none" : "flex" }}>
+                        <div className="deskripsi-isi" style={{ display: (!active || status === "CANCELED" || !technician_id) ? "none" : "flex" }}>
                             <select name="ticket_status" style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }} onChange={this.handleChange} value={this.state.ticket_status}>
                                 <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }} disabled>
                                     Waiting for support
@@ -167,9 +168,9 @@ class DetailTicket extends Component {
                                 <option value="cancel" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "red" }}>
                                     Canceled
                             </option>
-                                <option value="escalated" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
+                                {/* <option value="escalated" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Escalated
-                            </option>
+                            </option> */}
                                 <option value="finish" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
                                     Set as Done
                             </option>
@@ -178,35 +179,35 @@ class DetailTicket extends Component {
                     </div>
                 </div>
 
-                <div className="kotak" style={{ backgroundColor: "#F4F4F6", width: "100%", marginTop: "50px", paddingTop: "10px", paddingBottom: "30px" }}>
+                <div className="kotak" style={{ backgroundColor: "#F6F6F6", width: "100%", marginTop: "50px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D" }}>Description</div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "700", marginTop: "10px" }}>{description}</div>
+                        <div className="row">
+                            <div className="title-kotak" style={{ width: "50%", textAlign: "left", color: "#7D7D7D", fontSize: "22px", fontWeight: "bold" }}>Description</div>
+                            <div className="categoryDetail" style={{ width: "50%" }}>
+                                <div className="kotakKategori" style={{ width: "100px", height: "25px", border: "1px solid #7d7d7d", float: "right", borderRadius: "5px", fontSize: "16px", color: "#5A5454", fontWeight: "500" }}> {category} </div>
+                            </div>
+                        </div>
+                        <div className="title
+                        -kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px" }}>{description}</div>
                         <div style={{ maxWidth: "414px", textAlign: "left", marginTop: "10px" }}>
                             {(image) ?
                                 <img src={'https://api.ict-servicedesk.xyz/uploads/' + image} alt="macbook" style={{ textAlign: "left", width: "100%" }} />
                                 : null
                             }
                         </div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>category : {category}</div>
-                        <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "100%", marginTop: "15px" }}>
-                            <div style={{ margin: "0px auto", padding: "10px 0px", border: "1px solid red", borderRadius: "8px", color: "red", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
-                                CANCELED
-                        </div>
-                        </div>
-                        <div style={{ display: !(status === "DONE") ? "none" : "flex", width: "100%", marginTop: "15px" }}>
-                            <div style={{ margin: "0px auto", padding: "10px 0px", border: "1px solid #09d509", borderRadius: "8px", color: "#09d509", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
-                                DONE
-                        </div>
-                        </div>
-
+                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>Report : {moment(time).format("Do MMM YY")}</div>
                     </div>
-                    {/* <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
-                    <div style={{ paddingLeft: "25px" }}>Location  : Divisi MIS Lantai 3</div>
-                </div>
-                <div style={{ textAlign: "left", width: "100%", fontSize: "14px", fontWeight: "700", display: "flex" }}>
-                    <div style={{ paddingLeft: "25px" }}>Report  : Divisi MIS Lantai 3</div>
-                </div> */}
+
+                    <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
+                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid red", borderRadius: "8px", borderRadius: "8px", backgroundColor: "red", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                            CANCELED
+                        </div>
+                    </div>
+                    <div style={{ display: !(status === "DONE") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
+                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #078407", borderRadius: "8px", backgroundColor: "#078407", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                            DONE
+                        </div>
+                    </div>
                 </div>
             </div>
 

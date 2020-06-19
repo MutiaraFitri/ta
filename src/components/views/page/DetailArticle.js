@@ -15,6 +15,7 @@ import { prod } from '../../../redux/url/server';
 import _ from "lodash";
 const url = prod
 const gambar = prod + 'avatar/technician/'
+
 class DetailArticle extends Component {
     state = {
         category: "",
@@ -27,24 +28,26 @@ class DetailArticle extends Component {
         saved: true
     }
     renderStep() {
+
         var dataku = this.state.steps;
         console.log('datsiSTep', dataku)
         const toDos = _.map(dataku, (values, key) => {
+            console.log("ini gambar", gambar + values.steps_image)
             return <div className="row step">
                 <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
                     <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>{key + 1}</p>
                 </div>
-                <div className="judulstep" style={{ width: "90%" }}>
+                <div className="judulstep" style={{ width: "80%", paddingLeft: "12px", color: "#000", fontSize: "16px", textAlign: "left", marginTop: "10px", fontWeight: "500" }}>
                     {values.steps_title ?
-                        <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_title}</p>
+                        <p style={{ color: "#000", fontSize: "16px", textAlign: "left", marginTop: "0px", fontWeight: "500" }}>{values.steps_title}</p>
                         : "STEP " + (key + 1)}
                 </div>
-                <div className="ket-step" style={{ width: "100%" }}>
+                <div className="ket-step" style={{ width: "100%", paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", backgroundColor: "red" }}>
                     {values.steps_description ?
-                        <p style={{ paddingLeft: "12px", marginTop: "8px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
+                        <p style={{ paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
                         : null}
                     {values.steps_image ?
-                        <img src={(gambar + values.steps_image)} alt="imgStep" style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
+                        <img src={(gambar + values.steps_image)} alt=" " style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
                         : null}
                 </div>
             </div>;
@@ -128,12 +131,12 @@ class DetailArticle extends Component {
                     </div>
 
                     <div className="kotak-detArticle">
-                        <p className="p-kotak">Authored By : <span style={{ fontSize: "14px", color: "#000" }}>Justin Bieber</span></p>
+                        {/* <p className="p-kotak">Authored By : <span style={{ fontSize: "14px", color: "#000" }}>Justin Bieber</span></p> */}
                         <div className="row category-detArticle" >
                             <div className=" date-detArticle" style={{ width: "60%" }} >
-                                <p className=" date-detArticleP">ICT Services - 10/03/2020</p>
+                                {/* <p className=" date-detArticleP">ICT Services - 10/03/2020</p> */}
                             </div>
-                            <div className=" category-detArticle" style={{ width: "40%" }} >
+                            <div className=" category-detArticle" style={{ width: "40%", marginTop: "10px" }} >
                                 <p className=" category-detArticleP">Categories : Network</p>
                             </div>
                         </div>
@@ -144,14 +147,14 @@ class DetailArticle extends Component {
                             {this.renderStep()}
 
                         </div>
-                        <div className="row last-edit" style={{ padding: "0px", marginTop: "-20px", marginBottom: "-25px" }}>
+                        {/* <div className="row last-edit" style={{ padding: "0px", marginTop: "-20px", marginBottom: "-25px" }}>
                             <div className="editor" style={{ width: "70%" }}>
                                 <p className="editor-lastEdit1" style={{ textAlign: "left", }}>Last Edit By : dimas putra</p>
                             </div>
                             <div className="time-edit" style={{ width: "30%" }}>
                                 <p className="editor-lastEdit1" style={{ textAlign: "right", }}>9 hour ago</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <br /> <br />

@@ -2,11 +2,10 @@ import React from 'react';
 import './App.css';
 import './assets/style.css';
 import io from 'socket.io-client'
-
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from "react-router-config";
 import routes from './routes';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import Loading from './loading';
 import 'react-toastify/dist/ReactToastify.css';
 import { prod } from "./redux/url/server";
@@ -22,14 +21,25 @@ class App extends React.Component {
 
   componentDidMount() {
     this.initSocket()
+    // toast.info(<div style={{ color: "white", textAlign: "center" }}> 🎟️ AHALALA</div>, {
+    //   position: toast.POSITION.TOP_CENTER,
+    //   transition: Slide,
+    //   autoClose: 3000
+    // })
   }
 
   initSocket = () => {
-    this.setState({ socket })
 
+    this.setState({ socket })
     socket.on('OPEN_TICKET', (data) => {
       console.log(data);
-      toast(data.title)
+      //alert("ADA TIKCETTTTT !")
+      //toast(data.title)
+      toast.info(<div style={{ color: "white", textAlign: "center" }}> 	🛈 {data.title}</div>, {
+        position: toast.POSITION.TOP_CENTER,
+        transition: Slide,
+        autoClose: 3000
+      })
       this.createNotificationSubscription(data)
     })
   }
@@ -49,7 +59,7 @@ class App extends React.Component {
         "key": "8dfcb234a322aeeb6b530f20c8e9988e",
         "content-type": "application/json",
         "title": data.title,
-        "description":data.description
+        "description": data.description
       }
     });
     console.log("Push Sent...");
