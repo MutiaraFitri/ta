@@ -29,7 +29,8 @@ class Antrian extends Component {
                     (this.props.status === "WAITING FOR TECHNICIAN") ? "#A4C7FA" :
                         (this.props.status === "ON PROCESS") ? "#FFD89D" :
                             (this.props.status === "CANCELED") ? "#FFABAB" :
-                                "#A4C7FA";
+                                (this.props.status === "SPAM") ? "#FF0F17" :
+                                    "#A4C7FA";
         const imagePriority =
             (this.props.priority === "Low") ? low :
                 (this.props.priority === "Highest") ? high :
@@ -37,7 +38,7 @@ class Antrian extends Component {
                         low;
         const statusPriority =
             (this.props.priority === "LOW") ? "LOW" :
-                (this.props.priority === "HIGH") ? "HIGH" :
+                (this.props.priority === "Highest") ? "HIGH" :
                     "LOW";
 
         const assignColor =
@@ -51,30 +52,30 @@ class Antrian extends Component {
         return (
             <div>
                 <Link to={'/ticket/detail/' + this.props.id}>
-                    <div className="tiket" >
+                    <div className="tiket antrian" >
 
-                        <div className="icon-category" style={{ width: "20%", marginTop: "15px", display: "flex" }}>
-                            <div className="icon" style={{ width: "50px", backgroundColor: bgCategory, height: "50px", borderRadius: "50%" }}>
-                                <img src={imgCategory} alt="!" style={{ marginTop: "25%", width: "5 0%" }} />
+                        <div className="icon-category" >
+                            <div className="icon" style={{ backgroundColor: bgCategory }}>
+                                <img className="imgCategory" src={imgCategory} alt="!" />
                             </div>
                         </div>
-                        <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
+                        <div className="desc-antrian"  >
                             <div className="name" style={{ fontSize: "15px", color: "black" }}>{this.props.sender1} {this.props.sender2}</div>
-                            <div className="type" style={{ fontSize: "10px", color: "#F1AEAE" }}>{this.props.category}</div>
-                            <div className="message" style={{ fontSize: "12px", color: "#665858" }}>{this.props.title}</div>
-                            <div className="status" style={{ width: "102px", height: "15px", margin: "0px auto", borderRadius: "50px", backgroundColor: bgStatus, textAlign: "center", marginTop: "10px" }}>
-                                <div style={{ fontSize: "9px", wight: "bold", color: "black", textTransform: "uppercase" }}>{this.props.status}</div>
+                            <div className="type" style={{ fontSize: "11px", color: "#F1AEAE" }}>{this.props.category}</div>
+                            <div className="message" style={{ fontSize: "13px", color: "#665858" }}>{this.props.title}</div>
+                            <div className="status" style={{ backgroundColor: bgStatus }}>
+                                <div className="category-status" >{this.props.status}</div>
                             </div>
                         </div>
-                        <div className="dasc-status" style={{ width: "20%", textAlign: "left", padding: "30px 30px" }}>
-                            <div style={{ fontSize: "12px", color: assignColor, fontWeight: "bold" }}>{assign}</div>
+                        <div className="dasc-status" >
+                            <div className="assign" style={{ color: assignColor }}>{assign}</div>
                         </div>
-                        <div className="category" style={{ width: "15%", textAlign: "left" }}>
-                            <div className="tanggal" style={{ fontSize: "9px", color: "black", letterSpacing: "0.2", fontWeight: "bold", textAlign: "center" }}> {moment(this.props.due_date).subtract(10, 'days').calendar()}</div>
-                            <div className="icon" style={{ fontSize: "10px", color: "black", textAlign: "center", marginTop: "10px" }}>
-                                <img src={imagePriority} alt="low" style={{ width: "22px", height: "22px", margin: "0px auto" }} />
+                        <div className="category-antrian" >
+                            <div className="tanggal" > {moment(this.props.due_date).subtract(10, 'days').calendar()}</div>
+                            <div className="icon-priority" >
+                                <img className="imgPriority" src={imagePriority} alt="low" />
                             </div>
-                            <div className="name-category" style={{ fontSize: "10px", color: "#000", textAlign: "center", padding: "5px", wight: "bold" }}> {statusPriority}</div>
+                            <div className="name-category" > {statusPriority}</div>
                         </div>
                     </div>
                 </Link>

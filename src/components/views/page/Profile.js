@@ -39,12 +39,14 @@ export class Profile extends Component {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    this.fetchUser();
-                }
-            )
+            else {
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        this.fetchUser();
+                    }
+                )
+            }
         });
     }
 
@@ -141,9 +143,9 @@ export class Profile extends Component {
                     </div>
                 </div>
 
-                <div className="row" style={{ width: "100%" }}>
-                    <div className="row" style={{ marginTop: "2rem" }}>
-                        <button className="button-submit" type="submit" onClick={this.handleLogout}>logOut</button>
+                <div>
+                    <div className="row">
+                        <button className="buttonLogout" type="submit" onClick={this.handleLogout}>logOut</button>
                     </div>
                 </div>
                 <NavbarBottom active="Profile" />

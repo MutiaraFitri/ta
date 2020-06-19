@@ -4,9 +4,11 @@ import '../../../assets/style.css';
 import NavbarTop from '../navbar/NavbarTopHome';
 import NavbarBottom from '../navbar/NavbarBottom';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import io from 'socket.io-client'
+import { Redirect } from 'react-router-dom';
 import tickets from '../../../assets/img/tickets.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import clipboard from '../../../assets/img/clipboard.png';
 import insurance from '../../../assets/img/insurance.png';
 import problem from '../../../assets/img/problem.png';
@@ -14,20 +16,30 @@ import { Link } from 'react-router-dom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import { connect } from 'react-redux';
 import users from '../../../redux/api/users';
-import { dev, prod } from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 
 const jwt = require('jsonwebtoken');
 const url = prod;
+const socketUrl = prod
+const socket = io(socketUrl)
 
 export class Home extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
-        this.state = { date: new Date() };
+        this.state = { 
+            date: new Date(),
+            persons: []
+        };
     }
-    state = {
-        persons: []
-    }
+    initSocket = () => {
+        this.setState({ socket })
+        socket.on('MESSAGE_SENT-'+this.state.user_id, (data) => {
+          toast.success("New Message")
+          // this.createNotificationSubscription(data)
+        })
+      }
+
     componentDidMount() {
         this._isMounted = true;
         if (this._isMounted) {
@@ -68,19 +80,23 @@ export class Home extends Component {
                 localStorage.removeItem("jwt");
                 // dispatch(loginFailed("Your session has expired"));
             }
-            const user = decoded.data;
-            this.setState({ ...user },
-                () => {
-                    axios.get(url + `ticket/technician/` + this.state.user_id, {
-                        headers: {
-                            key: "8dfcb234a322aeeb6b530f20c8e9988e"
-                        }
-                    })
-                        .then(res => {
-                            this.setState({ jumlahTask: res.data.values.length })
+            else {
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        axios.get(url + `ticket/technician/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
                         })
-                }
-            )
+                            .then(res => {
+                                this.setState({ jumlahTask: res.data.values.length })
+                                this.initSocket()
+                                console.log("setelah jwt")
+                            })
+                    }
+                )
+            }
         });
     }
 
@@ -113,7 +129,7 @@ export class Home extends Component {
             <div className="home">
                 <NavbarTop />
                 <div className="container" style={{ width: "100%" }}>
-                    <div className="row rowHome" style={{ width: "340px", margin: "20px auto", marginTop: "-60px" }}>
+                    <div className="row rowHome">
                         <div className="lingkaran">
                             <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.date.toLocaleTimeString([], { timeStyle: 'short' })}</h6>
                             <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Good {waktu} !</h6>
@@ -168,7 +184,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
                                     <img src={tickets} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "60%" }}>
+                                <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>All Ticket</div>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahAll ? this.state.jumlahAll : "0"}</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>queue</div>
@@ -192,7 +208,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
                                     <img src={clipboard} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "60%" }}>
+                                <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTask ? this.state.jumlahTask : "0"}</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>assign</div>
@@ -221,7 +237,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
                                     <img src={insurance} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Report</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>summary</div>
                                 </div>
@@ -241,7 +257,7 @@ export class Home extends Component {
                                 <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
                                     <img src={problem} alt="info" />
                                 </div>
-                                <div className="desc" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlage Base</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
                                 </div>

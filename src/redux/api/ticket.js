@@ -1,7 +1,7 @@
 
 import { fetchTiket } from "../action/action";
 import axios from 'axios';
-import { dev,prod } from '../url/server';
+import { prod } from '../url/server';
 
 const url = prod;
 
@@ -13,7 +13,7 @@ export function tickets() {
             }
         })
             .then(res => {
-                const tiket = res.data;
+                const tiket = res.data.values;
                 console.log("data", tiket)
                 dispatch(fetchTiket(tiket));
             })

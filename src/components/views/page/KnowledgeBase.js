@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
-import { css } from '@emotion/core';
+// import { css } from '@emotion/core';
 import back from '../../../assets/img/back.png';
 import axios from 'axios';
 import picture from './../../../assets/img/picture.png';
@@ -154,10 +154,6 @@ export class KnowledgeBase extends Component {
 
     render() {
         let { imagePreviewUrl } = this.state;
-        const override = css`
-            display: block;
-            margin: 0px auto;
-        `;
         return (
             <div className="home" style={{ height: (this.state.loading) ? "100vh" : "auto", overflow: (this.state.loading) ? "hidden" : "auto" }}>
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
@@ -168,7 +164,7 @@ export class KnowledgeBase extends Component {
                             </div>
                         </Link>
                     </div>
-                        Edit Article
+                         Edit Article
                 </div>
                 <div style={{
                     width: "100%",

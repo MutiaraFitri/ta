@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import write from '../../../assets/img/write.png';
 import NavbarBottom from '../navbar/NavbarBottom';
 import back from '../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
@@ -19,15 +18,15 @@ class Article extends Component {
         const { data } = this.props;
         var dataku = data.kb.data;
         const toDos = _.map(dataku, (values, key) => {
-            return <Link to={'/article/detail/' + values.kb_id} ><div key={values.kb_id} className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", display: "flex", margin: "0px auto" }}>
-                <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                    <p style={{ fontSize: "15px", color: "#104FAD", }}>{values.issue_subject}</p>
+            return <Link to={'/article/detail/' + values.kb_id} ><div key={values.kb_id} className="ticket-article">
+                <div className="judul-topic" >
+                    <p>{values.issue_subject}</p>
                 </div>
-                <div className="judul-kategori" style={{ width: "30%" }}>
-                    <p style={{ fontSize: "15px", color: "black", float: "center" }}>{values.issue_category}</p>
+                <div className="jdul-kategori" >
+                    <p>{values.issue_category}</p>
                 </div>
-                <div className="jdul-authors" style={{ width: "50%" }}>
-                    <p style={{ fontSize: "15px", color: "black", }}>{values.kb_subject}</p>
+                <div className="jdul-authors"  >
+                    <p>{values.kb_subject}</p>
                 </div>
             </div></Link>;
         });
@@ -72,13 +71,19 @@ class Article extends Component {
                     {this.renderKB()}
                     <br /><br />
                 </div>
-                <div style={{ bottom: "50px", position: "fixed" }}>
+                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
+                    <div style={{ width: "82%", height: "10px" }}>
+                    </div>
                     <Link to="/new-article">
-                        <img src={write} alt="add" style={{ width: "70%" }} />
+                        <div class="chatIcon">
+                            <span class="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>
+                                add
+                            </span>
+                        </div>
                     </Link>
                 </div>
                 <NavbarBottom active="Home" />
-            </div>
+            </div >
         );
     }
 }

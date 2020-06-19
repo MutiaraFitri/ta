@@ -9,14 +9,50 @@ export const UPDATE_PASSWORD_FAILED = 'UPDATE_PASSWORD_FAILED';
 export const FETCH_KB_SUCCESS = 'FETCH_KB_SUCCESS';
 export const FETCH_TIKET_SUCCESS = 'FETCH_TIKET_SUCCESS';
 export const FETCH_TECHNICIAN_SUCCESS = 'FETCH_TECHNICIAN_SUCCESS';
+export const FETCH_NOTIFICATION_SUCCESS = 'FETCH_NOTIFICATION_SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const FETCH_SUMMARY_ASSIGN = 'FETCH_SUMMARY_ASSIGN';
+export const FETCH_SUMMARY_DONE = 'FETCH_SUMMARY_DONE';
+export const FETCH_SUMMARY_ESCALATED = 'FETCH_SUMMARY_ESCALATED';
+export const FETCH_SUMMARY_CANCEL = 'FETCH_SUMMARY_CANCEL';
+export const FETCH_SUMMARY_THIS_MONTH = 'FETCH_SUMMARY_THIS_MONTH';
 
 export const fetchProductPending = () => {
     // console.log("asu")
     return {
         type: FETCH_PRODUCT_PENDING,
         value: "pending"
+    }
+}
+export const fetchSummaryAssignSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_ASSIGN,
+        value: data.values
+    }
+}
+export const fetchSummaryThisMonthSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_THIS_MONTH,
+        value: data.values
+    }
+}
+export const fetchSummaryCancelSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_CANCEL,
+        value: data.values
+    }
+}
+export const fetchSummaryEscalatedSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_ESCALATED,
+        value: data.values
+    }
+}
+export const fetchSummaryDoneSucces = (data) => {
+    return {
+        type: FETCH_SUMMARY_DONE,
+        value: data.values
     }
 }
 
@@ -45,6 +81,13 @@ export const fetchProductSuccess = () => {
     return {
         type: FETCH_SUCCESS,
         value: "success"
+    }
+}
+
+export const fetchNotification = (data) => {
+    return {
+        type: FETCH_NOTIFICATION_SUCCESS,
+        value:data
     }
 }
 
