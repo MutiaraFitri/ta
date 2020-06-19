@@ -8,10 +8,10 @@ import routes from './routes';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import Loading from './loading';
 import 'react-toastify/dist/ReactToastify.css';
+import { prod } from "./redux/url/server";
 
-const socketUrl = "https://api.ict-servicedesk.xyz/"
+const socketUrl = prod
 const socket = io(socketUrl)
-console.log("socket", socket);
 const publicVapidKey =
   "BKh1biqQNSmXP62RjznwyzSGCm_FXcvtVMm8XPGophGFRxD2oycxY1LgTDRAv0gA2D7_00epR9SOwF9NGToCZcM";
 
