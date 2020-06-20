@@ -94,12 +94,19 @@ background:url('./img/star.png');
 }
 
 .input-form-full{
-    width: 90%;
+    width: 100%;
     text-align: center;
+    padding: 10px;
+    font-size: 18px;
 }
-
+.input-form-PB{
+    width: 93%;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+}
 .input-form-textarea{
-    width: 90%;
+    width: 100%;
     height: 60px;
     text-align: left;
 }
@@ -489,7 +496,7 @@ a {
 .desc-antrian{
     width: 45%;
     text-align: left;
-    padding-left: 3px;
+    padding-left: 6px;
 }
 .desc-antrian .status{
     width: 125px;
@@ -743,10 +750,11 @@ margin-top: 25px;
     margin: 25px;
 }
 .p-titile1{
-    font-size: 12px; 
+    font-size: 16px; 
     padding: 0px; 
     margin: 0px; 
-    color: black;
+    color: #7D7D7D;
+    font-weight: bold;
 } 
 .p-titile2{
     font-size: 22px; 
@@ -772,14 +780,14 @@ margin-top: 25px;
     color: white;
 }
 .nama-pengirim .nama{
-    font-size: 24px; 
+    font-size: 20px; 
     color: black; 
     font-weight: bold; 
     text-align: left;
 }
 .nama-pengirim .email{
-    font-size: 20px; 
-    color: black; 
+    font-size: .75rem ; 
+    color: #5f6368; 
     text-align: left; 
     }
 .nama-pengirim .deskripsi-isi{

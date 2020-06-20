@@ -24,11 +24,11 @@ class Antrian extends Component {
                         lain;
 
         const bgStatus =
-            (this.props.status === "DONE") ? "#BAF2D7" :
-                (this.props.status === "WAITING FOR SUPPORT") ? "#A4C7FA" :
-                    (this.props.status === "WAITING FOR TECHNICIAN") ? "#A4C7FA" :
-                        (this.props.status === "ON PROCESS") ? "#FFD89D" :
-                            (this.props.status === "CANCELED") ? "#FFABAB" :
+            (this.props.status === "DONE") ? "#43bf57" :
+                (this.props.status === "WAITING FOR SUPPORT") ? "#619ffc" :
+                    (this.props.status === "WAITING FOR TECHNICIAN") ? "#619ffc" :
+                        (this.props.status === "ON PROCESS") ? "#f8c22d" :
+                            (this.props.status === "CANCELED") ? "#f35834" :
                                 (this.props.status === "SPAM") ? "#FF0F17" :
                                     "#A4C7FA";
         const imagePriority =

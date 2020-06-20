@@ -117,6 +117,9 @@ class DetailTicket extends Component {
             var title = values.ticket_subject;
             var image = values.ticket_image;
             var technician_id = values.ticket_technician_id;
+            var imgEmployee = (values.employee_image) ? (values.employee_image) ? values.employee_image : "dimas.jpg" : "dimas.jpg";
+            var gambarEmployee = 'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee;
+            console.log(gambarEmployee);
             // var assign_to = values.technician_firstname;
             var status = values.ticket_status;
             // var due_date = values.ticket_timestamp;
@@ -128,7 +131,7 @@ class DetailTicket extends Component {
             var email = values.employee_email;
             // var location = values.ticket_location;
             var time = values.ticket_timestamp;
-            return <div>
+            return (<div>
                 <div style={{ width: "100%" }}>
                     <div className="title-ticketCategory" >
                         <p className="p-titile1" >Title</p>
@@ -138,18 +141,18 @@ class DetailTicket extends Component {
                 <div style={{ width: "100%", height: "70px", display: "flex" }}>
                     <div className="pengirim" style={{ width: "20%", marginLeft: "25px" }}>
                         <div className="foto-pengim" >
-                            <img src={mann} alt="mann" style={{ width: "100%" }} />
+                            <img src={gambarEmployee} alt="mann" style={{ width: "100%" }} />
                         </div>
                     </div>
                     <div className="nama-pengirim">
                         <div className="nama" >{sender1} {sender2}</div>
                         <div className="email" > {email} </div>
-                        <div style={{ display: (active) ? "none" : "flex", width: "100%" }}>
+                        <div style={{ display: (active) ? "none" : "flex", width: "100%", textAlign: "right " }}>
                             <div style={{ color: "red", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
                                 <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "red", marginRight: "5px" }}>
                                     highlight_off
                         </span>
-                        CLOSED
+                        TICKET CLOSED
                         </div>
                         </div>
                         <div style={{ display: !(active) ? "none" : "flex", width: "100%" }}>
@@ -187,29 +190,33 @@ class DetailTicket extends Component {
                                 <div className="kotakKategori" style={{ width: "100px", height: "25px", border: "1px solid #7d7d7d", float: "right", borderRadius: "5px", fontSize: "16px", color: "#5A5454", fontWeight: "500" }}> {category} </div>
                             </div>
                         </div>
-                        <div className="title
-                        -kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px" }}>{description}</div>
+                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px" }}>{description}</div>
                         <div style={{ maxWidth: "414px", textAlign: "left", marginTop: "10px" }}>
                             {(image) ?
                                 <img src={'https://api.ict-servicedesk.xyz/uploads/' + image} alt="macbook" style={{ textAlign: "left", width: "100%" }} />
                                 : null
                             }
                         </div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>Report : {moment(time).format("Do MMM YY")}</div>
+                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>Report : {moment(time).format("Do MMM YY")} , {moment(time).startOf('hour').fromNow()}</div>
                     </div>
 
                     <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
-                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid red", borderRadius: "8px", borderRadius: "8px", backgroundColor: "red", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #f35834", borderRadius: "8px", backgroundColor: "#f35834", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             CANCELED
                         </div>
                     </div>
                     <div style={{ display: !(status === "DONE") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
-                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #078407", borderRadius: "8px", backgroundColor: "#078407", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #43bf57", borderRadius: "8px", backgroundColor: "#43bf57", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             DONE
                         </div>
                     </div>
+                    <div style={{ display: !(status === "SPAM") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
+                        <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #FF0F17", borderRadius: "8px", backgroundColor: "#FF0F17", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
+                            SPAM
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>)
 
 
                 ;

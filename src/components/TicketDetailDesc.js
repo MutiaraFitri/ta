@@ -30,6 +30,8 @@ class TicketDetailDesc extends Component {
             })
     }
     render() {
+        const gambarEmployee = (this.props.employee_image) ? (this.props.employee_image) ? this.props.employee_image : mann : mann;
+        console.log(gambarEmployee);
         return (
             <div>
                 <div style={{ width: "100%" }}>
@@ -41,7 +43,7 @@ class TicketDetailDesc extends Component {
                 <div style={{ width: "100%", height: "70px", display: "flex" }}>
                     <div className="pengirim" style={{ width: "20%", marginLeft: "25px" }}>
                         <div className="foto-pengim" >
-                            <img src={mann} alt="mann" style={{ width: "100%" }} />
+                            <img src={gambarEmployee} alt="img" style={{ width: "100%" }} />
                         </div>
                     </div>
                     <div className="nama-pengirim">
