@@ -42,7 +42,7 @@ class DetailArticle extends Component {
                         <p style={{ color: "#000", fontSize: "16px", textAlign: "left", marginTop: "0px", fontWeight: "500" }}>{values.steps_title}</p>
                         : "STEP " + (key + 1)}
                 </div>
-                <div className="ket-step" style={{ width: "100%", paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", backgroundColor: "red" }}>
+                <div className="ket-step" style={{ width: "100%", paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>
                     {values.steps_description ?
                         <p style={{ paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
                         : null}

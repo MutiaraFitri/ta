@@ -328,7 +328,7 @@ class DetailTicket extends Component {
                 />
                 <div className="navbar-message" >
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='/all-ticket'>
+                        <Link to='/ticket/all'>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
                                 <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>
@@ -342,8 +342,8 @@ class DetailTicket extends Component {
                 {(this.state.tiket[0]) ?
                     (!this.state.tiket[0].ticket_technician_id && this.state.tiket[0].ticket_is_active) ?
                         <div className="row" style={{ width: "100%" }}>
-                            <div className="kotak-menu" style={{ width: "33%" }}>
-                                <div style={{ padding: "5px" }} onClick={this.handleButtonAssignToMe}>
+                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonAssignToMe}>
+                                <div style={{ padding: "5px" }} >
                                     <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
                                         <div className="icon-menu">
                                             <img src={tambah} alt="tambah" />
@@ -354,8 +354,8 @@ class DetailTicket extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="kotak-menu" style={{ width: "33%" }}>
-                                <div style={{ padding: "5px" }} onClick={this.handleButtonMakeItPriority}>
+                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonMakeItPriority}>
+                                <div style={{ padding: "5px" }} >
                                     <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
                                         <div className="icon-menu">
                                             <img src={priority} alt="tambah" />
@@ -366,8 +366,8 @@ class DetailTicket extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="kotak-menu" style={{ width: "33%" }}>
-                                <div style={{ padding: "5px" }} onClick={this.handleButtonSpam}>
+                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonSpam}>
+                                <div style={{ padding: "5px" }}>
                                     <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
                                         <div className="icon-menu">
                                             <img src={garbage} alt="tambah" />
