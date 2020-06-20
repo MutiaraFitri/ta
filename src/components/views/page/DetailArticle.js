@@ -14,7 +14,7 @@ import { prod } from '../../../redux/url/server';
 
 import _ from "lodash";
 const url = prod
-const gambar = prod + 'avatar/technician/'
+const gambar = prod + 'uploads/'
 
 class DetailArticle extends Component {
     state = {
@@ -32,7 +32,8 @@ class DetailArticle extends Component {
         var dataku = this.state.steps;
         console.log('datsiSTep', dataku)
         const toDos = _.map(dataku, (values, key) => {
-            console.log("ini gambar", gambar + values.steps_image)
+            var kbImg = gambar + values.steps_image
+            console.log("ini gambar", kbImg)
             return <div className="row step">
                 <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
                     <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>{key + 1}</p>
@@ -47,7 +48,7 @@ class DetailArticle extends Component {
                         <p style={{ paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
                         : null}
                     {values.steps_image ?
-                        <img src={(gambar + values.steps_image)} alt=" " style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
+                        <img src={kbImg} alt=" " style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
                         : null}
                 </div>
             </div>;

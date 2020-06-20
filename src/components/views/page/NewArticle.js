@@ -274,7 +274,7 @@ export class Report extends Component {
                         <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
                             Problem Solve
                         </div>
-                        <input className="input-form-full" type="text" placeholder="Problem Solve" onChange={this.handleChange} name="kb_subject" />
+                        <input className="input-form-PB" type="text" placeholder="Problem Solve" onChange={this.handleChange} name="kb_subject" />
                     </div>
                     <div className="label" style={{ display: (this.state.issue_category) ? "inline" : "none" }}>
                         <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
@@ -286,7 +286,7 @@ export class Report extends Component {
                         <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
                             How Many Step ?
                         </div>
-                        <input className="input-form-full" type="number" placeholder="2,3,4,..." onChange={this.handleChange} name="much" />
+                        <input className="input-form-PB" type="number" placeholder="2,3,4,..." onChange={this.handleChange} name="much" />
                     </div>
                     <div className="row" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "100%", marginBottom: "70px", float: "right" }}>
                         <button className="button" type="submit" onClick={this.handleSubmit}>
