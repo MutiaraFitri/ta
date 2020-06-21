@@ -23,7 +23,8 @@ export class Ticket extends Component {
         until: null,
         priority: null,
         category: null,
-        transform: true
+        transform: true,
+        date: { awal: null, akhir: null },
     }
     componentDidMount() {
         if (this.props.match.params.detail === 'assign-to-me') {
@@ -46,6 +47,11 @@ export class Ticket extends Component {
         }
     }
 
+    handleDate = (e) =>{
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
     showFilter = () => {
         this.setState({
             overlay: true
@@ -72,7 +78,146 @@ export class Ticket extends Component {
         if (data.personState.data) {
             dataku = data.personState.data.values;
             const toDos = _.map(dataku, (values, key) => {
-                if (this.state.priority && this.state.category) {
+                if (this.state.priority && this.state.awal && this.state.category) {
+                    console.log("ASU")
+                    if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.priority && this.state.awal) {
+                    if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.awal && this.state.category) {
+                    if (values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.priority && this.state.category) {
                     if (values.ticket_priority === this.state.priority && values.ticket_category === this.state.category) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
@@ -120,6 +265,52 @@ export class Ticket extends Component {
                 }
                 else if (this.state.priority) {
                     if (values.ticket_priority === this.state.priority) {
+                        if (this.state.q) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                                return <div key={key}>
+                                    <Antrian
+                                        //imageKategori={hardware}
+                                        sender1={values.employee_firstname}
+                                        sender2={values.employee_lastname}
+                                        category={values.ticket_category}
+                                        title={values.ticket_subject}
+                                        assign_to={values.technician_firstname}
+                                        status={values.ticket_status}
+                                        due_date={values.ticket_timestamp}
+                                        imagePriority={low}
+                                        priority={values.ticket_priority}
+                                        id={values.ticket_id}
+                                        employee_email={values.employee_email}
+                                        description={values.ticket_description}
+                                        location={values.ticket_location}
+                                    />
+                                </div>;
+                            }
+                        }
+                        else {
+                            return <div key={key}>
+                                <Antrian
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    category={values.ticket_category}
+                                    title={values.ticket_subject}
+                                    assign_to={values.technician_firstname}
+                                    status={values.ticket_status}
+                                    due_date={values.ticket_timestamp}
+                                    imagePriority={low}
+                                    priority={values.ticket_priority}
+                                    id={values.ticket_id}
+                                    employee_email={values.employee_email}
+                                    description={values.ticket_description}
+                                    location={values.ticket_location}
+                                />
+                            </div>;
+                        }
+                    }
+                }
+                else if (this.state.awal) {
+                    if (values.ticket_timestamp <= this.state.akhir&& values.ticket_timestamp >= this.state.awal) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
                                 return <div key={key}>
@@ -327,26 +518,26 @@ export class Ticket extends Component {
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
                                         <div style={{ fontSize: "11px", marginBottom: "5px", color: "black" }}>From</div>
-                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} /></div>
+                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} name="awal" onChange={this.handleDate}/></div>
                                     </div>
                                 </div>
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
                                         <div style={{ fontSize: "11px", marginBottom: "5px", color: "black" }}>Until</div>
-                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} /></div>
+                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} name="akhir" onChange={this.handleDate}/></div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>PRIORITY</div>
                                 <div style={{ width: "90%" }} className="row">
-                                    <div style={{ width: "33.3333%" }}>
+                                    <div style={{ width: "50%" }}>
                                         <div className={(this.state.priority === "low") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="low">
                                             Low
                                     </div>
                                     </div>
-                                    <div style={{ width: "33.3333%" }}>
-                                        <div className={(this.state.priority === "high") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="high">
+                                    <div style={{ width: "50%" }}>
+                                        <div className={(this.state.priority === "Highest") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="Highest">
                                             High
                                     </div>
                                     </div>
