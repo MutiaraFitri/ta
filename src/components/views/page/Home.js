@@ -7,7 +7,8 @@ import axios from 'axios';
 import io from 'socket.io-client'
 import { Redirect } from 'react-router-dom';
 import tickets from '../../../assets/img/tickets.png';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import clipboard from '../../../assets/img/clipboard.png';
 import insurance from '../../../assets/img/insurance.png';
@@ -27,18 +28,18 @@ export class Home extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             date: new Date(),
             persons: []
         };
     }
     initSocket = () => {
         this.setState({ socket })
-        socket.on('MESSAGE_SENT-'+this.state.user_id, (data) => {
-          toast.success("New Message")
-          // this.createNotificationSubscription(data)
+        socket.on('MESSAGE_SENT-' + this.state.user_id, (data) => {
+            toast.success("New Message")
+            // this.createNotificationSubscription(data)
         })
-      }
+    }
 
     componentDidMount() {
         this._isMounted = true;
@@ -146,7 +147,7 @@ export class Home extends Component {
                                     margin: "0px -20px"
                                 }}>
                                 <h6 style={{ fontSize: "21px", color: "black" }}>{this.state.jumlahQueue ? this.state.jumlahQueue : "0"} Tickets</h6>
-                                <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>QUEUE</p>
+                                <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Unassign</p>
                             </div>
                         </Link>
                         <Link to="/ticket/done">

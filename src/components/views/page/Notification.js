@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NavbarTop from '../navbar/NavbarTop';
 import { connect } from "react-redux";
 import Skeleton from 'react-loading-skeleton';
-import {SkeletonTheme} from 'react-loading-skeleton';
+import { SkeletonTheme } from 'react-loading-skeleton';
 import _ from 'lodash'
 import NavbarBottom from '../navbar/NavbarBottom';
 import moment from 'moment'
@@ -18,8 +18,8 @@ export class Notification extends Component {
             return (
                 <div className="notification" key={key}>
                     <div className="time-notification">{moment(value.notification_timestamps).format('LT')}</div>
-            <div className="title-notification">{value.notification_title}}</div>
-            <div className="description-notification">{value.notification_message}</div>
+                    <div className="title-notification">{value.notification_title}</div>
+                    <div className="description-notification">{value.notification_message}</div>
                 </div>
             );
         });
@@ -28,17 +28,17 @@ export class Notification extends Component {
         }
         return (
             <div className="notification">
-                <div className="time-notification"><SkeletonTheme color="#35599e" highlightColor="#486fbb"><Skeleton duration={1} width="50px"/></SkeletonTheme></div>
-                <div className="title-notification"><SkeletonTheme color="#35599e" highlightColor="#486fbb"><Skeleton duration={1} width="200px"/></SkeletonTheme></div>
+                <div className="time-notification"><SkeletonTheme color="#35599e" highlightColor="#486fbb"><Skeleton duration={1} width="50px" /></SkeletonTheme></div>
+                <div className="title-notification"><SkeletonTheme color="#35599e" highlightColor="#486fbb"><Skeleton duration={1} width="200px" /></SkeletonTheme></div>
                 <div className="description-notification"><SkeletonTheme color="#35599e" highlightColor="#486fbb"><Skeleton duration={1} /></SkeletonTheme></div>
             </div>
         );
     }
     render() {
         return (
-            <div className="home Ticket" style={{ paddingBottom: "50px", minHeight:"90vh" }}>
+            <div className="home Ticket" style={{ paddingBottom: "50px", minHeight: "90vh" }}>
                 <NavbarTop back="true" title="Notification" />
-                <div style={{ width: "95%",paddingTop:"70px",textAlign:"left" }}>
+                <div style={{ width: "95%", paddingTop: "70px", textAlign: "left" }}>
                     {this.renderTicket()}
                 </div>
                 <NavbarBottom active="Home" />
