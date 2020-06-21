@@ -4,6 +4,7 @@ import garbage from './../../../assets/img/garbage.png';
 import mann from './../../../assets/img/mann.png';
 import tambah from './../../../assets/img/tambah.png';
 import { ToastContainer, toast, Slide } from 'react-toastify';
+import io from 'socket.io-client'
 import 'react-toastify/dist/ReactToastify.css';
 import NavbarBottom from '../navbar/NavbarBottom';
 import { Link } from 'react-router-dom';
@@ -15,9 +16,12 @@ import { connect } from 'react-redux';
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
 import * as moment from 'moment';
-import { prod } from './../../../redux/url/server'
+import { dev } from './../../../redux/url/server'
 
-const url = prod;
+const url = dev
+const socketUrl = url
+
+const socket = io(socketUrl)
 class DetailTicket extends Component {
     state = {
         tiket: [],
@@ -82,6 +86,7 @@ class DetailTicket extends Component {
                 }
                 console.log("hasil", res)
                 this.fetchData()
+                socket.emit(`TICKET`, ({ employeeId: this.state.tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
             })
             .catch(error => {
                 console.log("Error " + error);
@@ -242,6 +247,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -273,6 +279,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -304,6 +311,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
