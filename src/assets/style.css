@@ -94,7 +94,7 @@ background:url('./img/star.png');
 }
 
 .input-form-full{
-    width: 100%;
+    width: 94%;
     text-align: center;
     padding: 10px;
     font-size: 18px;
@@ -517,7 +517,7 @@ a {
 .dasc-status{
     width: 20%;
     text-align:left;
-    padding: 30px 30px;
+    padding: 30px 0px;
 }
 .assign{
     font-size: 12px;
@@ -666,14 +666,13 @@ margin-top: 25px;
     width: 300px;
 }
 .edit-article2{
-    width: 15%;
+    width: 45%;
     text-align: left;
 }
 .edit-articleIcon{
     width: 40px; 
     height: 40px; 
     border-radius: 10px; 
-    padding: 5px;
     margin: 5px auto;
 }
 .kotak-detArticle{
@@ -702,10 +701,11 @@ margin-top: 25px;
     text-align: left;
 }
 .category-detArticleP{
-    margin: 17px; 
+    /* margin: 17px;  */
     font-size: 12px; 
     color: #4F4F4F; 
     text-align: right;
+    padding-right: 13px;
 }
 .detArticle-P1{
     font-size: 24px; 
@@ -794,7 +794,7 @@ margin-top: 25px;
     width: 200px; 
     float: right; 
     margin: 10px ;
-    margin-top: -20px;
+    margin-top: 10px;
 }
 /* PAGE HOME */
 .rowHome{
@@ -818,7 +818,10 @@ margin-top: 25px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
     padding: 15px ;
     background-color: #0050A1; 
-    border-radius: 50%
+    border-radius: 50%;
+    float: right;
+    margin-right: 40px;
+    margin-bottom: 10px;
 }
 @media (min-width: 500px) {
     .navbar-message {
@@ -833,8 +836,16 @@ margin-top: 25px;
         padding: 0px;
         transform: translateX(-50%);
         position: relative;
+        margin-right: 0px;
     }
     .chatIcons{
         margin-top: 13px;
     }
+}
+@media only screen and (min-device-width : 375px){
+    .judul-kategori{
+        margin:0px;    
+        margin-bottom: 20px;
+    }
+    
 }

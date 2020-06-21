@@ -71,9 +71,7 @@ class Article extends Component {
                     {this.renderKB()}
                     <br /><br />
                 </div>
-                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
-                    <div style={{ width: "82%", height: "10px" }}>
-                    </div>
+                <div style={{ width: "414px", bottom: "55px", position: "fixed", clear: "both" }}>
                     <Link to="/new-article">
                         <div class="chatIcon">
                             <span class="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>

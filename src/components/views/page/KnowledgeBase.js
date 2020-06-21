@@ -158,7 +158,7 @@ export class KnowledgeBase extends Component {
             <div className="home" style={{ height: (this.state.loading) ? "100vh" : "auto", overflow: (this.state.loading) ? "hidden" : "auto" }}>
                 <div style={{ backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", width: "100%", color: "white", padding: "16px 0px" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='/article'>
+                        <Link to={'/article/detail/' + this.props.match.params.id}>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
                                 <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>

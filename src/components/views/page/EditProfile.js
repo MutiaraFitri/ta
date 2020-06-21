@@ -33,7 +33,7 @@ export class EditProfile extends Component {
     }
 
     handleSave = () => {
-        axios.put(`https://api.ict-servicedesk.xyz//technician/` + this.state.user_id, this.state, {
+        axios.put(`https://api.ict-servicedesk.xyz/technician/` + this.state.user_id, this.state, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }

@@ -74,7 +74,7 @@ class Rating extends Component {
                 dataku = data.personState.data;
                 const toDos = _.map(dataku, (values, key) => {
                     console.log("bulan", new Date(values.ticket_timestamp).getMonth());
-                    if (values.ticket_rating && new Date(values.ticket_timestamp).getMonth()===5) {
+                    if (values.ticket_rating && new Date(values.ticket_timestamp).getMonth() === 5) {
                         return <div key={key}>
                             <Ratingdesc
                                 //imageKategori={hardware}

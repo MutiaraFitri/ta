@@ -25,7 +25,7 @@ class Antrian extends Component {
 
         const bgStatus =
             (this.props.status === "DONE") ? "#43bf57" :
-                (this.props.status === "WAITING FOR SUPPORT") ? "#619ffc" :
+                (this.props.status === "WAITING") ? "#619ffc" :
                     (this.props.status === "WAITING FOR TECHNICIAN") ? "#619ffc" :
                         (this.props.status === "ON PROCESS") ? "#f8c22d" :
                             (this.props.status === "CANCELED") ? "#f35834" :
@@ -64,7 +64,7 @@ class Antrian extends Component {
                             <div className="type" style={{ fontSize: "11px", color: "#F1AEAE" }}>{this.props.category}</div>
                             <div className="message" style={{ fontSize: "13px", color: "#665858" }}>{this.props.title}</div>
                             <div className="status" style={{ backgroundColor: bgStatus }}>
-                                <div className="category-status" >{this.props.status}</div>
+                                <div className="category-status" style={{ color: "#fff" }}>{this.props.status}</div>
                             </div>
                         </div>
                         <div className="dasc-status" >
