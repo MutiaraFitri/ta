@@ -23,7 +23,7 @@ class Message extends Component {
         message: "",
         message_ticket_id: this.props.match.params.id,
         socket: null,
-        employeeTyping:false
+        employeeTyping: false
     }
     initSocket = () => {
         // this.setState({ socket })
@@ -34,7 +34,7 @@ class Message extends Component {
         })
         socket.on('TYPING-T' + this.props.match.params.id, ({ isTyping }) => {
             this.setState({
-                employeeTyping:isTyping
+                employeeTyping: isTyping
             })
         })
     }
@@ -131,7 +131,7 @@ class Message extends Component {
                 return (
                     <div style={{ width: "100%", display: "flex" }} key={key}>
                         <img src={baloon} width="10" height="15" style={{ margin: "5px 0px" }} alt="baloon" />
-                        <div className="description" style={{ backgroundColor: "#fff", padding: "15px",wordWrap:"break-word",maxWidth:"80%", margin: "5px 0px", borderRadius: "0px 10px 10px 10px" }}>
+                        <div className="description" style={{ backgroundColor: "#fff", padding: "15px", wordWrap: "break-word", maxWidth: "80%", margin: "5px 0px", borderRadius: "0px 10px 10px 10px" }}>
                             {/* <div className="title-kotak" style={{ textAlign: "left", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
                             <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
                         </div>
@@ -139,9 +139,9 @@ class Message extends Component {
                 );
             } else {
                 return (
-                    <div style={{ width: "100%",clear:"both"}} key={key}>
-                        <img src={baloon2} width="10" height="15" style={{ margin: "5px 0px",float:"right", transform: "scale(-1, 1)" }} alt="baloon"/>
-                        <div className="description" style={{ backgroundColor: "#c6e6f8",float:"right",wordWrap:"break-word",maxWidth:"80%", padding: "15px", margin: "5px 0px",borderRadius: "10px 0px 10px 10px" }}>
+                    <div style={{ width: "100%", clear: "both" }} key={key}>
+                        <img src={baloon2} width="10" height="15" style={{ margin: "5px 0px", float: "right", transform: "scale(-1, 1)" }} alt="baloon" />
+                        <div className="description" style={{ backgroundColor: "#c6e6f8", float: "right", wordWrap: "break-word", maxWidth: "80%", padding: "15px", margin: "5px 0px", borderRadius: "10px 0px 10px 10px" }}>
                             {/* <div className="title-kotak" style={{ textAlign: "right", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
                             <div className="title-kotak" style={{ textAlign: "right", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
                         </div>
@@ -178,56 +178,56 @@ class Message extends Component {
             })
     }
     handleKeyPress = (e) => {
-        if (e.key == 'Enter') {
+        if (e.key === 'Enter') {
             this.handleSend();
         }
     }
-    sendTyping = ()=>{
-		this.lastUpdateTime = Date.now()
-		if(!this.state.isTyping){
-			this.setState({isTyping:true})
-			this.sendTypingKu(true)
-			this.startCheckingTyping()
-		}
+    sendTyping = () => {
+        this.lastUpdateTime = Date.now()
+        if (!this.state.isTyping) {
+            this.setState({ isTyping: true })
+            this.sendTypingKu(true)
+            this.startCheckingTyping()
+        }
     }
-    
+
     /*
 	*	startCheckingTyping
 	*	Start an interval that checks if the user is typing.
 	*/
-	startCheckingTyping = ()=>{
-		console.log("Typing");
-		this.typingInterval = setInterval(()=>{
-			if((Date.now() - this.lastUpdateTime) > 300){
-				this.setState({isTyping:false})
-				this.stopCheckingTyping()
-			}
-		}, 300)
-	}
-	
+    startCheckingTyping = () => {
+        console.log("Typing");
+        this.typingInterval = setInterval(() => {
+            if ((Date.now() - this.lastUpdateTime) > 300) {
+                this.setState({ isTyping: false })
+                this.stopCheckingTyping()
+            }
+        }, 300)
+    }
+
 	/*
 	*	stopCheckingTyping
 	*	Start the interval from checking if the user is typing.
 	*/
-	stopCheckingTyping = ()=>{
-		console.log("Stop Typing");
-		if(this.typingInterval){
-			clearInterval(this.typingInterval)
-			this.sendTypingKu(false)
-		}
+    stopCheckingTyping = () => {
+        console.log("Stop Typing");
+        if (this.typingInterval) {
+            clearInterval(this.typingInterval)
+            this.sendTypingKu(false)
+        }
     }
     componentWillUnmount() {
         this.stopCheckingTyping()
-      }
+    }
 
-    sendTypingKu = (type) =>{
-		socket.emit("TYPING", {
-            ticketId: "E"+this.props.match.params.id,
+    sendTypingKu = (type) => {
+        socket.emit("TYPING", {
+            ticketId: "E" + this.props.match.params.id,
             isTyping: type
         })
     }
     renderIsTyping = () => {
-        if(this.state.employeeTyping){
+        if (this.state.employeeTyping) {
             return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px" }}><i>Typing . . .</i></div>
         }
     }
@@ -259,7 +259,7 @@ class Message extends Component {
                     <div style={{ width: "90%", margin: "0px auto", minHeight: "50px", display: "flex" }}>
                         <div style={{ width: "80%", padding: "10px" }}>
                             <textarea placeholder="Type Message"
-                                onKeyUp = { e => { e.keyCode !== 13 && this.sendTyping() } }
+                                onKeyUp={e => { e.keyCode !== 13 && this.sendTyping() }}
                                 style={{ height: this.state.message.length > 54 ? "100px" : "20px", width: "100%", padding: "10px 17px", borderRadius: "20px", fontSize: "17px" }} name="message" onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.message} />
                         </div>
                         <div style={{ width: "20%", height: "100%" }} onClick={this.handleSend}>

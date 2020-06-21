@@ -48,7 +48,7 @@ export class NavbarProfile extends Component {
                         position: "absolute",
                         overflow: "hidden"
                     }}>
-                    <img src={gambar} alt="man" style={{ width: "100%" }} />
+                    <img src={gambar} alt="img" style={{ width: "100%" }} />
                 </div>
             </div>
         )

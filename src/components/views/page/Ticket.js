@@ -346,11 +346,6 @@ export class Ticket extends Component {
                                     </div>
                                     </div>
                                     <div style={{ width: "33.3333%" }}>
-                                        <div className={(this.state.priority === "medium") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="medium">
-                                            Medium
-                                    </div>
-                                    </div>
-                                    <div style={{ width: "33.3333%" }}>
                                         <div className={(this.state.priority === "high") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="high">
                                             High
                                     </div>
@@ -391,7 +386,7 @@ export class Ticket extends Component {
                     </div>
                 </div>
                 <NavbarTop title="Ticket" />
-                <div style={{ color: "black", width: "100%",marginTop:"60px" }}>
+                <div style={{ color: "black", width: "100%", marginTop: "60px" }}>
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
@@ -409,7 +404,7 @@ export class Ticket extends Component {
                     </div>
                 </div>
                 <div style={{ width: "90%" }}>
-                    <div className="title" style={{ textAlign: "left",textTransform:"uppercase", marginLeft: "5px", letterSpacing: "5px" }}>
+                    <div className="title" style={{ textAlign: "left", textTransform: "uppercase", marginLeft: "5px", letterSpacing: "5px" }}>
                         {this.props.match.params.detail} Ticket
                     </div>
                     {this.renderToDos()}

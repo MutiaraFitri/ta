@@ -222,7 +222,7 @@ export class KnowledgeBase extends Component {
                             {this.state.number + 1}
                         </button>
                         <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved ? this.hanndleNext : this.handleProhibit}>
-                            >
+                            {'>'}
                         </button>
                         <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved ? this.handleOpen : this.handleProhibit}>
                             Go To
@@ -281,7 +281,7 @@ export class KnowledgeBase extends Component {
                             {this.state.number + 1}
                         </button>
                         <button className="button" type="submit" style={{ width: "20%" }} onClick={this.state.saved ? this.hanndleNext : this.handleProhibit}>
-                            >
+                            {'>'}
                         </button>
                         <button className="button" type="submit" style={{ width: "40%" }} onClick={this.state.saved ? this.handleOpen : this.handleProhibit}>
                             Go To
