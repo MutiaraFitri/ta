@@ -40,12 +40,12 @@ class DetailArticle extends Component {
                 </div>
                 <div className="judulstep" style={{ width: "80%", paddingLeft: "12px", color: "#000", fontSize: "16px", textAlign: "left", marginTop: "10px", fontWeight: "500" }}>
                     {values.steps_title ?
-                        <p style={{ color: "#000", fontSize: "16px", textAlign: "left", marginTop: "0px", fontWeight: "500" }}>{values.steps_title}</p>
+                        <p style={{ color: "#000", fontSize: "16px", textAlign: "left", marginTop: "1px", fontWeight: "500", wordBreak: "break-word" }}>{values.steps_title}</p>
                         : "STEP " + (key + 1)}
                 </div>
                 <div className="ket-step" style={{ width: "100%", paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>
                     {values.steps_description ?
-                        <p style={{ paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", }}>{values.steps_description}</p>
+                        <p style={{ paddingLeft: "17px", marginTop: "0px", color: "#000", fontSize: "14px", textAlign: "left", wordBreak: "break-word" }}>{values.steps_description}</p>
                         : null}
                     {values.steps_image ?
                         <img src={kbImg} alt=" " style={{ paddingLeft: "12px", float: "left", width: "80%" }} />
@@ -111,11 +111,11 @@ class DetailArticle extends Component {
                 <div className="bungkus-article">
                     <div className="jarak">
                         <div className="row edit" >
-                            <div className="edit-article" >
+                            <div className="edit-article">
                                 <p className="edit-article-judul">Issue</p>
                                 <p className="edit-article-judul2">{(this.state.kb) ? this.state.kb[0].issue_subject : "title"}</p>
                             </div>
-                            <div className="edit-artikel2" >
+                            <div className="edit-artikel2"  >
                                 <div className="edit-articleIcon">
                                     <Link to={'/knowledgebase/' + this.props.match.params.id}>
                                         <span
@@ -141,7 +141,7 @@ class DetailArticle extends Component {
                                 <p className=" category-detArticleP">Categories : Network</p>
                             </div>
                         </div>
-                        <p clasName="detArticle-P1" style={{ fontSize: "24px", padding: "0px", margin: "17px", fontWeight: "bold", color: "#000", textAlign: "left", }}>Problem Solving</p>
+                        <p clasName="detArticle-P1" style={{ fontSize: "24px", padding: "0px", margin: "17px", fontWeight: "bold", color: "#000", textAlign: "left", marginTop: "40px" }}>Problem Solving</p>
                         <p clasName="detArticle-P2" style={{ fontSize: "14px", padding: "0px", margin: "17px", fontWeight: "400", color: "#000", textAlign: "left", }}>{(this.state.kb) ? this.state.kb[0].kb_description : "description for problem solve"}</p>
                         <div className="description-detArticle" >
                             <div className="title-kotakdetArticle">Troubleshooting Steps</div>

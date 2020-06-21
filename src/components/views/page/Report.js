@@ -21,6 +21,7 @@ export class Home extends Component {
         tab: "summary",
         report: "month"
     }
+
     renderSummary = () => {
 
         const totalRating = this.state.rating ?
@@ -35,15 +36,15 @@ export class Home extends Component {
         // })
         var dataSummary = []
         var labesSummary = []
-        var jumlahCancel= 0;
-        var jumlahDone= 0;
-        var jumlahSeluruh= 0;
+        var jumlahCancel = 0;
+        var jumlahDone = 0;
+        var jumlahSeluruh = 0;
         const csvData = []
         if (this.state.report === "month") {
             _.map(this.props.data.summary.dataThisMonth, (values, key) => {
-                if(values.status==="DONE") {jumlahDone=values.jumlah}
-                if(values.status==="CANCELED") {jumlahCancel=values.jumlah}
-                jumlahSeluruh+=values.jumlah;
+                if (values.status === "DONE") { jumlahDone = values.jumlah }
+                if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
+                jumlahSeluruh += values.jumlah;
                 dataSummary.push(values.jumlah)
                 labesSummary.push(values.status)
                 csvData.push(values)
@@ -51,15 +52,15 @@ export class Home extends Component {
         }
         else {
             _.map(this.props.data.summary.data, (values, key) => {
-                if(values.status==="DONE") {jumlahDone=values.jumlah}
-                if(values.status==="CANCELED") {jumlahCancel=values.jumlah}
-                jumlahSeluruh+=values.jumlah;
+                if (values.status === "DONE") { jumlahDone = values.jumlah }
+                if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
+                jumlahSeluruh += values.jumlah;
                 dataSummary.push(values.jumlah)
                 labesSummary.push(values.status)
                 csvData.push(values)
             })
         }
-        console.log("dateku",jumlahSeluruh)
+        console.log("dateku", jumlahSeluruh)
         // _.map(this.props.data.summary.dataDone, (values, key) => {
         //     csvData.push(values)
         // })
@@ -83,6 +84,8 @@ export class Home extends Component {
                 ]
             }
         };
+
+
         return (
             <div className="home" style={{ paddingBottom: "70px", width: "100%" }} >
                 <div className="curva" style={{ display: "flex", width: "100%" }}>
@@ -113,7 +116,7 @@ export class Home extends Component {
                         <div className="row" style={{ padding: "20px", margin: "0px" }}>
 
                             <div className="desc" style={{ width: "100%" }}>
-                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{jumlahDone? jumlahDone : "0"}</div>
+                                <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{jumlahDone ? jumlahDone : "0"}</div>
                                 <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>Task Done</div>
                             </div>
                         </div>
@@ -152,7 +155,7 @@ export class Home extends Component {
                             <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Assigned vs Done</div>
                         </div>
                         <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahSeluruh ?jumlahSeluruh : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahSeluruh ? jumlahSeluruh : "0"}</div>
                             <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Assigned</div>
                         </div>
                         <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
@@ -207,7 +210,7 @@ export class Home extends Component {
     }
 
     renderFeedback = () => {
-        return (<Rating tipe={this.state.report}/>)
+        return (<Rating tipe={this.state.report} />)
     }
     async componentDidMount() {
         this.props.getSummary("done");
@@ -215,7 +218,7 @@ export class Home extends Component {
         this.props.getSummary("cancel");
         this.props.getSummary("all");
         this.props.getSummary("this_month");
-        axios.get(`https://api.ict-servicedesk.xyz/rating`, {
+        axios.get(`https://api.ict-servicedesk.xyz/rating/all`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }

@@ -19,13 +19,13 @@ class Article extends Component {
         var dataku = data.kb.data;
         const toDos = _.map(dataku, (values, key) => {
             return <Link to={'/article/detail/' + values.kb_id} ><div key={values.kb_id} className="ticket-article">
-                <div className="judul-topic" >
-                    <p>{values.issue_subject}</p>
+                <div className="judul-topic" style={{ width: "40%", wordWrap: "break-word", textAlign: "left" }}>
+                    <p style={{ paddingLeft: "15px" }}>{values.issue_subject}</p>
                 </div>
-                <div className="jdul-kategori" >
+                <div className="jdul-kategori" style={{ width: "25%", wordWrap: "break-word", textAlign: "center" }}>
                     <p>{values.issue_category}</p>
                 </div>
-                <div className="jdul-authors"  >
+                <div className="jdul-authors" style={{ width: "35%", wordWrap: "break-word", textAlign: "center" }} >
                     <p>{values.kb_subject}</p>
                 </div>
             </div></Link>;
@@ -56,24 +56,22 @@ class Article extends Component {
                         <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowlage base.</p>
                     </div>
 
-                    <div className="tiket" style={{ width: "85%", marginTop: "10px", paddingBottom: "10px", borderBottom: "1px solid black", display: "flex", margin: "0px auto" }}>
+                    <div className="tiket" style={{ width: "85%", height: "50px", paddingBottom: "2px", borderBottom: "1px solid black", display: "flex", margin: "0px auto" }}>
 
-                        <div className="judul-topic" style={{ width: "30%", textAlign: "left" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Subject</p>
+                        <div className="judul-topic" style={{ width: "40%", textAlign: "ledt" }}>
+                            <p style={{ fontSize: "15px", color: "black", paddingLeft: "15px" }}>Subject</p>
                         </div>
-                        <div className="judul-kategori" style={{ width: "30%" }}>
-                            <p style={{ fontSize: "15px", color: "black", }}>Categories</p>
+                        <div className="judul-kategori" style={{ width: "25%", }}>
+                            <p style={{ fontSize: "15px", color: "black", textAlign: "center" }}>Categories</p>
                         </div>
-                        <div className="jdul-authors" style={{ width: "50%" }}>
+                        <div className="jdul-authors" style={{ width: "35%", textAlign: "center" }}>
                             <p style={{ fontSize: "15px", color: "black", }}>ProblemSolve</p>
                         </div>
                     </div>
                     {this.renderKB()}
                     <br /><br />
                 </div>
-                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
-                    <div style={{ width: "82%", height: "10px" }}>
-                    </div>
+                <div style={{ width: "414px", bottom: "55px", position: "fixed", clear: "both" }}>
                     <Link to="/new-article">
                         <div class="chatIcon">
                             <span class="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>

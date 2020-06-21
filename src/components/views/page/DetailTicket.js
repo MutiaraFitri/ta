@@ -86,7 +86,7 @@ class DetailTicket extends Component {
                 }
                 console.log("hasil", res)
                 this.fetchData()
-                socket.emit(`TICKET`, ({ employeeId: this.state.tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                socket.emit(`TICKET`, ({ employeeId: this.state.tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
             })
             .catch(error => {
                 console.log("Error " + error);
@@ -136,6 +136,7 @@ class DetailTicket extends Component {
             var email = values.employee_email;
             // var location = values.ticket_location;
             var time = values.ticket_timestamp;
+            var due = values.ticket_due_date;
             return (<div>
                 <div style={{ width: "100%" }}>
                     <div className="title-ticketCategory" >
@@ -165,7 +166,7 @@ class DetailTicket extends Component {
                                 <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
                                     check_circle_outline
                         </span>
-                        OPEN
+                        TICKET OPEN
                         </div>
                         </div>
                         <div className="deskripsi-isi" style={{ display: (!active || status === "CANCELED" || !technician_id) ? "none" : "flex" }}>
@@ -192,19 +193,32 @@ class DetailTicket extends Component {
                         <div className="row">
                             <div className="title-kotak" style={{ width: "50%", textAlign: "left", color: "#7D7D7D", fontSize: "22px", fontWeight: "bold" }}>Description</div>
                             <div className="categoryDetail" style={{ width: "50%" }}>
-                                <div className="kotakKategori" style={{ width: "100px", height: "25px", border: "1px solid #7d7d7d", float: "right", borderRadius: "5px", fontSize: "16px", color: "#5A5454", fontWeight: "500" }}> {category} </div>
+                                <div className="kotakKategori" style={{
+                                    marginTop: "-20px",
+                                    float: "right",
+                                    borderRadius: "5px",
+                                    fontSize: "14px",
+                                    color: "black",
+                                    fontWeight: "500",
+                                    backgroundColor: "#f5e44c",
+                                    padding: "4px"
+                                }}> Due : {moment(due, "YYYYMMDD").endOf('day').fromNow()} </div>
                             </div>
                         </div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px" }}>{description}</div>
+                        <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px", wordWrap: "break-word" }}>{description}</div>
                         <div style={{ maxWidth: "414px", textAlign: "left", marginTop: "10px" }}>
                             {(image) ?
                                 <img src={'https://api.ict-servicedesk.xyz/uploads/' + image} alt="macbook" style={{ textAlign: "left", width: "100%" }} />
                                 : null
                             }
                         </div>
-                        <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>Report : {moment(time).format("Do MMM YY")} , {moment(time).startOf('hour').fromNow()}</div>
+                        <div>
+                        </div>
+                        <div className="row">
+                            <div className="title-kotak" style={{ marginTop: "20px", width: "55%", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Report : {moment(time).format("Do MMM YY")}</div>
+                            <div className="title-kotak" style={{ marginTop: "20px", width: "45%", textAlign: "right", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
+                            <div></div></div>
                     </div>
-
                     <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #f35834", borderRadius: "8px", backgroundColor: "#f35834", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             CANCELED
@@ -221,10 +235,8 @@ class DetailTicket extends Component {
                         </div>
                     </div>
                 </div>
-            </div>)
-
-
-                ;
+            </div>
+            );
         });
         if (!_.isEmpty(toDos)) {
             return toDos;
@@ -254,7 +266,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -286,7 +298,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -318,7 +330,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -356,7 +368,7 @@ class DetailTicket extends Component {
                 </div>
                 {(this.state.tiket[0]) ?
                     (!this.state.tiket[0].ticket_technician_id && this.state.tiket[0].ticket_is_active) ?
-                        <div className="row" style={{ width: "100%" }}>
+                        <div className="row" style={{ width: "100%", marginBottom: "50px" }}>
                             <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonAssignToMe}>
                                 <div style={{ padding: "5px" }} >
                                     <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
@@ -399,9 +411,7 @@ class DetailTicket extends Component {
                     :
                     null
                 }
-                <div className="row" style={{ width: "414px", bottom: "55px", position: "fixed" }}>
-                    <div style={{ width: "82%", height: "10px" }}>
-                    </div>
+                <div style={{ width: "414px", bottom: "55px", position: "fixed", clear: "both" }}>
                     <Link to={'/message/' + this.props.match.params.id}>
                         <div className="chatIcon" >
                             <span className="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>

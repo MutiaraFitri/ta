@@ -196,11 +196,7 @@ class AllTicket extends Component {
                                             Low
                                     </div>
                                     </div>
-                                    <div style={{ width: "33.3333%" }}>
-                                        <div className={(this.state.priority === "medium") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="medium">
-                                            Medium
-                                    </div>
-                                    </div>
+
                                     <div style={{ width: "33.3333%" }}>
                                         <div className={(this.state.priority === "high") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="high">
                                             High
