@@ -594,7 +594,7 @@ a {
 .ticket-article{
     width: 85%; 
     margin-top: 10px;
-    padding-bottom: 10px; 
+    /* padding-bottom: 10px;  */
     display: flex; 
     margin: 0px auto;
 }
@@ -662,7 +662,7 @@ margin-top: 25px;
     margin:0px; 
     font-weight: bold; 
     color: #000; 
-    overflow-x: hidden;
+    overflow: scroll;
     width: 300px;
 }
 .edit-article2{

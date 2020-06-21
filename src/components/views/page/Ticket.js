@@ -47,7 +47,7 @@ export class Ticket extends Component {
         }
     }
 
-    handleDate = (e) =>{
+    handleDate = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -79,7 +79,7 @@ export class Ticket extends Component {
             dataku = data.personState.data.values;
             const toDos = _.map(dataku, (values, key) => {
                 if (this.state.priority && this.state.awal && this.state.category) {
-                    console.log("ASU")
+                    console.log("TIKET")
                     if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
@@ -310,7 +310,7 @@ export class Ticket extends Component {
                     }
                 }
                 else if (this.state.awal) {
-                    if (values.ticket_timestamp <= this.state.akhir&& values.ticket_timestamp >= this.state.awal) {
+                    if (values.ticket_timestamp <= this.state.akhir && values.ticket_timestamp >= this.state.awal) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
                                 return <div key={key}>
@@ -518,19 +518,19 @@ export class Ticket extends Component {
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
                                         <div style={{ fontSize: "11px", marginBottom: "5px", color: "black" }}>From</div>
-                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} name="awal" onChange={this.handleDate}/></div>
+                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} name="awal" onChange={this.handleDate} /></div>
                                     </div>
                                 </div>
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
                                         <div style={{ fontSize: "11px", marginBottom: "5px", color: "black" }}>Until</div>
-                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} name="akhir" onChange={this.handleDate}/></div>
+                                        <div><input type="date" style={{ fontSize: "12px", padding: "5px", width: "100px" }} name="akhir" onChange={this.handleDate} /></div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>PRIORITY</div>
-                                <div style={{ width: "90%" }} className="row">
+                                <div style={{ width: "80%" }} className="row">
                                     <div style={{ width: "50%" }}>
                                         <div className={(this.state.priority === "low") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="low">
                                             Low
@@ -583,7 +583,7 @@ export class Ticket extends Component {
                             <div style={{ width: "80%" }}>
                                 <input type="text" name="q" id="q" placeholder="Search . . ." style={{ marginLeft: "5px", padding: "10px", width: "100%" }} onChange={this.handleChange} />
                                 <div style={{ marginTop: "-40px", width: "100%", marginLeft: "50%" }}>
-                                    <img src={search} alt="search" style={{ top: "87px", right: "65px", position: "absolute" }} />
+                                    <img src={search} alt="search" style={{ top: "87px", position: "absolute" }} />
                                 </div>
                             </div>
                             <div style={{ width: "20%" }} onClick={this.showFilter}>

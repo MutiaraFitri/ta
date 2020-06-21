@@ -86,7 +86,7 @@ class DetailTicket extends Component {
                 }
                 console.log("hasil", res)
                 this.fetchData()
-                socket.emit(`TICKET`, ({ employeeId: this.state.tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                socket.emit(`TICKET`, ({ employeeId: this.state.tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
             })
             .catch(error => {
                 console.log("Error " + error);
@@ -193,7 +193,16 @@ class DetailTicket extends Component {
                         <div className="row">
                             <div className="title-kotak" style={{ width: "50%", textAlign: "left", color: "#7D7D7D", fontSize: "22px", fontWeight: "bold" }}>Description</div>
                             <div className="categoryDetail" style={{ width: "50%" }}>
-                                <div className="kotakKategori" style={{ width: "150px", height: "25px", border: "1px solid #7d7d7d", float: "right", borderRadius: "5px", fontSize: "14px", color: "#5A5454", fontWeight: "500" }}> Due : {moment(due, "YYYYMMDD").endOf('day').fromNow()} </div>
+                                <div className="kotakKategori" style={{
+                                    marginTop: "-20px",
+                                    float: "right",
+                                    borderRadius: "5px",
+                                    fontSize: "14px",
+                                    color: "black",
+                                    fontWeight: "500",
+                                    backgroundColor: "#f5e44c",
+                                    padding: "4px"
+                                }}> Due : {moment(due, "YYYYMMDD").endOf('day').fromNow()} </div>
                             </div>
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px", wordWrap: "break-word" }}>{description}</div>
@@ -204,11 +213,12 @@ class DetailTicket extends Component {
                             }
                         </div>
                         <div>
-                            <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "10px" }}>Category : {category}</div>
-                            <div className="title-kotak" style={{ textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold", marginTop: "0px" }}>Report : {moment(time).format("Do MMM YY")} , {moment(time).startOf('hour').fromNow()}</div>
-                            <div>
-                            </div>
-                        </div></div>
+                        </div>
+                        <div className="row">
+                            <div className="title-kotak" style={{ marginTop: "20px", width: "55%", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Report : {moment(time).format("Do MMM YY")}</div>
+                            <div className="title-kotak" style={{ marginTop: "20px", width: "45%", textAlign: "right", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
+                            <div></div></div>
+                    </div>
                     <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #f35834", borderRadius: "8px", backgroundColor: "#f35834", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             CANCELED
@@ -256,7 +266,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -288,7 +298,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -320,7 +330,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id,ticketId:this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);

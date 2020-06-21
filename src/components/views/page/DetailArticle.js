@@ -141,7 +141,7 @@ class DetailArticle extends Component {
                                 <p className=" category-detArticleP">Categories : Network</p>
                             </div>
                         </div>
-                        <p clasName="detArticle-P1" style={{ fontSize: "24px", padding: "0px", margin: "17px", fontWeight: "bold", color: "#000", textAlign: "left", }}>Problem Solving</p>
+                        <p clasName="detArticle-P1" style={{ fontSize: "24px", padding: "0px", margin: "17px", fontWeight: "bold", color: "#000", textAlign: "left", marginTop: "40px" }}>Problem Solving</p>
                         <p clasName="detArticle-P2" style={{ fontSize: "14px", padding: "0px", margin: "17px", fontWeight: "400", color: "#000", textAlign: "left", }}>{(this.state.kb) ? this.state.kb[0].kb_description : "description for problem solve"}</p>
                         <div className="description-detArticle" >
                             <div className="title-kotakdetArticle">Troubleshooting Steps</div>
