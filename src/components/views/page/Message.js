@@ -161,9 +161,11 @@ class Message extends Component {
     }
 
     handleSend = () => {
-        socket.emit('MESSAGE_SENT', {
-            chatId: this.state.tiket[0].ticket_technician_id,
-            messageId: this.props.match.params.id
+        socket.emit('MESSAGE', {
+            userId: this.state.tiket[0].ticket_employee_id,
+            messageId: this.props.match.params.id,
+            from:this.state.tiket[0].technician_firstname,
+            message:this.state.message,
         })
         axios.post(url + `message`, this.state, {
             headers: {

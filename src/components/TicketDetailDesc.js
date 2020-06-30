@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import mann from './../assets/img/mann.png';
 import axios from 'axios';
-import { prod } from './../redux/url/server'
+import { dev } from './../redux/url/server'
 
-const url = prod;
+const url = dev;
 class TicketDetailDesc extends Component {
     state = {
         ticket_status: -1
