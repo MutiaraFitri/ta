@@ -37,7 +37,7 @@ class Antrian extends Component {
                     (this.props.priority === "Medium") ? medium :
                         low;
         const statusPriority =
-            (this.props.priority === "LOW") ? "LOW" :
+            (this.props.priority === "low") ? "LOW" :
                 (this.props.priority === "Highest") ? "HIGH" :
                     "LOW";
 
@@ -48,7 +48,7 @@ class Antrian extends Component {
         const assign =
             (this.props.assign_to === null) ? "Unassign" :
                 this.props.assign_to;
-
+        var panjangTitle = (this.props.title).length > 20 ? (this.props.title).slice(0, 20) + " ..." : (this.props.title);
         return (
             <div>
                 <Link to={'/ticket/detail/' + this.props.id}>
@@ -62,7 +62,7 @@ class Antrian extends Component {
                         <div className="desc-antrian"  >
                             <div className="name" style={{ fontSize: "15px", color: "black" }}>{this.props.sender1} {this.props.sender2}</div>
                             <div className="type" style={{ fontSize: "11px", color: "#F1AEAE" }}>{this.props.category}</div>
-                            <div className="message" style={{ fontSize: "13px", color: "#665858" }}>{this.props.title}</div>
+                            <div className="message" style={{ fontSize: "13px", color: "#665858" }}>{panjangTitle}</div>
                             <div className="status" style={{ backgroundColor: bgStatus }}>
                                 <div className="category-status" style={{ color: "#fff" }}>{this.props.status}</div>
                             </div>

@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 // const url = "http://localhost:3001/tickets" fetchIssue
 
-export function getNotificationByEmployeeId() {
+export function getNotificationByTechnicianId() {
 
     return dispatch => {
         jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
@@ -17,7 +17,7 @@ export function getNotificationByEmployeeId() {
             }
             else {
                 const user = decoded.data;
-                const myData = ({...user});
+                const myData = ({ ...user });
                 console.log(myData);
                 axios.get(url + 'notification/technician/' + myData.user_id, {
                     headers: {
@@ -30,7 +30,7 @@ export function getNotificationByEmployeeId() {
                         if (res.error) {
                             throw (res.error);
                         }
-                        // console.log(res);
+                        console.log(res);
                         dispatch(fetchNotification(res));
                         return res.data;
                     })

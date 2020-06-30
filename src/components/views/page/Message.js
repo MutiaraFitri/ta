@@ -95,6 +95,8 @@ class Message extends Component {
 
     renderToDos() {
         const toDos = _.map(this.state.tiket, (values, key) => {
+            var imgEmployee = (values.employee_image) ? (values.employee_image) ? values.employee_image : "defaultEmploy.png" : "defaultEmploy.png";
+            var gambarEmployee = 'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee;
             return <div key={key} style={{ width: "85%", margin: "0px auto" }}>
                 <div>
                     <div className="title-kendala" style={{ width: "100%", textAlign: "left", marginTop: "30px" }}>
@@ -106,7 +108,7 @@ class Message extends Component {
                                 width: "40px", backgroundColor: "#F1AEAE",
                                 height: "40px", borderRadius: "50%", border: "1px solid", margin: "0px auto", overflow: "hidden"
                             }}>
-                                <img src={mann} alt="mann" style={{ width: "100%" }} />
+                                <img src={gambarEmployee} alt="mann" style={{ width: "100%" }} />
                             </div>
                         </div>
                         <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
@@ -164,8 +166,8 @@ class Message extends Component {
         socket.emit('MESSAGE', {
             userId: this.state.tiket[0].ticket_employee_id,
             messageId: this.props.match.params.id,
-            from:this.state.tiket[0].technician_firstname,
-            message:this.state.message,
+            from: this.state.tiket[0].technician_firstname,
+            message: this.state.message,
         })
         axios.post(url + `message`, this.state, {
             headers: {

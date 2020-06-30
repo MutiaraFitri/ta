@@ -122,7 +122,7 @@ class DetailTicket extends Component {
             var title = values.ticket_subject;
             var image = values.ticket_image;
             var technician_id = values.ticket_technician_id;
-            var imgEmployee = (values.employee_image) ? (values.employee_image) ? values.employee_image : "dimas.jpg" : "dimas.jpg";
+            var imgEmployee = (values.employee_image) ? (values.employee_image) ? values.employee_image : "defaultEmploy.png" : "defaultEmploy.png";
             var gambarEmployee = 'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee;
             console.log(gambarEmployee);
             // var assign_to = values.technician_firstname;
