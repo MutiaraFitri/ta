@@ -8,9 +8,10 @@ import routes from './routes';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import Loading from './loading';
 import 'react-toastify/dist/ReactToastify.css';
-import { dev } from "./redux/url/server";
+import { prod } from "./redux/url/server";
 
-const socketUrl = dev
+const url = prod
+const socketUrl = url
 const socket = io(socketUrl)
 const publicVapidKey =
   "BKh1biqQNSmXP62RjznwyzSGCm_FXcvtVMm8XPGophGFRxD2oycxY1LgTDRAv0gA2D7_00epR9SOwF9NGToCZcM";
@@ -52,7 +53,7 @@ class App extends React.Component {
       applicationServerKey: this.urlBase64ToUint8Array(publicVapidKey),
     });
 
-    fetch(dev+"subscribe", {
+    fetch(url+"subscribe", {
       method: "POST",
       body: JSON.stringify(subscription),
       headers: {

@@ -16,9 +16,9 @@ import { connect } from 'react-redux';
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
 import * as moment from 'moment';
-import { dev } from './../../../redux/url/server'
+import { prod } from './../../../redux/url/server'
 
-const url = dev
+const url = prod
 const socketUrl = url
 
 const socket = io(socketUrl)
@@ -29,6 +29,7 @@ class DetailTicket extends Component {
     }
 
     handleChange = (e) => {
+        var messageNotification = ""
         const notifDone = <div style={{ color: "white", textAlign: "center" }}>
             <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
                 done
@@ -53,6 +54,7 @@ class DetailTicket extends Component {
                 transition: Slide,
                 autoClose: 3000
             })
+            messageNotification = "Your ticket has been resolved."
         }
         if (e.target.value === "cancel") {
             toast.info(notifCancel, {
@@ -60,6 +62,7 @@ class DetailTicket extends Component {
                 transition: Slide,
                 autoClose: 3000
             })
+            messageNotification = "Your ticket has been canceled."
         }
         if (e.target.value === "escalated") {
             toast.info(notifEscalated, {
@@ -67,6 +70,7 @@ class DetailTicket extends Component {
                 transition: Slide,
                 autoClose: 3000
             })
+            messageNotification = "Your ticket has been escalated."
         }
 
         this.setState({
@@ -86,7 +90,7 @@ class DetailTicket extends Component {
                 }
                 console.log("hasil", res)
                 this.fetchData()
-                socket.emit(`TICKET`, ({ employeeId: this.state.tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
+                socket.emit(`TICKET`, ({ message: messageNotification, employeeId: this.state.tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
             })
             .catch(error => {
                 console.log("Error " + error);
@@ -264,9 +268,9 @@ class DetailTicket extends Component {
                             if (res.error) {
                                 throw (res.error);
                             }
-                            console.log("hasil", res)
+                            console.log("hasil", this.props.data.personState.data.user_firstname)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ message: "Your ticket on process with " + this.props.data.personState.data.user_firstname + " " + this.props.data.personState.data.user_lastname, employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -298,7 +302,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ message: "Your ticket is Priority", employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
@@ -330,7 +334,7 @@ class DetailTicket extends Component {
                             }
                             console.log("hasil", res)
                             this.fetchData()
-                            socket.emit(`TICKET`, ({ employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
+                            socket.emit(`TICKET`, ({ message: "Unfortunately your ticket has been tag Spam", employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
                             console.log("Error " + error);
