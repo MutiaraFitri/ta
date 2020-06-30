@@ -11,6 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { prod } from "./redux/url/server";
 
 const socketUrl = prod
+const url = prod
+const socketUrl = url
+
 const socket = io(socketUrl)
 const publicVapidKey =
   "BKh1biqQNSmXP62RjznwyzSGCm_FXcvtVMm8XPGophGFRxD2oycxY1LgTDRAv0gA2D7_00epR9SOwF9NGToCZcM";
@@ -56,7 +59,8 @@ class App extends React.Component {
       applicationServerKey: this.urlBase64ToUint8Array(publicVapidKey),
     });
 
-    fetch(prod + "subscribe", {
+
+      fetch(prod + "subscribe", {
       method: "POST",
       body: JSON.stringify(subscription),
       headers: {
