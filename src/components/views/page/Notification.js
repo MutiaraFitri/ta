@@ -1,18 +1,33 @@
 import React, { Component } from 'react'
 import NavbarTop from '../navbar/NavbarTop';
 import { connect } from "react-redux";
+import io from 'socket.io-client';
 import Skeleton from 'react-loading-skeleton';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import _ from 'lodash'
 import NavbarBottom from '../navbar/NavbarBottom';
-import moment from 'moment'
-import { getNotificationByEmployeeId } from './../../../redux/api/notification'
-
+import moment from 'moment';
+import { getNotificationByTechnicianId } from './../../../redux/api/notification';
+import users from '../../../redux/api/users';
+import { prod } from "./../../../redux/url/server";
+const socketUrl = prod
+const socket = io(socketUrl)
 export class Notification extends Component {
+
+
+
     componentDidMount() {
-        this.props.getNotification(12345)
+
+        this.props.userku();
+
+        socket.on("OPEN_TICKET", () => {
+            this.props.getNotification()
+        })
+        this.props.getNotification()
+
     }
-    renderTicket = () => {
+
+    renderNotification = () => {
         const { data } = this.props;
         const toDos = _.map(data.notification.data, (value, key) => {
             return (
@@ -39,7 +54,7 @@ export class Notification extends Component {
             <div className="home Ticket" style={{ paddingBottom: "50px", minHeight: "90vh" }}>
                 <NavbarTop back="true" title="Notification" />
                 <div style={{ width: "95%", paddingTop: "70px", textAlign: "left" }}>
-                    {this.renderTicket()}
+                    {this.renderNotification()}
                 </div>
                 <NavbarBottom active="Home" />
             </div>
@@ -53,9 +68,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => {
-    // console.log("asu");
+
     return {
-        getNotification: (id) => dispatch(getNotificationByEmployeeId(id)),
+        getNotification: () => dispatch(getNotificationByTechnicianId()),
+        userku: () => dispatch(users()),
     }
 }
 
