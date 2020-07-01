@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import baloon from './../../../assets/img/side-chat.png';
 import baloon2 from './../../../assets/img/side-chat-2.png';
 import { Link } from 'react-router-dom';
-import mann from './../../../assets/img/mann.png';
 import moment from 'moment'
 import axios from 'axios';
 import { ticketsById } from '../../../redux/api/ticket';

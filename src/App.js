@@ -10,7 +10,6 @@ import Loading from './loading';
 import 'react-toastify/dist/ReactToastify.css';
 import { prod } from "./redux/url/server";
 
-const socketUrl = prod
 const url = prod
 const socketUrl = url
 

@@ -20,7 +20,6 @@ export class NavbarTop extends Component {
         // const title = (this.props.title) ? <div className="title-pages" style={{paddingTop:"5px"}}>{this.props.title}</div>:<img src={logo} alt="Komatsu" style={{ margin: "0 auto", height: "30px",paddingTop:"15px" }} />;
         const profile = (data.personState.data) ? (data.personState.data) ? data.personState.data.user_image : "defaultEmploy.png" : "defaultEmploy.png"
         const gambar = prod + 'avatar/technician/' + profile
-        console.log(gambar)
         return (
             <div className="container" style={{ width: "100%" }}>
                 <div style={{ backgroundImage: "url(" + top + ")", height: "300px", backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
@@ -31,6 +30,7 @@ export class NavbarTop extends Component {
                             </Link>
                         </div>
                     </div>
+                    <Link to="/profile">
                     <div className="profile"
                         style={{
                             width: "110px",
@@ -41,6 +41,7 @@ export class NavbarTop extends Component {
                         }}>
                         <img src={gambar} alt="man" style={{ width: "100%" }} />
                     </div>
+                    </Link>
                     <div>
 
                         <div style={{ color: "white", textAlign: "center" }}>Welcome, {!(data.personState.data) ? <Skeleton duration={1} /> : data.personState.data ? data.personState.data.user_firstname : "Technician"} </div>

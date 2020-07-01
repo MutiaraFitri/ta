@@ -15,7 +15,7 @@ export function users() {
                 // dispatch(loginFailed("Your session has expired"));
             }
             if (decoded) {
-                console.log("decoded", decoded) // bar
+                // console.log("decoded", decoded) // bar
                 dispatch(fetchUser(decoded.data));
             }
         });

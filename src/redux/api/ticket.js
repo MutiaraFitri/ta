@@ -14,7 +14,7 @@ export function tickets() {
         })
             .then(res => {
                 const tiket = res.data.values;
-                console.log("data", tiket)
+                // console.log("data", tiket)
                 dispatch(fetchTiket(tiket));
             })
     }
@@ -28,7 +28,7 @@ export function ticketByDetail(data) {
         })
             .then(res => {
                 const tiket = res.data;
-                console.log("data", tiket)
+                // console.log("data", tiket)
                 dispatch(fetchTiket(tiket));
             })
     }
