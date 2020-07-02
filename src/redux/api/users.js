@@ -1,6 +1,6 @@
 import { fetchUser, userLogout, loginFailed, updatePasswordSuccess, updatePasswordFailed, requestResetPasswordSuccess, requestResetPasswordFailed, fectProductError } from "../action/action";
 import axios from 'axios';
-import {prod} from './../url/server';
+import { prod } from './../url/server';
 
 const url = prod;
 const jwt = require('jsonwebtoken');
@@ -30,7 +30,7 @@ export function setNullError() {
 
 export function updatePassword(data) {
     return dispatch => {
-        axios.put(url+"auth/password/technician", data, {
+        axios.put(url + "auth/password/technician", data, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
             }
@@ -53,7 +53,7 @@ export function updatePassword(data) {
 
 export function resetPassword(data) {
     return dispatch => {
-        axios.post(url+"auth/reset/technician", data, {
+        axios.post(url + "auth/reset/technician", data, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
             }
@@ -81,7 +81,7 @@ export function userLoginFetch(data) {
     // console.log(data)
 
     return dispatch => {
-        axios.post(url+`auth/login/technician`, data, {
+        axios.post(url + `auth/login/technician`, data, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }

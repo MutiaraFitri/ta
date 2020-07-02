@@ -4,7 +4,9 @@ import * as moment from 'moment';
 
 
 class Ratingdesc extends Component {
+
     render() {
+
         return (
             <div>
                 <div className="bungkusReview" style={{ width: "100%", display: "flex" }}>
@@ -15,7 +17,7 @@ class Ratingdesc extends Component {
                             borderRadius: "50%", border: "1px solid", overflow: "hidden",
                             float: "left"
                         }}>
-                            <img src={mann} alt="mann" style={{ width: "100%" }} />
+                            <img src={this.props.gambarEmployee} alt="mann" style={{ width: "100%" }} />
                         </div>
                     </div>
                     <div className="nama-pengirim" style={{ width: "70%", marginTop: "5px", marginLeft: "10px" }}>

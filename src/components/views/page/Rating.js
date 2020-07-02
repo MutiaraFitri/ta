@@ -3,11 +3,12 @@ import NavbarBottom from '../navbar/NavbarBottom';
 import starfull from './../../../assets/img/star.png';
 // import { Link } from 'react-router-dom';
 import Ratingdesc from '../../Ratingdesc.js';
-import { tickets } from '../../../redux/api/ticket';
+import { ticketsByTechnicianId } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from "lodash";
 import { prod } from "./../../../redux/url/server";
+import users from '../../../redux/api/users';
 
 const url = prod;
 class Rating extends Component {
@@ -40,9 +41,12 @@ class Rating extends Component {
                     ratingMonth
                 })
             })
-        this.props.tiketku()
+        this.props.userku()
     }
 
+    UNSAFE_componentWillUpdate() {
+        if (this.props.user) this.props.tiketku(this.props.user)
+    }
     renderToDos() {
         const { data } = this.props;
         var dataku = "";
@@ -50,6 +54,7 @@ class Rating extends Component {
             if (data.personState.data) {
                 dataku = data.personState.data;
                 const toDos = _.map(dataku, (values, key) => {
+                    var imgEmployee = (values.employee_image) ? values.employee_image : "defaultEmploy.png";
                     if (values.ticket_rating) {
                         return <div key={key}>
                             <Ratingdesc
@@ -60,6 +65,7 @@ class Rating extends Component {
                                 due_date={values.ticket_timestamp}
                                 bintang={values.ticket_rating}
                                 comment={values.ticket_comment}
+                                gambarEmployee={'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee}
                             />
                         </div>;
                     }
@@ -310,8 +316,8 @@ const mapStateToProps = (state) => ({
 })
 const mapDispacthToProps = (dispatch) => {
     return {
-        tiketku: () => dispatch(tickets()),
-
+        tiketku: (id) => dispatch(ticketsByTechnicianId(id)),
+        userku: () => dispatch(users())
     }
 }
 export default connect(

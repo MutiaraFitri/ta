@@ -210,7 +210,7 @@ export class Home extends Component {
     }
 
     renderFeedback = () => {
-        return (<Rating tipe={this.state.report} />)
+        return (<Rating tipe={this.state.report} user={this.state.user_id} />)
     }
     async componentDidMount() {
         this.props.getSummary("done");
