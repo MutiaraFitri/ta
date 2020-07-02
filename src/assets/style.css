@@ -231,6 +231,27 @@ a {
     margin: 15px auto;
 }
 
+.white-overlay{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 4;
+    opacity: 0;
+    transition: visible 0s , opacity 0.2s;
+}
+.confirmation{
+    position: fixed;
+    width: 100vw;
+    height: 170px;
+    transition: bottom 0.3s;
+    background-color: white;
+    bottom:0px;
+    /* bottom:-240px; */
+    border-radius: 20px 20px 0px 0px;
+    z-index: 5;
+}
+
 .button-submit {
     width: 100%;
     padding: 9px;

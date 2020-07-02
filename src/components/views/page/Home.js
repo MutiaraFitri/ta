@@ -93,7 +93,6 @@ export class Home extends Component {
                             .then(res => {
                                 this.setState({ jumlahTask: res.data.values.length })
                                 this.initSocket()
-                                console.log("setelah jwt")
                             })
                     }
                 )
@@ -177,7 +176,7 @@ export class Home extends Component {
                             <div className="row" style={{
                                 padding: "10px", margin: "0px",
                                 borderRadius: "10px",
-                                backgroundColor: "#FFF9F9",
+                                backgroundColor: "#fff",
                                 border: "2px solid #DEDEDE",
                                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                             }}>
@@ -201,7 +200,7 @@ export class Home extends Component {
                         <Link to="/ticket/assign-to-me">
                             <div className="row" style={{
                                 padding: "10px", margin: "0px", borderRadius: "10px",
-                                backgroundColor: "#FFF9F9",
+                                backgroundColor: "#fff",
                                 border: "2px solid #DEDEDE",
                                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                             }}>
@@ -230,7 +229,7 @@ export class Home extends Component {
                             <div className="row" style={{
                                 borderRadius: "10px",
                                 padding: "10px",
-                                backgroundColor: "#FFF9F9",
+                                backgroundColor: "#fff",
                                 border: "2px solid #DEDEDE",
                                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)"
                             }}>
@@ -251,7 +250,7 @@ export class Home extends Component {
                             <div className="row" style={{
                                 borderRadius: "10px",
                                 padding: "10px",
-                                backgroundColor: "#FFF9F9",
+                                backgroundColor: "#fff",
                                 border: "2px solid #DEDEDE",
                                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                             }}>

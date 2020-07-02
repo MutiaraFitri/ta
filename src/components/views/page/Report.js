@@ -60,7 +60,7 @@ export class Home extends Component {
                 csvData.push(values)
             })
         }
-        console.log("dateku", jumlahSeluruh)
+        // console.log("dateku", jumlahSeluruh)
         // _.map(this.props.data.summary.dataDone, (values, key) => {
         //     csvData.push(values)
         // })
@@ -78,7 +78,7 @@ export class Home extends Component {
                         label: 'ESCALATED',
                         data: dataSummary,
                         backgroundColor: [
-                            "#0050A1", "RED", "ORANGE"
+                            "#0050A1", "PINK", "ORANGE"
                         ]
                     }
                 ]
@@ -212,12 +212,8 @@ export class Home extends Component {
     renderFeedback = () => {
         return (<Rating tipe={this.state.report} user={this.state.user_id} />)
     }
-    async componentDidMount() {
-        this.props.getSummary("done");
-        this.props.getSummary("escalated");
-        this.props.getSummary("cancel");
-        this.props.getSummary("all");
-        this.props.getSummary("this_month");
+    componentDidMount() {
+
         axios.get(`https://api.ict-servicedesk.xyz/rating/all`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -238,6 +234,11 @@ export class Home extends Component {
             }
             else {
                 const user = decoded.data;
+                this.props.getSummary("done",user.user_id);
+                this.props.getSummary("escalated",user.user_id);
+                this.props.getSummary("cancel",user.user_id);
+                this.props.getSummary("all",user.user_id);
+                this.props.getSummary("this_month",user.user_id);
                 this.setState({ ...user },
                     () => {
                         axios.get(url + `ticket/done/` + this.state.user_id, {
@@ -323,7 +324,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispacthToProps = (dispatch) => {
     return {
-        getSummary: (STATUS) => dispatch(fetchSummary(STATUS)),
+        getSummary: (STATUS, id) => dispatch(fetchSummary(STATUS, id)),
     }
 }
 

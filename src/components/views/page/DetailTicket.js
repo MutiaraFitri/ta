@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import priority from './../../../assets/img/priority.png';
 import garbage from './../../../assets/img/garbage.png';
-import mann from './../../../assets/img/mann.png';
 import tambah from './../../../assets/img/tambah.png';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import io from 'socket.io-client'
@@ -25,10 +24,23 @@ const socket = io(socketUrl)
 class DetailTicket extends Component {
     state = {
         tiket: [],
-        ticket_status: -1
+        ticket_status: -1,
+        bottom: "-240px",
+        confirmation: false,
+        confirmationTitle: ""
     }
 
     handleChange = (e) => {
+        this.setState({
+            ticket_status: e.target.value,
+            confirmation: !this.state.confirmation
+        })
+    }
+
+    updateTicket = (data) => {
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
         var messageNotification = ""
         const notifDone = <div style={{ color: "white", textAlign: "center" }}>
             <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "white", marginRight: "5px" }}>
@@ -48,7 +60,7 @@ class DetailTicket extends Component {
             </span>
             Ticket Canceled !
         </div>
-        if (e.target.value === "finish") {
+        if (data === "finish") {
             toast.success(notifDone, {
                 position: toast.POSITION.TOP_CENTER,
                 transition: Slide,
@@ -56,7 +68,7 @@ class DetailTicket extends Component {
             })
             messageNotification = "Your ticket has been resolved."
         }
-        if (e.target.value === "cancel") {
+        if (data === "cancel") {
             toast.info(notifCancel, {
                 position: toast.POSITION.TOP_CENTER,
                 transition: Slide,
@@ -64,7 +76,7 @@ class DetailTicket extends Component {
             })
             messageNotification = "Your ticket has been canceled."
         }
-        if (e.target.value === "escalated") {
+        if (data === "escalated") {
             toast.info(notifEscalated, {
                 position: toast.POSITION.TOP_CENTER,
                 transition: Slide,
@@ -72,12 +84,7 @@ class DetailTicket extends Component {
             })
             messageNotification = "Your ticket has been escalated."
         }
-
-        this.setState({
-            ticket_status: e.target.value
-        })
-
-        axios.put(url + 'ticket/' + e.target.value + '/' + this.props.match.params.id, null, {
+        axios.put(url + 'ticket/' + data + '/' + this.props.match.params.id, null, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
             }
@@ -88,7 +95,7 @@ class DetailTicket extends Component {
                 if (res.error) {
                     throw (res.error);
                 }
-                console.log("hasil", res)
+                // console.log("hasil", res)
                 this.fetchData()
                 socket.emit(`TICKET`, ({ message: messageNotification, employeeId: this.state.tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
             })
@@ -132,7 +139,7 @@ class DetailTicket extends Component {
             // var assign_to = values.technician_firstname;
             var status = values.ticket_status;
             // var due_date = values.ticket_timestamp;
-            var priority = values.ticket_priority;
+            // var priority = values.ticket_priority;
             // var id = values.ticket_id;
             var active = values.ticket_is_active;
             // var employee_email = values.employee_email;
@@ -141,7 +148,7 @@ class DetailTicket extends Component {
             // var location = values.ticket_location;
             var time = values.ticket_timestamp;
             var due = values.ticket_due_date;
-            return (<div>
+            return (<div key={key}>
                 <div style={{ width: "100%" }}>
                     <div className="title-ticketCategory" >
                         <p className="p-titile1" >Title</p>
@@ -159,7 +166,7 @@ class DetailTicket extends Component {
                         <div className="email" > {email} </div>
                         <div style={{ display: (active) ? "none" : "flex", width: "100%", textAlign: "right " }}>
                             <div style={{ color: "red", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
-                                <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "red", marginRight: "5px" }}>
+                                <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "red", marginRight: "5px" }}>
                                     highlight_off
                         </span>
                         TICKET CLOSED
@@ -167,13 +174,13 @@ class DetailTicket extends Component {
                         </div>
                         <div style={{ display: !(active) ? "none" : "flex", width: "100%" }}>
                             <div style={{ color: "#09d509", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
-                                <span class="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
+                                <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
                                     check_circle_outline
                         </span>
                         TICKET OPEN
                         </div>
                         </div>
-                        <div className="deskripsi-isi" style={{ display: (!active || status === "CANCELED" || !technician_id) ? "none" : "flex" }}>
+                        <div className="deskripsi-isi" style={{ display: (!active || status === "CANCELED" || !technician_id || this.state.tiket[0].ticket_technician_id !== this.props.data.personState.data.user_id) ? "none" : "flex" }}>
                             <select name="ticket_status" style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }} onChange={this.handleChange} value={this.state.ticket_status}>
                                 <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }} disabled>
                                     Waiting for support
@@ -248,6 +255,10 @@ class DetailTicket extends Component {
     }
 
     handleButtonAssignToMe = () => {
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+
         axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -255,7 +266,7 @@ class DetailTicket extends Component {
         })
             .then(res => {
                 const tiket = res.data.values;
-                console.log("data", tiket[0])
+                // console.log("data", tiket[0])
                 if (!tiket[0].ticket_technician_id) {
                     axios.put('https://api.ict-servicedesk.xyz/ticket/assign/' + this.props.match.params.id, { technician_id: this.props.data.personState.data.user_id }, {
                         headers: {
@@ -268,7 +279,7 @@ class DetailTicket extends Component {
                             if (res.error) {
                                 throw (res.error);
                             }
-                            console.log("hasil", this.props.data.personState.data.user_firstname)
+                            // console.log("hasil", this.props.data.personState.data.user_firstname)
                             this.fetchData()
                             socket.emit(`TICKET`, ({ message: "Your ticket on process with " + this.props.data.personState.data.user_firstname + " " + this.props.data.personState.data.user_lastname, employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
@@ -277,9 +288,13 @@ class DetailTicket extends Component {
                         })
                 }
             })
-        console.log("Assign To me");
+        // console.log("Assign To me");
     }
     handleButtonMakeItPriority = () => {
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+
         axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -287,7 +302,7 @@ class DetailTicket extends Component {
         })
             .then(res => {
                 const tiket = res.data.values;
-                console.log("data", tiket[0])
+                // console.log("data", tiket[0])
                 if (!tiket[0].ticket_technician_id) {
                     axios.put('https://api.ict-servicedesk.xyz/ticket/priority/' + this.props.match.params.id, null, {
                         headers: {
@@ -300,7 +315,7 @@ class DetailTicket extends Component {
                             if (res.error) {
                                 throw (res.error);
                             }
-                            console.log("hasil", res)
+                            // console.log("hasil", res)
                             this.fetchData()
                             socket.emit(`TICKET`, ({ message: "Your ticket is Priority", employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
@@ -309,9 +324,13 @@ class DetailTicket extends Component {
                         })
                 }
             })
-        console.log("Make it Priority");
+        // console.log("Make it Priority");
     }
     handleButtonSpam = () => {
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+
         axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -319,7 +338,7 @@ class DetailTicket extends Component {
         })
             .then(res => {
                 const tiket = res.data.values;
-                console.log("data", tiket[0])
+                // console.log("data", tiket[0])
                 if (!tiket[0].ticket_technician_id) {
                     axios.put('https://api.ict-servicedesk.xyz/ticket/spam/' + this.props.match.params.id, { technician_id: this.props.data.personState.data.user_id }, {
                         headers: {
@@ -332,7 +351,7 @@ class DetailTicket extends Component {
                             if (res.error) {
                                 throw (res.error);
                             }
-                            console.log("hasil", res)
+                            // console.log("hasil", res)
                             this.fetchData()
                             socket.emit(`TICKET`, ({ message: "Unfortunately your ticket has been tag Spam", employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
@@ -341,12 +360,55 @@ class DetailTicket extends Component {
                         })
                 }
             })
-        console.log("Spam");
+        // console.log("Spam");
+    }
+
+    handleConfirmation = () => {
+        this.setState({
+            ticket_status: -1,
+            confirmation: !this.state.confirmation,
+        })
+    }
+    handleConfirmationAssign = () => {
+        this.setState({
+            confirmationTitle: "assign",
+        })
+
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+    }
+    handleConfirmationPriority = () => {
+        this.setState({
+            confirmationTitle: "priority",
+        })
+
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+    }
+    handleConfirmationSpam = () => {
+        this.setState({
+            confirmationTitle: "spam",
+        })
+
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
     }
     render() {
         //console.log(this.props.match.params.id)
+        const id_user = this.props.data.personState.data ? this.props.data.personState.data.user_id : null;
+        const id_technician_ticket = this.state.tiket[0] ? this.state.tiket[0].ticket_technician_id ? this.state.tiket[0].ticket_technician_id : null : null;
+
+        const chatBallon =
+            id_technician_ticket ?
+                id_user ?
+                    id_user === id_technician_ticket ? "inline" : "none"
+                    : "none"
+                : "none"
         return (
-            <div className="home" style={{ paddingBottom: "70px" }}>
+            <div className="home" style={this.state.confirmation ? { height: "100vh", overflow: "hidden" } : {}}>
                 <ToastContainer
                     position="top-center"
                     hideProgressBar={false}
@@ -357,6 +419,53 @@ class DetailTicket extends Component {
                     draggable
                     pauseOnHover
                 />
+                {/* Confirmation */}
+                <div className="white-overlay"
+                    style={{
+                        visibility: this.state.confirmation ? "visible" : "hidden",
+                        opacity: this.state.confirmation ? "1" : "0"
+                    }}
+
+                    onClick={this.handleConfirmation}
+                ></div>
+                <div className="confirmation"
+                    style={{
+                        bottom: this.state.confirmation ? "0px" : "-200px"
+                    }}
+                >
+                    <div style={{ marginTop: "30px", fontSize: "24px", fontWeight: "bold" }}>
+                        {this.state.confirmationTitle === "assign" ?
+                            "Assign to me ?"
+                            : this.state.confirmationTitle === "priority" ?
+                                "Make it Priority ?" :
+                                this.state.confirmationTitle === "spam" ?
+                                    "Make it spam ?" :
+                                    this.state.ticket_status+" this Ticket ?"}
+                    </div>
+                    <div className="row" style={{ width: "100%", bottom: "15px", position: "absolute" }}>
+                        <div style={{ margin: "0 auto", width: "100%" }}>
+                            <button
+                                className="button"
+                                style={{
+                                    borderRadius: "5px", padding: "15px", marginRight: "15px", width: "45%", color: "#0050A1", backgroundColor: "white", border: "1px solid #0050A1"
+                                }}
+                                onClick={this.handleConfirmation}
+                                id="overlay">
+                                No
+                            </button>
+                            {this.state.confirmationTitle === "assign" ?
+                                <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonAssignToMe}>Yes</button>
+                                : this.state.confirmationTitle === "priority" ?
+                                    <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonMakeItPriority}>Yes</button> :
+                                    this.state.confirmationTitle === "spam" ?
+                                        <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonSpam}>Yes</button> :
+                                        <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={()=> {this.updateTicket(this.state.ticket_status)}}>Yes</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                {/* End Confirmation */}
+
                 <div className="navbar-message" >
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to='/ticket/all'>
@@ -372,10 +481,10 @@ class DetailTicket extends Component {
                 </div>
                 {(this.state.tiket[0]) ?
                     (!this.state.tiket[0].ticket_technician_id && this.state.tiket[0].ticket_is_active) ?
-                        <div className="row" style={{ width: "100%", marginBottom: "50px" }}>
-                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonAssignToMe}>
+                        <div className="row" style={{ width: "100%", marginBottom: "65px" }}>
+                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleConfirmationAssign}>
                                 <div style={{ padding: "5px" }} >
-                                    <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
+                                    <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }} id="1">
                                         <div className="icon-menu">
                                             <img src={tambah} alt="tambah" />
                                         </div>
@@ -385,7 +494,7 @@ class DetailTicket extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonMakeItPriority}>
+                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleConfirmationPriority}>
                                 <div style={{ padding: "5px" }} >
                                     <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
                                         <div className="icon-menu">
@@ -397,7 +506,7 @@ class DetailTicket extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleButtonSpam}>
+                            <div className="kotak-menu" style={{ width: "33%" }} onClick={this.handleConfirmationSpam}>
                                 <div style={{ padding: "5px" }}>
                                     <div style={{ border: "1px solid #e9e9e9", borderRadius: "10px", padding: "10px 0px" }}>
                                         <div className="icon-menu">
@@ -415,7 +524,7 @@ class DetailTicket extends Component {
                     :
                     null
                 }
-                <div style={{ width: "414px", bottom: "55px", position: "fixed", clear: "both" }}>
+                <div style={{ width: "414px", bottom: "55px", position: "fixed", clear: "both", display: chatBallon }}>
                     <Link to={'/message/' + this.props.match.params.id}>
                         <div className="chatIcon" >
                             <span className="material-icons chatIcons" style={{ verticalAlign: "bottom", color: "#fff" }}>
