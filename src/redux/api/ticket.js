@@ -57,7 +57,6 @@ export function ticketsByTechnicianId(id) {
         })
             .then(res => {
                 const tiket = res.data;
-                // localStorage.setItem("jwt", tiket.values.jwt);
                 console.log("data", tiket)
                 dispatch(fetchTiket(tiket));
             })
