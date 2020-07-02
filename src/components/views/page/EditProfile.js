@@ -6,7 +6,8 @@ import '../../../assets/style.css';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
-// import mann from '../../../assets/img/mann.png';
+import { prod } from '../../../redux/url/server';
+import defaultEmploy from '../../../assets/img/worker.png';
 import axios from 'axios';
 const jwt = require('jsonwebtoken');
 
@@ -18,12 +19,51 @@ export class EditProfile extends Component {
             user: []
         }
     }
+
     handleChange = (e) => {
         //console.log(e.target.value)
         this.setState({
             [e.target.name]: e.target.value,
             save: false
+
         })
+    }
+
+    _handleImageChange(e) {
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                file_to_upload: file,
+                user_image_temp: reader.result
+            });
+        }
+
+        reader.readAsDataURL(file)
+
+        const formData = new FormData();
+
+        formData.append('myImage', file);
+        formData.append('employee_id', this.state.user_id);
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data',
+                key: '8dfcb234a322aeeb6b530f20c8e9988e'
+            }
+        };
+
+        // axios.post(url+"ticket", formData, config)
+        axios.post(prod + "edit/image/technician", formData, config)
+            .then((response) => {
+                this.setState({
+                    redirect: true
+                })
+            }).catch((error) => {
+            });
     }
 
     handleSubmit = (e) => {
@@ -75,8 +115,11 @@ export class EditProfile extends Component {
                 this.setState({ ...user })
             })
     }
+
     render() {
         //if (localStorage.getItem("jwt")) return <Redirect to="/profile" />
+        // var userImgLink = (this.state.user_image) ? this.state.user_image : "defaultEmploy";
+        // var userImg = prod + 'avatar/technician/' + userImgLink;
         return (
 
             <div className="home" style={{ paddingBottom: "70px" }}>
@@ -93,7 +136,7 @@ export class EditProfile extends Component {
                 <div style={{ color: "black", width: "100%" }}>
                 </div>
 
-                {/* <div className="container" style={{ width: "100%" }}>
+                <div className="container" style={{ width: "100%" }}>
                     <div className="profile"
                         style={{
                             top: "30px",
@@ -108,10 +151,15 @@ export class EditProfile extends Component {
                             overflow: "hidden",
                             marginBottom: "20px"
                         }}>
-                        <img src={mann} alt="man" style={{ width: "100%" }} />
+                        <img src={(this.state.user_image_temp) ? this.state.user_image_temp : defaultEmploy} alt="man" style={{ width: "100%" }} />
                     </div>
-                    <div className="ganti-foto"> Change Profile Photo   </div>
-                </div> */}
+                    <div className="ganti-foto" > <label htmlFor="files">change profile photo</label>
+                        <input className="fileInput"
+                            id="files"
+                            type="file"
+                            onChange={(e) => this._handleImageChange(e)} style={{ display: "none" }} />
+                    </div>
+                </div>
 
                 <div className="row editProfile" style={{ width: "100%", display: this.state.save ? "flex" : "none" }}>
                     <div style={{ padding: "10px", color: "white" }}>
@@ -122,7 +170,6 @@ export class EditProfile extends Component {
                 <div className="bungkusBg" style={{
                     borderRadius: "10px",
                     padding: "20px",
-                    marginTop: "30px"
                 }}>
                     <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit} >
                         <div className="container">
@@ -200,7 +247,7 @@ export class EditProfile extends Component {
                         <button className="button-submit" type="submit" onClick={this.handleSave}>Save</button>
                     </div>
                 </div>
-            </div>
+            </div >
 
 
         )
