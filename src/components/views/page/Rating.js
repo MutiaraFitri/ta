@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavbarBottom from '../navbar/NavbarBottom';
 import starfull from './../../../assets/img/star.png';
 // import { Link } from 'react-router-dom';
+import moment from 'moment'
 import Ratingdesc from '../../Ratingdesc.js';
 import { ticketsByTechnicianId } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
@@ -17,19 +18,20 @@ class Rating extends Component {
 
     }
     componentDidMount() {
-        axios.get(url + `rating/all/9`, {
+        axios.get(url + `rating/all/` + this.props.user, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
         })
             .then(res => {
                 const rating = res.data.values;
-                console.log("data rating", rating)
+                console.log("data rating ku", rating)
                 this.setState({
                     rating
                 })
             })
-        axios.get(url + `rating/6/9`, {
+            console.log(url + `rating/`+moment().month()+`/` + this.props.user)
+        axios.get(url + `rating/`+moment().month()+`/` + this.props.user, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -42,60 +44,65 @@ class Rating extends Component {
                 })
             })
         this.props.userku()
-    }
-
-    UNSAFE_componentWillUpdate() {
-        if (this.props.user) this.props.tiketku(this.props.user)
+        this.props.tiketku(this.props.user)
     }
     renderToDos() {
         const { data } = this.props;
         var dataku = "";
         if (this.props.tipe === "all") {
-            if (data.personState.data) {
-                dataku = data.personState.data;
-                const toDos = _.map(dataku, (values, key) => {
-                    var imgEmployee = (values.employee_image) ? values.employee_image : "defaultEmploy.png";
-                    if (values.ticket_rating) {
-                        return <div key={key}>
-                            <Ratingdesc
-                                //imageKategori={hardware}
-                                sender1={values.employee_firstname}
-                                sender2={values.employee_lastname}
-                                email={values.employee_email}
-                                due_date={values.ticket_timestamp}
-                                bintang={values.ticket_rating}
-                                comment={values.ticket_comment}
-                                gambarEmployee={'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee}
-                            />
-                        </div>;
+            if (data.ticketState.data) {
+                if (data.ticketState.data.length > 0) {
+                    dataku = data.ticketState.data
+                    const toDos = _.map(dataku, (values, key) => {
+                        var imgEmployee = (values.employee_image) ? values.employee_image : "defaultEmploy.png";
+                        if (values.ticket_rating) {
+                            return <div key={key}>
+                                <Ratingdesc
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    email={values.employee_email}
+                                    due_date={values.ticket_timestamp}
+                                    bintang={values.ticket_rating}
+                                    comment={values.ticket_comment}
+                                    gambarEmployee={'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee}
+                                />
+                            </div>;
+                        }
+                    });
+                    if (!_.isEmpty(toDos)) {
+                        return toDos;
                     }
-                });
-                if (!_.isEmpty(toDos)) {
-                    return toDos;
                 }
             }
         }
         if (this.props.tipe === "month") {
-            if (data.personState.data) {
-                dataku = data.personState.data;
-                const toDos = _.map(dataku, (values, key) => {
-                    console.log("bulan", new Date(values.ticket_timestamp).getMonth());
-                    if (values.ticket_rating && new Date(values.ticket_timestamp).getMonth() === 5) {
-                        return <div key={key}>
-                            <Ratingdesc
-                                //imageKategori={hardware}
-                                sender1={values.employee_firstname}
-                                sender2={values.employee_lastname}
-                                email={values.employee_email}
-                                due_date={values.ticket_timestamp}
-                                bintang={values.ticket_rating}
-                                comment={values.ticket_comment}
-                            />
-                        </div>;
+            if (data.ticketState.data) {
+                if (data.ticketState.data.length > 0) {
+                    dataku = data.ticketState.data
+                    const toDos = _.map(dataku, (values, key) => {
+                        var imgEmployee = (values.employee_image) ? values.employee_image : "defaultEmploy.png";
+
+                        // console.log("bulan", moment(values.ticket_timestamp).month());
+                        // console.log("data", values.ticket_rating);
+                        if (values.ticket_rating && moment(values.ticket_timestamp).month() === moment().month()) {
+                            return <div key={key}>
+                                <Ratingdesc
+                                    //imageKategori={hardware}
+                                    sender1={values.employee_firstname}
+                                    sender2={values.employee_lastname}
+                                    email={values.employee_email}
+                                    due_date={values.ticket_timestamp}
+                                    bintang={values.ticket_rating}
+                                    gambarEmployee={'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee}
+                                    comment={values.ticket_comment}
+                                />
+                            </div>;
+                        }
+                    });
+                    if (!_.isEmpty(toDos)) {
+                        return toDos;
                     }
-                });
-                if (!_.isEmpty(toDos)) {
-                    return toDos;
                 }
             }
         }
@@ -136,7 +143,7 @@ class Rating extends Component {
             }
         })
         const jumlahRating = (varRating1 * 1) + (varRating2 * 2) + (varRating3 * 3) + (varRating4 * 4) + (varRating5 * 5);
-        console.log('jumlahRating', varRating3);
+        // console.log('jumlahRating', varRating3);
         const rating5 = varRating5 ? varRating5 : 0
         const rating4 = varRating4 ? varRating4 : 0
         const rating3 = varRating3 ? varRating3 : 0

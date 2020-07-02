@@ -24,11 +24,6 @@ const authReducers = (state = initState, action) => {
                 ...state,
                 data: action.value
             }
-        case 'FETCH_TIKET_SUCCESS':
-            return {
-                ...state,
-                data: action.value
-            }
         case 'LOGOUT_SUCCESS':
             return {
                 ...state,

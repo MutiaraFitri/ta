@@ -75,8 +75,8 @@ export class Ticket extends Component {
     renderToDos() {
         const { data } = this.props;
         var dataku = "";
-        if (data.personState.data) {
-            dataku = data.personState.data.values;
+        if (data.ticketState.data) {
+            dataku = data.ticketState.data;
             const toDos = _.map(dataku, (values, key) => {
                 if (this.state.priority && this.state.awal && this.state.category) {
                     console.log("TIKET")

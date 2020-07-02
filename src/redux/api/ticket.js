@@ -27,7 +27,7 @@ export function ticketByDetail(data) {
             }
         })
             .then(res => {
-                const tiket = res.data;
+                const tiket = res.data.values;
                 // console.log("data", tiket)
                 dispatch(fetchTiket(tiket));
             })
@@ -56,8 +56,7 @@ export function ticketsByTechnicianId(id) {
             }
         })
             .then(res => {
-                const tiket = res.data;
-                console.log("data", tiket)
+                const tiket = res.data.values;
                 dispatch(fetchTiket(tiket));
             })
     }
