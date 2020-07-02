@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import mann from './../assets/img/mann.png';
 import axios from 'axios';
-import { dev } from './../redux/url/server'
+import { prod } from './../redux/url/server'
 
-const url = dev;
+const url = prod;
+const socketUrl = url
+
+const socket = io(socketUrl)
 class TicketDetailDesc extends Component {
     state = {
         ticket_status: -1
@@ -20,9 +23,21 @@ class TicketDetailDesc extends Component {
         )
             .then(res => res.data)
             .then(res => {
+                var messageNotification="";
                 if (res.error) {
                     throw (res.error);
                 }
+                if(e.target.value=="cancel"){
+                    messageNotification="Your ticket has been canceled."
+                    socket.emit(`TICKET`, ({ message: messageNotification, employeeId: this.props.employeeId, ticketId: this.props.id }))
+                }else if(e.target.value=="escalated"){
+                    messageNotification="Your ticket has been escalated."
+                    socket.emit(`TICKET`, ({ message: messageNotification, employeeId: this.props.employeeId, ticketId: this.props.id }))
+                }else{
+                    messageNotification="Your ticket has been resolved."
+                    socket.emit(`TICKET`, ({ message: messageNotification, employeeId: this.props.employeeId, ticketId: this.props.id }))
+                }
+
                 console.log("hasil", res)
             })
             .catch(error => {
