@@ -20,6 +20,8 @@ import users from '../../../redux/api/users';
 import { prod } from '../../../redux/url/server';
 
 const jwt = require('jsonwebtoken');
+const publicVapidKey =
+    "BKh1biqQNSmXP62RjznwyzSGCm_FXcvtVMm8XPGophGFRxD2oycxY1LgTDRAv0gA2D7_00epR9SOwF9NGToCZcM";
 const url = prod;
 const socketUrl = prod
 const socket = io(socketUrl)
@@ -98,6 +100,44 @@ export class Home extends Component {
                 )
             }
         });
+    }
+    
+    urlBase64ToUint8Array(base64String) {
+        const padding = "=".repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, "+")
+            .replace(/_/g, "/");
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+    async componentWillUpdate() {
+        const serviceWorker = await navigator.serviceWorker.ready;
+        // subscribe and return the subscription
+        const subscription = await serviceWorker.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: this.urlBase64ToUint8Array(publicVapidKey),
+        });
+        if (this.props.data.personState.data.user_id) {
+            fetch(socketUrl + "subscribe", {
+                method: "POST",
+                body: JSON.stringify(subscription),
+                headers: {
+                    "key": "8dfcb234a322aeeb6b530f20c8e9988e",
+                    "content-type": "application/json",
+                    "technician_id": this.props.data.personState.data.user_id,
+                }
+            })
+            socket.on('NOTIFICATION-' + this.props.data.personState.data.user_id, (data) => {
+                toast.success(data)
+                // this.fetchMessage();
+            })
+        }
     }
 
     tick() {

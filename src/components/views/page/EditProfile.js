@@ -6,7 +6,7 @@ import '../../../assets/style.css';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
-import { prod } from '../../../redux/url/server';
+import { dev } from '../../../redux/url/server';
 import defaultEmploy from '../../../assets/img/worker.png';
 import axios from 'axios';
 const jwt = require('jsonwebtoken');
@@ -16,7 +16,12 @@ export class EditProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: []
+            user: [],
+            editPassword: false,
+            oldPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+            success: false
         }
     }
 
@@ -24,7 +29,14 @@ export class EditProfile extends Component {
         //console.log(e.target.value)
         this.setState({
             [e.target.name]: e.target.value,
-            save: false
+            save: false,
+            nrp: this.props.data.personState.data.user_id
+        })
+    }
+
+    handleClickChangePassword = () => {
+        this.setState({
+            editPassword: !this.state.editPassword
 
         })
     }
@@ -47,7 +59,7 @@ export class EditProfile extends Component {
         const formData = new FormData();
 
         formData.append('myImage', file);
-        formData.append('employee_id', this.state.user_id);
+        formData.append('technician_id', this.state.user_id);
 
         const config = {
             headers: {
@@ -57,7 +69,7 @@ export class EditProfile extends Component {
         };
 
         // axios.post(url+"ticket", formData, config)
-        axios.post(prod + "edit/image/technician", formData, config)
+        axios.post(dev + "edit/image/technician", formData, config)
             .then((response) => {
                 this.setState({
                     redirect: true
@@ -116,10 +128,29 @@ export class EditProfile extends Component {
             })
     }
 
+    handleSavePassword = (e) => {
+        e.preventDefault()
+        if(this.state.newPassword.length>5 && this.state.newPassword==this.state.confirmPassword)
+        axios.put(`http://localhost:3001/change/password/technician`, this.state, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                console.log(res.data.values)
+                if (res.data.values.message == "success") {
+                    this.setState({ success: true })
+                }else{
+                    this.setState({ passwordSalah: true })
+                }
+            })
+    }
+
     render() {
         //if (localStorage.getItem("jwt")) return <Redirect to="/profile" />
         // var userImgLink = (this.state.user_image) ? this.state.user_image : "defaultEmploy";
         // var userImg = prod + 'avatar/technician/' + userImgLink;
+        const profile = this.state.technician_image ? "https://api.ict-servicedesk.xyz/avatar/technician/" + this.state.technician_image : defaultEmploy;
         return (
 
             <div className="home" style={{ paddingBottom: "70px" }}>
@@ -136,30 +167,7 @@ export class EditProfile extends Component {
                 <div style={{ color: "black", width: "100%" }}>
                 </div>
 
-                <div className="container" style={{ width: "100%" }}>
-                    <div className="profile"
-                        style={{
-                            top: "30px",
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            width: "90px",
-                            height: "90px",
-                            borderRadius: "50%",
-                            backgroundColor: "#fff",
-                            border: "1px solid",
-                            position: "relative",
-                            overflow: "hidden",
-                            marginBottom: "20px"
-                        }}>
-                        <img src={(this.state.user_image_temp) ? this.state.user_image_temp : defaultEmploy} alt="man" style={{ width: "100%" }} />
-                    </div>
-                    <div className="ganti-foto" > <label htmlFor="files">change profile photo</label>
-                        <input className="fileInput"
-                            id="files"
-                            type="file"
-                            onChange={(e) => this._handleImageChange(e)} style={{ display: "none" }} />
-                    </div>
-                </div>
+
 
                 <div className="row editProfile" style={{ width: "100%", display: this.state.save ? "flex" : "none" }}>
                     <div style={{ padding: "10px", color: "white" }}>
@@ -171,81 +179,188 @@ export class EditProfile extends Component {
                     borderRadius: "10px",
                     padding: "20px",
                 }}>
-                    <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit} >
-                        <div className="container">
-                            <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                <div className="sub-editProfile"> job</div>
-                                <div>
-                                    <input
-                                        className="editInput"
-                                        type="text"
-                                        placeholder="Your Job"
-                                        name="technician_job"
-                                        onChange={this.handleChange}
-                                        value={this.state.technician_job}
-                                    />
+                    {!this.state.editPassword ?
+                        <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit} >
+                            <div className="container" style={{ width: "100%" }}>
+                                <div className="profile"
+                                    style={{
+                                        top: "30px",
+                                        left: "50%",
+                                        transform: "translateX(-50%)",
+                                        width: "90px",
+                                        height: "90px",
+                                        borderRadius: "50%",
+                                        backgroundColor: "#fff",
+                                        border: "1px solid",
+                                        position: "relative",
+                                        overflow: "hidden",
+                                        marginBottom: "20px"
+                                    }}>
+                                    <img src={(this.state.user_image_temp) ? this.state.user_image_temp : profile} alt="man" style={{ width: "100%" }} />
+                                </div>
+                                <div className="ganti-foto" > <label htmlFor="files">change profile photo</label>
+                                    <input className="fileInput"
+                                        id="files"
+                                        type="file"
+                                        onChange={(e) => this._handleImageChange(e)} style={{ display: "none" }} />
+                                </div>
+                            </div>
+                            <div className="container">
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile"> job</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            placeholder="Your Job"
+                                            name="technician_job"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_job}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile"> department</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            name="technician_department"
+                                            placeholder="Your Department"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_department}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile"> address</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            name="technician_address"
+                                            placeholder="Your Address"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_address}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile"> email</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            name="technician_email"
+                                            placeholder="Your Email"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_email}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile"> contact</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            placeholder="Your Contact"
+                                            name="technician_contact"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_contact}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                <div className="sub-editProfile"> department</div>
-                                <div>
-                                    <input
-                                        className="editInput"
-                                        type="text"
-                                        name="technician_department"
-                                        placeholder="Your Department"
-                                        onChange={this.handleChange}
-                                        value={this.state.technician_department}
-                                    />
+                                <div
+                                    style={{
+                                        fontSize: "16px",
+                                        textAlign: "left",
+                                    }}
+                                    onClick={this.handleClickChangePassword}
+                                >
+                                    Change Password
                                 </div>
                             </div>
-                            <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                <div className="sub-editProfile"> address</div>
-                                <div>
-                                    <input
-                                        className="editInput"
-                                        type="text"
-                                        name="technician_address"
-                                        placeholder="Your Address"
-                                        onChange={this.handleChange}
-                                        value={this.state.technician_address}
-                                    />
+                            <div className="row" style={{ width: "100%" }}>
+                                <div className="row" style={{ marginTop: "2rem", width: "100%" }}>
+                                    <button className="button-submit" type="submit" onClick={this.handleSave}>Save</button>
                                 </div>
                             </div>
-                            <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                <div className="sub-editProfile"> email</div>
-                                <div>
-                                    <input
-                                        className="editInput"
-                                        type="text"
-                                        name="technician_email"
-                                        placeholder="Your Email"
-                                        onChange={this.handleChange}
-                                        value={this.state.technician_email}
-                                    />
+                        </form>
+                        :
+                        <form style={{ marginTop: "1rem" }} onSubmit={this.handleSavePassword} >
+                            <div className="container">
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile">Old Password</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="password"
+                                            placeholder="Your Job"
+                                            name="oldPassword"
+                                            onChange={this.handleChange}
+                                            value={this.state.oldPassword}
+                                            style={{
+                                                color: this.props.data.auth ? this.props.data.auth.message !== "succes" ? "red" : "#0050A1" : "#0050A1",
+                                                borderBottom: this.props.data.auth ? this.props.data.auth.message !== "succes" ? "1px solid red" : "1px solid #C6C6C6" : "1px solid #C6C6C6"
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile">New Password</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="password"
+                                            name="newPassword"
+                                            placeholder="Your Department"
+                                            onChange={this.handleChange}
+                                            value={this.state.newPassword}
+                                            style={{
+                                                color: this.state.newPassword ? this.state.newPassword.length < 6 ? "red" : "#0050A1" : "#0050A1",
+                                                borderBottom: this.state.newPassword ? this.state.newPassword.length < 6 ? "1px solid red" : "1px solid #C6C6C6" : "1px solid #C6C6C6"
+                                            }}
+                                        />
+                                        <div
+                                            style={this.state.newPassword ? this.state.newPassword.length < 6 ? { width: "280px", color: "red", display: "block", fontSize: "14px" } : { display: "none" } : { display: "none" }}>
+                                            Password must be at least 6 characters.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row-editProfile" style={{ alignItems: "center" }}>
+                                    <div className="sub-editProfile"> Confirm Password</div>
+                                    <div>
+                                        <input
+                                            className="editInput"
+                                            type="password"
+                                            name="confirmPassword"
+                                            placeholder="Your Address"
+                                            onChange={this.handleChange}
+                                            value={this.state.confirmPassword}
+                                        />
+                                        <div className="sub-title" style={this.state.confirmPassword ? this.state.newPassword !== this.state.confirmPassword ? { color: "red", display: "block", fontSize: "14px" } : { display: "none" } : { display: "none" }}>Password doesn't match!.</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                <div className="sub-editProfile"> contact</div>
-                                <div>
-                                    <input
-                                        className="editInput"
-                                        type="text"
-                                        placeholder="Your Contact"
-                                        name="technician_contact"
-                                        onChange={this.handleChange}
-                                        value={this.state.technician_contact}
-                                    />
+                            <div className="row" style={{ width: "100%" }}>
+                                <div className="row" style={{ marginTop: "2rem", width: "100%" }}>
+                                    <button className="button-submit" type="submit" onClick={this.handleSavePassword}>Save</button>
+                                     <button className="button-submit" type="submit" onClick={this.handleClickChangePassword} style={{marginTop:"10px"}}>Discard</button>
                                 </div>
                             </div>
-
-                        </div>
-                    </form>
-                </div>
-                <div className="row" style={{ width: "100%" }}>
-                    <div className="row" style={{ marginTop: "2rem" }}>
-                        <button className="button-submit" type="submit" onClick={this.handleSave}>Save</button>
-                    </div>
+                            <div
+                                style={this.state.success ? { width: "100%", color: "green", display: "block", fontSize: "14px" } : { display: "none" }}>
+                                Password has been changed.
+                            </div>
+                            <div
+                                style={this.state.passwordSalah ? { width: "100%", color: "red", display: "block", fontSize: "14px" } : { display: "none" }}>
+                                Incorrect Password!
+                            </div>
+                        </form>
+                    }
                 </div>
             </div >
 
