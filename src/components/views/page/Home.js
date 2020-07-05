@@ -32,7 +32,8 @@ export class Home extends Component {
         super(props);
         this.state = {
             date: new Date(),
-            persons: []
+            persons: [],
+            notifikasiGet:true
         };
     }
     initSocket = () => {
@@ -95,13 +96,14 @@ export class Home extends Component {
                             .then(res => {
                                 this.setState({ jumlahTask: res.data.values.length })
                                 this.initSocket()
+                                this.notifikasi()
                             })
                     }
                 )
             }
         });
     }
-    
+
     urlBase64ToUint8Array(base64String) {
         const padding = "=".repeat((4 - base64String.length % 4) % 4);
         const base64 = (base64String + padding)
@@ -116,26 +118,31 @@ export class Home extends Component {
         }
         return outputArray;
     }
-    async componentWillUpdate() {
-        const serviceWorker = await navigator.serviceWorker.ready;
-        // subscribe and return the subscription
-        const subscription = await serviceWorker.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: this.urlBase64ToUint8Array(publicVapidKey),
-        });
-        if (this.props.data.personState.data.user_id) {
-            fetch(socketUrl + "subscribe", {
-                method: "POST",
-                body: JSON.stringify(subscription),
-                headers: {
-                    "key": "8dfcb234a322aeeb6b530f20c8e9988e",
-                    "content-type": "application/json",
-                    "technician_id": this.props.data.personState.data.user_id,
-                }
-            })
-            socket.on('NOTIFICATION-' + this.props.data.personState.data.user_id, (data) => {
-                toast.success(data)
-                // this.fetchMessage();
+    async notifikasi() {
+        if (this.state.notifikasiGet) {
+            const serviceWorker = await navigator.serviceWorker.ready;
+            // subscribe and return the subscription
+            const subscription = await serviceWorker.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: this.urlBase64ToUint8Array(publicVapidKey),
+            });
+            if (this.props.data.personState.data.user_id) {
+                fetch(socketUrl + "subscribe", {
+                    method: "POST",
+                    body: JSON.stringify(subscription),
+                    headers: {
+                        "key": "8dfcb234a322aeeb6b530f20c8e9988e",
+                        "content-type": "application/json",
+                        "idd": this.props.data.personState.data.user_id,
+                    }
+                })
+                socket.on('NOTIFICATION-' + this.props.data.personState.data.user_id, (data) => {
+                    toast.success(data)
+                    // this.fetchMessage();
+                })
+            }
+            this.setState({
+                notifikasiGet:false
             })
         }
     }
