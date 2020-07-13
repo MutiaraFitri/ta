@@ -168,10 +168,7 @@ export class Home extends Component {
                 </div>
                 <div className="menu-atas" style={{ display: "flex", width: "100%" }}>
                     <div className="menu"
-                        style={{
-                            width: "50%",
-                            padding: "0px 10px"
-                        }}>
+                        style={{ width: "50%", padding: "0px 10px" }}>
                         <Link to="/ticket/all">
                             <div className="row" style={{
                                 padding: "10px", margin: "0px",
@@ -194,8 +191,7 @@ export class Home extends Component {
                     </div>
                     <div className="menu"
                         style={{
-                            width: "50%",
-                            padding: "0px 10px",
+                            width: "50%", padding: "0px 10px",
                         }}>
                         <Link to="/ticket/assign-to-me">
                             <div className="row" style={{
@@ -217,11 +213,7 @@ export class Home extends Component {
                         </Link>
                     </div>
                 </div>
-                <div className="menu_bawah" style={{
-                    width: "100%",
-                    height: "81px",
-
-                }} >
+                <div className="menu_bawah" style={{ width: "100%", height: "81px", }} >
                     <Link to='/report' >
                         <div className="menuReport"
                             style={{ padding: "0px 10px" }}

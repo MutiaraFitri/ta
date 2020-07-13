@@ -95,43 +95,19 @@ export class Login extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="row">
-                        <img src={logo} alt="Komatsu" />
-                    </div>
+                    <div className="row"> <img src={logo} alt="Komatsu" /></div>
                 </div>
                 <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit}>
                     <div className="container">
                         <div className="row">
-                            <input
-                                className="form-input"
-                                type="text"
-                                placeholder="Employee ID"
-                                onChange={this.handleChange}
-                                name="nrp"
-                                value={this.state.nrp}
-                                style={{ padding: "10px", width: "100%" }}
-                            />
+                            <input className="form-input" type="text" placeholder="Employee ID" onChange={this.handleChange} name="nrp" value={this.state.nrp} style={{ padding: "10px", width: "100%" }} />
                         </div>
                         <div className="row-password" style={{ alignItems: "center" }}>
-                            <input
-                                className="form-input"
-                                type={this.state.type}
-                                name="password"
-                                placeholder="Password"
-                                onChange={this.handleChange}
-                                value={this.state.password}
-                                style={{ padding: "10px" }}
-
-
-                            />
+                            <input className="form-input" type={this.state.type} name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} style={{ padding: "10px" }} />
                             <span className="password__show" onClick={this.handleClick} style={{ position: "absolute", marginLeft: "-35px", marginTop: "15px" }}>
                                 {this.state.type === 'text' ?
-                                    <i className="material-icons visibility" >
-                                        visibility_off</i> :
-                                    <i className="material-icons visibility">
-                                        visibility</i>}
+                                    <i className="material-icons visibility" > visibility_off</i> : <i className="material-icons visibility">  visibility</i>}
                             </span>
-
                         </div>
                     </div>
                     <div className="row" style={{ marginTop: "2rem" }}>

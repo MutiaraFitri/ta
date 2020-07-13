@@ -78,7 +78,7 @@ export class Home extends Component {
                         label: 'ESCALATED',
                         data: dataSummary,
                         backgroundColor: [
-                            "#0050A1", "PINK", "ORANGE"
+                            "red","#0050A1", "ORANGE"
                         ]
                     }
                 ]

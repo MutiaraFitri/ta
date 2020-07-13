@@ -198,7 +198,6 @@ class DetailTicket extends Component {
                         </div>
                     </div>
                 </div>
-
                 <div className="kotak" style={{ backgroundColor: "#F6F6F6", width: "100%", marginTop: "50px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                         <div className="row">
@@ -440,7 +439,7 @@ class DetailTicket extends Component {
                                 "Make it Priority ?" :
                                 this.state.confirmationTitle === "spam" ?
                                     "Make it spam ?" :
-                                    this.state.ticket_status+" this Ticket ?"}
+                                    this.state.ticket_status + " this Ticket ?"}
                     </div>
                     <div className="row" style={{ width: "100%", bottom: "15px", position: "absolute" }}>
                         <div style={{ margin: "0 auto", width: "100%" }}>
@@ -459,7 +458,7 @@ class DetailTicket extends Component {
                                     <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonMakeItPriority}>Yes</button> :
                                     this.state.confirmationTitle === "spam" ?
                                         <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonSpam}>Yes</button> :
-                                        <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={()=> {this.updateTicket(this.state.ticket_status)}}>Yes</button>
+                                        <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={() => { this.updateTicket(this.state.ticket_status) }}>Yes</button>
                             }
                         </div>
                     </div>
@@ -488,9 +487,7 @@ class DetailTicket extends Component {
                                         <div className="icon-menu">
                                             <img src={tambah} alt="tambah" />
                                         </div>
-                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                            Assign to Me
-                                            </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>   Assign to Me </div>
                                     </div>
                                 </div>
                             </div>
@@ -500,9 +497,7 @@ class DetailTicket extends Component {
                                         <div className="icon-menu">
                                             <img src={priority} alt="tambah" />
                                         </div>
-                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                            Make it Priority
-                                            </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}> Make it Priority</div>
                                     </div>
                                 </div>
                             </div>
@@ -512,9 +507,7 @@ class DetailTicket extends Component {
                                         <div className="icon-menu">
                                             <img src={garbage} alt="tambah" />
                                         </div>
-                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                            Spam
-                                            </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>   Spam </div>
                                     </div>
                                 </div>
                             </div>

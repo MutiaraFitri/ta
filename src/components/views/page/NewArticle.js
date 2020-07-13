@@ -214,9 +214,7 @@ export class Report extends Component {
                 </div>
 
                 <div className="Report" style={{ width: "85%" }}>
-                    <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
-                        Category
-                        </div>
+                    <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>Category </div>
                     <div className="row" style={{ width: "100%", margin: "0 auto", textAlign: "center" }}>
                         <div className="menu-service">
                             <div className="isi-our-service" id="network" onClick={this.handleCategory} style={{ backgroundColor: (this.state.issue_category === "network") ? "#0050A1" : "white" }}>

@@ -112,7 +112,7 @@ class Message extends Component {
                         </div>
                         <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
                             <div className="nama" style={{ fontSize: "16px", color: "black", fontWeight: "bold", textAlign: "left" }}>{values.employee_firstname} {values.employee_lastname}</div>
-                            <div className="row" style={{ marginTop: "-4px" }}>
+                            <div className="row" style={{ marginTop: "-0px" }}>
                                 <div className="time" style={{ width: "50%", fontSize: "14px", color: "black", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
                                 <Link to={'/ticket/detail/' + values.ticket_id} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </Link>
                             </div>

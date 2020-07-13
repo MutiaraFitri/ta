@@ -820,9 +820,31 @@ margin-top: 25px;
 /* PAGE HOME */
 .rowHome{
     
- width: 340px; 
- margin: 20px auto; 
- margin-top: -60px;
+width: 340px; 
+margin: 20px auto; 
+margin-top: -60px;
+}
+/* PAGE FILTER TICKET */
+.filter-kategori{
+    margin: 10px auto; 
+    width: 100%;
+    letter-spacing: 5px;
+    font-size: 12px;
+    color:#000;
+}
+.filter-priority{
+    margin: 10px auto; 
+    width: 100%;
+    letter-spacing: 5px;
+    font-size: 12px;
+    color:#000;
+}
+.filter-date{
+    margin: 10px auto; 
+    width: 100%;
+    letter-spacing: 5px;
+    font-size: 12px;
+    color:#000;
 }
 /* PAGE PROFILE */
 .buttonLogout{
