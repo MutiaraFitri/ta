@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash'
+import { connect } from 'react-redux';
+import { kb } from '../../../redux/api/kb';
 import axios from 'axios';
 import lain from '../../../assets/img/more.png';
 import mouse from '../../../assets/img/mouse-blue.png';
@@ -86,6 +88,8 @@ export class Report extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchKb();
+
         if (this.props.match.params.paramsss) {
             this.setState({
                 issue_category: this.props.match.params.paramsss
@@ -141,13 +145,11 @@ export class Report extends Component {
     }
 
     handleSubmit = () => {
-        console.log("state", this.state)
         if (this.state.issue_id === "lainnya") {
             this.setState({
                 issue_id: (new Date().getTime()).toString(36),
                 kb_id: (new Date().getTime() + 9).toString(36),
             }, () => {
-                console.log(this.state)
                 axios.post("https://api.ict-servicedesk.xyz/steps", this.state, {
                     headers: {
                         key: '8dfcb234a322aeeb6b530f20c8e9988e'
@@ -195,7 +197,7 @@ export class Report extends Component {
         }
     }
     render() {
-        if (this.state.redirect_1 && this.state.redirect_2) return <Redirect to={"/knowledgebase/" + this.state.kb_id} />
+        if (this.state.redirect_1 && this.state.redirect_2) return <Redirect to={"/edit/kb/" + this.state.kb_id} />
         const imgmouse = this.state.issue_category === "hardware" ? mouseActive : mouse;
         const imgnetwork = this.state.issue_category === "network" ? networkActive : network;
         const imgsoftware = this.state.issue_category === "software" ? softwareActive : software;
@@ -262,7 +264,7 @@ export class Report extends Component {
                     <select className="input-form-full" id="cars" name="issue_id" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "99%", color: "grey" }} onChange={this.handleChange} value={this.state.issue_id} defaultValue="xx">
                         <option value="xx" disabled style={{ color: "grey" }}>------- Choose your issue -------</option>
                         {this.renderOption()}
-                        <option value="lainnya">lainnya</option>
+                        <option value="lainnya">( + ) Create New Issue</option>
                     </select>
                     <div className="label" style={{ height: "30px", display: (this.state.issue_id === "lainnya") ? "inline" : "none" }} >
                         <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
@@ -270,7 +272,7 @@ export class Report extends Component {
                         </div>
                         <input className="input-form-full" type="text" placeholder="-- Title your article --" onChange={this.handleChange} name="issue_subject" />
                     </div>
-                    <div className="label" style={{ display: (this.state.issue_category) ? "inline" : "none" }}>
+                    {/* <div className="label" style={{ display: (this.state.issue_category) ? "inline" : "none" }}>
                         <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
                             Problem Solve
                         </div>
@@ -287,7 +289,7 @@ export class Report extends Component {
                             How Many Step ?
                         </div>
                         <input className="input-form-PB" type="number" placeholder="2,3,4,..." onChange={this.handleChange} name="much" />
-                    </div>
+                    </div> */}
                     <div className="row" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "100%", marginBottom: "70px", float: "right" }}>
                         <button className="button" type="submit" onClick={this.handleSubmit}>
                             submit
@@ -300,4 +302,15 @@ export class Report extends Component {
     }
 }
 
-export default Report
+const mapStateToProps = (state) => ({
+    data: state
+})
+const mapDispacthToProps = (dispatch) => {
+    return {
+        fetchKb: () => dispatch(kb()),
+    }
+}
+
+export default connect(
+    mapStateToProps, mapDispacthToProps
+)(Report);
