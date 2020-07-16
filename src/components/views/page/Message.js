@@ -12,6 +12,7 @@ import { prod } from '../../../redux/url/server'
 import jwt from "jsonwebtoken";
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
+import TextareaAutosize from 'react-textarea-autosize';
 
 const url = prod
 const socketUrl = url
@@ -58,6 +59,23 @@ class Message extends Component {
 
     componentDidUpdate() {
         this.scrollToBottom();
+        if (this.props.match.params.notification_id) {
+            axios.put(url + "notification/" + this.props.match.params.notification_id, null, {
+                headers: {
+                    key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                }
+            })
+                .then(res => res.data)
+                .then(res => {
+                    if (res.error) {
+                        throw (res.error);
+                    }
+                })
+                .catch(error => {
+                    console.log("Error " + error);
+                    // dispatch(fetchTicketError(error));
+                })
+        }
     }
     componentDidMount() {
         this.initSocket()
@@ -99,7 +117,7 @@ class Message extends Component {
             return <div key={key} style={{ width: "85%", margin: "0px auto" }}>
                 <div>
                     <div className="title-kendala" style={{ width: "100%", textAlign: "left", marginTop: "30px" }}>
-                        <p style={{ fontSize: "20px", color: "black", marginTop: "-20px", fontWeight: "700" }}>{values.ticket_subject}</p>
+                        {/* <p style={{ fontSize: "20px", color: "black", marginTop: "-20px", fontWeight: "700" }}>{values.ticket_subject}</p> */}
                     </div>
                     <div style={{ width: "100%", display: "flex", marginTop: "-6px" }}>
                         <div className="pengirim" style={{ width: "15%" }}>
@@ -134,7 +152,7 @@ class Message extends Component {
                         <img src={baloon} width="10" height="15" style={{ margin: "5px 0px" }} alt="baloon" />
                         <div className="description" style={{ backgroundColor: "#fff", padding: "15px", wordWrap: "break-word", maxWidth: "80%", margin: "5px 0px", borderRadius: "0px 10px 10px 10px" }}>
                             {/* <div className="title-kotak" style={{ textAlign: "left", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
-                            <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
+                            <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px" }}>{values.message}</div>
                         </div>
                     </div>
                 );
@@ -144,7 +162,7 @@ class Message extends Component {
                         <img src={baloon2} width="10" height="15" style={{ margin: "5px 0px", float: "right", transform: "scale(-1, 1)" }} alt="baloon" />
                         <div className="description" style={{ backgroundColor: "#c6e6f8", float: "right", wordWrap: "break-word", maxWidth: "80%", padding: "15px", margin: "5px 0px", borderRadius: "10px 0px 10px 10px" }}>
                             {/* <div className="title-kotak" style={{ textAlign: "right", color: "#0050A1", fontWeight: "700" }}>Dimas</div> */}
-                            <div className="title-kotak" style={{ textAlign: "right", color: "#000", fontSize: "16px", fontWeight: "100" }}>{values.message}</div>
+                            <div className="title-kotak" style={{ textAlign: "right", color: "#000", fontSize: "16px" }}>{values.message}</div>
                         </div>
                     </div>
                 );
@@ -230,14 +248,19 @@ class Message extends Component {
         })
     }
     renderIsTyping = () => {
+        console.log(this.state.message)
         if (this.state.employeeTyping) {
-            return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px" }}><i>Typing . . .</i></div>
+            if (this.state.state_message.length < 8) {
+                return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "100%", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
+            } else {
+                return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "90%" }}><i>Typing . . .</i></div>
+            }
         }
     }
     render() {
         //console.log(this.props.match.params.id)
         return (
-            <div className="home" style={{ paddingBottom: "10vh", minHeight: "90vh", backgroundColor: "#F4F4F6", }}>
+            <div className="home" style={{ paddingBottom: "10vh", minHeight: "90vh", backgroundColor: "#F4F4F6", position: "relative" }}>
                 <div className="navbar-message">
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
                         <Link to={'/ticket/detail/' + this.state.message_ticket_id}>
@@ -253,17 +276,19 @@ class Message extends Component {
                 </div>
                 <div className="kotak" style={{ marginTop: "140px", paddingTop: "20px", width: "100%", marginBottom: "7px" }}>
                     {this.renderMessage()}
-                    {this.renderIsTyping()}
                 </div>
+                {this.renderIsTyping()}
                 <div style={{ float: "left", clear: "both" }}
                     ref={(el) => { this.messagesEnd = el; }}>
                 </div>
+
                 <div style={{ width: "414px", display: "flex", backgroundColor: "#0050A1", bottom: "0px", position: "fixed", marginBottom: "0px" }}>
                     <div style={{ width: "90%", margin: "0px auto", minHeight: "50px", display: "flex" }}>
                         <div style={{ width: "80%", padding: "10px" }}>
-                            <textarea placeholder="Type Message"
+                            <TextareaAutosize placeholder="Type Message"
+                                maxRows={3}
                                 onKeyUp={e => { e.keyCode !== 13 && this.sendTyping() }}
-                                style={{ height: this.state.message.length > 54 ? "100px" : "20px", width: "100%", padding: "10px 17px", borderRadius: "20px", fontSize: "17px" }} name="message" onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.message} />
+                                style={{ width: "100%", padding: "10px 17px", borderRadius: "20px", fontSize: "17px" }} name="message" onKeyPress={this.handleKeyPress} onChange={this.handleChange} value={this.state.message} />
                         </div>
                         <div style={{ width: "20%", height: "100%" }} onClick={this.handleSend}>
                             <span className="material-icons" style={{ marginTop: "17px", color: "#fff", marginLeft: "15px", fontSize: "24px" }}>

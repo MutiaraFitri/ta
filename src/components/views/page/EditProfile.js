@@ -6,7 +6,7 @@ import '../../../assets/style.css';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
-import { dev } from '../../../redux/url/server';
+import { prod } from '../../../redux/url/server';
 import defaultEmploy from '../../../assets/img/worker.png';
 import axios from 'axios';
 const jwt = require('jsonwebtoken');
@@ -69,7 +69,7 @@ export class EditProfile extends Component {
         };
 
         // axios.post(url+"ticket", formData, config)
-        axios.post(dev + "edit/image/technician", formData, config)
+        axios.post(prod + "edit/image/technician", formData, config)
             .then((response) => {
                 this.setState({
                     redirect: true
@@ -131,7 +131,7 @@ export class EditProfile extends Component {
     handleSavePassword = (e) => {
         e.preventDefault()
         if(this.state.newPassword.length>5 && this.state.newPassword==this.state.confirmPassword)
-        axios.put(`http://localhost:3001/change/password/technician`, this.state, {
+        axios.put(`https://api.ict-servicedesk.xyz/change/password/technician`, this.state, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -296,9 +296,10 @@ export class EditProfile extends Component {
                                     <div className="sub-editProfile">Old Password</div>
                                     <div>
                                         <input
+                                            required={true}
                                             className="editInput"
                                             type="password"
-                                            placeholder="Your Job"
+                                            placeholder="Old Password"
                                             name="oldPassword"
                                             onChange={this.handleChange}
                                             value={this.state.oldPassword}
@@ -313,10 +314,11 @@ export class EditProfile extends Component {
                                     <div className="sub-editProfile">New Password</div>
                                     <div>
                                         <input
+                                            required={true}
                                             className="editInput"
                                             type="password"
                                             name="newPassword"
-                                            placeholder="Your Department"
+                                            placeholder="New Password"
                                             onChange={this.handleChange}
                                             value={this.state.newPassword}
                                             style={{
@@ -334,10 +336,11 @@ export class EditProfile extends Component {
                                     <div className="sub-editProfile"> Confirm Password</div>
                                     <div>
                                         <input
+                                            required={true}
                                             className="editInput"
                                             type="password"
                                             name="confirmPassword"
-                                            placeholder="Your Address"
+                                            placeholder="Confirm New Password"
                                             onChange={this.handleChange}
                                             value={this.state.confirmPassword}
                                         />

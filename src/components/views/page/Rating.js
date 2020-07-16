@@ -30,8 +30,8 @@ class Rating extends Component {
                     rating
                 })
             })
-            console.log(url + `rating/`+moment().month()+`/` + this.props.user)
-        axios.get(url + `rating/`+moment().month()+`/` + this.props.user, {
+        console.log(url + `rating/` + moment().month() + `/` + this.props.user)
+        axios.get(url + `rating/` + moment().month() + `/` + this.props.user, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -199,7 +199,15 @@ class Rating extends Component {
                                     height: "30px",
                                 }}>
                                     <div className="barbg" style={{ width: "100%", height: "10px", backgroundColor: "#C4C4C4", margin: "10px auto", }}>
-                                        <div className="isibar" style={{ width: rating5 ? ((rating5 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%", transition: "width 0.5s", height: "10px", backgroundColor: "#141AA2", color: "white", fontSize: "20px" }} >
+                                        <div className="isibar"
+                                            style={{
+                                                width: rating5 ? ((rating5 / countJumlah).toFixed(1) * 100) + "%" : 0 + "%",
+                                                transition: "width 0.5s",
+                                                height: "10px",
+                                                backgroundColor: "#141AA2",
+                                                color: "white",
+                                                fontSize: "20px"
+                                            }} >
                                         </div>
                                     </div>
                                 </div>

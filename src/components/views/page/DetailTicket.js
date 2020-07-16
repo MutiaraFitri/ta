@@ -122,7 +122,23 @@ class DetailTicket extends Component {
     componentDidMount() {
         this.props.userku();
         this.fetchData()
-
+        if (this.props.match.params.notification_id) {
+            axios.put(url + "notification/" + this.props.match.params.notification_id,null, {
+                headers: {
+                    key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                }
+            })
+                .then(res => res.data)
+                .then(res => {
+                    if (res.error) {
+                        throw (res.error);
+                    }
+                })
+                .catch(error => {
+                    console.log("Error " + error);
+                    // dispatch(fetchTicketError(error));
+                })
+        }
     }
 
     renderToDos() {
@@ -229,17 +245,17 @@ class DetailTicket extends Component {
                             <div className="title-kotak" style={{ marginTop: "20px", width: "45%", textAlign: "right", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
                             <div></div></div>
                     </div>
-                    <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
+                    <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto",marginBottom:"60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #f35834", borderRadius: "8px", backgroundColor: "#f35834", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             CANCELED
                         </div>
                     </div>
-                    <div style={{ display: !(status === "DONE") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
+                    <div style={{ display: !(status === "DONE") ? "none" : "flex", width: "90%", margin: "0px auto",marginBottom:"60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #43bf57", borderRadius: "8px", backgroundColor: "#43bf57", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             DONE
                         </div>
                     </div>
-                    <div style={{ display: !(status === "SPAM") ? "none" : "flex", width: "90%", margin: "0px auto", }}>
+                    <div style={{ display: !(status === "SPAM") ? "none" : "flex", width: "90%", margin: "0px auto",marginBottom:"60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #FF0F17", borderRadius: "8px", backgroundColor: "#FF0F17", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             SPAM
                         </div>

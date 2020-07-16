@@ -18,7 +18,7 @@ export function getNotificationByTechnicianId() {
             else {
                 const user = decoded.data;
                 const myData = ({ ...user });
-                console.log(myData);
+                // console.log(myData);
                 axios.get(url + 'notification/technician/' + myData.user_id, {
                     headers: {
                         key: '8dfcb234a322aeeb6b530f20c8e9988e'
@@ -30,7 +30,7 @@ export function getNotificationByTechnicianId() {
                         if (res.error) {
                             throw (res.error);
                         }
-                        console.log(res);
+                        // console.log(res);
                         dispatch(fetchNotification(res));
                         return res.data;
                     })
