@@ -19,7 +19,7 @@ export class Home extends Component {
 
     state = {
         tab: "summary",
-        report: "month"
+        report: "all"
     }
 
     renderSummary = () => {
@@ -40,8 +40,9 @@ export class Home extends Component {
         var jumlahDone = 0;
         var jumlahSeluruh = 0;
         const csvData = []
-        if (this.state.report === "month") {
-            _.map(this.props.data.summary.dataThisMonth, (values, key) => {
+        
+        if (this.state.report === "all") {
+            _.map(this.props.data.summary.data, (values, key) => {
                 if (values.status === "DONE") { jumlahDone = values.jumlah }
                 if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
                 jumlahSeluruh += values.jumlah;
@@ -51,7 +52,7 @@ export class Home extends Component {
             })
         }
         else {
-            _.map(this.props.data.summary.data, (values, key) => {
+            _.map(this.props.data.summary.dataThisMonth, (values, key) => {
                 if (values.status === "DONE") { jumlahDone = values.jumlah }
                 if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
                 jumlahSeluruh += values.jumlah;
@@ -75,10 +76,9 @@ export class Home extends Component {
                 labels: labesSummary,
                 datasets: [
                     {
-                        label: 'ESCALATED',
                         data: dataSummary,
                         backgroundColor: [
-                            "#0050A1", "PINK", "ORANGE"
+                            "red", "#0050A1", "ORANGE"
                         ]
                     }
                 ]
@@ -213,19 +213,6 @@ export class Home extends Component {
         return (<Rating tipe={this.state.report} user={this.state.user_id} />)
     }
     componentDidMount() {
-
-        axios.get(`https://api.ict-servicedesk.xyz/rating/all`, {
-            headers: {
-                key: "8dfcb234a322aeeb6b530f20c8e9988e"
-            }
-        })
-            .then(res => {
-                const rating = res.data.values;
-                console.log("data", rating)
-                this.setState({
-                    rating
-                })
-            })
         jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
             if (err) {
                 console.log("Error", err)
@@ -305,9 +292,9 @@ export class Home extends Component {
                         </div>
                     </div>
                 </div>
-                <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="month">
-                    <option value="month" >This Month</option>
+                <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="all">
                     <option value="all" >All Day</option>
+                    <option value="month" >This Month</option>
                 </select>
                 {
                     (this.state.tab === "summary") ?

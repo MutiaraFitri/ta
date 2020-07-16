@@ -10,6 +10,7 @@ const DetailTickets = React.lazy(() => import('./components/views/page/DetailTic
 const DetailTicket = React.lazy(() => import('./components/views/page/DetailTicket'));
 const DetProblemSolve = React.lazy(() => import('./components/views/page/DetailProblemSolve'));
 const EditProfile = React.lazy(() => import('./components/views/page/EditProfile'));
+const EditKb = React.lazy(() => import('./components/views/page/EditKb'));
 const ForgotPassword = React.lazy(() => import('./components/views/page/ForgotPassword'));
 const History = React.lazy(() => import('./components/views/page/History'));
 const Home = React.lazy(() => import('./components/views/page/Home'));
@@ -45,6 +46,7 @@ const routes = [
   { path: '/login', exact: true, name: 'Login', component: Login },
   { path: '/new-article', exact: true, name: 'Report', component: NewArticle },
   { path: '/knowledgebase/:id', exact: true, name: 'KB', component: KB },
+  { path: '/edit/kb/:id', exact: true, name: 'KB', component: EditKb },
   { path: '/profile', exact: true, name: 'Login', component: Profile },
   { path: '/Notification', exact: true, name: 'Login', component: Notification },
   { path: '/edit-profile', exact: true, name: 'EditProfile', component: EditProfile },
@@ -55,8 +57,10 @@ const routes = [
   { path: '/ticketdet', exact: true, name: 'TicketDet', component: TicketDet },
   { path: '/detail-ticket', exact: true, name: 'DetailTicket', component: DetailTicket },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
+  { path: '/ticket/detail/:id/:notification_id', exact: true, name: 'DetailTicket', component: DetailTickets },
   { path: '/rating', exact: true, name: 'Rating', component: Rating },
   { path: '/message/:id', exact: true, name: 'Message', component: Message },
+  { path: '/message/:id/:notification_id', exact: true, name: 'Message', component: Message },
 
 
 

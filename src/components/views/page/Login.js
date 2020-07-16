@@ -108,7 +108,7 @@ export class Login extends Component {
                                 placeholder="Employee ID"
                                 onChange={this.handleChange}
                                 name="nrp"
-                                value={this.state.nrp}
+                                value={this.state.nrps}
                                 style={{ padding: "10px", width: "100%" }}
                             />
                         </div>

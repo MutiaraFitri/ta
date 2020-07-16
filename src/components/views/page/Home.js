@@ -38,10 +38,6 @@ export class Home extends Component {
     }
     initSocket = () => {
         this.setState({ socket })
-        socket.on('MESSAGE_SENT-' + this.state.user_id, (data) => {
-            toast.success("New Message")
-            // this.createNotificationSubscription(data)
-        })
     }
 
     componentDidMount() {
@@ -137,7 +133,8 @@ export class Home extends Component {
                     }
                 })
                 socket.on('NOTIFICATION-' + this.props.data.personState.data.user_id, (data) => {
-                    toast.success(data)
+                    // toast.success(data)
+                    // console.log("notif masuk")
                     // this.fetchMessage();
                 })
             }
