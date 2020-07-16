@@ -89,17 +89,6 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <React.Suspense fallback={loading()}>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
           {/* Same as */}
           <ToastContainer />
           {renderRoutes(routes)}

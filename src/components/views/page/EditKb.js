@@ -43,15 +43,25 @@ export class EditKb extends Component {
 
     handleChange = (e) => {
         //console.log(e.target.value)
+
+        // Steps array ke id
         var x = { ...this.state.steps[e.target.id] }
+
+        // Array Steps seluruh
         var steps = { ...this.state.steps }
+
+        // Steps data name, array ke id 
         x[e.target.name] = e.target.value;
+
+        // steps ke id = array yang sudah edit
         steps[e.target.id] = x;
+
+        // Ngedit state
         this.setState({ steps: steps, edit: true })
     }
 
     fetchData = () => {
-        // this.props.getSteps(this.props.params.id)
+        // Handle Fetch Steps
         axios.get("https://api.ict-servicedesk.xyz/steps/" + this.props.match.params.id, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
@@ -65,6 +75,8 @@ export class EditKb extends Component {
         }).catch(error => {
             console.log("Error " + error);
         })
+
+        // Handle Fetch KB
         axios.get("https://api.ict-servicedesk.xyz/knowledge_base/id/" + this.props.match.params.id, {
             headers: {
                 key: '8dfcb234a322aeeb6b530f20c8e9988e'
@@ -256,15 +268,17 @@ export class EditKb extends Component {
                         {this.state.edit ?
                             <span className="material-icons" style={{ color: "#fff", fontSize: "30px" }}>
                                 done
-                        </span>
+                            </span>
                             :
-                            <div style={{ color: "#fff", marginTop: "8px", fontSize: "14px" }}>Saved</div>
+                            <div style={{ color: "#fff", marginTop: "8px", fontSize: "14px" }}>
+                                Saved
+                            </div>
                         }
                     </div>
                 </div>
                 <div className="container" style={{ width: "85%", marginTop: "60px" }}>
                     <div className="row" style={{ width: "100%" }}>
-                        <div className="issue-kb" style={{ width: "15%" }}>Issue :</div>
+                        <div className="issue-kb" style={{ width: "15%" }} onClick={this.getState}>Issue :</div>
                         <div className="issue-kb" style={{ width: "85%" }}>{this.state.issue_subject ? this.state.issue_subject : null}</div>
                     </div>
                 </div>
