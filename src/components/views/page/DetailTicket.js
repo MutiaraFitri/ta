@@ -123,7 +123,7 @@ class DetailTicket extends Component {
         this.props.userku();
         this.fetchData()
         if (this.props.match.params.notification_id) {
-            axios.put(url + "notification/" + this.props.match.params.notification_id,null, {
+            axios.put(url + "notification/" + this.props.match.params.notification_id, null, {
                 headers: {
                     key: '8dfcb234a322aeeb6b530f20c8e9988e'
                 }
@@ -164,6 +164,13 @@ class DetailTicket extends Component {
             // var location = values.ticket_location;
             var time = values.ticket_timestamp;
             var due = values.ticket_due_date;
+            var statusTicketIsActive = (active) ? "none" : "flex";
+            var statusTicket = (!active || status === "CANCELED" || !technician_id || this.state.tiket[0].ticket_technician_id !== this.props.data.personState.data.user_id) ? "none" : "flex";
+            var imgTicket = (image) ? <img src={'https://api.ict-servicedesk.xyz/uploads/' + image} alt="macbook" style={{ textAlign: "left", width: "100%" }} /> : null;
+            var statusCancel = !(status === "CANCELED") ? "none" : "flex";
+            var statusDone = !(status === "DONE") ? "none" : "flex";
+            var statusSpam = !(status === "SPAM") ? "none" : "flex";
+
             return (<div key={key}>
                 <div style={{ width: "100%" }}>
                     <div className="title-ticketCategory" >
@@ -180,7 +187,7 @@ class DetailTicket extends Component {
                     <div className="nama-pengirim">
                         <div className="nama" >{sender1} {sender2}</div>
                         <div className="email" > {email} </div>
-                        <div style={{ display: (active) ? "none" : "flex", width: "100%", textAlign: "right " }}>
+                        <div style={{ display: statusTicketIsActive, width: "100%", textAlign: "right " }}>
                             <div style={{ color: "red", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
                                 <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "red", marginRight: "5px" }}>
                                     highlight_off
@@ -188,7 +195,7 @@ class DetailTicket extends Component {
                         TICKET CLOSED
                         </div>
                         </div>
-                        <div style={{ display: !(active) ? "none" : "flex", width: "100%" }}>
+                        <div style={{ display: !statusTicketIsActive, width: "100%" }}>
                             <div style={{ color: "#09d509", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
                                 <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
                                     check_circle_outline
@@ -196,7 +203,7 @@ class DetailTicket extends Component {
                         TICKET OPEN
                         </div>
                         </div>
-                        <div className="deskripsi-isi" style={{ display: (!active || status === "CANCELED" || !technician_id || this.state.tiket[0].ticket_technician_id !== this.props.data.personState.data.user_id) ? "none" : "flex" }}>
+                        <div className="deskripsi-isi" style={{ display: statusTicket }}>
                             <select name="ticket_status" style={{ padding: "1px 5px", backgroundColor: "#F4F4F6", color: "#0050A1", border: "none", fontWeight: "700", fontSize: "16px" }} onChange={this.handleChange} value={this.state.ticket_status}>
                                 <option value="-1" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }} disabled>
                                     Waiting for support
@@ -214,7 +221,6 @@ class DetailTicket extends Component {
                         </div>
                     </div>
                 </div>
-
                 <div className="kotak" style={{ backgroundColor: "#F6F6F6", width: "100%", marginTop: "50px", paddingTop: "10px", paddingBottom: "30px" }}>
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                         <div className="row">
@@ -234,10 +240,7 @@ class DetailTicket extends Component {
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px", wordWrap: "break-word" }}>{description}</div>
                         <div style={{ maxWidth: "414px", textAlign: "left", marginTop: "10px" }}>
-                            {(image) ?
-                                <img src={'https://api.ict-servicedesk.xyz/uploads/' + image} alt="macbook" style={{ textAlign: "left", width: "100%" }} />
-                                : null
-                            }
+                            {imgTicket}
                         </div>
                         <div>
                         </div>
@@ -246,17 +249,17 @@ class DetailTicket extends Component {
                             <div className="title-kotak" style={{ marginTop: "20px", width: "45%", textAlign: "right", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
                             <div></div></div>
                     </div>
-                    <div style={{ display: !(status === "CANCELED") ? "none" : "flex", width: "90%", margin: "0px auto",marginBottom:"60px" }}>
+                    <div style={{ display: statusCancel, width: "90%", margin: "0px auto", marginBottom: "60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #f35834", borderRadius: "8px", backgroundColor: "#f35834", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             CANCELED
                         </div>
                     </div>
-                    <div style={{ display: !(status === "DONE") ? "none" : "flex", width: "90%", margin: "0px auto",marginBottom:"60px" }}>
+                    <div style={{ display: statusDone, width: "90%", margin: "0px auto", marginBottom: "60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #43bf57", borderRadius: "8px", backgroundColor: "#43bf57", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             DONE
                         </div>
                     </div>
-                    <div style={{ display: !(status === "SPAM") ? "none" : "flex", width: "90%", margin: "0px auto",marginBottom:"60px" }}>
+                    <div style={{ display: statusSpam, width: "90%", margin: "0px auto", marginBottom: "60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #FF0F17", borderRadius: "8px", backgroundColor: "#FF0F17", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>
                             SPAM
                         </div>
@@ -417,6 +420,17 @@ class DetailTicket extends Component {
         //console.log(this.props.match.params.id)
         const id_user = this.props.data.personState.data ? this.props.data.personState.data.user_id : null;
         const id_technician_ticket = this.state.tiket[0] ? this.state.tiket[0].ticket_technician_id ? this.state.tiket[0].ticket_technician_id : null : null;
+        const getVisibility = this.state.confirmation ? "visible" : "hidden";
+        const getOpacity = this.state.confirmation ? "1" : "0";
+        const konfirmasiTiketText =
+            this.state.confirmationTitle === "assign" ?
+                "Assign to me ?"
+                : this.state.confirmationTitle === "priority" ?
+                    "Make it Priority ?" :
+                    this.state.confirmationTitle === "spam" ?
+                        "Make it spam ?" :
+                        this.state.ticket_status + " this Ticket ?";
+
 
         const chatBallon =
             id_technician_ticket ?
@@ -439,8 +453,8 @@ class DetailTicket extends Component {
                 {/* Confirmation */}
                 <div className="white-overlay"
                     style={{
-                        visibility: this.state.confirmation ? "visible" : "hidden",
-                        opacity: this.state.confirmation ? "1" : "0"
+                        visibility: getVisibility,
+                        opacity: getOpacity
                     }}
 
                     onClick={this.handleConfirmation}
@@ -476,7 +490,7 @@ class DetailTicket extends Component {
                                     <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonMakeItPriority}>Yes</button> :
                                     this.state.confirmationTitle === "spam" ?
                                         <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={this.handleButtonSpam}>Yes</button> :
-                                        <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={()=> {this.updateTicket(this.state.ticket_status)}}>Yes</button>
+                                        <button className="button" style={{ padding: "15px", borderRadius: "5px", width: "45%", border: "1px solid #0050A1" }} onClick={() => { this.updateTicket(this.state.ticket_status) }}>Yes</button>
                             }
                         </div>
                     </div>
@@ -505,9 +519,7 @@ class DetailTicket extends Component {
                                         <div className="icon-menu">
                                             <img src={tambah} alt="tambah" />
                                         </div>
-                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                            Assign to Me
-                                            </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>   Assign to Me </div>
                                     </div>
                                 </div>
                             </div>
@@ -517,9 +529,7 @@ class DetailTicket extends Component {
                                         <div className="icon-menu">
                                             <img src={priority} alt="tambah" />
                                         </div>
-                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                            Make it Priority
-                                            </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}> Make it Priority</div>
                                     </div>
                                 </div>
                             </div>
@@ -529,9 +539,7 @@ class DetailTicket extends Component {
                                         <div className="icon-menu">
                                             <img src={garbage} alt="tambah" />
                                         </div>
-                                        <div className="desc-menu" style={{ fontSize: "14px" }}>
-                                            Spam
-                                            </div>
+                                        <div className="desc-menu" style={{ fontSize: "14px" }}>   Spam </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 
 // Front End
-const About = React.lazy(() => import('./components/views/page/About'));
+// const About = React.lazy(() => import('./components/views/page/About'));
+// const Rating = React.lazy(() => import('./components/views/page/Rating'));
 const Article = React.lazy(() => import('./components/views/page/Article'));
 const AllTicket = React.lazy(() => import('./components/views/page/AllTicket'));
 const Chart_Component = React.lazy(() => import('./components/views/Chart_Component'));
@@ -26,7 +27,7 @@ const Reset = React.lazy(() => import('./components/views/page/ResetPassword'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
 const Ticket = React.lazy(() => import('./components/views/page/Ticket'));
 const TicketDet = React.lazy(() => import('./components/views/page/TicketDet'));
-const Rating = React.lazy(() => import('./components/views/page/Rating'));
+
 
 
 
@@ -34,7 +35,7 @@ const Rating = React.lazy(() => import('./components/views/page/Rating'));
 
 const routes = [
   { path: '/', exact: true, name: 'Landing', component: Home },
-  { path: '/about', exact: true, name: 'History', component: About },
+  // { path: '/about', exact: true, name: 'History', component: About },
   { path: '/all-ticket', exact: true, name: 'AllTicket', component: AllTicket },
   { path: '/article', exact: true, name: 'Report', component: Article },
   { path: '/article/detail/:id', exact: true, name: 'DetailArticle', component: DetailArticle },
@@ -58,7 +59,6 @@ const routes = [
   { path: '/detail-ticket', exact: true, name: 'DetailTicket', component: DetailTicket },
   { path: '/ticket/detail/:id', exact: true, name: 'DetailTicket', component: DetailTickets },
   { path: '/ticket/detail/:id/:notification_id', exact: true, name: 'DetailTicket', component: DetailTickets },
-  { path: '/rating', exact: true, name: 'Rating', component: Rating },
   { path: '/message/:id', exact: true, name: 'Message', component: Message },
   { path: '/message/:id/:notification_id', exact: true, name: 'Message', component: Message },
 

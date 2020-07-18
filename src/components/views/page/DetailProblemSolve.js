@@ -18,7 +18,7 @@ export class DetailProblemSolve extends Component {
                         <div className="title-problem-solve">title</div>
                     </div>
                     <div className="row">
-                        <div className="detail-problem-solve">sssssssssssssssssssssssssss s s ss s s s                     ss s s s s s s s s </div>
+                        <div className="detail-problem-solve">detail problem</div>
                     </div>
                 </div>
                 <div className="row" style={{ textAlign: "center", width: "100%" }}>

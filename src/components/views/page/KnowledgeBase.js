@@ -164,7 +164,7 @@ export class KnowledgeBase extends Component {
                             </div>
                         </Link>
                     </div>
-                        Edit Article
+                        New Article
                 </div>
                 <div style={{
                     width: "100%",
