@@ -220,7 +220,7 @@ class Message extends Component {
         console.log("Typing");
         this.typingInterval = setInterval(() => {
             if ((Date.now() - this.lastUpdateTime) > 300) {
-                this.setState({ isTyping: false })
+                this.setState({ isTyping: true })
                 this.stopCheckingTyping()
             }
         }, 300)
@@ -234,7 +234,7 @@ class Message extends Component {
         console.log("Stop Typing");
         if (this.typingInterval) {
             clearInterval(this.typingInterval)
-            this.sendTypingKu(false)
+            this.sendTypingKu(true)
         }
     }
     componentWillUnmount() {
@@ -251,7 +251,7 @@ class Message extends Component {
         console.log(this.state.message)
         if (this.state.employeeTyping) {
             if (this.state.state_message.length < 8) {
-                return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "100%", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
+                return <div style={{ float: "left", marginLeft: "300px", padding: "10px 0px", textAlign: "left", width: "100%", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
             } else {
                 return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "90%" }}><i>Typing . . .</i></div>
             }
@@ -277,7 +277,7 @@ class Message extends Component {
                 <div className="kotak" style={{ marginTop: "140px", paddingTop: "20px", width: "100%", marginBottom: "7px" }}>
                     {this.renderMessage()}
                 </div>
-                    {this.renderIsTyping()}
+                {this.renderIsTyping()}
                 <div style={{ float: "left", clear: "both" }}
                     ref={(el) => { this.messagesEnd = el; }}>
                 </div>

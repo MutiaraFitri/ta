@@ -40,7 +40,7 @@ export class Home extends Component {
         var jumlahDone = 0;
         var jumlahSeluruh = 0;
         const csvData = []
-        
+
         if (this.state.report === "all") {
             _.map(this.props.data.summary.data, (values, key) => {
                 if (values.status === "DONE") { jumlahDone = values.jumlah }
@@ -221,11 +221,11 @@ export class Home extends Component {
             }
             else {
                 const user = decoded.data;
-                this.props.getSummary("done",user.user_id);
-                this.props.getSummary("escalated",user.user_id);
-                this.props.getSummary("cancel",user.user_id);
-                this.props.getSummary("all",user.user_id);
-                this.props.getSummary("this_month",user.user_id);
+                this.props.getSummary("done", user.user_id);
+                this.props.getSummary("escalated", user.user_id);
+                this.props.getSummary("cancel", user.user_id);
+                this.props.getSummary("all", user.user_id);
+                this.props.getSummary("this_month", user.user_id);
                 this.setState({ ...user },
                     () => {
                         axios.get(url + `ticket/done/` + this.state.user_id, {

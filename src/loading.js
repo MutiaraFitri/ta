@@ -3,14 +3,13 @@ import './loading.css';
 import { css } from '@emotion/core';
 import logo from './assets/img/logo_komatsu.png';
 import { PulseLoader } from 'react-spinners';
-
 export default class loading extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          loading: true
+            loading: true
         }
-      }
+    }
     render() {
         const override = css`
             display: block;
@@ -19,14 +18,13 @@ export default class loading extends Component {
         `;
         return (
             <div className='loading sweet-loading'>
-                <img src={logo} alt="komatsu"/>
+                <img src={logo} alt="komatsu" />
                 <PulseLoader
                     css={override}
                     sizeUnit={"px"}
                     size={15}
                     color={'#0050A1'}
-                    loading={this.state.loading}
-                />
+                    loading={this.state.loading} />
             </div>
         )
     }
