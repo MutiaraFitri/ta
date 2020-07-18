@@ -514,7 +514,7 @@ export class Ticket extends Component {
                                     </div>
                             </div>
                             <div className="row" style={{ textAlign: "center", marginTop: "50px" }}>
-                                <div className="filter-date">DATE</div>
+                                <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>DATE</div>
                                 <div style={{ width: "50%" }}>
                                     <div style={{ textAlign: "left", width: "80%", margin: "0px auto" }}>
                                         <div style={{ fontSize: "11px", marginBottom: "5px", color: "black" }}>From</div>
@@ -529,7 +529,7 @@ export class Ticket extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="filter-priority" >PRIORITY</div>
+                                <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>PRIORITY</div>
                                 <div style={{ width: "80%" }} className="row">
                                     <div style={{ width: "50%" }}>
                                         <div className={(this.state.priority === "low") ? "box-priority active" : "box-priority"} onClick={this.handlePriority} id="low">
@@ -544,7 +544,7 @@ export class Ticket extends Component {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="filter-kategory">CATEGORY</div>
+                                <div style={{ margin: "10px auto", width: "100%", letterSpacing: "5px", fontSize: "12px", color: "black" }}>CATEGORY</div>
                                 <div style={{ width: "90%" }} className="row">
                                     <div style={{ width: "25%" }}>
                                         <div className={(this.state.category === "hardware") ? "box-priority active" : "box-priority"} onClick={this.handleCategory} id="hardware">
@@ -581,7 +581,7 @@ export class Ticket extends Component {
                     <div className="search" style={{ width: "100%" }}>
                         <div className="row">
                             <div style={{ width: "80%" }}>
-                                <input type="text" name="q" id="q" placeholder="Search . . ." onChange={this.handleChange} />
+                                <input type="text" name="q" id="q" placeholder="Search . . ." style={{ marginLeft: "5px", padding: "10px", width: "100%" }} onChange={this.handleChange} />
                                 <div style={{ marginTop: "-40px", width: "100%", marginLeft: "50%" }}>
                                     <img src={search} alt="search" style={{ top: "87px", position: "absolute" }} />
                                 </div>

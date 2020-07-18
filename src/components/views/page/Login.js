@@ -46,6 +46,9 @@ export class Login extends Component {
             display: block;
             margin: 0px auto;
         `;
+
+        const VisibelityPassword = this.state.type === 'text' ?
+            <i className="material-icons visibility" > visibility_off</i> : <i className="material-icons visibility">  visibility</i>;
         return (
 
             <div className="loading">
@@ -105,8 +108,7 @@ export class Login extends Component {
                         <div className="row-password" style={{ alignItems: "center" }}>
                             <input className="form-input" type={this.state.type} name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} style={{ padding: "10px" }} />
                             <span className="password__show" onClick={this.handleClick} style={{ position: "absolute", marginLeft: "-35px", marginTop: "15px" }}>
-                                {this.state.type === 'text' ?
-                                    <i className="material-icons visibility" > visibility_off</i> : <i className="material-icons visibility">  visibility</i>}
+                                {VisibelityPassword}
                             </span>
                         </div>
                     </div>

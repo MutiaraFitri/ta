@@ -130,8 +130,8 @@ class Message extends Component {
                         </div>
                         <div className="nama-pengirim" style={{ width: "80%", marginLeft: "5px" }}>
                             <div className="nama" style={{ fontSize: "16px", color: "black", fontWeight: "bold", textAlign: "left" }}>{values.employee_firstname} {values.employee_lastname}</div>
-                            <div className="row" style={{ marginTop: "-0px" }}>
-                                <div className="time" style={{ width: "50%", fontSize: "14px", color: "black", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
+                            <div className="row" style={{ marginTop: "-4px" }}>
+                                <div className="time" style={{ width: "50%", fontSize: "14px", color: "black", marginTop: "5px", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
                                 <Link to={'/ticket/detail/' + values.ticket_id} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </Link>
                             </div>
                         </div>
@@ -220,7 +220,7 @@ class Message extends Component {
         console.log("Typing");
         this.typingInterval = setInterval(() => {
             if ((Date.now() - this.lastUpdateTime) > 300) {
-                this.setState({ isTyping: false })
+                this.setState({ isTyping: true })
                 this.stopCheckingTyping()
             }
         }, 300)
@@ -234,7 +234,7 @@ class Message extends Component {
         console.log("Stop Typing");
         if (this.typingInterval) {
             clearInterval(this.typingInterval)
-            this.sendTypingKu(false)
+            this.sendTypingKu(true)
         }
     }
     componentWillUnmount() {
@@ -251,7 +251,7 @@ class Message extends Component {
         console.log(this.state.message)
         if (this.state.employeeTyping) {
             if (this.state.state_message.length < 8) {
-                return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "100%", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
+                return <div style={{ float: "left", marginLeft: "300px", padding: "10px 0px", textAlign: "left", width: "100%", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
             } else {
                 return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "90%" }}><i>Typing . . .</i></div>
             }

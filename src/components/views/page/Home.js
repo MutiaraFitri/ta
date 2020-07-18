@@ -33,7 +33,7 @@ export class Home extends Component {
         this.state = {
             date: new Date(),
             persons: [],
-            notifikasiGet:true
+            notifikasiGet: true
         };
     }
     initSocket = () => {
@@ -139,7 +139,7 @@ export class Home extends Component {
                 })
             }
             this.setState({
-                notifikasiGet:false
+                notifikasiGet: false
             })
         }
     }
@@ -156,6 +156,10 @@ export class Home extends Component {
     }
 
     render() {
+        const getJumlahUnassign = this.state.jumlahQueue ? this.state.jumlahQueue : "0";
+        const getJumlahDone = this.state.jumlahDone ? this.state.jumlahDone : "0";
+        const getJumlahAll = this.state.jumlahAll ? this.state.jumlahAll : "0";
+        const getJumlahAssign = this.state.jumlahTask ? this.state.jumlahTask : "0";
         // const { data } = this.props;
         var today = new Date()
         var curHr = today.getHours()
@@ -189,7 +193,7 @@ export class Home extends Component {
 
                                     margin: "0px -20px"
                                 }}>
-                                <h6 style={{ fontSize: "21px", color: "black" }}>{this.state.jumlahQueue ? this.state.jumlahQueue : "0"} Tickets</h6>
+                                <h6 style={{ fontSize: "21px", color: "black" }}>{getJumlahUnassign} Tickets</h6>
                                 <p style={{ fontSize: "12px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>Unassign</p>
                             </div>
                         </Link>
@@ -202,7 +206,7 @@ export class Home extends Component {
                                     backgroundColor: "#fff",
                                     border: "2px solid #e8e8e8"
                                 }}>
-                                <h6 style={{ fontSize: "18px", color: "black" }}>{this.state.jumlahDone ? this.state.jumlahDone : "0"} </h6>
+                                <h6 style={{ fontSize: "18px", color: "black" }}>{getJumlahDone} </h6>
                                 <h6 style={{ fontSize: "10px", color: "#A4A6B3", textAlign: "center", letterSpacing: "0.2", marginTop: "-40px" }}>
                                     Task Done
                                 </h6>
@@ -227,7 +231,7 @@ export class Home extends Component {
                                 </div>
                                 <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>All Ticket</div>
-                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahAll ? this.state.jumlahAll : "0"}</div>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{getJumlahAll}</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>queue</div>
                                 </div>
                             </div>
@@ -250,7 +254,7 @@ export class Home extends Component {
                                 </div>
                                 <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
-                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{this.state.jumlahTask ? this.state.jumlahTask : "0"}</div>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>{getJumlahAssign}</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500", textTransform: "uppercase" }}>assign</div>
                                 </div>
                             </div>
