@@ -398,7 +398,7 @@ a {
 .notification {
     color: #fff;
     padding: 15px 20px;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-top: 10px;
     background-color: rgba(0, 0, 0, 0.3);
 }
@@ -413,13 +413,13 @@ a {
     color: #fff;
     font-weight: 700;
     text-align: left;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .description-notification {
     color: #fff;
     text-align: left;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .description-app {
@@ -482,13 +482,23 @@ a {
     padding:5px 0px;
 }
 
+.navbar-edit-kb{
+    position: fixed;
+    bottom: 0px;
+    height: 40px;
+    background-color: #fff;
+    width: 100%;
+    border-top: 1px solid #C6C6C6;
+    display: flex;
+}
+
 .month-ticket {
     font-size: calc(10px + 1vmin);
     margin-right: 5px;
 }
 
 .Ticket{
-    background-color: #0050A1;
+    background-color: #141AA2;
 }
 
 .valueData {
@@ -666,6 +676,10 @@ a {
     text-align: left; 
     margin-left: 5px;
     letter-spacing: 5px;
+}
+
+.ticket-status::first-letter{
+    text-transform: uppercase;
 }
 /* PAGE ARTICLE */
 .ticket-article{
@@ -934,6 +948,9 @@ margin-top: 25px;
         margin-top: -30px;
     }
     .navtop{
+        width: 414px;
+    }
+    .navbar-edit-kb{
         width: 414px;
     }
 }

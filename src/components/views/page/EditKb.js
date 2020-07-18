@@ -120,9 +120,14 @@ export class EditKb extends Component {
             if (this.state.steps[mumut].steps_title) {
                 formData.append('steps_title', this.state.steps[mumut].steps_title);
             }
-            formData.append('myImage', this.state.steps[mumut].file);
+            
             if (this.state.steps[mumut].steps_description) {
                 formData.append('steps_description', this.state.steps[mumut].steps_description);
+            }
+            if(!this.state.steps[mumut].steps_image){
+                formData.append('myImage', this.state.steps[mumut].file);
+            }else{
+                formData.append('steps_image', this.state.steps[mumut].steps_image);
             }
             const config = {
                 headers: {
@@ -287,7 +292,7 @@ export class EditKb extends Component {
                     <TextareaAutosize className="input-form-steps description-kb" type="text" value={this.state.kb_description ? this.state.kb_description : ""} name="kb_description" placeholder="Description" onChange={this.handleChangeTitle} />
                 </div>
                 {this.renderSteps()}
-                <div style={{ width: "80%",margin:"0px auto", marginTop: "40px" }}>
+                <div style={{ width: "80%", margin: "0px auto", marginTop: "40px" }}>
                     <hr />
                     <div className="circle-add" onClick={this.addSteps}>
                         <span className="material-icons" style={{ color: "#fff", fontSize: "20px" }}>
@@ -295,13 +300,22 @@ export class EditKb extends Component {
                         </span>
                     </div>
                 </div>
-                <div style={{ position: "fixed", bottom: "0px", height: "40px", backgroundColor: "#fff", width: "100%",borderTop:"1px solid #C6C6C6" }} onClick={this.handleClickEdit}>
-                    <div style={{ position: "relative" }}>
-                        {this.state.delete ?
-                            "Done"
-                            :
-                            "Edit"
-                        }
+                <div className="navbar-edit-kb" onClick={this.handleClickEdit}>
+                    <div style={{ position: "relative", width: "50%"}}>
+                        <div style={{ position: "absolute", left: "20px",fontWeight:"700" }}>
+                            {this.state.delete ?
+                                "Done"
+                                :
+                                "Edit"
+                            }</div>
+                    </div>
+                    <div style={{ position: "relative", width: "50%"}}>
+                        <div style={{ position: "absolute", right: "20px",fontWeight:"700" }}>
+                            {this.state.delete ?
+                                "Published"
+                                :
+                                "Draft"
+                            }</div>
                     </div>
                 </div>
             </div >

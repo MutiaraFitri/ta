@@ -272,7 +272,8 @@ class DetailTicket extends Component {
 
     handleButtonAssignToMe = () => {
         this.setState({
-            confirmation: !this.state.confirmation
+            confirmation: !this.state.confirmation,
+            confirmationTitle:null
         })
 
         axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
@@ -449,7 +450,7 @@ class DetailTicket extends Component {
                         bottom: this.state.confirmation ? "0px" : "-200px"
                     }}
                 >
-                    <div style={{ marginTop: "30px", fontSize: "24px", fontWeight: "bold" }}>
+                    <div className="ticket-status" style={{ marginTop: "30px", fontSize: "24px", fontWeight: "bold" }}>
                         {this.state.confirmationTitle === "assign" ?
                             "Assign to me ?"
                             : this.state.confirmationTitle === "priority" ?
