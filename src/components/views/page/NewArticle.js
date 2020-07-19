@@ -197,7 +197,7 @@ export class Report extends Component {
         }
     }
     render() {
-        if (this.state.redirect_1 && this.state.redirect_2) return <Redirect to={"/edit/kb/" + this.state.kb_id} />
+        if (this.state.redirect_1 && this.state.redirect_2) return <Redirect to={"/new/kb/" + this.state.kb_id} />
         const imgmouse = this.state.issue_category === "hardware" ? mouseActive : mouse;
         const imgnetwork = this.state.issue_category === "network" ? networkActive : network;
         const imgsoftware = this.state.issue_category === "software" ? softwareActive : software;

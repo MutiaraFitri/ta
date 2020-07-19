@@ -234,7 +234,7 @@ class Message extends Component {
         console.log("Stop Typing");
         if (this.typingInterval) {
             clearInterval(this.typingInterval)
-            this.sendTypingKu(true)
+            this.sendTypingKu(false)
         }
     }
     componentWillUnmount() {

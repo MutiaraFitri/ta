@@ -18,7 +18,7 @@ class Article extends Component {
         const { data } = this.props;
         var dataku = data.kb.data;
         const toDos = _.map(dataku, (values, key) => {
-            return <Link to={'/edit/kb/' + values.kb_id} ><div key={values.kb_id} className="ticket-article">
+            return <Link to={'/article/detail/' + values.kb_id} ><div key={values.kb_id} className="ticket-article">
                 <div className="judul-topic" style={{ width: "40%", wordWrap: "break-word", textAlign: "left" }}>
                     <p style={{ paddingLeft: "15px" }}>{values.issue_subject}</p>
                 </div>
