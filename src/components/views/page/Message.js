@@ -234,7 +234,7 @@ class Message extends Component {
         console.log("Stop Typing");
         if (this.typingInterval) {
             clearInterval(this.typingInterval)
-            this.sendTypingKu(true)
+            this.sendTypingKu(false)
         }
     }
     componentWillUnmount() {
@@ -251,7 +251,7 @@ class Message extends Component {
         console.log(this.state.message)
         if (this.state.employeeTyping) {
             if (this.state.state_message.length < 8) {
-                return <div style={{ float: "left", marginLeft: "300px", padding: "10px 0px", textAlign: "left", width: "100%", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
+                return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "414px", position: "fixed", bottom: "65px" }}><i>Typing . . .</i></div>
             } else {
                 return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "90%" }}><i>Typing . . .</i></div>
             }

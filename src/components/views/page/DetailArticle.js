@@ -117,7 +117,7 @@ class DetailArticle extends Component {
                             </div>
                             <div className="edit-artikel2"  >
                                 <div className="edit-articleIcon">
-                                    <Link to={'/knowledgebase/' + this.props.match.params.id}>
+                                    <Link to={'/edit/kb/' + this.props.match.params.id}>
                                         <span
                                             className="material-icons"
                                             onClick={this.handleClick}
