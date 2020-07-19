@@ -79,10 +79,11 @@ export class Home extends Component {
         if (this.state.report === "all") {
             if (this.props.data.summary.data) {
                 _.map(this.props.data.summary.data, (values, key) => {
-                    if (values.status === "DONE") { jumlahDone = values.jumlah }
-                    if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
-                    jumlahSeluruh += values.jumlah;
-                    dataSummary.push(values.jumlah)
+                    if (values.STATUS === "DONE") { jumlahDone = values.total }
+                    if (values.STATUS === "CANCELED") { jumlahCancel = values.total }
+                    jumlahSeluruh += values.total;
+                    dataSummary.push(values.total);
+                    labesSummary.push(values.STATUS)
 
                 })
 
@@ -93,11 +94,11 @@ export class Home extends Component {
         }
         else {
             _.map(this.props.data.summary.dataThisMonth, (values, key) => {
-                if (values.status === "DONE") { jumlahDone = values.jumlah }
-                if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
-                jumlahSeluruh += values.jumlah;
-                dataSummary.push(values.jumlah)
-                labesSummary.push(values.status)
+                if (values.status === "DONE") { jumlahDone = values.total }
+                if (values.status === "CANCELED") { jumlahCancel = values.total }
+                jumlahSeluruh += values.total;
+                // dataSummary.push(values.jumlah)
+                // labesSummary.push(values.status)
                 // csvData.push(values)
             })
         }
