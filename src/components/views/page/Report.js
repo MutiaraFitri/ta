@@ -92,14 +92,14 @@ export class Home extends Component {
             }
         }
         else {
-            // _.map(this.props.data.summary.dataThisMonth, (values, key) => {
-            //     if (values.status === "DONE") { jumlahDone = values.jumlah }
-            //     if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
-            //     jumlahSeluruh += values.jumlah;
-            //     // dataSummary.push(values.jumlah)
-            //     // labesSummary.push(values.status)
-            //     // csvData.push(values)
-            // })
+            _.map(this.props.data.summary.dataThisMonth, (values, key) => {
+                if (values.status === "DONE") { jumlahDone = values.jumlah }
+                if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
+                jumlahSeluruh += values.jumlah;
+                dataSummary.push(values.jumlah)
+                labesSummary.push(values.status)
+                // csvData.push(values)
+            })
         }
         // console.log("dateku", jumlahSeluruh)
         // _.map(this.props.data.summary.dataDone, (values, key) => {
