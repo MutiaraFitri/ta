@@ -3,6 +3,7 @@ import '../../../loading.css';
 import '../../../assets/style.css';
 import NavbarBottom from '../navbar/NavbarBottom';
 import _ from "lodash";
+import moment from 'moment'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
@@ -15,6 +16,8 @@ import { fetchSummary } from '../../../redux/api/summary';
 const jwt = require('jsonwebtoken');
 
 const url = prod;
+const csvData = []
+
 export class Home extends Component {
 
     state = {
@@ -24,13 +27,46 @@ export class Home extends Component {
 
     renderSummary = () => {
 
-        const totalRating = this.state.rating ?
-            (this.state.rating[0].jumlah * 1) +
-            (this.state.rating[1].jumlah * 2) +
-            (this.state.rating[2].jumlah * 3) +
-            (this.state.rating[3].jumlah * 4) +
-            (this.state.rating[4].jumlah * 5) : 0;
-        const jumlahRating = this.state.rating ? this.state.rating.length : 0;
+        var varRating1 = 0;
+        var varRating2 = 0;
+        var varRating3 = 0;
+        var varRating4 = 0;
+        var varRating5 = 0;
+        var datanya = null;
+        if (this.state.report === "all") {
+            datanya = this.state.rating;
+        }
+        if (this.state.report === "month") {
+            datanya = this.state.ratingMonth;
+        }
+
+        _.map(datanya, (values, key) => {
+            if (values.ticket_rating === 1) {
+                varRating1 = values.jumlah;
+            }
+            if (values.ticket_rating === 2) {
+                varRating2 = values.jumlah;
+            }
+            if (values.ticket_rating === 3) {
+                varRating3 = values.jumlah;
+            }
+            if (values.ticket_rating === 4) {
+                varRating4 = values.jumlah;
+            }
+            if (values.ticket_rating === 5) {
+                varRating5 = values.jumlah;
+            }
+        })
+        const totalRating = (varRating1 * 1) + (varRating2 * 2) + (varRating3 * 3) + (varRating4 * 4) + (varRating5 * 5);
+        const rating5 = varRating5 ? varRating5 : 0
+        const rating4 = varRating4 ? varRating4 : 0
+        const rating3 = varRating3 ? varRating3 : 0
+        const rating2 = varRating2 ? varRating2 : 0
+        const rating1 = varRating1 ? varRating1 : 0
+        var jumlahRating = 0;
+        _.map(datanya, (values, key) => {
+            jumlahRating += values.jumlah;
+        })
 
         // _.map(this.props.data.summary.dataAssign, (values, key) => {
         // })
@@ -39,27 +75,31 @@ export class Home extends Component {
         var jumlahCancel = 0;
         var jumlahDone = 0;
         var jumlahSeluruh = 0;
-        const csvData = []
 
         if (this.state.report === "all") {
-            _.map(this.props.data.summary.data, (values, key) => {
-                if (values.status === "DONE") { jumlahDone = values.jumlah }
-                if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
-                jumlahSeluruh += values.jumlah;
-                dataSummary.push(values.jumlah)
-                labesSummary.push(values.status)
-                csvData.push(values)
-            })
+            if (this.props.data.summary.data) {
+                _.map(this.props.data.summary.data, (values, key) => {
+                    if (values.status === "DONE") { jumlahDone = values.jumlah }
+                    if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
+                    jumlahSeluruh += values.jumlah;
+                    dataSummary.push(values.jumlah)
+
+                })
+
+                if (csvData.length === 0) {
+                    csvData.push(...this.props.data.summary.data)
+                }
+            }
         }
         else {
-            _.map(this.props.data.summary.dataThisMonth, (values, key) => {
-                if (values.status === "DONE") { jumlahDone = values.jumlah }
-                if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
-                jumlahSeluruh += values.jumlah;
-                dataSummary.push(values.jumlah)
-                labesSummary.push(values.status)
-                csvData.push(values)
-            })
+            // _.map(this.props.data.summary.dataThisMonth, (values, key) => {
+            //     if (values.status === "DONE") { jumlahDone = values.jumlah }
+            //     if (values.status === "CANCELED") { jumlahCancel = values.jumlah }
+            //     jumlahSeluruh += values.jumlah;
+            //     // dataSummary.push(values.jumlah)
+            //     // labesSummary.push(values.status)
+            //     // csvData.push(values)
+            // })
         }
         // console.log("dateku", jumlahSeluruh)
         // _.map(this.props.data.summary.dataDone, (values, key) => {
@@ -213,6 +253,7 @@ export class Home extends Component {
         return (<Rating tipe={this.state.report} user={this.state.user_id} />)
     }
     componentDidMount() {
+
         jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
             if (err) {
                 console.log("Error", err)
@@ -243,6 +284,31 @@ export class Home extends Component {
                         })
                             .then(res => {
                                 this.setState({ jumlahTaskNotDone: res.data.values.length })
+                            })
+                        axios.get(url + `rating/all/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
+                        })
+                            .then(res => {
+                                const rating = res.data.values;
+                                console.log("data rating ku", rating)
+                                this.setState({
+                                    rating
+                                })
+                            })
+                        console.log(url + `rating/` + moment().month() + `/` + this.state.user_id)
+                        axios.get(url + `rating/` + moment().month() + `/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
+                        })
+                            .then(res => {
+                                const ratingMonth = res.data.values;
+                                console.log("data rating", ratingMonth)
+                                this.setState({
+                                    ratingMonth
+                                })
                             })
                     }
                 )

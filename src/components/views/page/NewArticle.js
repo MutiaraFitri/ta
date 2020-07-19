@@ -212,7 +212,7 @@ export class Report extends Component {
                             </div>
                         </Link>
                     </div>
-                    New Article
+                    New Knowledge Base
                 </div>
 
                 <div className="Report" style={{ width: "85%" }}>
