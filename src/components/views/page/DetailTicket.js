@@ -163,7 +163,7 @@ class DetailTicket extends Component {
             var email = values.employee_email;
             // var location = values.ticket_location;
             var time = values.ticket_timestamp;
-            var due = values.ticket_due_date;
+            var due = (values.ticket_due_date) ? moment(values.ticket_due_date, "YYYYMMDD").endOf('day').fromNow() : " no time limit ";
             var statusTicketIsActive = (active) ? "none" : "flex";
             var statusTicketIsNotActive = (active) ? "flex" : "none";
             var statusTicket = (!active || status === "CANCELED" || !technician_id || this.state.tiket[0].ticket_technician_id !== this.props.data.personState.data.user_id) ? "none" : "flex";
@@ -236,7 +236,7 @@ class DetailTicket extends Component {
                                     fontWeight: "500",
                                     backgroundColor: "#f5e44c",
                                     padding: "4px"
-                                }}> Due : {moment(due, "YYYYMMDD").endOf('day').fromNow()} </div>
+                                }}> Due : {due} </div>
                             </div>
                         </div>
                         <div className="title-kotak" style={{ textAlign: "left", color: "#000", fontSize: "16px", fontWeight: "400", marginTop: "10px", wordWrap: "break-word" }}>{description}</div>
@@ -246,7 +246,7 @@ class DetailTicket extends Component {
                         <div>
                         </div>
                         <div className="row">
-                            <div className="title-kotak" style={{ marginTop: "20px", width: "55%", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Report : {moment(time).format("Do MMM YY")}</div>
+                            <div className="title-kotak" style={{ marginTop: "20px", width: "55%", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Report : {moment(time).format('L') + " (" + moment(time).format('LT')})</div>
                             <div className="title-kotak" style={{ marginTop: "20px", width: "45%", textAlign: "right", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
                             <div></div></div>
                     </div>
@@ -277,7 +277,7 @@ class DetailTicket extends Component {
     handleButtonAssignToMe = () => {
         this.setState({
             confirmation: !this.state.confirmation,
-            confirmationTitle:null
+            confirmationTitle: null
         })
 
         axios.get(`https://api.ict-servicedesk.xyz/ticket/id/` + this.props.match.params.id, {
@@ -472,7 +472,7 @@ class DetailTicket extends Component {
                                 "Make it Priority ?" :
                                 this.state.confirmationTitle === "spam" ?
                                     "Make it spam ?" :
-                                    this.state.ticket_status+" this Ticket ?"}
+                                    this.state.ticket_status + " this Ticket ?"}
                     </div>
                     <div className="row" style={{ width: "100%", bottom: "15px", position: "absolute" }}>
                         <div style={{ margin: "0 auto", width: "100%" }}>

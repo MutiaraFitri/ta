@@ -62,7 +62,7 @@ class Antrian extends Component {
                         </div>
                         <div className="desc-antrian"  >
                             <div className="name" style={{ fontSize: "15px", color: "black" }}>{this.props.sender1} {this.props.sender2}</div>
-                            <div className="type" style={{ fontSize: "11px", color: "#F1AEAE" }}>{this.props.category}</div>
+                            <div className="type" style={{ fontSize: "10px", textTransform: "uppercase", color: "rgb(241, 174, 174)" }}>{this.props.category}</div>
                             <div className="message" style={{ fontSize: "13px", color: "#665858" }}>{panjangTitle}</div>
                             <div className="status" style={{ backgroundColor: bgStatus }}>
                                 <div className="category-status" style={{ color: "#fff" }}>{this.props.status}</div>
@@ -72,7 +72,7 @@ class Antrian extends Component {
                             <div className="assign" style={{ color: assignColor }}>{assign}</div>
                         </div>
                         <div className="category-antrian" >
-                            <div className="tanggal" > {this.props.due_date})</div>
+                            <div className="tanggal" > {this.props.due_date}</div>
                             <div className="icon-priority" >
                                 <img className="imgPriority" src={imagePriority} alt="low" />
                             </div>

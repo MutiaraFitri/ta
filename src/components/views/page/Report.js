@@ -18,7 +18,7 @@ const jwt = require('jsonwebtoken');
 const url = prod;
 const csvData = []
 
-export class Home extends Component {
+export class Report extends Component {
 
     state = {
         tab: "summary",
@@ -120,7 +120,10 @@ export class Home extends Component {
                         data: dataSummary,
                         backgroundColor: [
                             "red", "#0050A1", "ORANGE"
-                        ]
+                        ],
+                        hoverBackgroundColor: [
+                            "red", "#0050A1", "ORANGE"
+                        ],
                     }
                 ]
             }
@@ -181,7 +184,7 @@ export class Home extends Component {
                 <div className="menuReport"
                     style={{
                         width: "80%",
-                        height: "81px",
+                        height: "100px",
                         margin: "30px auto 0px auto",
                         borderRadius: "10px",
                         border: "2px solid #DEDEDE",
@@ -191,15 +194,15 @@ export class Home extends Component {
                     }}>
                     <div className="row" style={{ padding: "10px", margin: "0px", width: "100%" }}>
                         <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Assigned vs Done</div>
+                            <div className="desc-main" style={{ fontSize: "18px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Assigned vs Done</div>
                         </div>
                         <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahSeluruh ? jumlahSeluruh : "0"}</div>
-                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Assigned</div>
+                            <div className="desc-main" style={{ fontSize: "20px", fontWeight: "600" }}>{jumlahSeluruh ? jumlahSeluruh : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "300" }}>Assigned</div>
                         </div>
                         <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{jumlahCancel ? jumlahCancel : "0"}</div>
-                            <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Cancel</div>
+                            <div className="desc-main" style={{ fontSize: "20px", fontWeight: "600" }}>{jumlahCancel ? jumlahCancel : "0"}</div>
+                            <div className="desc-main" style={{ fontSize: "14px", fontWeight: "300" }}>Cancel</div>
                         </div>
                     </div>
                 </div>
@@ -207,7 +210,7 @@ export class Home extends Component {
                     <div className="menuReport"
                         style={{
                             width: "100%",
-                            height: "81px",
+                            height: "100px",
                             margin: "20px auto 0px auto",
                             borderRadius: "10px",
                             border: "2px solid #DEDEDE",
@@ -216,15 +219,15 @@ export class Home extends Component {
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px" }}>
                             <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
-                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Customer Satisfaction</div>
+                                <div className="desc-main" style={{ fontSize: "18px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Customer Satisfaction</div>
                             </div>
                             <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
-                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.rating ? ((totalRating / (jumlahRating * 5)) * 100).toFixed(1) : "0"}%</div>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>Average Rating</div>
+                                <div className="desc-main" style={{ fontSize: "20px", fontWeight: "600" }}>{this.state.rating ? ((totalRating / (jumlahRating * 5)) * 100).toFixed(1) : "0"}%</div>
+                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "300" }}>Average Rating</div>
                             </div>
                             <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
-                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600" }}>{this.state.rating ? jumlahRating : "0"}</div>
-                                <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300" }}>User Review</div>
+                                <div className="desc-main" style={{ fontSize: "20px", fontWeight: "600" }}>{this.state.rating ? jumlahRating : "0"}</div>
+                                <div className="desc-main" style={{ fontSize: "14px", fontWeight: "300" }}>User Review</div>
                             </div>
                         </div>
                     </div>
@@ -232,12 +235,12 @@ export class Home extends Component {
                 <div className="row" style={{ width: "80%", border: "1px solid #0050A1", padding: "10px 0px", borderRadius: "10px" }}>
                     <div style={{ width: "100%" }}>
                         <CSVLink data={csvData}>
-                            <div style={{ width: "40%", margin: "0px auto" }}>
+                            <div style={{ width: "60%", margin: "0px auto" }}>
                                 <span className="material-icons" style={{ marginRight: "10px", verticalAlign: "bottom" }}>
                                     print
                             </span>
-                                <span style={{ fontSize: "18px", fontWeight: "700" }}>
-                                    Print
+                                <span style={{ fontSize: "18px", fontWeight: "600" }}>
+                                    Export to CSV
                             </span>
                             </div>
                         </CSVLink>
@@ -357,7 +360,7 @@ export class Home extends Component {
                     </div>
                 </div>
                 <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="all">
-                    <option value="all" >All Summary</option>
+                    <option value="all" >All Summaries</option>
                     {/* <option value="month" >This Month</option> */}
                 </select>
                 {
@@ -381,4 +384,4 @@ const mapDispacthToProps = (dispatch) => {
 
 export default connect(
     mapStateToProps, mapDispacthToProps
-)(Home);
+)(Report);

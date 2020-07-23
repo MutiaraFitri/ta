@@ -97,7 +97,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -119,7 +119,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -146,7 +146,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -168,7 +168,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -195,7 +195,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -217,7 +217,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -244,7 +244,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -266,7 +266,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -293,7 +293,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -315,7 +315,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -342,7 +342,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -364,7 +364,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -391,7 +391,7 @@ export class Ticket extends Component {
                                         title={values.ticket_subject}
                                         assign_to={values.technician_firstname}
                                         status={values.ticket_status}
-                                        due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                        due_date={moment(values.ticket_timestamp).format('L')}
                                         imagePriority={low}
                                         priority={values.ticket_priority}
                                         id={values.ticket_id}
@@ -413,7 +413,7 @@ export class Ticket extends Component {
                                     title={values.ticket_subject}
                                     assign_to={values.technician_firstname}
                                     status={values.ticket_status}
-                                    due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                    due_date={moment(values.ticket_timestamp).format('L')}
                                     imagePriority={low}
                                     priority={values.ticket_priority}
                                     id={values.ticket_id}
@@ -441,7 +441,7 @@ export class Ticket extends Component {
                                 title={values.ticket_subject}
                                 assign_to={values.technician_firstname}
                                 status={values.ticket_status}
-                                due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                                due_date={moment(values.ticket_timestamp).format('L')}
                                 imagePriority={low}
                                 priority={values.ticket_priority}
                                 id={values.ticket_id}
@@ -464,7 +464,7 @@ export class Ticket extends Component {
                             title={values.ticket_subject}
                             assign_to={values.technician_firstname}
                             status={values.ticket_status}
-                            due_date={moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}
+                            due_date={moment(values.ticket_timestamp).format('L')}
                             imagePriority={low}
                             priority={values.ticket_priority}
                             id={values.ticket_id}

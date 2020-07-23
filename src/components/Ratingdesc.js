@@ -8,7 +8,7 @@ class Ratingdesc extends Component {
     render() {
 
         return (
-            <div>
+            <div style={{ width: "100%" }}>
                 <div className="bungkusReview" style={{ width: "100%", display: "flex" }}>
                     <div className="pengirim" style={{ width: "20%", margin: '5px 0px 0px 5px' }}>
                         <div className="foto-pengim" style={{
@@ -37,8 +37,8 @@ class Ratingdesc extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="review" style={{ marginLeft: "10px", paddingBottom: "10px" }}>
-                    <p style={{ color: "black", textAlign: "left", fontSize: "16px" }}> {this.props.comment} </p>
+                <div className="review" style={{ width: "300px", marginLeft: "10px", paddingBottom: "10px" }}>
+                    <p style={{ wordBreak: "break-word", width: "100%", color: "black", textAlign: "left", fontSize: "16px" }}> {this.props.comment} </p>
                 </div>
             </div>
         );
