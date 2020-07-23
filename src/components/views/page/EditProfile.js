@@ -130,27 +130,27 @@ export class EditProfile extends Component {
 
     handleSavePassword = (e) => {
         e.preventDefault()
-        if(this.state.newPassword.length>5 && this.state.newPassword==this.state.confirmPassword)
-        axios.put(`https://api.ict-servicedesk.xyz/change/password/technician`, this.state, {
-            headers: {
-                key: "8dfcb234a322aeeb6b530f20c8e9988e"
-            }
-        })
-            .then(res => {
-                console.log(res.data.values)
-                if (res.data.values.message == "success") {
-                    this.setState({ success: true })
-                }else{
-                    this.setState({ passwordSalah: true })
+        if (this.state.newPassword.length > 5 && this.state.newPassword == this.state.confirmPassword)
+            axios.put(`https://api.ict-servicedesk.xyz/change/password/technician`, this.state, {
+                headers: {
+                    key: "8dfcb234a322aeeb6b530f20c8e9988e"
                 }
             })
+                .then(res => {
+                    console.log(res.data.values)
+                    if (res.data.values.message == "success") {
+                        this.setState({ success: true })
+                    } else {
+                        this.setState({ passwordSalah: true })
+                    }
+                })
     }
 
     render() {
         //if (localStorage.getItem("jwt")) return <Redirect to="/profile" />
         // var userImgLink = (this.state.user_image) ? this.state.user_image : "defaultEmploy";
         // var userImg = prod + 'avatar/technician/' + userImgLink;
-        const profile = this.state.technician_image ? "https://api.ict-servicedesk.xyz/avatar/technician/" + this.state.technician_image : defaultEmploy;
+        const profile = this.state.technician_image ? "https://api.ict-servicedesk.xyz/avatar/technician/" + this.state.technician_image : "https://api.ict-servicedesk.xyz/avatar/technician/defaultEmploy.png";
         return (
 
             <div className="home" style={{ paddingBottom: "70px" }}>
@@ -351,7 +351,7 @@ export class EditProfile extends Component {
                             <div className="row" style={{ width: "100%" }}>
                                 <div className="row" style={{ marginTop: "2rem", width: "100%" }}>
                                     <button className="button-submit" type="submit" onClick={this.handleSavePassword}>Save</button>
-                                     <button className="button-submit" type="submit" onClick={this.handleClickChangePassword} style={{marginTop:"10px"}}>Discard</button>
+                                    <button className="button-submit" type="submit" onClick={this.handleClickChangePassword} style={{ marginTop: "10px" }}>Discard</button>
                                 </div>
                             </div>
                             <div

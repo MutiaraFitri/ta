@@ -215,9 +215,9 @@ export class Report extends Component {
                     New Article
                 </div>
 
-                <div className="Report" style={{ width: "85%" }}>
+                <div className="New KnowladgeBase" style={{ width: "85%" }}>
                     <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>Category </div>
-                    <div className="row" style={{ width: "100%", margin: "0 auto", textAlign: "center" }}>
+                    <div className="row category-KB" style={{ width: "100%", margin: "0 auto", textAlign: "center" }}>
                         <div className="menu-service">
                             <div className="isi-our-service" id="network" onClick={this.handleCategory} style={{ backgroundColor: (this.state.issue_category === "network") ? "#0050A1" : "white" }}>
                                 <div className="row" id="network" onClick={this.handleCategory}>
@@ -270,24 +270,6 @@ export class Report extends Component {
                         </div>
                         <input className="input-form-full" type="text" placeholder="-- Title your article --" onChange={this.handleChange} name="issue_subject" />
                     </div>
-                    {/* <div className="label" style={{ display: (this.state.issue_category) ? "inline" : "none" }}>
-                        <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
-                            Problem Solve
-                        </div>
-                        <input className="input-form-PB" type="text" placeholder="Problem Solve" onChange={this.handleChange} name="kb_subject" />
-                    </div>
-                    <div className="label" style={{ display: (this.state.issue_category) ? "inline" : "none" }}>
-                        <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
-                            Description Problem Solve
-                        </div>
-                        <textarea className="input-form-textarea" type="text-area" placeholder="..." onChange={this.handleChange} name="kb_description" />
-                    </div>
-                    <div className="label" style={{ display: (this.state.issue_category) ? "inline" : "none" }}>
-                        <div className="row" style={{ fontSize: "22px", color: " #A4A6B3" }}>
-                            How Many Step ?
-                        </div>
-                        <input className="input-form-PB" type="number" placeholder="2,3,4,..." onChange={this.handleChange} name="much" />
-                    </div> */}
                     <div className="row" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "100%", marginBottom: "70px", float: "right" }}>
                         <button className="button" type="submit" onClick={this.handleSubmit}>
                             submit

@@ -679,6 +679,9 @@ a {
 .ticket-status::first-letter{
     text-transform: uppercase;
 }
+.tiketKosong{
+    width:"100%",
+}
 /* PAGE ARTICLE */
 .ticket-article{
     width: 85%; 
@@ -950,6 +953,10 @@ margin-top: 25px;
     }
     .navbar-edit-kb{
         width: 414px;
+    }
+    .tiketKosong{
+        width: 414px;
+        
     }
 }
 
