@@ -188,10 +188,8 @@ export class Home extends Component {
                         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
                         display: "flex",
                         paddingBottom: "10px"
-
                     }}>
                     <div className="row" style={{ padding: "10px", margin: "0px", width: "100%" }}>
-
                         <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
                             <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Assigned vs Done</div>
                         </div>
@@ -217,7 +215,6 @@ export class Home extends Component {
                             paddingBottom: "10px"
                         }}>
                         <div className="row" style={{ padding: "10px", margin: "0px" }}>
-
                             <div className="gambar" style={{ width: "100%", padding: "5px 0px" }}>
                                 <div className="desc-main" style={{ fontSize: "14px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Customer Satisfaction</div>
                             </div>
@@ -360,8 +357,8 @@ export class Home extends Component {
                     </div>
                 </div>
                 <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="all">
-                    <option value="all" >All Day</option>
-                    <option value="month" >This Month</option>
+                    <option value="all" >All Summary</option>
+                    {/* <option value="month" >This Month</option> */}
                 </select>
                 {
                     (this.state.tab === "summary") ?
@@ -385,4 +382,3 @@ const mapDispacthToProps = (dispatch) => {
 export default connect(
     mapStateToProps, mapDispacthToProps
 )(Home);
-

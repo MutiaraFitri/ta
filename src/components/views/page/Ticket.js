@@ -72,17 +72,20 @@ export class Ticket extends Component {
             category: e.target.id
         })
     }
-    renderToDos() {
+    renderTicket() {
         const { data } = this.props;
         var dataku = "";
+        var counter = 0;
         if (data.ticketState.data) {
             dataku = data.ticketState.data;
             const toDos = _.map(dataku, (values, key) => {
+                // cek filter apakah aktif ketiganya
                 if (this.state.priority && this.state.awal && this.state.category) {
                     console.log("TIKET")
                     if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -104,6 +107,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -125,10 +129,12 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                // cek filter apakah aktif keduanya aktif (priority & tggl)
                 else if (this.state.priority && this.state.awal) {
                     if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -150,6 +156,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -171,10 +178,12 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                // cek filter apakah aktif keduanya aktif (tgl & category)
                 else if (this.state.awal && this.state.category) {
                     if (values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -196,6 +205,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -217,10 +227,12 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                // cek filter apakah aktif keduanya aktif (priority & category)
                 else if (this.state.priority && this.state.category) {
                     if (values.ticket_priority === this.state.priority && values.ticket_category === this.state.category) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -242,6 +254,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -263,10 +276,12 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                // cek filter apakah aktif salah satuu ( priority )
                 else if (this.state.priority) {
                     if (values.ticket_priority === this.state.priority) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -288,6 +303,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -309,10 +325,12 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                // cek filter apakah aktif salah satuu ( tggl )
                 else if (this.state.awal) {
                     if (values.ticket_timestamp <= this.state.akhir && values.ticket_timestamp >= this.state.awal) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -334,6 +352,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -355,10 +374,12 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                //  cek filter apakah aktif salah satuu ( category )
                 else if (this.state.category) {
                     if (values.ticket_category === this.state.category) {
                         if (this.state.q) {
-                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                            if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                                counter += 1
                                 return <div key={key}>
                                     <Antrian
                                         //imageKategori={hardware}
@@ -380,6 +401,7 @@ export class Ticket extends Component {
                             }
                         }
                         else {
+                            counter += 1
                             return <div key={key}>
                                 <Antrian
                                     //imageKategori={hardware}
@@ -401,11 +423,13 @@ export class Ticket extends Component {
                         }
                     }
                 }
+                // cek pencarian
                 else if (this.state.q) {
                     console.log("ticket Subject ", values.ticket_subject.toLowerCase())
                     console.log("q ", this.state.q)
                     console.log((values.ticket_subject).toLowerCase().search(this.state.q))
-                    if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1) {
+                    if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
+                        counter += 1
                         return <div key={key}>
                             <Antrian
                                 //imageKategori={hardware}
@@ -428,6 +452,7 @@ export class Ticket extends Component {
                 }
                 // Search null
                 else {
+                    counter += 1
                     return <div key={key}>
                         <Antrian
                             //imageKategori={hardware}
@@ -449,7 +474,11 @@ export class Ticket extends Component {
                     </div>;
                 }
             });
+            if (counter === 0) {
+                return <div style={{ margin: "0px auto", marginTop: "200px", textAlign: "center" }}> Sorry , Ticket is Empty </div>
+            }
             if (!_.isEmpty(toDos)) {
+                console.log(counter)
                 return toDos;
             }
         }
@@ -586,6 +615,7 @@ export class Ticket extends Component {
                                     <img src={search} alt="search" style={{ top: "87px", position: "absolute" }} />
                                 </div>
                             </div>
+                            {/* menampilkan filter */}
                             <div style={{ width: "20%" }} onClick={this.showFilter}>
                                 <button style={{ paddingTop: "10px", paddingBottom: "10px", float: "right", marginRight: "5px", paddingLeft: "12px", paddingRight: "12px", backgroundColor: "#fff", color: "#fff", borderRadius: "10%", border: "1px solid #c6c6c6" }}>
                                     <img src={filter} alt="filter" />
@@ -598,7 +628,7 @@ export class Ticket extends Component {
                     <div className="title" style={{ textAlign: "left", textTransform: "uppercase", marginLeft: "5px", letterSpacing: "5px" }}>
                         {this.props.match.params.detail} Ticket
                     </div>
-                    {this.renderToDos()}
+                    {this.renderTicket()}
                     <br /><br /><br /><br />
 
                 </div>

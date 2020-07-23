@@ -22,7 +22,6 @@ const NotFound = React.lazy(() => import('./components/views/page/NotFound_404')
 const NewArticle = React.lazy(() => import('./components/views/page/NewArticle'));
 const NewKb = React.lazy(() => import('./components/views/page/NewKb'));
 const ProblemSolve = React.lazy(() => import('./components/views/page/ProblemSolve'));
-const KB = React.lazy(() => import('./components/views/page/KnowledgeBase'));
 const Profile = React.lazy(() => import('./components/views/page/Profile'));
 const Reset = React.lazy(() => import('./components/views/page/ResetPassword'));
 const Report = React.lazy(() => import('./components/views/page/Report'));
@@ -47,7 +46,6 @@ const routes = [
   { path: '/home', exact: true, name: 'Landing', component: Home },
   { path: '/login', exact: true, name: 'Login', component: Login },
   { path: '/new-article', exact: true, name: 'Report', component: NewArticle },
-  { path: '/knowledgebase/:id', exact: true, name: 'KB', component: KB },
   { path: '/edit/kb/:id', exact: true, name: 'KB', component: EditKb },
   { path: '/new/kb/:id', exact: true, name: 'KB', component: NewKb },
   { path: '/profile', exact: true, name: 'Login', component: Profile },

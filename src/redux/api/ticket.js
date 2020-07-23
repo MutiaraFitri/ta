@@ -1,9 +1,9 @@
 
 import { fetchTiket } from "../action/action";
 import axios from 'axios';
-import { prod } from '../url/server';
+import { dev } from '../url/server';
 
-const url = prod;
+const url = dev;
 
 export function tickets() {
     return dispatch => {

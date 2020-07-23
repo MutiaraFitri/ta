@@ -185,7 +185,7 @@ export class NewKb extends Component {
                             <TextareaAutosize className="input-form-steps" onChange={this.handleChange} id={key} name="steps_description" type="text-area" placeholder="Description" value={value.steps_description ? value.steps_description : ""} />
                         </div>
                         <div className="label">
-                            <div className="kotak-input">
+                            <div className="kotak-input ImgStep">
                                 <label className="row" style={{ width: "100%" }} htmlFor={"files" + key}>
                                     {value.steps_image ?
                                         <img src={"https://api.ict-servicedesk.xyz/uploads/" + value.steps_image} alt="" style={{ margin: "0px auto", maxWidth: "250px" }} />
@@ -334,24 +334,15 @@ export class NewKb extends Component {
                 <div className="navbar-edit-kb">
                     <div style={{ position: "relative", width: "50%" }} onClick={this.handleClickEdit}>
                         <div style={{ position: "absolute", left: "20px", bottom: "20px", fontWeight: "700" }}>
-                            {this.state.delete ?
-                                "Done"
-                                :
-                                "Edit"
-                            }</div>
+                            {this.state.delete ? "Done" : "Edit"}</div>
                     </div>
                     <div style={{ position: "relative", width: "50%" }}>
                         <div style={{ position: "absolute", right: "20px", bottom: "20px", fontWeight: "700" }}>
                             {this.state.delete ?
                                 <div onClick={this.handlePublish}>
-                                    {this.state.kb_publish ?
-                                        "Unpublish"
-                                        : "Publish"}
-                                </div>
+                                    {this.state.kb_publish ? "Unpublish" : "Publish"} </div>
                                 :
-                                this.state.kb_publish ?
-                                    "Published"
-                                    : "Draft"
+                                this.state.kb_publish ? "Published" : "Draft"
                             }</div>
                     </div>
                 </div>

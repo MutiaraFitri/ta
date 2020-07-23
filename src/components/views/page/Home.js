@@ -262,9 +262,30 @@ export class Home extends Component {
                     </div>
                 </div>
                 <div className="menu_bawah" style={{ width: "100%", height: "81px", }} >
+
+                    <Link to='/article'>
+                        <div className="menuKnowlageBase"
+                            style={{ padding: "0px 10px" }}>
+                            <div className="row" style={{
+                                borderRadius: "10px",
+                                padding: "10px",
+                                backgroundColor: "#fff",
+                                border: "2px solid #DEDEDE",
+                                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                            }}>
+                                <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
+                                    <img src={problem} alt="info" />
+                                </div>
+                                <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlage Base</div>
+                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
                     <Link to='/report' >
                         <div className="menuReport"
-                            style={{ padding: "0px 10px" }}
+                            style={{ padding: "0px 10px", paddingBottom: "70px" }}
                         >
                             <div className="row" style={{
                                 borderRadius: "10px",
@@ -280,26 +301,6 @@ export class Home extends Component {
                                 <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Report</div>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>summary</div>
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                    <Link to='/article'>
-                        <div className="menuKnowlageBase"
-                            style={{ padding: "0px 10px", paddingBottom: "70px" }}>
-                            <div className="row" style={{
-                                borderRadius: "10px",
-                                padding: "10px",
-                                backgroundColor: "#fff",
-                                border: "2px solid #DEDEDE",
-                                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                            }}>
-                                <div className="gambar" style={{ width: "20%", padding: "5px 0px" }}>
-                                    <img src={problem} alt="info" />
-                                </div>
-                                <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
-                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlage Base</div>
-                                    <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
                                 </div>
                             </div>
                         </div>

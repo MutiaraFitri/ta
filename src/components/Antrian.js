@@ -13,7 +13,7 @@ import * as moment from 'moment';
 class Antrian extends Component {
     render() {
         const bgCategory =
-            (this.props.category === "network") ? "#617BBD" :
+            (this.props.category === "network") ? "#b7c9f6" :
                 (this.props.category === "software") ? "#EFF25E" :
                     (this.props.category === "hardware") ? "#F1AEAE" :
                         "#eae702";
@@ -71,7 +71,7 @@ class Antrian extends Component {
                             <div className="assign" style={{ color: assignColor }}>{assign}</div>
                         </div>
                         <div className="category-antrian" >
-                            <div className="tanggal" > {moment(this.props.due_date).subtract(10, 'days').calendar()}</div>
+                            <div className="tanggal" > {moment(this.props.due_date).format('L') + " (" + moment(this.props.due_date).format('LT')}</div>
                             <div className="icon-priority" >
                                 <img className="imgPriority" src={imagePriority} alt="low" />
                             </div>

@@ -18,8 +18,9 @@ export class NavbarTop extends Component {
 
         // const back = (this.props.back == "true") ?<Link to="." ><div className="back-button"><img src={arrow} alt="" style={{padding:"15px"}}/></div></Link>:'';
         // const title = (this.props.title) ? <div className="title-pages" style={{paddingTop:"5px"}}>{this.props.title}</div>:<img src={logo} alt="Komatsu" style={{ margin: "0 auto", height: "30px",paddingTop:"15px" }} />;
-        const profile = (data.personState.data) ? (data.personState.data) ? data.personState.data.user_image : "defaultEmploy.png" : "defaultEmploy.png"
+        const profile = (data.personState.data) ? (data.personState.data.user_image) ? data.personState.data.user_image : "defaultEmploy.png" : "defaultEmploy.png"
         const gambar = prod + 'avatar/technician/' + profile
+        console.log("home", gambar)
         return (
             <div className="container" style={{ width: "100%" }}>
                 <div style={{ backgroundImage: "url(" + top + ")", height: "300px", backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
@@ -31,16 +32,16 @@ export class NavbarTop extends Component {
                         </div>
                     </div>
                     <Link to="/profile">
-                    <div className="profile"
-                        style={{
-                            width: "110px",
-                            height: "110px",
-                            borderRadius: "50%",
-                            overflow: "hidden",
-                            margin: "0px auto"
-                        }}>
-                        <img src={gambar} alt="man" style={{ width: "100%" }} />
-                    </div>
+                        <div className="profile"
+                            style={{
+                                width: "110px",
+                                height: "110px",
+                                borderRadius: "50%",
+                                overflow: "hidden",
+                                margin: "0px auto"
+                            }}>
+                            <img src={gambar} alt="man" style={{ width: "100%" }} />
+                        </div>
                     </Link>
                     <div>
 
