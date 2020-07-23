@@ -86,18 +86,17 @@ class Rating extends Component {
                         // console.log("bulan", moment(values.ticket_timestamp).month());
                         // console.log("data", values.ticket_rating);
                         if (values.ticket_rating && moment(values.ticket_timestamp).month() === moment().month()) {
-                            return <div key={key}>
-                                <Ratingdesc
-                                    //imageKategori={hardware}
-                                    sender1={values.employee_firstname}
-                                    sender2={values.employee_lastname}
-                                    email={values.employee_email}
-                                    due_date={values.ticket_timestamp}
-                                    bintang={values.ticket_rating}
-                                    gambarEmployee={'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee}
-                                    comment={values.ticket_comment}
-                                />
-                            </div>;
+                            return <Ratingdesc style={{ width: "100%" }} key={key}
+                                //imageKategori={hardware}
+                                sender1={values.employee_firstname}
+                                sender2={values.employee_lastname}
+                                email={values.employee_email}
+                                due_date={values.ticket_timestamp}
+                                bintang={values.ticket_rating}
+                                gambarEmployee={'https://api.ict-servicedesk.xyz/avatar/employee/' + imgEmployee}
+                                comment={values.ticket_comment}
+                            />
+                                ;
                         }
                     });
                     if (!_.isEmpty(toDos)) {
