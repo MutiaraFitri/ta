@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import {Redirect} from 'react-router-dom'
 import '../../../loading.css';
 import '../../../assets/style.css';
 import '../../../assets/style.css';
@@ -7,7 +8,7 @@ import { Link } from 'react-router-dom';
 import back from './../../../assets/img/back.png';
 import { users } from '../../../redux/api/users';
 import { prod } from '../../../redux/url/server';
-import defaultEmploy from '../../../assets/img/worker.png';
+// import defaultEmploy from '../../../assets/img/worker.png';
 import axios from 'axios';
 const jwt = require('jsonwebtoken');
 
@@ -147,7 +148,7 @@ export class EditProfile extends Component {
     }
 
     render() {
-        //if (localStorage.getItem("jwt")) return <Redirect to="/profile" />
+        if (this.state.save) return <Redirect to="/profile" />
         // var userImgLink = (this.state.user_image) ? this.state.user_image : "defaultEmploy";
         // var userImg = prod + 'avatar/technician/' + userImgLink;
         const profile = this.state.technician_image ? "https://api.ict-servicedesk.xyz/avatar/technician/" + this.state.technician_image : "https://api.ict-servicedesk.xyz/avatar/technician/defaultEmploy.png";
@@ -166,25 +167,22 @@ export class EditProfile extends Component {
                 </div>
                 <div style={{ color: "black", width: "100%" }}>
                 </div>
-
-
-
-                <div className="row editProfile" style={{ width: "100%", display: this.state.save ? "flex" : "none" }}>
+                {/* <div className="row editProfile" style={{ width: "100%", display: this.state.save ? "flex" : "none" }}>
                     <div style={{ padding: "10px", color: "white" }}>
                         Save successfully
                         </div>
-                </div>
+                </div> */}
 
                 <div className="bungkusBg" style={{
                     borderRadius: "10px",
                     padding: "20px",
                 }}>
                     {!this.state.editPassword ?
-                        <form style={{ marginTop: "1rem" }} onSubmit={this.handleSubmit} >
+                        <form  onSubmit={this.handleSubmit} >
                             <div className="container" style={{ width: "100%" }}>
                                 <div className="profile"
                                     style={{
-                                        top: "30px",
+                                        top: "10px",
                                         left: "50%",
                                         transform: "translateX(-50%)",
                                         width: "90px",
@@ -193,21 +191,20 @@ export class EditProfile extends Component {
                                         backgroundColor: "#fff",
                                         border: "1px solid",
                                         position: "relative",
-                                        overflow: "hidden",
-                                        marginBottom: "20px"
+                                        overflow: "hidden"
                                     }}>
                                     <img src={(this.state.user_image_temp) ? this.state.user_image_temp : profile} alt="man" style={{ width: "100%" }} />
                                 </div>
-                                <div className="ganti-foto" > <label htmlFor="files">change profile photo</label>
+                                <div className="ganti-foto" > <label htmlFor="files">Change Photo Profile</label>
                                     <input className="fileInput"
                                         id="files"
                                         type="file"
                                         onChange={(e) => this._handleImageChange(e)} style={{ display: "none" }} />
                                 </div>
                             </div>
-                            <div className="container">
+                            <div className="container" style={{backgroundColor:"#edf4ff",padding:"10px",borderRadius:"10px"}}>
                                 <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                    <div className="sub-editProfile"> job</div>
+                                    <div className="sub-editProfile">Job</div>
                                     <div>
                                         <input
                                             className="editInput"
@@ -220,7 +217,7 @@ export class EditProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                    <div className="sub-editProfile"> department</div>
+                                    <div className="sub-editProfile"> Department</div>
                                     <div>
                                         <input
                                             className="editInput"
@@ -233,7 +230,7 @@ export class EditProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                    <div className="sub-editProfile"> address</div>
+                                    <div className="sub-editProfile">Location / Plan</div>
                                     <div>
                                         <input
                                             className="editInput"
@@ -246,7 +243,7 @@ export class EditProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                    <div className="sub-editProfile"> email</div>
+                                    <div className="sub-editProfile">Email</div>
                                     <div>
                                         <input
                                             className="editInput"
@@ -259,7 +256,7 @@ export class EditProfile extends Component {
                                     </div>
                                 </div>
                                 <div className="row-editProfile" style={{ alignItems: "center" }}>
-                                    <div className="sub-editProfile"> contact</div>
+                                    <div className="sub-editProfile">Contact</div>
                                     <div>
                                         <input
                                             className="editInput"
