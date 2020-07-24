@@ -104,7 +104,7 @@ class DetailArticle extends Component {
                             </div>
                         </Link>
                     </div>
-                    Detail Article
+                    Detail Knowledge Base
                 </div>
                 <div className="bungkus-article">
                     <div className="jarak">
@@ -135,8 +135,8 @@ class DetailArticle extends Component {
                             <div className=" date-detArticle" style={{ width: "60%" }} >
                                 {/* <p className=" date-detArticleP">ICT Services - 10/03/2020</p> */}
                             </div>
-                            <div className="category-detArticle" style={{ width: "90%", display:"flex",margin:"0px auto",marginTop:"15px" }} >
-                                <p className=" category-detArticleP" style={{textAlign:"left"}}>Categories :  {(this.state.kb) ? this.state.kb[0].issue_category ? this.state.kb[0].issue_category : null : null}  </p>
+                            <div className="category-detArticle" style={{ width: "90%", display: "flex", margin: "0px auto", marginTop: "15px" }} >
+                                <p className=" category-detArticleP" style={{ textAlign: "left" }}>Categories :  {(this.state.kb) ? this.state.kb[0].issue_category ? this.state.kb[0].issue_category : null : null}  </p>
                                 <p className=" category-detArticleP">Status : {(this.state.kb) ? this.state.kb[0].kb_publish ? "Publish" : "Draft" : null}</p>
                             </div>
                         </div>
