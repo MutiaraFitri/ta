@@ -278,7 +278,11 @@ export class Home extends Component {
                                     <img src={problem} alt="info" />
                                 </div>
                                 <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+<<<<<<< HEAD
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlege Base</div>
+=======
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowledge Base</div>
+>>>>>>> e6e4219e508b07fbbbeff60a1a756c0ac1e6a426
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
                                 </div>
                             </div>

@@ -253,7 +253,7 @@ class Message extends Component {
             if (this.state.state_message.length < 8) {
                 return <div className="typing"><i>Typing . . .</i></div>
             } else {
-                return <div style={{ float: "left", marginLeft: "20px", padding: "10px 0px", textAlign: "left", width: "90%" }}><i>Typing . . .</i></div>
+                return <div style={{ float: "left", marginLeft: "25px", padding: "10px 0px", textAlign: "left", width: "90%" }}><i>Typing . . .</i></div>
             }
         }
     }
