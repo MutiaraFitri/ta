@@ -163,7 +163,8 @@ class DetailTicket extends Component {
             var email = values.employee_email;
             // var location = values.ticket_location;
             var time = values.ticket_timestamp;
-            var due = (values.ticket_due_date) ? moment(values.ticket_due_date, "YYYYMMDD").endOf('day').fromNow() : " no time limit ";
+            var due = (values.ticket_due_date) ? moment(values.ticket_due_date).format('L') + " (" + moment(values.ticket_due_date, "YYYYMMDD").endOf('day').fromNow() + ") " : " no time limit ";
+            // moment(values.ticket_due_date, "YYYYMMDD").endOf('day').fromNow()
             var statusTicketIsActive = (active) ? "none" : "flex";
             var statusTicketIsNotActive = (active) ? "flex" : "none";
             var statusTicket = (!active || status === "CANCELED" || !technician_id || this.state.tiket[0].ticket_technician_id !== this.props.data.personState.data.user_id) ? "none" : "flex";
@@ -196,7 +197,7 @@ class DetailTicket extends Component {
                         TICKET CLOSED
                         </div>
                         </div>
-                        <div style={{ display: statusTicketIsNotActive, width: "100%",textAlign: "left" }}>
+                        <div style={{ display: statusTicketIsNotActive, width: "100%", textAlign: "left" }}>
                             <div style={{ color: "#09d509", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
                                 <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
                                     check_circle_outline
@@ -226,12 +227,12 @@ class DetailTicket extends Component {
                     <div className="description" style={{ backgroundColor: "#fff", width: "80%", padding: "20px", margin: "20px auto" }}>
                         <div className="row">
                             <div className="title-kotak" style={{ width: "50%", textAlign: "left", color: "#7D7D7D", fontSize: "22px", fontWeight: "bold" }}>Description</div>
-                            <div className="categoryDetail" style={{ width: "50%" }}>
+                            <div className="categoryDetail" style={{ width: "100%" }}>
                                 <div className="kotakKategori" style={{
-                                    marginTop: "-20px",
+                                    marginTop: "-50px",
                                     float: "right",
                                     borderRadius: "5px",
-                                    fontSize: "14px",
+                                    fontSize: "12px",
                                     color: "black",
                                     fontWeight: "500",
                                     backgroundColor: "#f5e44c",
@@ -498,13 +499,13 @@ class DetailTicket extends Component {
                 </div>
                 {/* End Confirmation */}
 
-                <div className="navbar-message" >
+                <div className="navbar-message"  >
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='/ticket/all'>
-                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
-                                <img src={back} alt="back" style={{ width: "20px" }} />
-                            </div>
-                        </Link>
+
+                        <div className="menu" onClick={() => { this.props.history.goBack() }} style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                            <img src={back} alt="back" style={{ width: "20px" }} />
+                        </div>
+
                     </div>
                     Detail Ticket
                 </div>
