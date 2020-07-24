@@ -329,7 +329,7 @@ export class Ticket extends Component {
                 }
                 // cek filter apakah aktif salah satuu ( tggl )
                 else if (this.state.awal) {
-                    if (values.ticket_timestamp <= this.state.akhir && values.ticket_timestamp >= this.state.awal) {
+                    if (moment(values.ticket_timestamp).format('L') <= moment(this.state.akhir).format('L') && moment(values.ticket_timestamp).format('L') >= moment(this.state.awal).format('L')) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
                                 counter += 1
