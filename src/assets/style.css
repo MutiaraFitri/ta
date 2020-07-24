@@ -537,6 +537,7 @@ a {
     border-radius: 1px;
     margin-bottom:5px;
     padding:7px;
+    background-color: #edf4ff;
 }
 .sub-editProfile{
     color:rgba(98, 98, 98, 0.924);
@@ -547,7 +548,7 @@ a {
     font-size: 16px;
 }
 .ganti-foto {
-    margin-top: 40px;
+    margin: 20px;
 }
 .navbar-message {
     background-color: #141AA2;
@@ -633,6 +634,15 @@ a {
     padding: 5px; 
     font-weight: bold; 
     margin-top: 8px;  
+}
+.typing {
+    float: left;
+    left: 15px;
+    padding: 10px 0px;
+    text-align: left;
+    width: 414px;
+    position:fixed;
+    bottom: 65px;
 }
 .imgPriority{
     width: 22px; 
@@ -754,7 +764,7 @@ margin-top: 25px;
     margin:0px; 
     font-weight: bold; 
     color: #000; 
-    overflow: scroll;
+    word-wrap: break-word;
     width: 300px;
 }
 .edit-article2{
@@ -794,6 +804,7 @@ margin-top: 25px;
 }
 .category-detArticleP{
     /* margin: 17px;  */
+    width: 50%;
     font-size: 12px; 
     color: #4F4F4F; 
     text-align: right;
@@ -957,6 +968,10 @@ margin-top: 25px;
     .tiketKosong{
         width: 414px;
         
+    }
+    .typing {
+        margin-left: 30px;
+        left: unset;
     }
 }
 

@@ -132,22 +132,25 @@ export class Report extends Component {
 
         return (
             <div className="home" style={{ paddingBottom: "70px", width: "100%" }} >
-                <div className="curva" style={{ display: "flex", width: "100%" }}>
-                    <div className="curva"
-                        style={{
-                            width: "80%",
-                            margin: "20px auto 0px auto",
-                            borderRadius: "10px",
-                            height: "200px",
-                            paddingBottom: "10px"
-                        }}>
+                {this.props.data.summary.data ? this.props.data.summary.data.length > 0 ?
+                    <div className="curva" style={{ display: "flex", width: "100%" }}>
+                        <div className="curva"
+                            style={{
+                                width: "80%",
+                                margin: "20px auto 0px auto",
+                                borderRadius: "10px",
+                                height: "200px",
+                                paddingBottom: "10px"
+                            }}>
 
-                        <div className="row" style={{ padding: "10px", margin: "0px", height: '200px' }}>
-                            {/* <ChartComponent data={this.state.datasets} /> */}
-                            <Chartjs2 data={dataHari.chartData} />
+                            <div className="row" style={{ padding: "10px", margin: "0px", height: '200px' }}>
+                                {/* <ChartComponent data={this.state.datasets} /> */}
+                                <Chartjs2 data={dataHari.chartData} />
+                            </div>
                         </div>
                     </div>
-                </div>
+                    : null : null
+                }
                 <div className="menu-atas" style={{ display: "flex", width: "80%" }}>
                     <div className="menu"
                         style={{
@@ -222,7 +225,7 @@ export class Report extends Component {
                                 <div className="desc-main" style={{ fontSize: "18px", fontWeight: "600", color: "black", float: "left", marginLeft: "20px" }}>Customer Satisfaction</div>
                             </div>
                             <div className="desc" style={{ width: "45%", textAlign: "left", paddingLeft: "20px" }}>
-                                <div className="desc-main" style={{ fontSize: "20px", fontWeight: "600" }}>{this.state.rating ? ((totalRating / (jumlahRating * 5)) * 100).toFixed(1) : "0"}%</div>
+                                <div className="desc-main" style={{ fontSize: "20px", fontWeight: "600" }}>{this.state.rating ? totalRating? ((totalRating / (jumlahRating * 5)) * 100).toFixed(1) :"0" : "0"}%</div>
                                 <div className="desc-main" style={{ fontSize: "14px", fontWeight: "300" }}>Average Rating</div>
                             </div>
                             <div className="desc" style={{ width: "35%", textAlign: "left", paddingLeft: "20px" }}>
@@ -359,10 +362,10 @@ export class Report extends Component {
                         </div>
                     </div>
                 </div>
-                <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="all">
+                {/* <select className="input-form-full" id="cars" name="issue_id" style={{ width: "80%", color: "grey", marginTop: "20px", padding: "10px" }} onChange={this.handleChange} value={this.state.report} defaultValue="all">
                     <option value="all" >All Summaries</option>
-                    {/* <option value="month" >This Month</option> */}
-                </select>
+                    <option value="month" >This Month</option>
+                </select> */}
                 {
                     (this.state.tab === "summary") ?
                         this.renderSummary() :

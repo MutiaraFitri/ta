@@ -146,23 +146,12 @@ export class Report extends Component {
 
     handleSubmit = () => {
         if (this.state.issue_id === "lainnya") {
+            var issue_idku = (new Date().getTime()).toString(36);
             this.setState({
-                issue_id: (new Date().getTime()).toString(36),
+                issue_id: issue_idku,
+                kb_issue_id: issue_idku,
                 kb_id: (new Date().getTime() + 9).toString(36),
             }, () => {
-                axios.post("https://api.ict-servicedesk.xyz/steps", this.state, {
-                    headers: {
-                        key: '8dfcb234a322aeeb6b530f20c8e9988e'
-                    }
-                }
-                ).then(res => {
-                    this.setState({
-                        redirect_1: true
-                    })
-                    console.log(res)
-                }).catch(error => {
-                    console.log("Error " + error);
-                })
 
                 axios.post("https://api.ict-servicedesk.xyz/issue", this.state, {
                     headers: {
@@ -177,23 +166,43 @@ export class Report extends Component {
                 }).catch(error => {
                     console.log("Error " + error);
                 })
+                axios.post("https://api.ict-servicedesk.xyz/knowledge_base", this.state, {
+                    headers: {
+                        key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                    }
+                }
+                ).then(res => {
+                    this.setState({
+                        redirect_1: true
+                    })
+                    console.log(res)
+                }).catch(error => {
+                    console.log("Error " + error);
+                })
             })
         }
         else {
-            axios.post("https://api.ict-servicedesk.xyz/steps", this.state, {
-                headers: {
-                    key: '8dfcb234a322aeeb6b530f20c8e9988e'
+            this.setState({
+                kb_issue_id: this.state.issue_id,
+                redirect_1: true,
+                redirect_2: true
+
+            }, () => {
+                axios.post("https://api.ict-servicedesk.xyz/knowledge_base", this.state, {
+                    headers: {
+                        key: '8dfcb234a322aeeb6b530f20c8e9988e'
+                    }
                 }
-            }
-            ).then(res => {
-                this.setState({
-                    redirect_1: true,
-                    redirect_2: true
+                ).then(res => {
+                    this.setState({
+                        redirect_1: true
+                    })
+                    console.log(res)
+                }).catch(error => {
+                    console.log("Error " + error);
                 })
-                console.log(res.value)
-            }).catch(error => {
-                console.log("Error " + error);
             })
+
         }
     }
     render() {
@@ -212,7 +221,7 @@ export class Report extends Component {
                             </div>
                         </Link>
                     </div>
-                    New Article
+                    New Knowledge Base
                 </div>
 
                 <div className="New KnowladgeBase" style={{ width: "85%" }}>

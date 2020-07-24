@@ -10,7 +10,8 @@ import tickets from '../../../assets/img/tickets.png';
 import { toast } from 'react-toastify';
 // import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import clipboard from '../../../assets/img/clipboard.png';
+// import clipboard from '../../../assets/img/clipboard.png';
+import clipboard from '../../../assets/img/list_1.png';
 import insurance from '../../../assets/img/insurance.png';
 import problem from '../../../assets/img/problem.png';
 import { Link } from 'react-router-dom';
@@ -250,7 +251,7 @@ export class Home extends Component {
                             }}>
 
                                 <div className="gambar" style={{ width: "40%", padding: "10px 0px" }}>
-                                    <img src={clipboard} alt="info" />
+                                    <img src={clipboard} width="48" alt="info"/>
                                 </div>
                                 <div className="descTask-home" style={{ width: "60%" }}>
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "500" }}>Your Task</div>
@@ -277,7 +278,11 @@ export class Home extends Component {
                                     <img src={problem} alt="info" />
                                 </div>
                                 <div className="descTask-home" style={{ width: "70%", textAlign: "left", paddingLeft: "20px" }}>
+<<<<<<< HEAD
                                     <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowlege Base</div>
+=======
+                                    <div className="desc-main" style={{ fontSize: "24px", fontWeight: "700" }}>Knowledge Base</div>
+>>>>>>> e6e4219e508b07fbbbeff60a1a756c0ac1e6a426
                                     <div className="desc-main" style={{ fontSize: "12px", fontWeight: "300", textTransform: "uppercase" }}>Problem Solving </div>
                                 </div>
                             </div>

@@ -166,6 +166,7 @@ class DetailTicket extends Component {
             var due = (values.ticket_due_date) ? moment(values.ticket_due_date).format('L') + " (" + moment(values.ticket_due_date, "YYYYMMDD").endOf('day').fromNow() + ") " : " no time limit ";
             // moment(values.ticket_due_date, "YYYYMMDD").endOf('day').fromNow()
             var statusTicketIsActive = (active) ? "none" : "flex";
+            var statusTicketIsNotActive = (active) ? "flex" : "none";
             var statusTicket = (!active || status === "CANCELED" || !technician_id || this.state.tiket[0].ticket_technician_id !== this.props.data.personState.data.user_id) ? "none" : "flex";
             var imgTicket = (image) ? <img src={'https://api.ict-servicedesk.xyz/uploads/' + image} alt="macbook" style={{ textAlign: "left", width: "100%" }} /> : null;
             var statusCancel = !(status === "CANCELED") ? "none" : "flex";
@@ -196,7 +197,7 @@ class DetailTicket extends Component {
                         TICKET CLOSED
                         </div>
                         </div>
-                        <div style={{ display: !statusTicketIsActive, width: "100%" }}>
+                        <div style={{ display: statusTicketIsNotActive, width: "100%",textAlign: "left" }}>
                             <div style={{ color: "#09d509", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
                                 <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
                                     check_circle_outline
@@ -215,9 +216,9 @@ class DetailTicket extends Component {
                                 {/* <option value="escalated" style={{ width: "200px", fontWeight: "700", fontSize: "16px" }}>
                                     Escalated
                             </option> */}
-                                <option value="finish" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
+                                {/* <option value="finish" style={{ width: "200px", fontWeight: "700", fontSize: "16px", color: "green" }}>
                                     Set as Done
-                            </option>
+                            </option> */}
                             </select>
                         </div>
                     </div>
