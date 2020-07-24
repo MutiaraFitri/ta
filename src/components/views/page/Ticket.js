@@ -84,7 +84,7 @@ export class Ticket extends Component {
                 // cek filter apakah aktif ketiganya
                 if (this.state.priority && this.state.awal && this.state.category) {
                     console.log("TIKET")
-                    if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
+                    if (values.ticket_priority === this.state.priority && moment(values.ticket_timestamp).format('L') <= moment(this.state.akhir).format('L') && moment(values.ticket_timestamp).format('L') >= moment(this.state.awal).format('L') && values.ticket_category === this.state.category) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
                                 counter += 1
@@ -133,7 +133,7 @@ export class Ticket extends Component {
                 }
                 // cek filter apakah aktif keduanya aktif (priority & tggl)
                 else if (this.state.priority && this.state.awal) {
-                    if (values.ticket_priority === this.state.priority && values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir) {
+                    if (values.ticket_priority === this.state.priority && moment(values.ticket_timestamp).format('L') <= moment(this.state.akhir).format('L') && moment(values.ticket_timestamp).format('L') >= moment(this.state.awal).format('L')) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
                                 counter += 1
@@ -182,7 +182,7 @@ export class Ticket extends Component {
                 }
                 // cek filter apakah aktif keduanya aktif (tgl & category)
                 else if (this.state.awal && this.state.category) {
-                    if (values.ticket_timestamp >= this.state.awal && values.ticket_timestamp <= this.state.akhir && values.ticket_category === this.state.category) {
+                    if (moment(values.ticket_timestamp).format('L') <= moment(this.state.akhir).format('L') && moment(values.ticket_timestamp).format('L') >= moment(this.state.awal).format('L') && values.ticket_category === this.state.category) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1) || (values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
                                 counter += 1
@@ -329,7 +329,7 @@ export class Ticket extends Component {
                 }
                 // cek filter apakah aktif salah satuu ( tggl )
                 else if (this.state.awal) {
-                    if (values.ticket_timestamp <= this.state.akhir && values.ticket_timestamp >= this.state.awal) {
+                    if (moment(values.ticket_timestamp).format('L') <= moment(this.state.akhir).format('L') && moment(values.ticket_timestamp).format('L') >= moment(this.state.awal).format('L')) {
                         if (this.state.q) {
                             if ((values.ticket_subject).toLowerCase().search(this.state.q.toLowerCase()) > -1 || ((values.employee_firstname + " " + values.employee_lastname).toLowerCase().search(this.state.q.toLowerCase()) > -1)) {
                                 counter += 1
