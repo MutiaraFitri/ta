@@ -22,7 +22,7 @@ export class EditKb extends Component {
             lengthSteps: null,
             edit: false,
             delete: false,
-            kb_id:this.props.match.params.id
+            kb_id: this.props.match.params.id
         }
     }
 
@@ -121,14 +121,18 @@ export class EditKb extends Component {
             if (this.state.steps[mumut].steps_title) {
                 formData.append('steps_title', this.state.steps[mumut].steps_title);
             }
-            
+
             if (this.state.steps[mumut].steps_description) {
                 formData.append('steps_description', this.state.steps[mumut].steps_description);
             }
-            if(!this.state.steps[mumut].steps_image){
+            if (!this.state.steps[mumut].steps_image) {
                 formData.append('myImage', this.state.steps[mumut].file);
-            }else{
-                formData.append('steps_image', this.state.steps[mumut].steps_image);
+            } else {
+                if (this.state.steps[mumut].file) {
+                    formData.append('myImage', this.state.steps[mumut].file);
+                } else {
+                    formData.append('steps_image', this.state.steps[mumut].steps_image);
+                }
             }
             const config = {
                 headers: {
@@ -187,10 +191,13 @@ export class EditKb extends Component {
                         <div className="label">
                             <div className="kotak-input">
                                 <label className="row" style={{ width: "100%" }} htmlFor={"files" + key}>
-                                    {value.steps_image ?
-                                        <img src={"https://api.ict-servicedesk.xyz/uploads/" + value.steps_image} alt="" style={{ margin: "0px auto", maxWidth: "250px" }} />
+                                    {value.imagePreviewUrl ?
+                                        <img src={value.imagePreviewUrl} alt="" style={{ margin: "0px auto", maxWidth: "250px" }} />
                                         :
-                                        <img src={imagePreviewUrl} alt="" style={{ margin: "0px auto", maxWidth: "250px" }} />
+                                        value.steps_image ?
+                                            <img src={"https://api.ict-servicedesk.xyz/uploads/" + value.steps_image} alt="" style={{ margin: "0px auto", maxWidth: "250px" }} />
+                                            :
+                                            <img src={imagePreviewUrl} alt="" style={{ margin: "0px auto", maxWidth: "250px" }} />
                                     }
                                 </label>
                                 {value.steps_image ?
@@ -293,7 +300,7 @@ export class EditKb extends Component {
             <div className="home" style={{ paddingBottom: "70px" }}>
                 <div className="navtop" style={{ position: "fixed", backgroundColor: "#141AA2", fontSize: "22px", fontFamily: "Muli", color: "white", padding: "16px 0px", zIndex: "20" }}>
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to={'/article/detail/'+this.props.match.params.id}>
+                        <Link to={'/article/detail/' + this.props.match.params.id}>
                             <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
                                 <img src={back} alt="back" style={{ width: "20px" }} />
                             </div>
@@ -333,7 +340,7 @@ export class EditKb extends Component {
                 </div>
                 <div className="navbar-edit-kb">
                     <div style={{ position: "relative", width: "50%" }} onClick={this.handleClickEdit}>
-                        <div style={{ position: "absolute", left: "20px", bottom: "20px", fontWeight: "700",cursor:"pointer" }}>
+                        <div style={{ position: "absolute", left: "20px", bottom: "20px", fontWeight: "700", cursor: "pointer" }}>
                             {this.state.delete ?
                                 "Done"
                                 :
@@ -341,7 +348,7 @@ export class EditKb extends Component {
                             }</div>
                     </div>
                     <div style={{ position: "relative", width: "50%" }}>
-                        <div style={{ position: "absolute", right: "20px", bottom: "20px", fontWeight: "700",cursor:"pointer" }}>
+                        <div style={{ position: "absolute", right: "20px", bottom: "20px", fontWeight: "700", cursor: "pointer" }}>
                             {this.state.delete ?
                                 <div onClick={this.handlePublish}>
                                     {this.state.kb_publish ?
