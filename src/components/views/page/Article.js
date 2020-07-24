@@ -49,7 +49,7 @@ class Article extends Component {
                             </div>
                         </Link>
                     </div>
-                    Article
+                    Knowledge Base
                 </div>
                 <div style={{ width: "100%", marginBottom: "100px" }}>
                     <div className="title" style={{ width: "80%", textAlign: "left", padding: "15px 30px", letterSpacing: "0.09em", marginTop: "70px" }}>

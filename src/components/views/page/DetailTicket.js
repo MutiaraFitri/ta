@@ -197,7 +197,7 @@ class DetailTicket extends Component {
                         TICKET CLOSED
                         </div>
                         </div>
-                        <div style={{ display: statusTicketIsNotActive, width: "100%",textAlign: "left" }}>
+                        <div style={{ display: statusTicketIsNotActive, width: "100%", textAlign: "left" }}>
                             <div style={{ color: "#09d509", fontSize: "14px", fontWeight: "bold", marginTop: "10px" }}>
                                 <span className="material-icons" style={{ fontSize: "20px", verticalAlign: "text-top", color: "#09d509", marginRight: "5px" }}>
                                     check_circle_outline
@@ -499,13 +499,13 @@ class DetailTicket extends Component {
                 </div>
                 {/* End Confirmation */}
 
-                <div className="navbar-message" >
+                <div className="navbar-message"  >
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to='/ticket/all'>
-                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
-                                <img src={back} alt="back" style={{ width: "20px" }} />
-                            </div>
-                        </Link>
+
+                        <div className="menu" onClick={() => { this.props.history.goBack() }} style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                            <img src={back} alt="back" style={{ width: "20px" }} />
+                        </div>
+
                     </div>
                     Detail Ticket
                 </div>
