@@ -22,18 +22,16 @@ class DetailArticle extends Component {
         imagePreviewUrl: picture,
         loading: false,
         number: 0,
-        steps: [],
         steps_description: "",
         steps_title: "",
-        saved: true
+        saved: true,
+        confirmation: false
     }
     renderStep() {
 
         var dataku = this.state.steps;
-        console.log('datsiSTep', dataku)
         const toDos = _.map(dataku, (values, key) => {
             var kbImg = gambar + values.steps_image
-            console.log("ini gambar", kbImg)
             return <div className="row step">
                 <div className="no-step" style={{ width: "10%", color: "#000", fontSize: "16px", fontWeight: "bold" }}>
                     <p style={{ width: "30px", backgroundColor: "grey", color: "#000", fontSize: "14px", textAlign: "center", }}>{key + 1}</p>
@@ -56,6 +54,9 @@ class DetailArticle extends Component {
         if (!_.isEmpty(toDos)) {
             return toDos;
         }
+        if (dataku) {
+            return <div style={{ margin: "50px" }}>Steps is Empty</div>
+        }
         return "Loading ..."
     }
 
@@ -69,7 +70,6 @@ class DetailArticle extends Component {
             const steps = res.data.values;
             const data = res.data.values[0];
             this.setState({ steps, ...data });
-            console.log("dataSteps", steps)
         }).catch(error => {
             console.log("Error " + error);
         });
@@ -81,7 +81,9 @@ class DetailArticle extends Component {
         })
             .then(res => {
                 const kb = res.data.values;
-                console.log("dataKb", kb)
+                if (!kb[0]) {
+                    this.props.history.push("/")
+                }
                 this.setState({
                     kb
                 })
@@ -91,11 +93,64 @@ class DetailArticle extends Component {
     componentDidMount = () => {
         this.fetchdata();
     }
+    handleConfirmation = () => {
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+    }
+    deleteProblemSolve = (id) => {
+        // console.log(id)
+        axios.delete(url + `knowledge_base/`+id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        },{data:"wow"})
+            .then(res => {
+                const kb = res.data.values;
+                this.props.history.goBack()
+            })
+        this.setState({
+            confirmation: !this.state.confirmation
+        })
+    }
 
     render() {
+        const getVisibility = this.state.confirmation ? "visible" : "hidden";
+        const getOpacity = this.state.confirmation ? "1" : "0";
         // const judul = ("No Internet Connection").length > 25 ? ("No No Internet Connectionnnn Connection").slice(0, 20) + " ..." : " No Internet Connection"
         return (
             <div className="home" style={{ height: (this.state.loading) ? "100vh" : "auto", overflow: (this.state.loading) ? "hidden" : "auto" }}>
+                <div className="white-overlay"
+                    style={{
+                        visibility: getVisibility,
+                        opacity: getOpacity
+                    }}
+
+                    onClick={this.handleConfirmation}
+                ></div>
+                <div className="confirmation"
+                    style={{
+                        bottom: this.state.confirmation ? "0px" : "-200px"
+                    }}
+                >
+                    <div className="ticket-status" style={{ marginTop: "30px", color: "#000", fontSize: "20px", fontWeight: "bold" }}>
+                        Delete this Problem Solve ?
+                    </div>
+                    <div className="row" style={{ width: "100%", bottom: "15px", position: "absolute" }}>
+                        <div style={{ margin: "0 auto", width: "100%" }}>
+                            <button
+                                className="button"
+                                style={{
+                                    borderRadius: "5px", fontSize: "18px", padding: "10px", marginRight: "15px", width: "45%", color: "#000", backgroundColor: "white", border: "1px solid #000"
+                                }}
+                                onClick={this.handleConfirmation}
+                                id="overlay">
+                                No
+                            </button>
+                            <button className="button" style={{ backgroundColor: "#cb2431", fontSize: "18px", padding: "10px", borderRadius: "5px", width: "45%" }} onClick={() => { this.deleteProblemSolve(this.state.kb[0].kb_id) }}>Yes</button>
+                        </div>
+                    </div>
+                </div>
                 <div className="navbar-message">
                     <div className="menu-article" >
                         <Link to='/article'>
@@ -111,7 +166,7 @@ class DetailArticle extends Component {
                         <div className="row edit" >
                             <div className="edit-article">
                                 <p className="edit-article-judul">Issue</p>
-                                <p className="edit-article-judul2">{(this.state.kb) ? this.state.kb[0].issue_subject : "title"}</p>
+                                <p className="edit-article-judul2">{(this.state.kb) ? (this.state.kb[0]) ? this.state.kb[0].issue_subject : "title" : "title"}</p>
                             </div>
                             <div className="edit-artikel2"  >
                                 <div className="edit-articleIcon">
@@ -136,12 +191,12 @@ class DetailArticle extends Component {
                                 {/* <p className=" date-detArticleP">ICT Services - 10/03/2020</p> */}
                             </div>
                             <div className="category-detArticle" style={{ width: "90%", display: "flex", margin: "0px auto", marginTop: "15px" }} >
-                                <p className=" category-detArticleP" style={{ textAlign: "left" }}>Categories :  {(this.state.kb) ? this.state.kb[0].issue_category ? this.state.kb[0].issue_category : null : null}  </p>
-                                <p className=" category-detArticleP">Status : {(this.state.kb) ? this.state.kb[0].kb_publish ? "Publish" : "Draft" : null}</p>
+                                <p className=" category-detArticleP" style={{ textAlign: "left" }}>Categories :  {(this.state.kb) ? this.state.kb[0] ? this.state.kb[0].issue_category : null : null}  </p>
+                                <p className=" category-detArticleP">Status : {(this.state.kb) ? this.state.kb[0] ? "Publish" : "Draft" : null}</p>
                             </div>
                         </div>
                         <p clasName="detArticle-P1" style={{ fontSize: "24px", padding: "0px", margin: "17px", fontWeight: "bold", color: "#000", textAlign: "left", marginTop: "40px" }}>Problem Solving</p>
-                        <p clasName="detArticle-P2" style={{ fontSize: "14px", padding: "0px", margin: "17px", fontWeight: "400", color: "#000", textAlign: "left", }}>{(this.state.kb) ? this.state.kb[0].kb_description : "description for problem solve"}</p>
+                        <p clasName="detArticle-P2" style={{ fontSize: "14px", padding: "0px", margin: "17px", fontWeight: "400", color: "#000", textAlign: "left", }}>{(this.state.kb) ? this.state.kb[0] ? this.state.kb[0].kb_description : "description for problem solve" : "description for problem solve"}</p>
                         <div className="description-detArticle" >
                             <div className="title-kotakdetArticle">Troubleshooting Steps</div>
                             {this.renderStep()}
@@ -155,6 +210,9 @@ class DetailArticle extends Component {
                                 <p className="editor-lastEdit1" style={{ textAlign: "right", }}>9 hour ago</p>
                             </div>
                         </div> */}
+                    </div>
+                    <div onClick={this.handleConfirmation} style={{ color: "red", fontSize: "14px", fontWeight: "700", cursor: "pointer", margin: "20px", borderRadius: "5px" }}>
+                        Delete Problem Solve
                     </div>
                 </div>
                 <br /> <br />

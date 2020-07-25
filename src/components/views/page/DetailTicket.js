@@ -246,10 +246,9 @@ class DetailTicket extends Component {
                         </div>
                         <div>
                         </div>
-                        <div className="row">
-                            <div className="title-kotak" style={{ marginTop: "20px", width: "55%", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Report : {moment(time).format('L') + " (" + moment(time).format('LT')})</div>
-                            <div className="title-kotak" style={{ marginTop: "20px", width: "45%", textAlign: "right", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
-                            <div></div></div>
+                        <div className="title-kotak" style={{ marginTop: "20px", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Report : {moment(time).format('L') + " (" + moment(time).format('LT')})</div>
+                        <div className="title-kotak" style={{ marginTop: "5px", textAlign: "left", color: "#7D7D7D", fontSize: "11px", fontWeight: "bold" }}>Category : {category}</div>
+                        <div></div>
                     </div>
                     <div style={{ display: statusCancel, width: "90%", margin: "0px auto", marginBottom: "60px" }}>
                         <div style={{ margin: "0px auto", padding: "10px", border: "1px solid #f35834", borderRadius: "8px", backgroundColor: "#f35834", color: "#fff", fontSize: "16px", fontWeight: "bold", marginTop: "10px", width: "100%" }}>

@@ -514,6 +514,7 @@ a {
 }
 
 .button{
+    border-radius: 10px;
     width: 100%;
     padding: 9px;
     font-size: calc(10px + 2vmin);
@@ -938,6 +939,12 @@ margin-top: 25px;
 }
 
 @media (min-width: 500px) {
+    .white-overlay{
+        width: 414px;
+    }
+    .confirmation{
+        width: 414px;
+    }
     .navbar-message {
         width:414px;
     }
