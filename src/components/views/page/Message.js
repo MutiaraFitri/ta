@@ -132,7 +132,7 @@ class Message extends Component {
                             <div className="nama" style={{ fontSize: "16px", color: "black", fontWeight: "bold", textAlign: "left" }}>{values.employee_firstname} {values.employee_lastname}</div>
                             <div className="row" style={{ marginTop: "-4px" }}>
                                 <div className="time" style={{ width: "50%", fontSize: "12px", color: "black", marginTop: "5px", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
-                                <Link to={'/ticket/detail/' + values.ticket_id} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </Link>
+                                <div onClick={() => { this.props.history.goForWard() }} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </div>
                             </div>
                         </div>
                     </div>
@@ -263,11 +263,11 @@ class Message extends Component {
             <div className="home" style={{ paddingBottom: "10vh", minHeight: "90vh", backgroundColor: "#F4F4F6", position: "relative" }}>
                 <div className="navbar-message">
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to={'/ticket/detail/' + this.state.message_ticket_id}>
-                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
-                                <img src={back} alt="back" style={{ width: "20px" }} />
-                            </div>
-                        </Link>
+
+                        <div onClick={() => { this.props.history.goBack() }} className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                            <img src={back} alt="back" style={{ width: "20px" }} />
+                        </div>
+
                     </div>
                     Message
                 </div>
