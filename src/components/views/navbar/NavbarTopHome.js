@@ -6,21 +6,54 @@ import { connect } from 'react-redux';
 import Skeleton from 'react-loading-skeleton';
 import { prod } from '../../../redux/url/server';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+const jwt = require('jsonwebtoken');
 
-export class NavbarTop extends Component {
 
+export class NavbarTopHome extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
     componentDidMount() {
         this.props.userku();
-    }
 
+        jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
+            if (err) {
+                console.log("Error", err)
+                localStorage.removeItem("jwt");
+                // dispatch(loginFailed("Your session has expired"));
+            }
+            const user = decoded.data;
+            this.setState({ ...user },
+                () => {
+                    this.fetchUser();
+                }
+            )
+
+        });
+    }
+    fetchUser = () => {
+        axios.get(`https://api.ict-servicedesk.xyz/user/technician/` + this.state.user_id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const user = res.data.values[0];
+                this.setState({ ...user })
+            })
+    }
     render() {
         const { data } = this.props;
 
         // const back = (this.props.back == "true") ?<Link to="." ><div className="back-button"><img src={arrow} alt="" style={{padding:"15px"}}/></div></Link>:'';
         // const title = (this.props.title) ? <div className="title-pages" style={{paddingTop:"5px"}}>{this.props.title}</div>:<img src={logo} alt="Komatsu" style={{ margin: "0 auto", height: "30px",paddingTop:"15px" }} />;
-        const profile = (data.personState.data) ? (data.personState.data.user_image) ? data.personState.data.user_image : "defaultEmploy.png" : "defaultEmploy.png"
-        const gambar = prod + 'avatar/technician/' + profile
-        console.log("home", gambar)
+        const profile = this.state.technician_image ? "https://api.ict-servicedesk.xyz/avatar/technician/" + this.state.technician_image : "https://api.ict-servicedesk.xyz/avatar/technician/defaultEmploy.png";
+        console.log(profile)
+        console.log("Profile", profile)
         return (
             <div className="container" style={{ width: "100%" }}>
                 <div style={{ backgroundImage: "url(" + top + ")", height: "300px", backgroundRepeat: "no-repeat", backgroundSize: "100% 100%" }}>
@@ -40,7 +73,7 @@ export class NavbarTop extends Component {
                                 overflow: "hidden",
                                 margin: "0px auto"
                             }}>
-                            <img src={gambar} alt="man" style={{ width: "100%" }} />
+                            <img src={profile} alt="man" style={{ width: "100%" }} />
                         </div>
                     </Link>
                     <div>
@@ -65,4 +98,4 @@ const mapDispacthToProps = (dispatch) => {
 }
 export default connect(
     mapStateToProps, mapDispacthToProps
-)(NavbarTop)
+)(NavbarTopHome)

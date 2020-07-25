@@ -526,9 +526,10 @@ a {
 }
 .row-editProfile{
     margin:10px;
+    
 }
 .editInput{
-    width: 280px;
+    width: 90%;
     height: 10px;
     margin: 0px auto;
     font-size: 16px;
@@ -542,8 +543,10 @@ a {
 }
 .sub-editProfile{
     color:rgba(98, 98, 98, 0.924);
-    float: left;
     font-size: 12px;
+    width: 95%;
+    text-align: left;
+    margin: 0px auto;
 }
 .ganti-foto>label{
     font-size: 16px;
