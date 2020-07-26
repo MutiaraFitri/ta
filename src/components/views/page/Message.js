@@ -132,7 +132,7 @@ class Message extends Component {
                             <div className="nama" style={{ fontSize: "16px", color: "black", fontWeight: "bold", textAlign: "left" }}>{values.employee_firstname} {values.employee_lastname}</div>
                             <div className="row" style={{ marginTop: "-4px" }}>
                                 <div className="time" style={{ width: "50%", fontSize: "12px", color: "black", marginTop: "5px", textAlign: "left" }}> {moment(values.ticket_timestamp).format('L') + " (" + moment(values.ticket_timestamp).format('LT')}) </div>
-                                <div onClick={() => { this.props.history.goForWard() }} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </div>
+                                <Link to={'/ticket/detail/' + values.ticket_id} style={{ width: "50%", fontSize: "14px", textAlign: "right", textDecoration: "underline", fontStyle: "italic" }}>Details Issue </Link>
                             </div>
                         </div>
                     </div>

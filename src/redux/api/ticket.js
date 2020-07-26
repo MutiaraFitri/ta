@@ -48,6 +48,22 @@ export function ticketsById(id) {
             })
     }
 }
+export function ticketsDoneById(id) {
+    return dispatch => {
+        axios.get(`https://api.ict-servicedesk.xyz/ticket/done/` + id, {
+            headers: {
+                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+            }
+        })
+            .then(res => {
+                const tiket = res.data.values;
+                // localStorage.setItem("jwt", tiket.values.jwt);
+                console.log("data", tiket)
+                dispatch(fetchTiket(tiket));
+            })
+    }
+}
+
 export function ticketsByTechnicianId(id) {
     return dispatch => {
         axios.get(url + `ticket/technician/` + id, {
