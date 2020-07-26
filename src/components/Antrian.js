@@ -49,7 +49,7 @@ class Antrian extends Component {
         const assign =
             (this.props.assign_to === null) ? "Unassign" :
                 this.props.assign_to;
-        var panjangTitle = (this.props.title).length > 20 ? (this.props.title).slice(0, 20) + " ..." : (this.props.title);
+        var panjangTitle = (this.props.title) ? (this.props.title).length > 20 ? (this.props.title).slice(0, 20) + " ..." : (this.props.title) : null;
         return (
             <div>
                 <Link to={'/ticket/detail/' + this.props.id}>

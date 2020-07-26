@@ -8,7 +8,7 @@ import NavbarBottom from '../navbar/NavbarBottom';
 import { fetchProductPending, fetchProductSuccess, fectProductError } from './../../../redux/action/action';
 import Antrian from '../../Antrian';
 import { Redirect } from 'react-router-dom';
-import { ticketByDetail, ticketsByTechnicianId } from '../../../redux/api/ticket';
+import { ticketByDetail, ticketsByTechnicianId, ticketsById, ticketsDoneById } from '../../../redux/api/ticket';
 import { connect } from 'react-redux';
 import _ from "lodash";
 import * as moment from 'moment';
@@ -40,6 +40,20 @@ export class Ticket extends Component {
                 this.setState({ ...user },
                     () => {
                         this.props.tiketById(this.state.user_id);
+                    }
+                )
+            });
+        } else if (this.props.match.params.detail === 'done') {
+            jwt.verify(localStorage.getItem("jwt"), 'dimasputray', (err, decoded) => {
+                if (err) {
+                    console.log("Error", err)
+                    localStorage.removeItem("jwt");
+                    // dispatch(loginFailed("Your session has expired"));
+                }
+                const user = decoded.data;
+                this.setState({ ...user },
+                    () => {
+                        this.props.tiketDoneById(this.state.user_id);
                     }
                 )
             });
@@ -650,6 +664,7 @@ const mapDispacthToProps = (dispatch) => {
         fetchErrorku: () => dispatch(fectProductError()),
         tiket: (data) => dispatch(ticketByDetail(data)),
         tiketById: (data) => dispatch(ticketsByTechnicianId(data)),
+        tiketDoneById: (data) => dispatch(ticketsDoneById(data)),
 
     }
 }
