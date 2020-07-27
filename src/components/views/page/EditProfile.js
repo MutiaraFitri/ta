@@ -386,7 +386,7 @@ export class EditProfile extends Component {
                                 Password has been changed.
                             </div>
                             <div
-                                style={this.state.passwordSalah ? { width: "100%", color: "red", display: "block", fontSize: "14px" } : { display: "none" }}>
+                                style={this.state.passwordSalah || !this.state.success? { width: "100%", color: "red", display: "block", fontSize: "14px" } : { display: "none" }}>
                                 Incorrect Password!
                             </div>
                         </form>
