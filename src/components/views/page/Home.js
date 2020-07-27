@@ -266,7 +266,7 @@ export class Home extends Component {
                 <div className="menu_bawah" style={{ width: "100%", height: "81px", }} >
 
                     <Link to='/article'>
-                        <div className="menuKnowlageBase"
+                        <div className="menuKnowlageBase mutiarafitri"
                             style={{ padding: "0px 10px" }}>
                             <div className="row" style={{
                                 borderRadius: "10px",

@@ -265,10 +265,7 @@ export class Report extends Component {
                             *Please Choose
                                 </div>
                     </i>
-                    <div className="row" style={{ fontSize: "22px", marginTop: "20px", color: " #A4A6B3", display: (this.state.issue_category) ? "flex" : "none" }}>
-                        Issue
-                    </div>
-                    <select className="input-form-full" id="cars" name="issue_id" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "99%", color: "grey" }} onChange={this.handleChange} value={this.state.issue_id} defaultValue="xx">
+                    <select className="input-form-full" id="cars" name="issue_id" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "99%", color: "grey",marginTop:"30px" }} onChange={this.handleChange} value={this.state.issue_id} defaultValue="xx">
                         <option value="xx" disabled style={{ color: "grey" }}>------- Choose your issue -------</option>
                         {this.renderOption()}
                         <option value="lainnya">( + ) Create New Issue</option>
@@ -279,11 +276,16 @@ export class Report extends Component {
                         </div>
                         <input className="input-form-full" type="text" placeholder="-- Title your article --" onChange={this.handleChange} name="issue_subject" />
                     </div>
-                    <div className="row" style={{ display: (this.state.issue_category) ? "inline" : "none", width: "100%", marginBottom: "70px", float: "right" }}>
+                    <div className="row" style={{ display: (this.state.issue_id!=="xx" && this.state.issue_category) ? "inline" : "none", width: "100%", marginBottom: "70px", float: "right" }}>
                         <button className="button" type="submit" onClick={this.handleSubmit}>
                             submit
                         </button>
                     </div>
+                    <i>
+                    <div className="row" style={{ textAlign:"left",fontSize:"12px",display: (this.state.issue_category && this.state.issue_id==="xx") ? "inline" : "none"}}>
+                        *Please select issue
+                    </div>
+                    </i>
                 </div>
                 <NavbarBottom active="Home" />
             </div>
