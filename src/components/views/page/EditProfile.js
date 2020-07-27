@@ -140,7 +140,7 @@ export class EditProfile extends Component {
                 .then(res => {
                     console.log(res.data.values)
                     if (res.data.values.message == "success") {
-                        this.setState({ success: true })
+                        this.setState({ success: true, passwordSalah: false })
                     } else {
                         this.setState({ passwordSalah: true })
                     }
@@ -386,7 +386,7 @@ export class EditProfile extends Component {
                                 Password has been changed.
                             </div>
                             <div
-                                style={this.state.passwordSalah || !this.state.success? { width: "100%", color: "red", display: "block", fontSize: "14px" } : { display: "none" }}>
+                                style={this.state.passwordSalah ? { width: "100%", color: "red", display: "block", fontSize: "14px" } : { display: "none" }}>
                                 Incorrect Password!
                             </div>
                         </form>
