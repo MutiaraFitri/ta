@@ -53,7 +53,7 @@ class Article extends Component {
                 </div>
                 <div style={{ width: "100%", marginBottom: "100px" }}>
                     <div className="title" style={{ width: "80%", textAlign: "left", padding: "15px 30px", letterSpacing: "0.09em", marginTop: "70px" }}>
-                        <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowlage base.</p>
+                        <p style={{ fontSize: "15px", color: "black", }}>Share solution with your customers and by adding articles to your knowledge base.</p>
                     </div>
 
                     <div className="tiket" style={{ width: "85%", height: "50px", paddingBottom: "2px", borderBottom: "1px solid black", display: "flex", margin: "0px auto" }}>
