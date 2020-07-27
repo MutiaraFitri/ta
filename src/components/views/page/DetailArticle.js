@@ -100,7 +100,7 @@ class DetailArticle extends Component {
     }
     deleteProblemSolve = (id) => {
         // console.log(id)
-        axios.delete(url + `knowledge_base/`+id, {
+        axios.delete(url + `knowledge_base/`+this.props.match.params.id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
