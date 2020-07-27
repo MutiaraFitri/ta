@@ -51,14 +51,7 @@ export class Home extends Component {
         }
         this.props.userku();
 
-        axios.get(url + `ticket/done`, {
-            headers: {
-                key: "8dfcb234a322aeeb6b530f20c8e9988e"
-            }
-        })
-            .then(res => {
-                this.setState({ jumlahDone: res.data.values.length })
-            })
+
         axios.get(url + `ticket/queue`, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
@@ -94,6 +87,14 @@ export class Home extends Component {
                                 this.setState({ jumlahTask: res.data.values.length })
                                 this.initSocket()
                                 this.notifikasi()
+                            })
+                        axios.get(url + `ticket/done/` + this.state.user_id, {
+                            headers: {
+                                key: "8dfcb234a322aeeb6b530f20c8e9988e"
+                            }
+                        })
+                            .then(res => {
+                                this.setState({ jumlahDone: res.data.values.length })
                             })
                     }
                 )

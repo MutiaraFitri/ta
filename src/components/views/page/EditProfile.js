@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import '../../../loading.css';
 import '../../../assets/style.css';
 import '../../../assets/style.css';
@@ -86,7 +86,7 @@ export class EditProfile extends Component {
     }
 
     handleSave = () => {
-        axios.put(`https://api.ict-servicedesk.xyz/technician/` + this.state.user_id, this.state, {
+        axios.put(prod + `technician/` + this.state.user_id, this.state, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -118,7 +118,7 @@ export class EditProfile extends Component {
         });
     }
     fetchUser = () => {
-        axios.get(`https://api.ict-servicedesk.xyz/user/technician/` + this.state.user_id, {
+        axios.get(prod + `user/technician/` + this.state.user_id, {
             headers: {
                 key: "8dfcb234a322aeeb6b530f20c8e9988e"
             }
@@ -177,24 +177,28 @@ export class EditProfile extends Component {
                     borderRadius: "10px",
                     padding: "20px",
                 }}>
+
                     {!this.state.editPassword ?
-                        <form  onSubmit={this.handleSubmit} >
+
+                        <form onSubmit={this.handleSubmit} >
                             <div className="container" style={{ width: "100%" }}>
-                                <div className="profile"
-                                    style={{
-                                        top: "10px",
-                                        left: "50%",
-                                        transform: "translateX(-50%)",
-                                        width: "90px",
-                                        height: "90px",
-                                        borderRadius: "50%",
-                                        backgroundColor: "#fff",
-                                        border: "1px solid",
-                                        position: "relative",
-                                        overflow: "hidden"
-                                    }}>
-                                    <img src={(this.state.user_image_temp) ? this.state.user_image_temp : profile} alt="man" style={{ width: "100%" }} />
-                                </div>
+                                <label htmlFor="files">
+                                    <div className="profile"
+                                        style={{
+                                            top: "10px",
+                                            left: "50%",
+                                            transform: "translateX(-50%)",
+                                            width: "90px",
+                                            height: "90px",
+                                            borderRadius: "50%",
+                                            backgroundColor: "#fff",
+                                            border: "1px solid",
+                                            position: "relative",
+                                            overflow: "hidden"
+                                        }}>
+                                        <img src={(this.state.user_image_temp) ? this.state.user_image_temp : profile} alt="man" style={{ width: "100%" }} />
+                                    </div>
+                                </label>
                                 <div className="ganti-foto" > <label htmlFor="files">Change Photo Profile</label>
                                     <input className="fileInput"
                                         id="files"
@@ -202,7 +206,33 @@ export class EditProfile extends Component {
                                         onChange={(e) => this._handleImageChange(e)} style={{ display: "none" }} />
                                 </div>
                             </div>
-                            <div className="container" style={{backgroundColor:"#edf4ff",padding:"10px",borderRadius:"10px"}}>
+                            <div className="container" style={{ backgroundColor: "#edf4ff", padding: "10px", borderRadius: "10px" }}>
+                                <div className="row-editProfile" style={{ display: "flex", width: "92%", margin: "0px auto" }} >
+                                    <div className="kiri" style={{ width: "50%" }}>
+                                        <div className="sub-editProfile"  >First Name</div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            placeholder="First Name"
+                                            name="technician_firstname"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_firstname}
+                                            style={{ width: "80%", margin: "0px" }}
+                                        />
+                                    </div>
+                                    <div className="kanan" style={{ width: "50%" }}>
+                                        <div className="sub-editProfile" >Last Name</div>
+                                        <input
+                                            className="editInput"
+                                            type="text"
+                                            placeholder="Last Name  "
+                                            name="technician_lastname"
+                                            onChange={this.handleChange}
+                                            value={this.state.technician_lastname}
+                                            style={{ width: "80%", margin: "0px" }}
+                                        />
+                                    </div>
+                                </div>
                                 <div className="row-editProfile" style={{ alignItems: "center" }}>
                                     <div className="sub-editProfile">Job</div>
                                     <div>

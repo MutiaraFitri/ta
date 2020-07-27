@@ -263,11 +263,11 @@ class Message extends Component {
             <div className="home" style={{ paddingBottom: "10vh", minHeight: "90vh", backgroundColor: "#F4F4F6", position: "relative" }}>
                 <div className="navbar-message">
                     <div className="menu" style={{ position: "absolute", top: "7px" }}>
-                        <Link to={'/ticket/detail/' + this.state.message_ticket_id}>
-                            <div className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
-                                <img src={back} alt="back" style={{ width: "20px" }} />
-                            </div>
-                        </Link>
+
+                        <div onClick={() => { this.props.history.goBack() }} className="menu" style={{ position: "absolute", top: "7px", marginLeft: "15px" }}>
+                            <img src={back} alt="back" style={{ width: "20px" }} />
+                        </div>
+
                     </div>
                     Message
                 </div>
