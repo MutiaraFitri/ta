@@ -30,7 +30,7 @@
 
 self.addEventListener("push", e => {
   const data = e.data.json();
-  console.log("Push Recieved...", data);
+  // console.log("Push Recieved...", data);
   self.registration.showNotification(data.title, {
     body: data.description,
     vibrate: [100, 50, 100],
@@ -42,7 +42,7 @@ self.addEventListener("push", e => {
 });
 
 self.addEventListener('notificationclick', function (event) {
-  console.log(event.notification);
+  // console.log(event.notification);
   event.notification.close();
   clients.openWindow("https://service.ict-servicedesk.xyz/" + event.notification.data.link);
 });
