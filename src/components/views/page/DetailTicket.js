@@ -15,9 +15,9 @@ import { connect } from 'react-redux';
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
 import * as moment from 'moment';
-import { dev } from './../../../redux/url/server'
+import { prod } from './../../../redux/url/server'
 
-const url = dev
+const url = prod
 const socketUrl = url
 
 const socket = io(socketUrl)
