@@ -15,9 +15,9 @@ import { connect } from 'react-redux';
 import back from './../../../assets/img/back.png';
 import _ from "lodash";
 import * as moment from 'moment';
-import { prod } from './../../../redux/url/server'
+import { dev } from './../../../redux/url/server'
 
-const url = prod
+const url = dev
 const socketUrl = url
 
 const socket = io(socketUrl)
@@ -302,6 +302,7 @@ class DetailTicket extends Component {
                             }
                             // console.log("hasil", this.props.data.personState.data.user_firstname)
                             this.fetchData()
+                            socket.emit('QUEUE')
                             socket.emit(`TICKET`, ({ message: "Your ticket on process with " + this.props.data.personState.data.user_firstname + " " + this.props.data.personState.data.user_lastname, employeeId: tiket[0].ticket_employee_id, ticketId: this.props.match.params.id }))
                         })
                         .catch(error => {
